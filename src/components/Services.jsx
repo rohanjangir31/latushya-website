@@ -1,13 +1,12 @@
 import { motion } from 'framer-motion';
-import {
-  Layers, Maximize2, Move, Monitor, Package, PenTool, Gem, Ruler
-} from 'lucide-react';
+import { Layers, Maximize2, Move, Gem } from 'lucide-react';
 import { SERVICES } from '../data/content';
 import { SectionHeader, StaggerContainer, fadeUpVariant } from '../utils/animations';
 
-// DoorOpen may not exist in older lucide — use custom SVG
+// Custom door icon (DoorOpen not in all lucide versions)
 const DoorOpenIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+    strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
     <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
     <path d="M2 20h3"/>
     <path d="M13 20h9"/>
@@ -22,31 +21,88 @@ const iconMap = {
   Maximize2,
   DoorOpen: DoorOpenIcon,
   Gem,
-  Package,
-  PenTool,
-  Ruler,
-  Monitor,
 };
 
 export default function Services() {
+  // Split into featured (first) and remaining
+  const [featured, ...rest] = SERVICES;
+
   return (
     <section id="services" className="py-32 bg-black-charcoal relative overflow-hidden">
-      {/* Subtle grid background */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 60px, #D4AF37 60px, #D4AF37 61px), repeating-linear-gradient(90deg, transparent, transparent 60px, #D4AF37 60px, #D4AF37 61px)',
-        }} />
-      </div>
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.015]" aria-hidden="true"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 80px, #D4AF37 80px, #D4AF37 81px), repeating-linear-gradient(90deg, transparent, transparent 80px, #D4AF37 80px, #D4AF37 81px)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeader
-          label="What We Specialise In"
-          title={<>Our Wardrobe <span className="italic text-gold">Services</span></>}
-          subtitle="We design and build every wardrobe type — tailored precisely to your space, your style, and your storage habits."
+          label="Wardrobe Specialists"
+          title={<>Five Ways We <span className="italic text-gold">Build Your Wardrobe</span></>}
+          subtitle="We design and install every wardrobe type — each one measured, designed, and built specifically for your space."
         />
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SERVICES.map((service, i) => {
+        {/* Featured card — full width hero */}
+        {featured && (() => {
+          const FeaturedIcon = iconMap[featured.icon] || Layers;
+          return (
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="group relative mb-6 overflow-hidden border border-gray-luxury/20 hover:border-gold/40 transition-all duration-500 cursor-default"
+            >
+              {/* Background image */}
+              <div className="absolute inset-0" aria-hidden="true">
+                <img
+                  src={featured.image}
+                  alt=""
+                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-black-deep/80 group-hover:bg-black-deep/70 transition-colors duration-500" />
+              </div>
+
+              {/* Top accent */}
+              <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full" />
+
+              <div className="relative z-10 p-10 md:p-14 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 flex items-center justify-center border border-gold/40 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
+                      <FeaturedIcon size={20} className="text-gold" />
+                    </div>
+                    <span className="section-label text-[10px]">Most Popular</span>
+                  </div>
+                  <h3 className="font-display text-3xl md:text-4xl text-white font-light mb-2 group-hover:text-gold transition-colors duration-300">
+                    {featured.title}
+                  </h3>
+                  <p className="text-gold/70 text-sm italic mb-4">{featured.tagline}</p>
+                </div>
+                <div>
+                  <p className="text-gray-subtle text-base leading-relaxed mb-6">
+                    {featured.description}
+                  </p>
+                  <a
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                    className="inline-flex items-center gap-3 text-gold text-xs tracking-widest uppercase border-b border-gold/40 pb-1 hover:border-gold transition-colors duration-300 group/link"
+                  >
+                    <span>Get a Quote</span>
+                    <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">→</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })()}
+
+        {/* Remaining 4 cards — 2-col on tablet, 4-col on desktop */}
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {rest.map((service, i) => {
             const Icon = iconMap[service.icon] || Layers;
             return (
               <motion.div
@@ -61,28 +117,32 @@ export default function Services() {
                     alt=""
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-black-deep/85" />
+                  <div className="absolute inset-0 bg-black-deep/88" />
                 </div>
 
                 {/* Top accent line */}
                 <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-500 group-hover:w-full" />
 
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="w-12 h-12 flex items-center justify-center border border-gold/30 mb-6 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                    <Icon size={20} className="text-gold" />
+                  {/* Number — decorative */}
+                  <div className="font-display text-5xl text-gold/8 group-hover:text-gold/18 font-bold absolute top-4 right-5 transition-all duration-300 select-none">
+                    {String(i + 2).padStart(2, '0')}
                   </div>
 
-                  {/* Number */}
-                  <div className="font-display text-4xl text-gold/10 group-hover:text-gold/20 font-bold absolute top-6 right-6 transition-all duration-300">
-                    {String(i + 1).padStart(2, '0')}
+                  {/* Icon */}
+                  <div className="w-11 h-11 flex items-center justify-center border border-gold/30 mb-5 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
+                    <Icon size={18} className="text-gold" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display text-xl text-white mb-3 font-medium group-hover:text-gold transition-colors duration-300">
+                  <h3 className="font-display text-xl text-white mb-1 font-medium group-hover:text-gold transition-colors duration-300 leading-snug">
                     {service.title}
                   </h3>
+
+                  {/* Tagline */}
+                  <p className="text-gold/60 text-xs italic mb-4">{service.tagline}</p>
 
                   {/* Description */}
                   <p className="text-gray-light text-sm leading-relaxed">
@@ -91,7 +151,7 @@ export default function Services() {
 
                   {/* Arrow */}
                   <div className="mt-6 flex items-center gap-2 text-gold text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <span>Learn More</span>
+                    <span>Enquire</span>
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </div>
                 </div>
@@ -103,7 +163,8 @@ export default function Services() {
         {/* Bottom CTA */}
         <div className="text-center mt-14">
           <p className="text-gray-subtle text-sm mb-6">
-            Not sure which wardrobe type suits your space? We'll help you decide — for free.
+            Not sure which wardrobe type suits your space?{' '}
+            <span className="text-white">We'll help you decide — for free.</span>
           </p>
           <a
             href="#contact"

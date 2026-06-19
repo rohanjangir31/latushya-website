@@ -109,9 +109,9 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-32 bg-black-charcoal relative overflow-hidden">
-      {/* Decorative quote mark */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 font-display text-[240px] text-gold/3 font-bold leading-none select-none pointer-events-none" aria-hidden="true">
-        "
+      {/* Decorative quote mark — capped on mobile */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 font-display text-[120px] md:text-[200px] text-gold/[0.04] font-bold leading-none select-none pointer-events-none overflow-hidden" aria-hidden="true">
+        &ldquo;
       </div>
 
       <div className="max-w-5xl mx-auto px-6 lg:px-16 relative z-10">

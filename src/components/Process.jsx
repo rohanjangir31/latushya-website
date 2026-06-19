@@ -46,7 +46,7 @@ export default function Process() {
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
                   className={`relative group ${
-                    isLeft ? 'lg:pr-16 text-left lg:text-right' : 'lg:pl-16 lg:col-start-2'
+                    isLeft ? 'lg:pr-16' : 'lg:pl-16 lg:col-start-2'
                   }`}
                 >
                   {/* Connector dot */}

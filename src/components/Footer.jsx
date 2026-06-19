@@ -73,10 +73,10 @@ export default function Footer() {
           <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-display text-2xl text-black-deep font-medium">
-                Ready to transform your space?
+                Your perfect wardrobe awaits.
               </h3>
               <p className="text-black-deep/70 text-sm mt-1">
-                Book a free wardrobe consultation — no obligations, ever.
+                Book a free in-home consultation — no obligations, ever.
               </p>
             </div>
             <button
@@ -227,8 +227,8 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Mobile sticky CTA bar — always visible on mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
+      {/* Mobile sticky CTA bar — always visible on mobile, iOS safe area aware */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden pb-safe">
         <div className="grid grid-cols-2 border-t border-gold/20">
           {COMPANY.whatsapp ? (
             <a

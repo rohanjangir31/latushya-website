@@ -89,4 +89,10 @@ export default {
     },
   },
   plugins: [],
+  // Custom variants for iOS safe area inset support
+  // Used by the mobile sticky CTA bar so it doesn't overlap the iPhone home indicator
 }
+
+// Inline plugin for safe-area utilities (no extra package needed)
+// Add this to your index.css if pb-safe doesn't work:
+// .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }

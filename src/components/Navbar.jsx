@@ -54,7 +54,7 @@ export default function Navbar() {
               {COMPANY.name}
             </span>
             <span className="text-gold text-[8px] tracking-widest uppercase font-medium -mt-1">
-              Luxury Interiors
+              Luxury Wardrobe Specialists
             </span>
           </motion.a>
 
@@ -143,15 +143,29 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
-              <motion.a
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                href={`https://wa.me/${COMPANY.whatsapp}`}
-                className="mt-8 btn-gold"
-              >
-                <span>Book Free Consultation</span>
-              </motion.a>
+              {COMPANY.whatsapp ? (
+                <motion.a
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-8 btn-gold"
+                >
+                  <span>Book Free Consultation</span>
+                </motion.a>
+              ) : (
+                <motion.button
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  onClick={() => { setMenuOpen(false); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="mt-8 btn-gold"
+                >
+                  <span>Book Free Consultation</span>
+                </motion.button>
+              )}
             </div>
             <div className="p-8 text-center text-gray-light text-xs tracking-widest">
               {COMPANY.phone}
