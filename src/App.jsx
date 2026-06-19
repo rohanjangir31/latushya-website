@@ -16,6 +16,8 @@ import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CTASection from './components/CTASection';
+import TrustBand from './components/TrustBand';
 import { COMPANY } from './data/content';
 
 // Preloader
@@ -124,46 +126,61 @@ export default function App() {
         <>
           <Navbar />
           <main>
-            {/* 1. Hero — wardrobe specialist positioning */}
+            {/* ─── NARRATIVE ARC ────────────────────────────────
+                Emotional hook → Why trust us → What we make →
+                Proof of work → How it works → Craftsmanship →
+                Conversion CTA → Brand depth → Social proof
+            ──────────────────────────────────────────────── */}
+
+            {/* 1. Hero — cinematic wardrobe impression */}
             <Hero />
 
-            {/* 2. About — honest, no fake stats */}
-            <About />
-
-            {/* 3. Services — wardrobe-only focus */}
-            <Services />
-
-            {/* 4. Credibility band — real trust signals, no fake numbers */}
-            <CredibilityBand />
-
-            {/* 5. Why Choose — real value propositions */}
+            {/* 2. Why Latushya — earn trust BEFORE selling the product */}
             <WhyChoose />
 
-            {/* 6. Portfolio — wardrobe categories with placeholder support */}
+            {/* 3. Credibility metrics — placeholder until real data available */}
+            <TrustBand />
+
+            <div className="section-divider" />
+
+            {/* 4. Wardrobe Expertise — five types we build */}
+            <Services />
+
+            <div className="section-divider" />
+
+            {/* 4. Portfolio — proof of work */}
             <Projects />
 
-            {/* 7. Recent Projects — structured for real project data */}
-            <RecentProjects />
-
-            {/* 8. Before & After — drag comparison slider */}
-            <BeforeAfter />
-
-            {/* 9. Materials & Hardware — Häfele, Hettich, Ebco, Century Ply */}
-            <Materials />
-
-            {/* 10. Process — 6-step journey */}
+            {/* 5. Process — how a project unfolds */}
             <Process />
 
-            {/* 11. Testimonials — placeholder until real reviews are collected */}
+            {/* 6. Materials — craftsmanship depth */}
+            <Materials />
+
+            <div className="section-divider" />
+
+            {/* 7. Conversion CTA — peak moment after trust is built */}
+            <CTASection />
+
+            {/* 8. Brand story — for visitors who want to know more */}
+            <About />
+
+            {/* 9. Credibility band — supporting trust signals */}
+            <CredibilityBand />
+
+            {/* 10. Before & After — visual comparison */}
+            <BeforeAfter />
+
+            {/* 11. Testimonials — social proof */}
             <Testimonials />
 
             {/* 12. Gallery — wardrobe photography */}
             <Gallery />
 
-            {/* 13. FAQ — wardrobe-specific questions */}
+            {/* 13. FAQ — objection handling */}
             <FAQ />
 
-            {/* 14. Contact — placeholder-aware, no fake contact info */}
+            {/* 14. Contact — final conversion */}
             <Contact />
           </main>
           <Footer />

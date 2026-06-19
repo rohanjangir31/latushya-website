@@ -37,17 +37,17 @@ export default function CredibilityBand() {
 
   return (
     <section ref={ref} className="relative py-20 overflow-hidden">
-      {/* Background */}
+      {/* Background — unique image, not repeated from Hero */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=70"
+          src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1920&q=70"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-black-deep/92" />
+        <div className="absolute inset-0 bg-black-deep/93" />
       </div>
 
       {/* Gold lines */}

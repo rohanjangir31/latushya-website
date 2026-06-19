@@ -1,180 +1,254 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Layers, Maximize2, Move, Gem } from 'lucide-react';
 import { SERVICES } from '../data/content';
-import { SectionHeader, StaggerContainer, fadeUpVariant } from '../utils/animations';
 
-// Custom door icon (DoorOpen not in all lucide versions)
 const DoorOpenIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-    strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+    strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
     <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
-    <path d="M2 20h3"/>
-    <path d="M13 20h9"/>
-    <path d="M10 12v.01"/>
+    <path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/>
     <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/>
   </svg>
 );
 
-const iconMap = {
-  Layers,
-  Move,
-  Maximize2,
-  DoorOpen: DoorOpenIcon,
-  Gem,
-};
+const iconMap = { Layers, Move, Maximize2, DoorOpen: DoorOpenIcon, Gem };
 
-export default function Services() {
-  // Split into featured (first) and remaining
-  const [featured, ...rest] = SERVICES;
+function ServiceRow({ service, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const Icon = iconMap[service.icon] || Layers;
+  const isEven = index % 2 === 0;
 
   return (
-    <section id="services" className="py-32 bg-black-charcoal relative overflow-hidden">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.015]" aria-hidden="true"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 80px, #D4AF37 80px, #D4AF37 81px), repeating-linear-gradient(90deg, transparent, transparent 80px, #D4AF37 80px, #D4AF37 81px)',
-        }}
-      />
+    <div
+      ref={ref}
+      className={`group relative overflow-hidden border-b border-gray-luxury/[0.1] last:border-b-0
+        grid grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-[500px]`}
+    >
+      {/* ── IMAGE — takes 60% on desktop ─────────────────── */}
+      <div
+        className={`relative overflow-hidden h-[300px] lg:h-auto
+          ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
+      >
+        <motion.img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+          initial={{ scale: 1.1 }}
+          animate={inView ? { scale: 1 } : { scale: 1.1 }}
+          transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+        />
+        {/* Directional gradient — fades toward the text panel */}
+        <div
+          className={`absolute inset-0 ${
+            isEven
+              ? 'bg-gradient-to-r from-transparent to-black-deep/60'
+              : 'bg-gradient-to-l from-transparent to-black-deep/60'
+          }`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black-deep/50 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeader
-          label="Wardrobe Specialists"
-          title={<>Five Ways We <span className="italic text-gold">Build Your Wardrobe</span></>}
-          subtitle="We design and install every wardrobe type — each one measured, designed, and built specifically for your space."
+        {/* Photo caption — editorial style, bottom of image */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className={`absolute bottom-5 flex items-center gap-3 z-10
+            ${isEven ? 'left-5' : 'right-5 flex-row-reverse'}`}
+        >
+          <div className="w-8 h-px bg-gold/35" />
+          <span className="text-white/30 text-[8px] tracking-[0.32em] uppercase">
+            Bangalore · Custom Made
+          </span>
+        </motion.div>
+      </div>
+
+      {/* ── TEXT — takes 40% on desktop ──────────────────── */}
+      <div
+        className={`relative flex flex-col justify-center px-8 py-12 lg:px-14 lg:py-16
+          bg-black-deep overflow-hidden
+          ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
+      >
+        {/* ── OVERSIZED DECORATIVE NUMERAL ─────────────────
+            Bleeds off the right (or left) edge of the text panel.
+            Creates spatial depth and breaks the "content box" feel. */}
+        <div
+          className={`absolute top-1/2 -translate-y-1/2 font-display font-bold
+            text-white/[0.035] leading-none select-none pointer-events-none
+            transition-all duration-700 group-hover:text-white/[0.055]
+            ${isEven ? '-right-6' : '-left-6'}`}
+          style={{ fontSize: 'clamp(7rem, 13vw, 12rem)' }}
+          aria-hidden="true"
+        >
+          {String(index + 1).padStart(2, '0')}
+        </div>
+
+        {/* Hover top-line — but only on the text panel, not the image */}
+        <div className={`absolute top-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full
+          ${isEven ? 'left-0' : 'right-0'}`}
         />
 
-        {/* Featured card — full width hero */}
-        {featured && (() => {
-          const FeaturedIcon = iconMap[featured.icon] || Layers;
-          return (
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="group relative mb-6 overflow-hidden border border-gray-luxury/20 hover:border-gold/40 transition-all duration-500 cursor-default"
-            >
-              {/* Background image */}
-              <div className="absolute inset-0" aria-hidden="true">
-                <img
-                  src={featured.image}
-                  alt=""
-                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-black-deep/80 group-hover:bg-black-deep/70 transition-colors duration-500" />
-              </div>
+        {/* Hover bg shift */}
+        <div className="absolute inset-0 bg-black-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Top accent */}
-              <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full" />
-
-              <div className="relative z-10 p-10 md:p-14 grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 flex items-center justify-center border border-gold/40 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                      <FeaturedIcon size={20} className="text-gold" />
-                    </div>
-                    <span className="section-label text-[10px]">Most Popular</span>
-                  </div>
-                  <h3 className="font-display text-3xl md:text-4xl text-white font-light mb-2 group-hover:text-gold transition-colors duration-300">
-                    {featured.title}
-                  </h3>
-                  <p className="text-gold/70 text-sm italic mb-4">{featured.tagline}</p>
-                </div>
-                <div>
-                  <p className="text-gray-subtle text-base leading-relaxed mb-6">
-                    {featured.description}
-                  </p>
-                  <a
-                    href="#contact"
-                    onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className="inline-flex items-center gap-3 text-gold text-xs tracking-widest uppercase border-b border-gold/40 pb-1 hover:border-gold transition-colors duration-300 group/link"
-                  >
-                    <span>Get a Quote</span>
-                    <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">→</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })()}
-
-        {/* Remaining 4 cards — 2-col on tablet, 4-col on desktop */}
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {rest.map((service, i) => {
-            const Icon = iconMap[service.icon] || Layers;
-            return (
-              <motion.div
-                key={service.id}
-                variants={fadeUpVariant}
-                className="group relative bg-black-card border border-gray-luxury/20 p-8 overflow-hidden cursor-default transition-all duration-500 hover:border-gold/40 hover:shadow-gold"
-              >
-                {/* Background image on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" aria-hidden="true">
-                  <img
-                    src={service.image}
-                    alt=""
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-black-deep/88" />
-                </div>
-
-                {/* Top accent line */}
-                <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-500 group-hover:w-full" />
-
-                <div className="relative z-10">
-                  {/* Number — decorative */}
-                  <div className="font-display text-5xl text-gold/8 group-hover:text-gold/18 font-bold absolute top-4 right-5 transition-all duration-300 select-none">
-                    {String(i + 2).padStart(2, '0')}
-                  </div>
-
-                  {/* Icon */}
-                  <div className="w-11 h-11 flex items-center justify-center border border-gold/30 mb-5 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                    <Icon size={18} className="text-gold" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-display text-xl text-white mb-1 font-medium group-hover:text-gold transition-colors duration-300 leading-snug">
-                    {service.title}
-                  </h3>
-
-                  {/* Tagline */}
-                  <p className="text-gold/60 text-xs italic mb-4">{service.tagline}</p>
-
-                  {/* Description */}
-                  <p className="text-gray-light text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  {/* Arrow */}
-                  <div className="mt-6 flex items-center gap-2 text-gold text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <span>Enquire</span>
-                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </StaggerContainer>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-14">
-          <p className="text-gray-subtle text-sm mb-6">
-            Not sure which wardrobe type suits your space?{' '}
-            <span className="text-white">We'll help you decide — for free.</span>
-          </p>
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="btn-outline inline-block"
-            id="services-cta"
+        <div className="relative z-10">
+          {/* Icon row */}
+          <motion.div
+            initial={{ opacity: 0, x: isEven ? -16 : 16 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.18 }}
+            className="flex items-center gap-3 mb-6"
           >
-            <span>Book a Free Consultation</span>
-          </a>
+            <div className="w-9 h-9 border border-gold/25 group-hover:border-gold/60 group-hover:bg-gold/[0.08] flex items-center justify-center transition-all duration-400 flex-shrink-0">
+              <Icon className="text-gold" />
+            </div>
+            <span className="text-gold/70 text-[8px] tracking-[0.38em] uppercase font-medium">
+              {service.tagline}
+            </span>
+          </motion.div>
+
+          {/* Title */}
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.85, delay: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="font-display font-light text-white group-hover:text-gold/90
+              transition-colors duration-400 leading-[1.05] mb-5"
+            style={{ fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}
+          >
+            {service.title}
+          </motion.h3>
+
+          {/* Animated gold rule — grows in on scroll */}
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: '2.5rem' } : {}}
+            transition={{ duration: 0.55, delay: 0.4 }}
+            className="h-px bg-gold/45 mb-6"
+          />
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.44 }}
+            className="text-gray-subtle text-sm leading-[1.85] max-w-[300px] mb-9 font-light"
+          >
+            {service.description}
+          </motion.p>
+
+          {/* CTA — pure text link, no button */}
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.58 }}
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-3 group/link"
+          >
+            <span className="text-gold text-[9px] tracking-[0.32em] uppercase font-medium
+              border-b border-gold/25 pb-px group-hover/link:border-gold/70
+              transition-colors duration-300">
+              Request a Quote
+            </span>
+            <motion.span
+              className="text-gold/70 text-xs"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+            >
+              →
+            </motion.span>
+          </motion.a>
         </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Services() {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
+
+  return (
+    <section id="services" className="bg-black-deep">
+
+      {/* ── Section header ──────────────────────────────── */}
+      <div ref={headerRef} className="max-w-7xl mx-auto px-6 lg:px-16 pt-28 pb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="flex items-center gap-4 mb-5"
+        >
+          <div className="w-5 h-px bg-gold" />
+          <span className="text-gold text-[9px] tracking-[0.35em] uppercase font-medium">
+            Wardrobe Specialists
+          </span>
+        </motion.div>
+
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 22 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="font-display font-light text-white leading-[1.05]"
+            style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}
+          >
+            Five Ways We{' '}
+            <span className="italic text-gold">Build Yours</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={headerInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.28 }}
+            className="text-gray-subtle text-sm max-w-[280px] leading-relaxed lg:text-right font-light"
+          >
+            Measured to your space. Built for your lifestyle.
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ width: 0 }}
+          animate={headerInView ? { width: '100%' } : {}}
+          transition={{ duration: 1.1, delay: 0.35 }}
+          className="mt-10 h-px bg-gradient-to-r from-gold/35 via-gold/8 to-transparent"
+        />
+      </div>
+
+      {/* ── Service rows ─────────────────────────────────── */}
+      {/* Full-bleed — no max-w container so rows touch viewport edges */}
+      <div className="border-t border-b border-gray-luxury/[0.08]">
+        {SERVICES.map((service, i) => (
+          <ServiceRow key={service.id} service={service} index={i} />
+        ))}
+      </div>
+
+      {/* ── Bottom CTA strip ─────────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 py-14
+        flex flex-col sm:flex-row items-center justify-between gap-5
+        border-t border-gray-luxury/[0.1]">
+        <p className="text-gray-subtle text-sm font-light">
+          Not sure which wardrobe suits your space?{' '}
+          <span className="text-white">We'll help you decide — for free.</span>
+        </p>
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="btn-outline flex-shrink-0"
+          id="services-cta"
+        >
+          <span>Book Free Consultation</span>
+        </a>
       </div>
     </section>
   );
