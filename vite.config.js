@@ -47,4 +47,20 @@ export default defineConfig({
   preview: {
     port: 4173,
   },
+
+  // ── Dev server: proxy /api to Express backend ─────────────────
+  // Allows the frontend to call fetch('/api/v1/...') in development
+  // without hardcoding http://localhost:5000 in every fetch call.
+  // In production (Vercel), the frontend calls the Railway backend URL
+  // directly via an environment variable (VITE_API_URL).
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });
