@@ -5,7 +5,7 @@ import { COMPANY } from '../data/content';
 import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant } from '../utils/animations';
 // api.js not used here — fetch is called explicitly so it is always
 // visible as a Fetch/XHR entry in Chrome DevTools Network tab.
-const BACKEND = 'http://localhost:5000';
+const BACKEND = 'https://latushya-website.onrender.com';
 
 // Wardrobe types — kept in sync with backend enquiry.model.js
 const WARDROBE_TYPES = [
@@ -19,19 +19,19 @@ const WARDROBE_TYPES = [
 ];
 
 const EMPTY_FORM = {
-  name:         '',
-  phone:        '',
-  email:        '',
+  name: '',
+  phone: '',
+  email: '',
   wardrobeType: '',
-  message:      '',
+  message: '',
 };
 
 export default function Contact() {
-  const [form,      setForm]      = useState(EMPTY_FORM);
+  const [form, setForm] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [focused,   setFocused]   = useState(null);
-  const [loading,   setLoading]   = useState(false);
-  const [error,     setError]     = useState(null);
+  const [focused, setFocused] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,14 +49,14 @@ export default function Contact() {
 
     try {
       const response = await fetch(`${BACKEND}/api/v1/enquiries`, {
-        method:  'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:         form.name,
-          phone:        form.phone,
-          email:        form.email        || undefined,
+          name: form.name,
+          phone: form.phone,
+          email: form.email || undefined,
           wardrobeType: form.wardrobeType || undefined,
-          message:      form.message      || undefined,
+          message: form.message || undefined,
         }),
       });
 
@@ -81,9 +81,9 @@ export default function Contact() {
     if (COMPANY.whatsapp) {
       const msg = encodeURIComponent(
         `Hello Latushya!\n\nNew website enquiry:\nName: ${form.name}\nPhone: ${form.phone}` +
-        `${form.email        ? `\nEmail: ${form.email}`        : ''}` +
+        `${form.email ? `\nEmail: ${form.email}` : ''}` +
         `${form.wardrobeType ? `\nType: ${form.wardrobeType}` : ''}` +
-        `${form.message      ? `\nMessage: ${form.message}`   : ''}`
+        `${form.message ? `\nMessage: ${form.message}` : ''}`
       );
       window.open(`https://wa.me/${COMPANY.whatsapp}?text=${msg}`, '_blank');
     }
@@ -94,16 +94,15 @@ export default function Contact() {
 
   // ── Input styling ────────────────────────────────────────────
   const inputClass = (field) =>
-    `w-full bg-transparent border-b py-4 text-white placeholder-gray-light/40 text-sm transition-all duration-300 outline-none ${
-      focused === field
-        ? 'border-gold'
-        : 'border-gray-luxury/40 hover:border-gray-subtle/60'
+    `w-full bg-transparent border-b py-4 text-white placeholder-gray-light/40 text-sm transition-all duration-300 outline-none ${focused === field
+      ? 'border-gold'
+      : 'border-gray-luxury/40 hover:border-gray-subtle/60'
     }`;
 
-  const hasPhone    = Boolean(COMPANY.phone);
+  const hasPhone = Boolean(COMPANY.phone);
   const hasWhatsApp = Boolean(COMPANY.whatsapp);
-  const hasEmail    = Boolean(COMPANY.email);
-  const hasAddress  = Boolean(COMPANY.address);
+  const hasEmail = Boolean(COMPANY.email);
+  const hasAddress = Boolean(COMPANY.address);
 
   return (
     <section id="contact" className="py-32 bg-black-deep relative overflow-hidden">
