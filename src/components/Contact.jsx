@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MessageCircle, Phone, MapPin, Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { COMPANY } from '../data/content';
 import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant } from '../utils/animations';
+import { apiPost } from '../utils/api';
 
 const WARDROBE_TYPES = [
   'Modular Wardrobe',
@@ -15,21 +16,38 @@ const WARDROBE_TYPES = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', wardrobeType: '', message: '' });
+  const EMPTY_FORM = { name: '', phone: '', email: '', wardrobeType: '', message: '' };
+
+  const [form, setForm]         = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [focused, setFocused] = useState(null);
+  const [focused, setFocused]   = useState(null);
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState(null);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Build WhatsApp message with form data (works even without backend)
-    const msg = encodeURIComponent(
-      `Hello Latushya!\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email || 'Not provided'}\nWardrobe Type: ${form.wardrobeType || 'Not specified'}\nMessage: ${form.message || 'No message'}`
-    );
-    if (COMPANY.whatsapp) {
-      window.open(`https://wa.me/${COMPANY.whatsapp}?text=${msg}`, '_blank');
+    setLoading(true);
+    setError(null);
+
+    const { data, error: apiError } = await apiPost('/api/v1/enquiries', {
+      name:         form.name,
+      phone:        form.phone,
+      email:        form.email        || undefined,
+      wardrobeType: form.wardrobeType || undefined,
+      message:      form.message      || undefined,
+    });
+
+    setLoading(false);
+
+    if (apiError) {
+      setError(apiError);
+      return;
     }
+
+    // Success — save to DB confirmed
+    setForm(EMPTY_FORM);
     setSubmitted(true);
   };
 
@@ -261,9 +279,37 @@ export default function Contact() {
                     />
                   </div>
 
-                  <button type="submit" id="form-submit" className="btn-gold w-full flex items-center justify-center gap-3">
-                    <span>Send Enquiry</span>
-                    <Send size={14} />
+                  {/* Inline error message */}
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-start gap-3 p-4 border border-red-500/30 bg-red-500/[0.07]"
+                    >
+                      <AlertCircle size={15} className="text-red-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-red-400 text-xs leading-relaxed">{error}</p>
+                    </motion.div>
+                  )}
+
+                  <button
+                    type="submit"
+                    id="form-submit"
+                    disabled={loading}
+                    className="btn-gold w-full flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                        </svg>
+                        <span>Sending…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Enquiry</span>
+                        <Send size={14} />
+                      </>
+                    )}
                   </button>
 
                   <p className="text-gray-light/40 text-xs text-center tracking-wide">
