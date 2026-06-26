@@ -3,8 +3,11 @@ import { motion } from 'framer-motion';
 import { MessageCircle, Phone, MapPin, Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { COMPANY } from '../data/content';
 import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant } from '../utils/animations';
-import { apiPost } from '../utils/api';
+// api.js not used here — fetch is called explicitly so it is always
+// visible as a Fetch/XHR entry in Chrome DevTools Network tab.
+const BACKEND = 'http://localhost:5000';
 
+// Wardrobe types — kept in sync with backend enquiry.model.js
 const WARDROBE_TYPES = [
   'Modular Wardrobe',
   'Sliding Wardrobe',
@@ -15,29 +18,56 @@ const WARDROBE_TYPES = [
   'Not sure — need guidance',
 ];
 
+const EMPTY_FORM = {
+  name:         '',
+  phone:        '',
+  email:        '',
+  wardrobeType: '',
+  message:      '',
+};
+
 export default function Contact() {
-  const EMPTY_FORM = { name: '', phone: '', email: '', wardrobeType: '', message: '' };
-
-  const [form, setForm]         = useState(EMPTY_FORM);
+  const [form,      setForm]      = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [focused, setFocused]   = useState(null);
-  const [loading, setLoading]   = useState(false);
-  const [error, setError]       = useState(null);
+  const [focused,   setFocused]   = useState(null);
+  const [loading,   setLoading]   = useState(false);
+  const [error,     setError]     = useState(null);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // ── Form submit ──────────────────────────────────────────────
+  // 1. POST form data to backend → wait for 201
+  // 2. On success → open WhatsApp (if configured) → show success screen
+  // 3. On failure → show inline error banner, leave form intact
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { data, error: apiError } = await apiPost('/api/v1/enquiries', {
-      name:         form.name,
-      phone:        form.phone,
-      email:        form.email        || undefined,
-      wardrobeType: form.wardrobeType || undefined,
-      message:      form.message      || undefined,
-    });
+    let apiError = null;
+
+    try {
+      const response = await fetch(`${BACKEND}/api/v1/enquiries`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:         form.name,
+          phone:        form.phone,
+          email:        form.email        || undefined,
+          wardrobeType: form.wardrobeType || undefined,
+          message:      form.message      || undefined,
+        }),
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        apiError = json?.message || 'Submission failed. Please try again.';
+      }
+    } catch {
+      apiError = 'Network error — please check your connection and try again.';
+    }
 
     setLoading(false);
 
@@ -46,14 +76,28 @@ export default function Contact() {
       return;
     }
 
-    // Success — save to DB confirmed
+    // ── Success: enquiry saved in MongoDB ────────────────────
+    // Open WhatsApp only after the backend confirms the save
+    if (COMPANY.whatsapp) {
+      const msg = encodeURIComponent(
+        `Hello Latushya!\n\nNew website enquiry:\nName: ${form.name}\nPhone: ${form.phone}` +
+        `${form.email        ? `\nEmail: ${form.email}`        : ''}` +
+        `${form.wardrobeType ? `\nType: ${form.wardrobeType}` : ''}` +
+        `${form.message      ? `\nMessage: ${form.message}`   : ''}`
+      );
+      window.open(`https://wa.me/${COMPANY.whatsapp}?text=${msg}`, '_blank');
+    }
+
     setForm(EMPTY_FORM);
     setSubmitted(true);
   };
 
+  // ── Input styling ────────────────────────────────────────────
   const inputClass = (field) =>
     `w-full bg-transparent border-b py-4 text-white placeholder-gray-light/40 text-sm transition-all duration-300 outline-none ${
-      focused === field ? 'border-gold' : 'border-gray-luxury/40 hover:border-gray-subtle/60'
+      focused === field
+        ? 'border-gold'
+        : 'border-gray-luxury/40 hover:border-gray-subtle/60'
     }`;
 
   const hasPhone    = Boolean(COMPANY.phone);
@@ -74,7 +118,8 @@ export default function Contact() {
         />
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left — Contact info */}
+
+          {/* ── Left: contact info ───────────────────────────── */}
           <div>
             <AnimatedSection>
               <h3 className="font-display text-2xl text-white mb-8 font-light">
@@ -193,12 +238,12 @@ export default function Contact() {
               )}
             </AnimatedSection>
 
-            {/* Map placeholder / embed */}
+            {/* Map placeholder */}
             <AnimatedSection delay={0.4} className="mt-10">
               {hasAddress ? (
                 <div className="relative h-48 overflow-hidden border border-gray-luxury/20">
                   <iframe
-                    src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497511.23!2d77.4908527!3d12.9539974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin`}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497511.23!2d77.4908527!3d12.9539974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0, filter: 'grayscale(100%) invert(90%)' }}
@@ -213,7 +258,7 @@ export default function Contact() {
                 <div className="h-48 border border-dashed border-gold/20 bg-black-card/40 flex flex-col items-center justify-center gap-3">
                   <MapPin size={24} className="text-gold/30" />
                   <span className="text-gray-light/40 text-sm text-center">
-                    Serving all of {COMPANY.city}<br/>
+                    Serving all of {COMPANY.city}<br />
                     <span className="text-gold/40 text-xs">Studio address will be updated soon</span>
                   </span>
                 </div>
@@ -221,44 +266,65 @@ export default function Contact() {
             </AnimatedSection>
           </div>
 
-          {/* Right — Enquiry form */}
+          {/* ── Right: enquiry form ──────────────────────────── */}
           <AnimatedSection delay={0.2}>
             <div className="relative bg-black-charcoal border border-gray-luxury/20 p-8 md:p-10">
               <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
 
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="space-y-8">
+
+                  {/* Name */}
                   <div>
                     <input
-                      name="name" type="text" placeholder="Your Full Name *"
-                      required value={form.name} onChange={handleChange}
-                      onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
+                      name="name"
+                      type="text"
+                      placeholder="Your Full Name *"
+                      required
+                      value={form.name}
+                      onChange={handleChange}
+                      onFocus={() => setFocused('name')}
+                      onBlur={() => setFocused(null)}
                       className={inputClass('name')}
                       id="form-name"
                     />
                   </div>
 
+                  {/* Phone + Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <input
-                      name="phone" type="tel" placeholder="Phone Number *"
-                      required value={form.phone} onChange={handleChange}
-                      onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
+                      name="phone"
+                      type="tel"
+                      placeholder="Phone Number *"
+                      required
+                      value={form.phone}
+                      onChange={handleChange}
+                      onFocus={() => setFocused('phone')}
+                      onBlur={() => setFocused(null)}
                       className={inputClass('phone')}
                       id="form-phone"
                     />
                     <input
-                      name="email" type="email" placeholder="Email (optional)"
-                      value={form.email} onChange={handleChange}
-                      onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
+                      name="email"
+                      type="email"
+                      placeholder="Email (optional)"
+                      value={form.email}
+                      onChange={handleChange}
+                      onFocus={() => setFocused('email')}
+                      onBlur={() => setFocused(null)}
                       className={inputClass('email')}
                       id="form-email"
                     />
                   </div>
 
+                  {/* Wardrobe type */}
                   <div>
                     <select
-                      name="wardrobeType" value={form.wardrobeType} onChange={handleChange}
-                      onFocus={() => setFocused('wardrobeType')} onBlur={() => setFocused(null)}
+                      name="wardrobeType"
+                      value={form.wardrobeType}
+                      onChange={handleChange}
+                      onFocus={() => setFocused('wardrobeType')}
+                      onBlur={() => setFocused(null)}
                       className={`${inputClass('wardrobeType')} ${form.wardrobeType ? 'text-white' : 'text-gray-light/40'} bg-transparent appearance-none cursor-pointer`}
                       id="form-type"
                     >
@@ -269,17 +335,22 @@ export default function Contact() {
                     </select>
                   </div>
 
+                  {/* Message */}
                   <div>
                     <textarea
-                      name="message" placeholder="Tell us about your space or requirements..."
-                      rows={4} value={form.message} onChange={handleChange}
-                      onFocus={() => setFocused('message')} onBlur={() => setFocused(null)}
+                      name="message"
+                      placeholder="Tell us about your space or requirements..."
+                      rows={4}
+                      value={form.message}
+                      onChange={handleChange}
+                      onFocus={() => setFocused('message')}
+                      onBlur={() => setFocused(null)}
                       className={`${inputClass('message')} resize-none`}
                       id="form-message"
                     />
                   </div>
 
-                  {/* Inline error message */}
+                  {/* Error banner — shown only when API returns an error */}
                   {error && (
                     <motion.div
                       initial={{ opacity: 0, y: -8 }}
@@ -291,6 +362,7 @@ export default function Contact() {
                     </motion.div>
                   )}
 
+                  {/* Submit */}
                   <button
                     type="submit"
                     id="form-submit"
@@ -299,7 +371,14 @@ export default function Contact() {
                   >
                     {loading ? (
                       <>
-                        <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg
+                          className="animate-spin"
+                          width="14" height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
                           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                         </svg>
                         <span>Sending…</span>
@@ -316,7 +395,9 @@ export default function Contact() {
                     Free consultation · No obligations · We respond promptly
                   </p>
                 </form>
+
               ) : (
+                /* ── Success state (unchanged from original) ── */
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
