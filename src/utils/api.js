@@ -11,7 +11,18 @@
  * They never throw — callers use the returned error string.
  */
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? '';
+// Resolves the backend base URL for each environment:
+//
+//   npm run dev  → import.meta.env.DEV is true  → 'http://localhost:5000'
+//                  Request appears in DevTools as http://localhost:5000/api/v1/...
+//                  Backend CORS already whitelists localhost:5173 (the frontend origin).
+//                  Does NOT rely on the Vite proxy.
+//
+//   npm run build → import.meta.env.DEV is false → VITE_API_URL (set in Vercel env vars)
+//                   Set VITE_API_URL=https://your-backend.railway.app before deploying.
+//
+// import.meta.env.DEV is a Vite built-in replaced at compile time — zero runtime overhead.
+const BASE_URL = import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:5000' : '');
 
 /**
  * POST JSON to an API endpoint.
