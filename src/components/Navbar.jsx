@@ -36,10 +36,10 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-[78px] flex items-center ${
           scrolled
-            ? 'bg-black-deep/95 backdrop-blur-xl border-b border-gold/10 py-4'
-            : 'bg-transparent py-6'
+            ? 'bg-black-deep/95 backdrop-blur-xl border-b border-gold/10'
+            : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -50,10 +50,10 @@ export default function Navbar() {
             className="flex flex-col items-start group"
             whileHover={{ scale: 1.02 }}
           >
-            <span className="font-display text-2xl tracking-ultra text-white font-light">
+            <span className="font-display tracking-ultra text-white font-light" style={{ fontSize: '31px', lineHeight: '1' }}>
               {COMPANY.name}
             </span>
-            <span className="text-gold text-[8px] tracking-widest uppercase font-medium -mt-1">
+            <span className="text-gold text-[8px] tracking-widest uppercase font-medium" style={{ marginTop: '-2px' }}>
               Luxury Wardrobe Specialists
             </span>
           </motion.a>
@@ -65,7 +65,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="relative text-xs tracking-widest uppercase text-gray-subtle hover:text-white transition-colors duration-300 group"
+                className="relative text-[13px] tracking-[4px] uppercase text-gray-subtle hover:text-white transition-colors duration-300 group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
