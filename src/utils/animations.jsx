@@ -1,13 +1,14 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-// Fade up animation variant
+// ─── Canonical reveal variant — 40px fade-up, 700ms ease-out, fire once
+// Used by AnimatedSection, StaggerContainer, and direct motion.div variants.
 export const fadeUpVariant = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
 
@@ -19,40 +20,41 @@ export const fadeInVariant = {
   },
 };
 
+// Children stagger 80ms apart — calm, not bouncy
 export const staggerContainerVariant = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 };
 
 export const slideInLeftVariant = {
-  hidden: { opacity: 0, x: -80 },
+  hidden: { opacity: 0, x: -60 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
 
 export const slideInRightVariant = {
-  hidden: { opacity: 0, x: 80 },
+  hidden: { opacity: 0, x: 60 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
 
 export const scaleUpVariant = {
-  hidden: { opacity: 0, scale: 0.85 },
+  hidden: { opacity: 0, scale: 0.92 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
 

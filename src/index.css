@@ -68,29 +68,37 @@
 
 @layer components {
   /* ─── Buttons ─────────────────────────────────────────── */
+  /* 300ms ease-out lift — consistent across the whole site  */
   .btn-gold {
     @apply relative overflow-hidden bg-gold text-black-deep font-semibold
-           px-8 py-4 tracking-widest text-xs uppercase transition-all duration-500
+           px-8 py-4 tracking-widest text-xs uppercase
+           transition-[transform,filter] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;
   }
   .btn-gold::before {
     content: '';
-    @apply absolute inset-0 bg-gold-light translate-x-full transition-transform duration-500;
+    @apply absolute inset-0 bg-gold-light translate-x-full;
+    transition: transform 300ms ease-out;
   }
-  .btn-gold:hover::before { @apply translate-x-0; }
+  .btn-gold:hover         { transform: translateY(-2px); filter: brightness(1.06); }
+  .btn-gold:hover::before { transform: translateX(0); }
+  .btn-gold:active        { transform: translateY(0px); filter: brightness(1.0); }
   .btn-gold span          { @apply relative z-10; }
 
   .btn-outline {
     @apply relative overflow-hidden border border-gold text-gold font-semibold
-           px-8 py-4 tracking-widest text-xs uppercase transition-all duration-500
+           px-8 py-4 tracking-widest text-xs uppercase
+           transition-[transform,filter,color] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;
   }
   .btn-outline::before {
     content: '';
-    @apply absolute inset-0 bg-gold translate-x-full transition-transform duration-500;
+    @apply absolute inset-0 bg-gold translate-x-full;
+    transition: transform 300ms ease-out;
   }
-  .btn-outline:hover::before { @apply translate-x-0; }
-  .btn-outline:hover         { @apply text-black-deep; }
+  .btn-outline:hover         { transform: translateY(-2px); filter: brightness(1.06); @apply text-black-deep; }
+  .btn-outline:hover::before { transform: translateX(0); }
+  .btn-outline:active        { transform: translateY(0px); }
   .btn-outline span          { @apply relative z-10; }
 
   /* ─── Typography ──────────────────────────────────────── */
@@ -106,11 +114,14 @@
   }
 
   /* ─── Cards ───────────────────────────────────────────── */
+  /* Lift 3px + border brightens — no glow, calm premium feel */
   .luxury-card {
-    @apply bg-black-charcoal border border-gray-luxury/20 transition-all duration-500;
+    @apply bg-black-charcoal border border-gray-luxury/20;
+    transition: transform 300ms ease-out, border-color 300ms ease-out;
   }
   .luxury-card:hover {
-    @apply border-gold/30 shadow-gold;
+    transform: translateY(-3px);
+    @apply border-gold/40;
   }
 
   /* ─── Decorative ──────────────────────────────────────── */
@@ -136,6 +147,56 @@
     content: '◆';
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
            text-gold/30 text-[6px] bg-black-deep px-2;
+  }
+
+  /* ─── Image hover ─────────────────────────────────────── */
+  /* Wrap any <img> in .img-hover to get the 1.03 scale on hover */
+  /* The parent must have overflow-hidden                        */
+  .img-hover {
+    overflow: hidden;
+  }
+  .img-hover img,
+  .img-hover > * {
+    transition: transform 800ms ease-out;
+    will-change: transform;
+  }
+  .img-hover:hover img,
+  .img-hover:hover > * {
+    transform: scale(1.03);
+  }
+
+  /* ─── Link underline ──────────────────────────────────── */
+  /* Underline grows left-to-right on hover, 250ms ease-out  */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px bg-current;
+    width: 0;
+    transition: width 250ms ease-out;
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Gold variant — underline is always gold */
+  .link-underline-gold {
+    @apply relative;
+  }
+  .link-underline-gold::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px bg-gold;
+    width: 0;
+    transition: width 250ms ease-out;
+  }
+  .link-underline-gold:hover::after {
+    width: 100%;
+  }
+
+  /* Active state — underline is permanently visible (used by Navbar) */
+  .link-underline-gold.is-active::after {
+    width: 100%;
   }
 }
 

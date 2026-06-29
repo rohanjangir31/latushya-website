@@ -1,160 +1,288 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Ruler, Wrench, Layers, Star, Users, Clock } from 'lucide-react';
+import { useRef, useState } from 'react';
 
-const PRINCIPLES = [
+// ─────────────────────────────────────────────────────────────────────────────
+// WHY CHOOSE US V3 — Editorial Capabilities List
+//
+// Visual language: Poliform / Molteni&C / Minotti
+// Structure:
+//   Section header (eyebrow + 48px heading + intro + hairline rule)
+//   72px gap
+//   Six full-width rows, each separated by a hairline divider
+//   Each row: [72px ordinal] [32px title + 18px description] [whitespace]
+//
+// Hover: number brightens · heading +4px · divider brightens · no scale
+// ─────────────────────────────────────────────────────────────────────────────
+
+const EASE = [0.25, 0.46, 0.45, 0.94];
+const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
+const SANS    = "'Inter', system-ui, sans-serif";
+
+const CAPABILITIES = [
   {
     num: '01',
-    Icon: Ruler,
-    title: '100% Custom Designed',
-    body: 'Every wardrobe is designed from scratch around your specific dimensions, storage needs, and aesthetic. No off-the-shelf templates, ever.',
+    title: 'Bespoke Design',
+    description:
+      'Every wardrobe is conceived from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
   },
   {
     num: '02',
-    Icon: Wrench,
-    title: 'Häfele & Hettich Hardware',
-    body: 'We install only trusted German hardware brands — Häfele and Hettich — known for soft-close mechanisms, silent operation, and lasting durability.',
+    title: 'Premium Materials',
+    description:
+      'Century Ply and Greenply substrates paired with premium laminates and finishes, selected for structural integrity and lasting beauty.',
   },
   {
     num: '03',
-    Icon: Layers,
-    title: 'Premium Material Standards',
-    body: 'Century Ply and Greenply substrates, premium laminates, and quality finishes — selected for structural integrity and a beautiful long-lasting result.',
+    title: 'Precision Craftsmanship',
+    description:
+      'Millimetre-accurate joinery and installation by our experienced in-house carpentry team, verified at every stage.',
   },
   {
     num: '04',
-    Icon: Star,
-    title: 'Precision Installation',
-    body: 'Our experienced carpentry team achieves millimetre-accurate installation. Every panel, runner, and fitting is checked before we hand over your wardrobe.',
+    title: 'Installation Excellence',
+    description:
+      'Häfele and Hettich German hardware — soft-close mechanisms, silent runners, and fittings built to outlast decades of daily use.',
   },
   {
     num: '05',
-    Icon: Users,
-    title: 'Personalised Consultation',
-    body: 'Your project begins with an in-home session. We visit, listen carefully, measure precisely — and only then do we design your wardrobe.',
+    title: 'Lifetime Support',
+    description:
+      'Post-installation support included as standard. We return to adjust, refine, or repair — because your wardrobe should perform indefinitely.',
   },
   {
     num: '06',
-    Icon: Clock,
-    title: 'Clear Timelines',
-    body: 'You receive a production and installation schedule before work begins. No surprises, no delays without explanation — just honest communication.',
+    title: 'Personal Consultation',
+    description:
+      'Your project begins with an in-home visit. We listen, measure precisely, and design only after we understand your home and your habits.',
   },
 ];
 
-function FeatureCard({ item, index }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+// ── Single capability row ─────────────────────────────────────────────────────
+function CapabilityRow({ item, index, totalInView }) {
+  const [hovered, setHovered] = useState(false);
+  const rowRef = useRef(null);
+  const rowInView = useInView(rowRef, { once: true, margin: '-40px' });
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative p-8 bg-black-charcoal border border-gray-luxury/15
-        hover:border-gold/25 transition-all duration-500 overflow-hidden"
+      ref={rowRef}
+      initial={{ opacity: 0, y: 16 }}
+      animate={rowInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.75, delay: index * 0.07, ease: EASE }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ position: 'relative', cursor: 'default' }}
     >
-      {/* Top gold accent line — grows on hover */}
-      <div className="absolute top-0 left-0 h-0.5 w-0 bg-gold group-hover:w-full transition-all duration-600" />
+      {/* Top divider — brightens on hover */}
+      <div
+        style={{
+          height: '1px',
+          background: hovered
+            ? 'rgba(212,175,55,0.25)'
+            : 'rgba(212,175,55,0.11)',
+          transition: 'background 350ms ease',
+        }}
+      />
 
-      {/* Subtle background glow on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.03] to-transparent
-        opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      <div className="relative z-10">
-        {/* Icon row */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="w-11 h-11 border border-gold/25 group-hover:border-gold/50
-            group-hover:bg-gold/[0.07] flex items-center justify-center
-            transition-all duration-400 flex-shrink-0">
-            <item.Icon size={18} className="text-gold" strokeWidth={1.5} />
-          </div>
-          <span className="font-display text-3xl text-gold/[0.07] group-hover:text-gold/[0.14]
-            font-bold select-none transition-all duration-400 leading-none">
+      {/* Row body */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '120px 1fr',
+          alignItems: 'center',
+          paddingTop: '48px',
+          paddingBottom: '48px',
+          gap: '0',
+        }}
+      >
+        {/* ── Left: ordinal number ─────────────────────────────────────── */}
+        <div style={{ alignSelf: 'flex-start', paddingTop: '6px' }}>
+          <span
+            style={{
+              fontFamily: DISPLAY,
+              fontSize: '72px',
+              fontWeight: 300,
+              lineHeight: 1,
+              letterSpacing: '-0.02em',
+              color: hovered ? 'rgba(212,175,55,0.55)' : 'rgba(212,175,55,0.20)',
+              transition: 'color 350ms ease',
+              userSelect: 'none',
+              display: 'block',
+            }}
+          >
             {item.num}
           </span>
         </div>
 
-        {/* Title */}
-        <h3 className="font-display text-lg text-white group-hover:text-gold/90
-          transition-colors duration-300 font-medium mb-3 leading-snug">
-          {item.title}
-        </h3>
+        {/* ── Right: title + description ───────────────────────────────── */}
+        <div>
+          <motion.h3
+            animate={{ x: hovered ? 4 : 0 }}
+            transition={{ duration: 0.35, ease: [0.0, 0.0, 0.2, 1] }}
+            style={{
+              fontFamily: DISPLAY,
+              fontSize: '32px',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1.1,
+              color: hovered ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.88)',
+              marginBottom: '14px',
+              transition: 'color 350ms ease',
+            }}
+          >
+            {item.title}
+          </motion.h3>
 
-        {/* Divider */}
-        <div className="w-8 h-px bg-gold/30 mb-4 group-hover:w-12 group-hover:bg-gold/50
-          transition-all duration-400" />
-
-        {/* Description */}
-        <p className="text-gray-subtle text-sm leading-[1.8] font-light">
-          {item.body}
-        </p>
+          <p
+            style={{
+              fontFamily: SANS,
+              fontSize: '18px',
+              fontWeight: 300,
+              lineHeight: 1.75,
+              color: 'rgba(255,255,255,0.62)',
+              maxWidth: '500px',
+            }}
+          >
+            {item.description}
+          </p>
+        </div>
       </div>
     </motion.div>
   );
 }
 
+// ── Main section ──────────────────────────────────────────────────────────────
 export default function WhyChoose() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const headerRef = useRef(null);
+  const inView     = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="why-choose" className="py-24 md:py-28 bg-black-deep relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full
-        bg-gold/[0.03] blur-3xl pointer-events-none" />
+    <section
+      id="why-choose"
+      style={{
+        background: '#0F0F0F',
+        paddingTop: '160px',
+        paddingBottom: '160px',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          paddingLeft: 'clamp(24px, 4vw, 64px)',
+          paddingRight: 'clamp(24px, 4vw, 64px)',
+        }}
+      >
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
+        {/* ── SECTION HEADER ──────────────────────────────────────────────── */}
+        <div ref={headerRef} style={{ marginBottom: '72px' }}>
 
-        {/* Header */}
-        <div ref={ref} className="mb-14">
+          {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-4 mb-5"
+            transition={{ duration: 0.65 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
-            <div className="w-5 h-px bg-gold" />
-            <span className="text-gold text-[9px] tracking-[0.35em] uppercase font-medium">
-              Our Promise
+            <div
+              style={{
+                width: '18px',
+                height: '1px',
+                background: 'rgba(212,175,55,0.65)',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: SANS,
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.38em',
+                textTransform: 'uppercase',
+                color: 'rgba(212,175,55,0.65)',
+              }}
+            >
+              Why Latushya
             </span>
           </motion.div>
 
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
+          {/* Heading row: 48px title + intro text */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              gap: '24px',
+            }}
+          >
             <motion.h2
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="font-display font-light text-white leading-[1.05]"
-              style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)' }}
+              transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
+              style={{
+                fontFamily: DISPLAY,
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontWeight: 300,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.05,
+                color: '#ffffff',
+              }}
             >
-              Why Choose{' '}
-              <span className="italic text-gold">Latushya</span>
+              Six Reasons to{' '}
+              <em style={{ fontStyle: 'italic', color: '#D4AF37' }}>Choose Us</em>
             </motion.h2>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="text-gray-subtle text-sm max-w-[260px] leading-relaxed lg:text-right font-light"
+              transition={{ duration: 0.75, delay: 0.28 }}
+              style={{
+                fontFamily: SANS,
+                fontSize: '0.8125rem',
+                lineHeight: 1.8,
+                color: 'rgba(255,255,255,0.30)',
+                maxWidth: '220px',
+                flexShrink: 0,
+              }}
             >
-              Six genuine reasons Bangalore homeowners trust us with their most personal space.
+              The principles behind every wardrobe we design and build for Bangalore homes.
             </motion.p>
           </div>
 
+          {/* Hairline rule */}
           <motion.div
-            initial={{ width: 0 }}
-            animate={inView ? { width: '100%' } : {}}
-            transition={{ duration: 1.0, delay: 0.3 }}
-            className="mt-8 h-px bg-gradient-to-r from-gold/35 via-gold/8 to-transparent"
+            initial={{ scaleX: 0 }}
+            animate={inView ? { scaleX: 1 } : {}}
+            transition={{ duration: 1.4, delay: 0.32, ease: EASE }}
+            style={{
+              height: '1px',
+              background: 'linear-gradient(to right, rgba(212,175,55,0.22), rgba(212,175,55,0.05) 55%, transparent)',
+              transformOrigin: 'left',
+              marginTop: '36px',
+            }}
           />
         </div>
 
-        {/* 3-col card grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {PRINCIPLES.map((item, i) => (
-            <FeatureCard key={item.num} item={item} index={i} />
+        {/* ── CAPABILITIES LIST ────────────────────────────────────────────── */}
+        <div>
+          {CAPABILITIES.map((item, i) => (
+            <CapabilityRow
+              key={item.num}
+              item={item}
+              index={i}
+              totalInView={inView}
+            />
           ))}
+
+          {/* Bottom divider — closes the list */}
+          <div
+            style={{
+              height: '1px',
+              background: 'rgba(212,175,55,0.11)',
+            }}
+          />
         </div>
+
       </div>
     </section>
   );

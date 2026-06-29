@@ -1,419 +1,270 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone, MapPin, Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { MessageCircle, Phone, Mail, MapPin } from 'lucide-react';
+import { useRef } from 'react';
 import { COMPANY } from '../data/content';
-import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant } from '../utils/animations';
-// api.js not used here — fetch is called explicitly so it is always
-// visible as a Fetch/XHR entry in Chrome DevTools Network tab.
-const BACKEND = 'https://latushya-website.onrender.com';
 
-// Wardrobe types — kept in sync with backend enquiry.model.js
-const WARDROBE_TYPES = [
-  'Modular Wardrobe',
-  'Sliding Wardrobe',
-  'Walk-In Wardrobe',
-  'Hinged Wardrobe',
-  'Luxury Wardrobe',
-  'Custom Storage Solution',
-  'Not sure — need guidance',
-];
+// ─── Motion helpers ───────────────────────────────────────────────────────────
+// A single "fade up once" transition — no bouncing, no flashiness.
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-60px' },
+  transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] },
+});
 
-const EMPTY_FORM = {
-  name: '',
-  phone: '',
-  email: '',
-  wardrobeType: '',
-  message: '',
-};
+// ─── Contact detail row ───────────────────────────────────────────────────────
+function ContactDetail({ icon: Icon, label, value, href, placeholder }) {
+  const inner = (
+    <div className="flex items-center gap-4 group cursor-pointer">
+      <div className="w-10 h-10 border border-gold/25 flex items-center justify-center flex-shrink-0 group-hover:border-gold group-hover:bg-gold/8 transition-all duration-300">
+        <Icon size={15} className="text-gold" />
+      </div>
+      <div>
+        <p className="text-gold text-[9px] tracking-[0.22em] uppercase font-medium mb-0.5">
+          {label}
+        </p>
+        {value ? (
+          <p className="text-white/80 text-sm group-hover:text-white transition-colors duration-300">
+            {value}
+          </p>
+        ) : (
+          <p className="text-white/45 text-sm italic">{placeholder}</p>
+        )}
+      </div>
+    </div>
+  );
 
+  if (href && value) {
+    return (
+      <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+        {inner}
+      </a>
+    );
+  }
+  return <div>{inner}</div>;
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 export default function Contact() {
-  const [form, setForm] = useState(EMPTY_FORM);
-  const [submitted, setSubmitted] = useState(false);
-  const [focused, setFocused] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const sectionRef = useRef(null);
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const hasPhone     = Boolean(COMPANY.phone);
+  const hasWhatsApp  = Boolean(COMPANY.whatsapp);
+  const hasEmail     = Boolean(COMPANY.email);
+  const hasAddress   = Boolean(COMPANY.address);
+  const hasCity      = Boolean(COMPANY.city);
 
-  // ── Form submit ──────────────────────────────────────────────
-  // 1. POST form data to backend → wait for 201
-  // 2. On success → open WhatsApp (if configured) → show success screen
-  // 3. On failure → show inline error banner, leave form intact
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    let apiError = null;
-
-    try {
-      const response = await fetch(`${BACKEND}/api/v1/enquiries`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          phone: form.phone,
-          email: form.email || undefined,
-          wardrobeType: form.wardrobeType || undefined,
-          message: form.message || undefined,
-        }),
-      });
-
-      const json = await response.json();
-
-      if (!response.ok) {
-        apiError = json?.message || 'Submission failed. Please try again.';
-      }
-    } catch {
-      apiError = 'Network error — please check your connection and try again.';
-    }
-
-    setLoading(false);
-
-    if (apiError) {
-      setError(apiError);
-      return;
-    }
-
-    // ── Success: enquiry saved in MongoDB ────────────────────
-    // Open WhatsApp only after the backend confirms the save
-    if (COMPANY.whatsapp) {
-      const msg = encodeURIComponent(
-        `Hello Latushya!\n\nNew website enquiry:\nName: ${form.name}\nPhone: ${form.phone}` +
-        `${form.email ? `\nEmail: ${form.email}` : ''}` +
-        `${form.wardrobeType ? `\nType: ${form.wardrobeType}` : ''}` +
-        `${form.message ? `\nMessage: ${form.message}` : ''}`
-      );
-      window.open(`https://wa.me/${COMPANY.whatsapp}?text=${msg}`, '_blank');
-    }
-
-    setForm(EMPTY_FORM);
-    setSubmitted(true);
-  };
-
-  // ── Input styling ────────────────────────────────────────────
-  const inputClass = (field) =>
-    `w-full bg-transparent border-b py-4 text-white placeholder-gray-light/40 text-sm transition-all duration-300 outline-none ${focused === field
-      ? 'border-gold'
-      : 'border-gray-luxury/40 hover:border-gray-subtle/60'
-    }`;
-
-  const hasPhone = Boolean(COMPANY.phone);
-  const hasWhatsApp = Boolean(COMPANY.whatsapp);
-  const hasEmail = Boolean(COMPANY.email);
-  const hasAddress = Boolean(COMPANY.address);
+  const whatsappHref = hasWhatsApp
+    ? `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`
+    : null;
 
   return (
-    <section id="contact" className="py-32 bg-black-deep relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-gold/3 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative overflow-hidden"
+      style={{ background: 'linear-gradient(160deg, #0A0A0A 0%, #111008 50%, #0A0A0A 100%)' }}
+    >
+      {/* ── Noise texture overlay ─────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")",
+          opacity: 0.5,
+          mixBlendMode: 'overlay',
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeader
-          label="Get In Touch"
-          title={<>Book Your Free <span className="italic text-gold">Wardrobe Consultation</span></>}
-          subtitle="Tell us about your space. We'll visit, measure, and design a custom wardrobe — completely free, no obligations."
+      {/* ── Very subtle radial warmth ─────────────────────────── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 55% at 50% 50%, rgba(212,175,55,0.04) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* ── Top gold rule ──────────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background:
+            'linear-gradient(to right, transparent 0%, rgba(212,175,55,0.5) 25%, rgba(212,175,55,0.5) 75%, transparent 100%)',
+        }}
+      />
+
+      {/* ── Content wrapper — generous vertical padding ───────── */}
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-16 py-40 md:py-52 text-center">
+
+        {/* ── Gold label ────────────────────────────────────────── */}
+        <motion.span
+          {...fadeUp(0)}
+          className="block text-gold text-[9px] tracking-[0.32em] uppercase font-medium mb-10"
+        >
+          Free In-Home Consultation · No Obligations
+        </motion.span>
+
+        {/* ── Headline ──────────────────────────────────────────── */}
+        <motion.h2
+          {...fadeUp(0.12)}
+          className="font-display font-light text-white leading-[1.08] tracking-tight mb-8"
+          style={{ fontSize: 'clamp(2.25rem, 6.5vw, 4.5rem)' }}
+        >
+          Ready to Build Your{' '}
+          <span
+            className="italic"
+            style={{
+              background: 'linear-gradient(135deg, #D4AF37 0%, #F0E0A0 55%, #B8962E 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Dream Wardrobe?
+          </span>
+        </motion.h2>
+
+        {/* ── Supporting paragraph ──────────────────────────────── */}
+        <motion.p
+          {...fadeUp(0.22)}
+          className="text-white/65 leading-relaxed max-w-xl mx-auto mb-16"
+          style={{ fontSize: '18px' }}
+        >
+          We visit your home, understand your space, and craft a wardrobe
+          designed around your life — not just your room.
+        </motion.p>
+
+        {/* ── Primary + Secondary CTA ───────────────────────────── */}
+        <motion.div
+          {...fadeUp(0.34)}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+        >
+          {/* Primary — Book Free Consultation */}
+          {hasWhatsApp ? (
+            <motion.a
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              id="contact-book-consultation"
+              className="btn-gold flex items-center gap-3"
+              style={{ minWidth: '220px', justifyContent: 'center' }}
+            >
+              <span>Book Free Consultation</span>
+            </motion.a>
+          ) : (
+            <motion.button
+              id="contact-book-consultation"
+              className="btn-gold flex items-center gap-3"
+              style={{ minWidth: '220px', justifyContent: 'center' }}
+              onClick={() =>
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
+              <span>Book Free Consultation</span>
+            </motion.button>
+          )}
+
+          {/* Secondary — Call Now */}
+          {hasPhone ? (
+            <motion.a
+              href={`tel:${COMPANY.phone}`}
+              id="contact-call-now"
+              className="btn-outline flex items-center gap-3"
+              style={{ minWidth: '160px', justifyContent: 'center' }}
+            >
+              <Phone size={14} />
+              <span>Call Now</span>
+            </motion.a>
+          ) : (
+            <motion.button
+              id="contact-call-now"
+              disabled
+              className="btn-outline flex items-center gap-3 opacity-35 cursor-not-allowed"
+              style={{ minWidth: '160px', justifyContent: 'center' }}
+            >
+              <Phone size={14} />
+              <span>Call Now</span>
+            </motion.button>
+          )}
+        </motion.div>
+
+        {/* ── Trust signal ──────────────────────────────────── */}
+        <motion.p
+          {...fadeUp(0.40)}
+          className="text-white/35 text-[11px] tracking-[0.2em] uppercase mb-16"
+        >
+          Precision Craftsmanship · Bespoke Design · Lifetime Support
+        </motion.p>
+
+        {/* ── Hairline divider ─────────────────────────────── */}
+        <motion.div
+          {...fadeUp(0.50)}
+          aria-hidden="true"
+          className="mx-auto mb-14"
+          style={{
+            width: '1px',
+            height: '48px',
+            background:
+              'linear-gradient(to bottom, rgba(212,175,55,0.5), transparent)',
+          }}
         />
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        {/* ── Contact details — 2×2 grid on desktop, 1-col on mobile */}
+        <motion.div
+          {...fadeUp(0.58)}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-8 max-w-xl mx-auto text-left"
+        >
+          {/* WhatsApp */}
+          <ContactDetail
+            icon={MessageCircle}
+            label="WhatsApp"
+            value={hasWhatsApp ? 'Chat with us on WhatsApp' : null}
+            href={whatsappHref}
+            placeholder="Available upon request"
+          />
 
-          {/* ── Left: contact info ───────────────────────────── */}
-          <div>
-            <AnimatedSection>
-              <h3 className="font-display text-2xl text-white mb-8 font-light">
-                Let's Design Your <span className="italic text-gold">Dream Wardrobe</span>
-              </h3>
-            </AnimatedSection>
+          {/* Phone */}
+          <ContactDetail
+            icon={Phone}
+            label="Phone"
+            value={hasPhone ? COMPANY.phone : null}
+            href={hasPhone ? `tel:${COMPANY.phone}` : null}
+            placeholder="Details shared on enquiry"
+          />
 
-            <StaggerContainer className="space-y-7 mb-10">
-              {/* Phone */}
-              <motion.div variants={fadeUpVariant} className="flex items-start gap-5 group">
-                <div className="w-11 h-11 border border-gold/30 flex items-center justify-center flex-shrink-0 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                  <Phone size={17} className="text-gold" />
-                </div>
-                <div>
-                  <div className="text-gold text-[10px] tracking-widest uppercase mb-1">Call Us</div>
-                  {hasPhone ? (
-                    <a href={`tel:${COMPANY.phone}`} className="text-white hover:text-gold transition-colors text-sm">
-                      {COMPANY.phone}
-                    </a>
-                  ) : (
-                    <span className="text-gray-light/40 text-sm italic">Phone number coming soon</span>
-                  )}
-                </div>
-              </motion.div>
+          {/* Email */}
+          <ContactDetail
+            icon={Mail}
+            label="Email"
+            value={hasEmail ? COMPANY.email : null}
+            href={hasEmail ? `mailto:${COMPANY.email}` : null}
+            placeholder="Shared upon consultation"
+          />
 
-              {/* WhatsApp */}
-              <motion.div variants={fadeUpVariant} className="flex items-start gap-5 group">
-                <div className="w-11 h-11 border border-gold/30 flex items-center justify-center flex-shrink-0 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                  <MessageCircle size={17} className="text-gold" />
-                </div>
-                <div>
-                  <div className="text-gold text-[10px] tracking-widest uppercase mb-1">WhatsApp</div>
-                  {hasWhatsApp ? (
-                    <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" rel="noreferrer" className="text-white hover:text-gold transition-colors text-sm">
-                      Chat with us on WhatsApp
-                    </a>
-                  ) : (
-                    <span className="text-gray-light/40 text-sm italic">WhatsApp contact coming soon</span>
-                  )}
-                </div>
-              </motion.div>
+          {/* Location */}
+          <ContactDetail
+            icon={MapPin}
+            label="Location"
+            value={hasAddress ? COMPANY.address : hasCity ? COMPANY.city : null}
+            placeholder="Serving all of Bangalore"
+          />
+        </motion.div>
 
-              {/* Email */}
-              <motion.div variants={fadeUpVariant} className="flex items-start gap-5 group">
-                <div className="w-11 h-11 border border-gold/30 flex items-center justify-center flex-shrink-0 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                  <Mail size={17} className="text-gold" />
-                </div>
-                <div>
-                  <div className="text-gold text-[10px] tracking-widest uppercase mb-1">Email</div>
-                  {hasEmail ? (
-                    <a href={`mailto:${COMPANY.email}`} className="text-white hover:text-gold transition-colors text-sm">
-                      {COMPANY.email}
-                    </a>
-                  ) : (
-                    <span className="text-gray-light/40 text-sm italic">Email address coming soon</span>
-                  )}
-                </div>
-              </motion.div>
-
-              {/* Address */}
-              <motion.div variants={fadeUpVariant} className="flex items-start gap-5 group">
-                <div className="w-11 h-11 border border-gold/30 flex items-center justify-center flex-shrink-0 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                  <MapPin size={17} className="text-gold" />
-                </div>
-                <div>
-                  <div className="text-gold text-[10px] tracking-widest uppercase mb-1">Location</div>
-                  {hasAddress ? (
-                    <p className="text-white text-sm leading-relaxed">{COMPANY.address}</p>
-                  ) : (
-                    <span className="text-gray-light/40 text-sm italic">
-                      {COMPANY.city} — full address coming soon
-                    </span>
-                  )}
-                </div>
-              </motion.div>
-            </StaggerContainer>
-
-            {/* Quick action buttons */}
-            <AnimatedSection delay={0.3} className="flex flex-col sm:flex-row gap-4">
-              {hasWhatsApp ? (
-                <a
-                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  id="contact-whatsapp"
-                  className="btn-gold flex items-center gap-3 justify-center"
-                >
-                  <MessageCircle size={15} />
-                  <span>WhatsApp Us</span>
-                </a>
-              ) : (
-                <button
-                  disabled
-                  className="btn-gold opacity-40 cursor-not-allowed flex items-center gap-3 justify-center"
-                  title="WhatsApp number not yet configured"
-                >
-                  <MessageCircle size={15} />
-                  <span>WhatsApp Us</span>
-                </button>
-              )}
-
-              {hasPhone ? (
-                <a href={`tel:${COMPANY.phone}`} id="contact-call" className="btn-outline flex items-center gap-3 justify-center">
-                  <Phone size={15} />
-                  <span>Call Now</span>
-                </a>
-              ) : (
-                <button
-                  disabled
-                  className="btn-outline opacity-40 cursor-not-allowed flex items-center gap-3 justify-center"
-                  title="Phone number not yet configured"
-                >
-                  <Phone size={15} />
-                  <span>Call Now</span>
-                </button>
-              )}
-            </AnimatedSection>
-
-            {/* Map placeholder */}
-            <AnimatedSection delay={0.4} className="mt-10">
-              {hasAddress ? (
-                <div className="relative h-48 overflow-hidden border border-gray-luxury/20">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497511.23!2d77.4908527!3d12.9539974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0, filter: 'grayscale(100%) invert(90%)' }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Latushya — Bangalore"
-                  />
-                  <div className="absolute inset-0 pointer-events-none border border-gold/10" />
-                </div>
-              ) : (
-                <div className="h-48 border border-dashed border-gold/20 bg-black-card/40 flex flex-col items-center justify-center gap-3">
-                  <MapPin size={24} className="text-gold/30" />
-                  <span className="text-gray-light/40 text-sm text-center">
-                    Serving all of {COMPANY.city}<br />
-                    <span className="text-gold/40 text-xs">Studio address will be updated soon</span>
-                  </span>
-                </div>
-              )}
-            </AnimatedSection>
-          </div>
-
-          {/* ── Right: enquiry form ──────────────────────────── */}
-          <AnimatedSection delay={0.2}>
-            <div className="relative bg-black-charcoal border border-gray-luxury/20 p-8 md:p-10">
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-
-              {!submitted ? (
-                <form onSubmit={handleSubmit} className="space-y-8">
-
-                  {/* Name */}
-                  <div>
-                    <input
-                      name="name"
-                      type="text"
-                      placeholder="Your Full Name *"
-                      required
-                      value={form.name}
-                      onChange={handleChange}
-                      onFocus={() => setFocused('name')}
-                      onBlur={() => setFocused(null)}
-                      className={inputClass('name')}
-                      id="form-name"
-                    />
-                  </div>
-
-                  {/* Phone + Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    <input
-                      name="phone"
-                      type="tel"
-                      placeholder="Phone Number *"
-                      required
-                      value={form.phone}
-                      onChange={handleChange}
-                      onFocus={() => setFocused('phone')}
-                      onBlur={() => setFocused(null)}
-                      className={inputClass('phone')}
-                      id="form-phone"
-                    />
-                    <input
-                      name="email"
-                      type="email"
-                      placeholder="Email (optional)"
-                      value={form.email}
-                      onChange={handleChange}
-                      onFocus={() => setFocused('email')}
-                      onBlur={() => setFocused(null)}
-                      className={inputClass('email')}
-                      id="form-email"
-                    />
-                  </div>
-
-                  {/* Wardrobe type */}
-                  <div>
-                    <select
-                      name="wardrobeType"
-                      value={form.wardrobeType}
-                      onChange={handleChange}
-                      onFocus={() => setFocused('wardrobeType')}
-                      onBlur={() => setFocused(null)}
-                      className={`${inputClass('wardrobeType')} ${form.wardrobeType ? 'text-white' : 'text-gray-light/40'} bg-transparent appearance-none cursor-pointer`}
-                      id="form-type"
-                    >
-                      <option value="" disabled className="bg-black-charcoal">Wardrobe Type Needed</option>
-                      {WARDROBE_TYPES.map((t) => (
-                        <option key={t} value={t} className="bg-black-charcoal text-white">{t}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <textarea
-                      name="message"
-                      placeholder="Tell us about your space or requirements..."
-                      rows={4}
-                      value={form.message}
-                      onChange={handleChange}
-                      onFocus={() => setFocused('message')}
-                      onBlur={() => setFocused(null)}
-                      className={`${inputClass('message')} resize-none`}
-                      id="form-message"
-                    />
-                  </div>
-
-                  {/* Error banner — shown only when API returns an error */}
-                  {error && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-3 p-4 border border-red-500/30 bg-red-500/[0.07]"
-                    >
-                      <AlertCircle size={15} className="text-red-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-red-400 text-xs leading-relaxed">{error}</p>
-                    </motion.div>
-                  )}
-
-                  {/* Submit */}
-                  <button
-                    type="submit"
-                    id="form-submit"
-                    disabled={loading}
-                    className="btn-gold w-full flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {loading ? (
-                      <>
-                        <svg
-                          className="animate-spin"
-                          width="14" height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
-                          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                        </svg>
-                        <span>Sending…</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Send Enquiry</span>
-                        <Send size={14} />
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-gray-light/40 text-xs text-center tracking-wide">
-                    Free consultation · No obligations · We respond promptly
-                  </p>
-                </form>
-
-              ) : (
-                /* ── Success state (unchanged from original) ── */
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-16 text-center"
-                >
-                  <CheckCircle size={56} className="text-gold mb-6" />
-                  <h3 className="font-display text-2xl text-white mb-3">Thank You!</h3>
-                  <p className="text-gray-light text-sm leading-relaxed max-w-xs">
-                    We've received your enquiry. Our wardrobe specialist will be in touch shortly to schedule your free consultation.
-                  </p>
-                  <div className="mt-6 w-16 h-px bg-gold" />
-                </motion.div>
-              )}
-            </div>
-          </AnimatedSection>
-        </div>
       </div>
+
+      {/* ── Bottom gold rule ──────────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{
+          background:
+            'linear-gradient(to right, transparent 0%, rgba(212,175,55,0.15) 40%, rgba(212,175,55,0.15) 60%, transparent 100%)',
+        }}
+      />
     </section>
   );
 }

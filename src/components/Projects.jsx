@@ -46,19 +46,19 @@ function PlaceholderOverlay({ index, imageHeight, hovered }) {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
-          transform: hovered ? 'scale(1.02)' : 'scale(1)',
-          transition: 'transform 400ms cubic-bezier(0.0, 0.0, 0.2, 1)',
+          transform: hovered ? 'scale(1.03)' : 'scale(1)',
+          transition: 'transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         }}
         loading="lazy"
         decoding="async"
       />
-      {/* Heavy dark overlay */}
+      {/* Dark overlay — lightened 12% so wardrobe detail shows */}
       <div
         className="absolute inset-0"
         style={{
           background: hovered
-            ? 'rgba(8,6,4,0.76)'
-            : 'rgba(8,6,4,0.84)',
+            ? 'rgba(8,6,4,0.64)'
+            : 'rgba(8,6,4,0.72)',
           transition: 'background 0.6s ease',
         }}
       />
@@ -93,8 +93,8 @@ function LiveImage({ project, hovered }) {
         alt={project.wardrobeType || project.category}
         className="absolute inset-0 w-full h-full object-cover"
         style={{
-          transform: hovered ? 'scale(1.02)' : 'scale(1)',
-          transition: 'transform 400ms cubic-bezier(0.0, 0.0, 0.2, 1)',
+          transform: hovered ? 'scale(1.03)' : 'scale(1)',
+          transition: 'transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         }}
         loading="lazy"
         decoding="async"

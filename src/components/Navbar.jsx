@@ -17,11 +17,32 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    // ── Scroll: background blur toggle
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // ── Active section: IntersectionObserver watches each nav section
+    const sectionIds = navLinks.map((l) => l.href.replace('#', ''));
+    const observers = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection('#' + id);
+        },
+        // Trigger when the section covers the middle 30% of the viewport
+        { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observers.forEach((o) => o.disconnect());
+    };
   }, []);
 
   const handleNavClick = (href) => {
@@ -60,17 +81,20 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="relative text-[13px] tracking-[4px] uppercase text-gray-subtle hover:text-white transition-colors duration-300 group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                  className={`link-underline-gold text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
+                    ${isActive ? 'text-gold is-active' : 'text-gray-subtle hover:text-white'}`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* CTA */}

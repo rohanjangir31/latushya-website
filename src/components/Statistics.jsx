@@ -77,7 +77,7 @@ export default function CredibilityBand() {
               <div className="text-gold text-[10px] tracking-widest uppercase font-medium mb-1">
                 {label}
               </div>
-              <div className="text-gray-light/50 text-[10px] tracking-wide">
+              <div className="text-gray-light/80 text-[10px] tracking-wide">
                 {sub}
               </div>
 
