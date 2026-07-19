@@ -1,54 +1,37 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import { COMPANY } from '../data/content';
+import Magnetic from './Magnetic';
+import { useCursor } from '../context/CursorContext';
 
 const navLinks = [
-  { label: 'About',     href: '#about' },
-  { label: 'Services',  href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Materials', href: '#materials' },
-  { label: 'Process',   href: '#process' },
-  { label: 'Contact',   href: '#contact' },
+  { label: 'About',     href: '/about' },
+  { label: 'Services',  href: '/services' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Materials', href: '/materials' },
+  { label: 'Process',   href: '/process' },
+  { label: 'Contact',   href: '/contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const location = useLocation();
+  const { setCursorState } = useCursor();
 
   useEffect(() => {
     // ── Scroll: background blur toggle
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // ── Active section: IntersectionObserver watches each nav section
-    const sectionIds = navLinks.map((l) => l.href.replace('#', ''));
-    const observers = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection('#' + id);
-        },
-        // Trigger when the section covers the middle 30% of the viewport
-        { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      observers.forEach((o) => o.disconnect());
     };
   }, []);
 
-  const handleNavClick = (href) => {
+  const handleNavClick = () => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -58,67 +41,78 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-[78px] flex items-center ${
-          scrolled
+          scrolled || menuOpen
             ? 'bg-black-deep/95 backdrop-blur-xl border-b border-gold/10'
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 flex w-full items-center justify-between">
           {/* Logo */}
-          <motion.a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="flex flex-col items-start group"
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="font-display tracking-ultra text-white font-light" style={{ fontSize: '31px', lineHeight: '1' }}>
-              {COMPANY.name}
-            </span>
-            <span className="text-gold text-[8px] tracking-widest uppercase font-medium" style={{ marginTop: '-2px' }}>
-              Luxury Wardrobe Specialists
-            </span>
-          </motion.a>
+          <Magnetic strength={0.3}>
+            <Link
+              to="/"
+              onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              onMouseEnter={() => setCursorState('hover')}
+              onMouseLeave={() => setCursorState('default')}
+              className="flex flex-col items-start group"
+            >
+              <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
+                <img 
+                  src="/logo-3d.png" 
+                  alt="Latushya Logo" 
+                  className="h-10 w-auto object-contain drop-shadow-md" 
+                />
+              </motion.div>
+            </Link>
+          </Magnetic>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href;
+              const isActive = location.pathname === link.href;
               return (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                  to={link.href}
+                  onClick={handleNavClick}
+                  onMouseEnter={() => setCursorState('hover')}
+                  onMouseLeave={() => setCursorState('default')}
                   className={`link-underline-gold text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
                     ${isActive ? 'text-gold is-active' : 'text-gray-subtle hover:text-white'}`}
                 >
                   {link.label}
-                </a>
+                </Link>
               );
             })}
           </div>
 
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            {COMPANY.whatsapp ? (
-              <a
-                href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-gold"
-                id="nav-cta"
-              >
-                <span>Free Consultation</span>
-              </a>
-            ) : (
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="btn-gold"
-                id="nav-cta"
-              >
-                <span>Free Consultation</span>
-              </a>
-            )}
+            <Magnetic strength={0.2}>
+              {COMPANY.whatsapp ? (
+                <a
+                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-gold"
+                  id="nav-cta"
+                  onMouseEnter={() => setCursorState('hover')}
+                  onMouseLeave={() => setCursorState('default')}
+                >
+                  <span>Free Consultation</span>
+                </a>
+              ) : (
+                <Link
+                  to="/contact"
+                  className="btn-gold"
+                  id="nav-cta"
+                  onMouseEnter={() => setCursorState('hover')}
+                  onMouseLeave={() => setCursorState('default')}
+                >
+                  <span>Free Consultation</span>
+                </Link>
+              )}
+            </Magnetic>
           </div>
 
           {/* Mobile hamburger */}
@@ -151,28 +145,31 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-40 bg-black-deep flex flex-col"
+            className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px]"
           >
             <div className="flex-1 flex flex-col justify-center items-center gap-8 px-8">
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 + 0.1 }}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className="font-display text-4xl text-white/80 hover:text-gold transition-colors duration-300"
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    to={link.href}
+                    onClick={handleNavClick}
+                    className={`font-display text-4xl transition-colors duration-300 ${location.pathname === link.href ? 'text-gold' : 'text-white/80 hover:text-gold'}`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               {COMPANY.whatsapp ? (
                 <motion.a
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
+                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-8 btn-gold"
@@ -180,15 +177,19 @@ export default function Navbar() {
                   <span>Book Free Consultation</span>
                 </motion.a>
               ) : (
-                <motion.button
+                <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  onClick={() => { setMenuOpen(false); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="mt-8 btn-gold"
                 >
-                  <span>Book Free Consultation</span>
-                </motion.button>
+                  <Link
+                    to="/contact"
+                    onClick={handleNavClick}
+                    className="mt-8 btn-gold block"
+                  >
+                    <span>Book Free Consultation</span>
+                  </Link>
+                </motion.div>
               )}
             </div>
             <div className="p-8 text-center text-gray-light text-xs tracking-widest">

@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { PROJECTS } from '../data/content';
+import ImageReveal from './ImageReveal';
 
 // ─────────────────────────────────────────────────────────────────────────
 // PORTFOLIO V3 — Editorial Architecture-Firm Layout
@@ -90,7 +91,7 @@ function LiveImage({ project, hovered }) {
     <>
       <img
         src={project.image}
-        alt={project.wardrobeType || project.category}
+        alt={project.projectType || project.category}
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           transform: hovered ? 'scale(1.03)' : 'scale(1)',
@@ -250,18 +251,21 @@ function FeaturedProject({ project, inView }) {
       transition={{ duration: 1.0, delay: 0.15, ease: EASE }}
     >
       {/* Image — full width, ~58vh */}
-      <div
-        className="relative overflow-hidden w-full"
-        style={{ height: 'clamp(340px, 58vh, 680px)', cursor: 'pointer', borderRadius: '12px' }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {project.isPlaceholder ? (
-          <PlaceholderOverlay index={0} hovered={hovered} />
-        ) : (
-          <LiveImage project={project} hovered={hovered} />
-        )}
-      </div>
+      <ImageReveal delay={0.15}>
+        <div
+          data-cursor="view"
+          className="relative overflow-hidden w-full"
+          style={{ height: 'clamp(340px, 58vh, 680px)', cursor: 'none', borderRadius: '12px' }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {project.isPlaceholder ? (
+            <PlaceholderOverlay index={0} hovered={hovered} />
+          ) : (
+            <LiveImage project={project} hovered={hovered} />
+          )}
+        </div>
+      </ImageReveal>
 
       {/* Caption — left-aligned, beneath image, max 480px */}
       <div style={{ paddingTop: '32px', maxWidth: '520px' }}>
@@ -324,8 +328,8 @@ function FeaturedProject({ project, inView }) {
           }}
         >
           {project.isPlaceholder
-            ? 'Installation photography will be added as each wardrobe project is completed and handed over to our clients.'
-            : (project.description || 'A bespoke wardrobe installation, designed around the client\'s storage requirements and interior palette.')}
+            ? 'Installation photography will be added as each interior project is completed and handed over to our clients.'
+            : (project.description || 'A bespoke interior installation, designed around the client\'s lifestyle and aesthetic vision.')}
         </motion.p>
 
         {!project.isPlaceholder && <ViewLink id="portfolio-cta-featured" />}
@@ -343,21 +347,23 @@ function SplitProject({ project, index, inView, delay, imageLeft = true }) {
   const imgNumber = String(index + 1).padStart(2, '0');
 
   const ImageCol = (
-    <motion.div
-      initial={{ opacity: 0, x: imageLeft ? -20 : 20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 1.0, delay, ease: EASE }}
-      className="lg:col-span-8 relative overflow-hidden"
-      style={{ height: 'clamp(300px, 44vw, 560px)', cursor: 'pointer', borderRadius: '12px' }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {project.isPlaceholder ? (
-        <PlaceholderOverlay index={index} hovered={hovered} />
-      ) : (
-        <LiveImage project={project} hovered={hovered} />
-      )}
-    </motion.div>
+    <div className="lg:col-span-8">
+      <ImageReveal delay={delay}>
+        <div
+          data-cursor="view"
+          className="relative overflow-hidden"
+          style={{ height: 'clamp(300px, 44vw, 560px)', cursor: 'none', borderRadius: '12px' }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {project.isPlaceholder ? (
+            <PlaceholderOverlay index={index} hovered={hovered} />
+          ) : (
+            <LiveImage project={project} hovered={hovered} />
+          )}
+        </div>
+      </ImageReveal>
+    </div>
   );
 
   const TextCol = (
@@ -452,8 +458,8 @@ export default function Projects() {
                 color: '#ffffff',
               }}
             >
-              Wardrobes We've{' '}
-              <em style={{ fontStyle: 'italic', color: '#D4AF37' }}>Created</em>
+              Spaces We've{' '}
+              <em style={{ fontStyle: 'italic', color: '#D4AF37' }}>Transformed</em>
             </motion.h2>
 
             <motion.p

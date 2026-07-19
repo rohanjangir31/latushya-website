@@ -141,8 +141,8 @@ export default function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.42, ease: EASE_OUT_EXPO }}
+                  className="font-display"
                   style={{
-                    fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
                     fontSize: 'clamp(2.2rem, 4.8vw, 4.2rem)',
                     fontWeight: 300,
                     letterSpacing: '0.04em',
@@ -151,7 +151,7 @@ export default function Hero() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Luxury
+                  Bespoke
                 </motion.h1>
               </div>
 
@@ -161,8 +161,8 @@ export default function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.52, ease: EASE_OUT_EXPO }}
+                  className="font-display"
                   style={{
-                    fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
                     fontSize: 'clamp(3.6rem, 7.8vw, 7rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.02em',
@@ -171,7 +171,7 @@ export default function Hero() {
                     marginBottom: '16px',
                   }}
                 >
-                  Wardrobes
+                  Interiors
                 </motion.h1>
               </div>
 
@@ -182,8 +182,8 @@ export default function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.62, ease: EASE_OUT_EXPO }}
+                  className="font-display"
                   style={{
-                    fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
                     fontSize: 'clamp(1.75rem, 3.8vw, 3.4rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.005em',
@@ -192,7 +192,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  Crafted Around
+                  & Luxury
                 </motion.h1>
               </div>
 
@@ -202,8 +202,8 @@ export default function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.72, ease: EASE_OUT_EXPO }}
+                  className="font-display"
                   style={{
-                    fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
                     fontSize: 'clamp(1.75rem, 3.8vw, 3.4rem)',
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
@@ -212,7 +212,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  Your Lifestyle.
+                  Wardrobes.
                 </motion.h1>
               </div>
             </div>
@@ -236,8 +236,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 1.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="font-sans"
               style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
                 fontSize: 'clamp(0.875rem, 1.15vw, 1.0rem)',
                 fontWeight: 300,
                 lineHeight: 1.95,
@@ -263,13 +263,13 @@ export default function Hero() {
               <button
                 onClick={handleConsult}
                 id="hero-cta-consult"
+                className="font-sans"
                 style={{
                   height: '72px',
                   paddingLeft: '2.75rem',
                   paddingRight: '2.75rem',
                   background: '#D4AF37',
                   color: '#0a0a0a',
-                  fontFamily: "'Inter', system-ui, sans-serif",
                   fontWeight: 600,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
@@ -297,13 +297,13 @@ export default function Hero() {
                 href="#portfolio"
                 onClick={handlePortfolio}
                 id="hero-cta-portfolio"
+                className="font-sans"
                 style={{
                   height: '64px',
                   paddingLeft: '2.25rem',
                   paddingRight: '2.25rem',
                   background: 'transparent',
                   color: 'rgba(212,175,55,0.90)',
-                  fontFamily: "'Inter', system-ui, sans-serif",
                   fontWeight: 500,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',

@@ -17,7 +17,7 @@ function RecentProjectCard({ project }) {
           <span className="section-label text-[9px] block mb-2">Recent Project</span>
           <h3 className="font-display text-lg text-white/40 mb-4">Real project details coming soon</h3>
           <div className="space-y-2 opacity-40">
-            {['Location', 'Wardrobe Type', 'Duration', 'Materials'].map((label) => (
+            {['Location', 'Project Type', 'Duration', 'Materials'].map((label) => (
               <div key={label} className="flex items-center gap-3">
                 <div className="w-14 h-px bg-gray-luxury/30" />
                 <span className="text-gray-light/30 text-xs">{label}: —</span>
@@ -38,7 +38,7 @@ function RecentProjectCard({ project }) {
       <div className="relative h-52 overflow-hidden">
         <img
           src={project.image}
-          alt={`${project.wardrobeType} — ${project.location}`}
+          alt={`${project.projectType} — ${project.location}`}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
@@ -48,7 +48,7 @@ function RecentProjectCard({ project }) {
         {/* Wardrobe type badge */}
         <div className="absolute bottom-4 left-4">
           <span className="bg-gold/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1">
-            {project.wardrobeType}
+            {project.projectType}
           </span>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function RecentProjects() {
           subtitle={
             allPlaceholder
               ? "Real project details — name, location, materials, and timeline — will appear here as projects are completed."
-              : "Our most recently completed wardrobe installations across Bangalore."
+              : "Our most recently completed interior installations across Bangalore."
           }
         />
 
@@ -116,7 +116,7 @@ export default function RecentProjects() {
           <div className="text-center mt-10">
             <div className="inline-block border border-gold/20 bg-black-charcoal px-8 py-5">
               <p className="text-gray-subtle text-sm leading-relaxed">
-                📋 Project records are being set up. Each entry will include the project name, location, wardrobe type, materials used, and timeline.
+                📋 Project records are being set up. Each entry will include the project name, location, project type, materials used, and timeline.
               </p>
             </div>
           </div>

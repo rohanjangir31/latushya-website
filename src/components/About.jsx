@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant } from '../utils/animations';
+import { SectionHeader, AnimatedSection, StaggerContainer, fadeUpVariant, TextReveal } from '../utils/animations';
 
 export default function About() {
   const ref = useRef(null);
@@ -25,7 +25,7 @@ export default function About() {
             >
               <img
                 src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&q=85"
-                alt="Custom walk-in wardrobe design by Latushya Bangalore"
+                alt="Luxury home interior design by Latushya Bangalore"
                 className="w-full h-[500px] lg:h-[600px] object-cover"
                 loading="lazy"
                 decoding="async"
@@ -42,7 +42,7 @@ export default function About() {
             >
               <img
                 src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
-                alt="Luxury modular wardrobe interior detail"
+                alt="Bespoke interior finishing detail"
                 className="w-full h-full object-cover rounded-sm"
                 loading="lazy"
                 decoding="async"
@@ -65,7 +65,7 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.6 }}
               className="absolute -top-6 -right-4 md:right-auto md:-left-8 glass rounded-sm p-5 z-30 flex flex-col items-center"
             >
-              <span className="font-display text-lg text-gold font-medium text-center leading-tight">Wardrobe<br/>Specialists</span>
+              <span className="font-display text-lg text-gold font-medium text-center leading-tight">Interior<br/>Specialists</span>
               <span className="text-white/70 text-[10px] tracking-widest uppercase text-center mt-2">Bangalore</span>
             </motion.div>
           </div>
@@ -76,23 +76,23 @@ export default function About() {
               <span className="section-label block mb-4">About Latushya</span>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.1}>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-8">
-                Wardrobes Built
-                <br />
-                <span className="italic text-gold">Around You</span>
-              </h2>
-            </AnimatedSection>
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-8">
+              <TextReveal text="Spaces Built" delay={0.1} />
+              <br />
+              <span className="italic text-gold">
+                <TextReveal text="Around You" delay={0.3} />
+              </span>
+            </div>
 
             <AnimatedSection delay={0.2}>
               <p className="text-gray-subtle leading-relaxed mb-6 text-base md:text-lg">
-                Latushya is a Bangalore-based wardrobe design and installation company. We focus exclusively on wardrobes — modular, sliding, walk-in, hinged, and luxury — designed and built specifically for your space and storage needs.
+                Latushya is a premium Bangalore-based interior design and execution studio. We specialize in complete home interiors — from turnkey solutions and modular kitchens to bespoke furniture — designed and built specifically for your lifestyle and aesthetics.
               </p>
             </AnimatedSection>
 
             <AnimatedSection delay={0.3}>
               <p className="text-gray-subtle leading-relaxed mb-10 text-base">
-                Every wardrobe we create starts with careful listening. We visit your home, measure precisely, understand how you use your space, and only then design a wardrobe that fits your life — not just your room.
+                Every space we create starts with careful listening. We visit your home, measure precisely, understand how you live, and only then design an interior that flows naturally — creating a space that feels distinctly yours.
               </p>
             </AnimatedSection>
 

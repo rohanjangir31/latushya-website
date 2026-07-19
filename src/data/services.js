@@ -7,53 +7,48 @@
 const services = [
   {
     id: 1,
-    icon: 'Move',
-    title: 'Sliding Wardrobes',
-    tagline: 'Space-saving elegance',
+    icon: 'DoorOpen',
+    title: 'Bespoke Wardrobes',
+    tagline: 'Precision meets flexibility',
     description:
-      'Floor-to-ceiling sliding door wardrobes with smooth German-grade hardware. Ideal where swing doors aren\'t practical — beautiful in any room.',
-    // Distinct image: sliding wardrobe interior
+      'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
     image: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=900&q=85',
   },
   {
     id: 2,
-    icon: 'Maximize2',
-    title: 'Walk-In Wardrobes',
-    tagline: 'Your personal boutique',
+    icon: 'Layout',
+    title: 'Turnkey Interiors',
+    tagline: 'From concept to handover',
     description:
-      'Bespoke walk-in wardrobe rooms designed around your complete wardrobe — dedicated zones for clothing, accessories, shoes, and jewellery.',
-    // Distinct image: walk-in wardrobe room
-    image: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&q=85',
+      'Complete home design and execution. We manage everything from bare-shell civil work to the final styling, ensuring a seamless, stress-free transformation of your space.',
+    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85',
   },
   {
     id: 3,
-    icon: 'Layers',
-    title: 'Modular Wardrobes',
-    tagline: 'Precision meets flexibility',
+    icon: 'UtensilsCrossed',
+    title: 'Modular Kitchens',
+    tagline: 'The heart of the home',
     description:
-      'Precision-engineered modular systems built to your exact dimensions — combining smart internal storage with clean, contemporary aesthetics.',
-    // Distinct image: luxury bedroom with modular wardrobe
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85',
+      'Ergonomically designed, premium modular kitchens featuring state-of-the-art German hardware, moisture-resistant cores, and flawless, easy-to-maintain finishes.',
+    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=85',
   },
   {
     id: 4,
-    icon: 'DoorOpen',
-    title: 'Hinged Wardrobes',
-    tagline: 'Timeless and robust',
+    icon: 'Sofa',
+    title: 'Living Room Design',
+    tagline: 'Curated entertainment spaces',
     description:
-      'Classic hinged-door wardrobes crafted with premium materials. Timeless in design, precise in construction, and tailored to your storage needs.',
-    // Distinct image: classic bedroom interior
-    image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=900&q=85',
+      'Custom TV units, sophisticated wall panelling, and bespoke furniture arrangements designed to make your living area the perfect setting for hosting and relaxing.',
+    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=900&q=85',
   },
   {
     id: 5,
-    icon: 'Gem',
-    title: 'Luxury Wardrobes',
-    tagline: 'The finest we build',
+    icon: 'PenTool',
+    title: 'Space Planning',
+    tagline: 'Intelligent spatial design',
     description:
-      'Our flagship collection featuring exotic laminates, soft-close European hardware, LED interior lighting, and mirror or fluted glass accents.',
-    // Distinct image: high-end wardrobe closeup
-    image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=900&q=85',
+      'Expert consultation on layout optimization, material selection, and lighting design to ensure your space flows naturally and looks spectacular.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85',
   },
 ];
 

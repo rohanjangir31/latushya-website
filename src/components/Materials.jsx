@@ -16,7 +16,7 @@ export default function MaterialsSection() {
         <SectionHeader
           label="Quality Assurance"
           title={<>Materials <span className="italic text-gold">We Trust</span></>}
-          subtitle="We select only proven brands for hardware and substrate — because a wardrobe is only as good as the components inside it."
+          subtitle="We select only proven brands for hardware and substrate — because an interior space is only as good as the components that build it."
         />
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -70,7 +70,7 @@ export default function MaterialsSection() {
           <div className="border border-gold/20 bg-black-charcoal/40 p-8 md:p-10 text-center relative">
             <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
             <p className="font-display text-xl md:text-2xl text-white/80 font-light italic leading-relaxed max-w-3xl mx-auto">
-              "We never cut corners on materials. The hardware that goes into your wardrobe is the same quality used by premium furniture brands worldwide."
+              "We never cut corners on materials. The hardware that goes into your home is the same quality used by premium furniture brands worldwide."
             </p>
             <div className="mt-6 flex justify-center">
               <div className="gold-line" />

@@ -27,8 +27,8 @@ export const TESTIMONIALS   = reviews;
 export const WHY_CHOOSE = [
   {
     id: 1,
-    title: 'Custom Wardrobe Designs',
-    description: 'Every wardrobe is designed from scratch around your specific dimensions, storage requirements, and aesthetic preferences. We never use off-the-shelf templates.',
+    title: 'Custom Interior Designs',
+    description: 'Every space is designed from scratch around your specific dimensions, lifestyle requirements, and aesthetic preferences. We never use off-the-shelf templates.',
   },
   {
     id: 2,
@@ -48,7 +48,7 @@ export const WHY_CHOOSE = [
   {
     id: 5,
     title: 'Space Optimisation',
-    description: 'We map your wardrobe usage patterns — clothing types, accessories, footwear — and engineer a layout that makes every cubic inch count.',
+    description: 'We map your spatial usage patterns — daily routines, entertainment needs, storage — and engineer a layout that makes every square foot count.',
   },
   {
     id: 6,
@@ -95,7 +95,7 @@ export const MATERIALS = [
     category: 'Substrate',
     origin: 'India',
     description:
-      "India's most trusted plywood brand — used as the core substrate in all our wardrobes for superior strength, moisture resistance, and longevity.",
+      "India's most trusted plywood brand — used as the core substrate in all our woodwork for superior strength, moisture resistance, and longevity.",
     qualities: ['BWP grade available', 'Termite resistant', 'Consistent thickness'],
     logo: null,
   },
@@ -105,7 +105,7 @@ export const MATERIALS = [
     category: 'Substrate',
     origin: 'India',
     description:
-      'A premium alternative substrate offering high-density core options and excellent screw-holding capacity, ideal for wardrobe carcasses.',
+      'A premium alternative substrate offering high-density core options and excellent screw-holding capacity, ideal for kitchen and wardrobe carcasses.',
     qualities: ['High density core', 'ISI certified', 'Superior screw hold'],
     logo: null,
   },
@@ -116,12 +116,12 @@ export const PROCESS_STEPS = [
   {
     step: '01',
     title: 'Free Consultation',
-    description: 'We visit your home, assess your space, and listen carefully to your requirements — wardrobe size, usage habits, style preferences.',
+    description: 'We visit your home, assess your space, and listen carefully to your requirements — room dimensions, lifestyle habits, and style preferences.',
   },
   {
     step: '02',
     title: 'Design Concept',
-    description: 'Our designer creates a 3D wardrobe layout tailored to your space — showing interior zones, shutter styles, and finish options.',
+    description: 'Our designer creates a 3D spatial layout tailored to your home — showing interior zones, material finishes, and lighting plans.',
   },
   {
     step: '03',
@@ -131,12 +131,12 @@ export const PROCESS_STEPS = [
   {
     step: '04',
     title: 'Production',
-    description: 'Your wardrobe panels are precision-cut and pre-assembled in our workshop — ensuring accuracy before it reaches your home.',
+    description: 'Your woodwork panels are precision-cut and pre-assembled in our workshop — ensuring accuracy before it reaches your home.',
   },
   {
     step: '05',
     title: 'Installation',
-    description: 'Our trained carpentry team installs your wardrobe on-site with minimal mess and disruption, typically within 1–3 days.',
+    description: 'Our trained carpentry team installs your interiors on-site with minimal mess and disruption, working strictly to the approved timelines.',
   },
   {
     step: '06',
@@ -148,12 +148,12 @@ export const PROCESS_STEPS = [
 // ─── Gallery Images ───────────────────────────────────────
 // Replace src values with real project photography when available
 export const GALLERY_IMAGES = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85', alt: 'Modular wardrobe — Bangalore', category: 'Modular Wardrobes', isPlaceholder: true },
-  { id: 2, src: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=85', alt: 'Walk-in wardrobe — Bangalore', category: 'Walk-In Wardrobes', isPlaceholder: true },
-  { id: 3, src: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=800&q=85', alt: 'Sliding wardrobe — Bangalore', category: 'Sliding Wardrobes', isPlaceholder: true },
-  { id: 4, src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=85', alt: 'Custom storage — Bangalore', category: 'Custom Storage', isPlaceholder: true },
-  { id: 5, src: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=85', alt: 'Luxury wardrobe — Bangalore', category: 'Luxury Wardrobes', isPlaceholder: true },
-  { id: 6, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85', alt: 'Hinged wardrobe — Bangalore', category: 'Hinged Wardrobes', isPlaceholder: true },
+  { id: 1, src: '/projects/media__1784490387524.jpg', alt: 'Luxury Living Room Interior — Bangalore', category: 'Living Room Design', isPlaceholder: false },
+  { id: 2, src: '/projects/media__1784490387507.jpg', alt: 'Acrylic Modular Kitchen — Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
+  { id: 3, src: '/projects/media__1784490387502.jpg', alt: 'Modern Bedroom Interior — Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
+  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe — Bangalore', category: 'Bespoke Wardrobes', isPlaceholder: false },
+  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console — Bangalore', category: 'Bespoke Furniture', isPlaceholder: false },
+  { id: 6, src: '/projects/media__1784490387524.jpg', alt: 'Classic Living & Dining — Bangalore', category: 'Living Room Design', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────

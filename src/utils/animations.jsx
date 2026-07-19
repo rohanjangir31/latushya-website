@@ -154,3 +154,80 @@ export function SectionHeader({ label, title, subtitle, centered = true, light =
     </div>
   );
 }
+
+// ─────────────────────────────────────────────────────────────
+// CINEMATIC TEXT REVEAL
+// Splits text into words and animates them up from behind a mask
+// ─────────────────────────────────────────────────────────────
+
+export const wordAnimation = {
+  hidden: { y: '110%' },
+  visible: {
+    y: '0%',
+    transition: { ease: [0.16, 1, 0.3, 1], duration: 1.1 }
+  }
+};
+
+export const wordStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+  }
+};
+
+export function TextReveal({ text, className = '', delay = 0 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  
+  // Parse underscores for italics
+  const tokens = [];
+  let isItalic = false;
+  
+  text.split(' ').forEach(word => {
+    let currentWord = word;
+    let endItalic = false;
+    
+    if (currentWord.startsWith('_')) {
+      isItalic = true;
+      currentWord = currentWord.substring(1);
+    }
+    
+    if (currentWord.endsWith('_')) {
+      endItalic = true;
+      currentWord = currentWord.substring(0, currentWord.length - 1);
+    }
+    
+    tokens.push({
+      text: currentWord,
+      italic: isItalic
+    });
+    
+    if (endItalic) {
+      isItalic = false;
+    }
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.06, delayChildren: delay } }
+      }}
+      className={`inline-block ${className}`}
+    >
+      {tokens.map((token, index) => (
+        <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top">
+          <motion.span
+            variants={wordAnimation}
+            className={`inline-block ${token.italic ? 'italic text-gold' : ''}`}
+          >
+            {token.text}
+          </motion.span>
+        </span>
+      ))}
+    </motion.div>
+  );
+}

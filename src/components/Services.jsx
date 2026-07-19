@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Layers, Maximize2, Move, Gem } from 'lucide-react';
+import { Layout, UtensilsCrossed, Sofa, PenTool } from 'lucide-react';
 import { SERVICES } from '../data/content';
+import { TextReveal } from '../utils/animations';
 
 const DoorOpenIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -12,12 +13,12 @@ const DoorOpenIcon = () => (
   </svg>
 );
 
-const iconMap = { Layers, Move, Maximize2, DoorOpen: DoorOpenIcon, Gem };
+const iconMap = { Layout, UtensilsCrossed, Sofa, PenTool, DoorOpen: DoorOpenIcon };
 
 function ServiceRow({ service, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const Icon = iconMap[service.icon] || Layers;
+  const Icon = iconMap[service.icon] || Layout;
   const isEven = index % 2 === 0;
 
   return (
@@ -188,21 +189,16 @@ export default function Services() {
         >
           <div className="w-5 h-px bg-gold" />
           <span className="text-gold text-[9px] tracking-[0.35em] uppercase font-medium">
-            Wardrobe Specialists
+            Our Expertise
           </span>
         </motion.div>
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 22 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          <TextReveal
+            text="Comprehensive _Interior Solutions_"
             className="font-display font-light text-white leading-[1.05]"
             style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}
-          >
-            Five Ways We{' '}
-            <span className="italic text-gold">Build Yours</span>
-          </motion.h2>
+          />
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -210,7 +206,7 @@ export default function Services() {
             transition={{ duration: 0.7, delay: 0.28 }}
             className="text-gray-subtle text-sm max-w-[280px] leading-relaxed lg:text-right font-light"
           >
-            Measured to your space. Built for your lifestyle.
+            Designed for your space. Crafted for your lifestyle.
           </motion.p>
         </div>
 
@@ -235,7 +231,7 @@ export default function Services() {
         flex flex-col sm:flex-row items-center justify-between gap-5
         border-t border-gray-luxury/[0.1]">
         <p className="text-gray-subtle text-sm font-light">
-          Not sure which wardrobe suits your space?{' '}
+          Ready to transform your space?{' '}
           <span className="text-white">We'll help you decide — for free.</span>
         </p>
         <a

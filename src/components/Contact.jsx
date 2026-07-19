@@ -48,11 +48,11 @@ function ContactDetail({ icon: Icon, label, value, href, placeholder }) {
 export default function Contact() {
   const sectionRef = useRef(null);
 
-  const hasPhone     = Boolean(COMPANY.phone);
-  const hasWhatsApp  = Boolean(COMPANY.whatsapp);
-  const hasEmail     = Boolean(COMPANY.email);
-  const hasAddress   = Boolean(COMPANY.address);
-  const hasCity      = Boolean(COMPANY.city);
+  const hasPhone = Boolean(COMPANY.phone);
+  const hasWhatsApp = Boolean(COMPANY.whatsapp);
+  const hasEmail = Boolean(COMPANY.email);
+  const hasAddress = Boolean(COMPANY.address);
+  const hasCity = Boolean(COMPANY.city);
 
   const whatsappHref = hasWhatsApp
     ? `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`

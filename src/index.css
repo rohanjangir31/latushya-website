@@ -31,6 +31,30 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Hide default cursor on desktop for custom cursor */
+  @media (pointer: fine) {
+    *, a, button {
+      cursor: none !important;
+    }
+  }
+
+  /* Lenis smooth scrolling base styles */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
   /* Reduce motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -70,7 +94,7 @@
   /* ─── Buttons ─────────────────────────────────────────── */
   /* 300ms ease-out lift — consistent across the whole site  */
   .btn-gold {
-    @apply relative overflow-hidden bg-gold text-black-deep font-semibold
+    @apply relative overflow-hidden inline-flex items-center justify-center bg-gold text-black-deep font-semibold
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;
@@ -86,7 +110,7 @@
   .btn-gold span          { @apply relative z-10; }
 
   .btn-outline {
-    @apply relative overflow-hidden border border-gold text-gold font-semibold
+    @apply relative overflow-hidden inline-flex items-center justify-center border border-gold text-gold font-semibold
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter,color] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;

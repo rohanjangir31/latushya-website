@@ -5,9 +5,9 @@
 
 const companyInfo = {
   name: 'LATUSHYA',
-  tagline: 'Luxury Wardrobes Crafted For Modern Living',
-  subTagline: "Bangalore's premium wardrobe specialists — designing custom wardrobes that maximise your space and elevate your everyday.",
-  specialty: "Bangalore's Premium Wardrobe Specialist",
+  tagline: 'Luxury Interiors & Bespoke Wardrobes',
+  subTagline: "Bangalore's premium design studio — crafting bespoke wardrobes and complete interior solutions that elevate your everyday.",
+  specialty: "Bangalore's Premium Interior Design Studio",
 
   // ─── CONTACT ──────────────────────────────────────────────
   // Replace null with real values when available

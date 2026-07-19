@@ -1,6 +1,7 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { PROCESS_STEPS } from '../data/content';
+import { TextReveal } from '../utils/animations';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PROCESS V2 — Premium Vertical Timeline
@@ -226,10 +227,8 @@ export default function Process() {
               gap: '24px',
             }}
           >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
+            <TextReveal
+              text="Our _Process_"
               style={{
                 fontFamily: DISPLAY,
                 fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -238,10 +237,7 @@ export default function Process() {
                 lineHeight: 1.05,
                 color: '#ffffff',
               }}
-            >
-              Our{' '}
-              <em style={{ fontStyle: 'italic', color: '#D4AF37' }}>Process</em>
-            </motion.h2>
+            />
 
             <motion.p
               initial={{ opacity: 0 }}

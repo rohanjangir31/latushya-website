@@ -47,7 +47,7 @@ export default function CredibilityBand() {
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-black-deep/93" />
+        <div className="absolute inset-0 bg-black-deep/90" />
       </div>
 
       {/* Gold lines */}

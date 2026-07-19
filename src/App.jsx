@@ -1,55 +1,89 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import WhyChoose from './components/WhyChoose';
-import Projects from './components/Projects';
-import RecentProjects from './components/RecentProjects';
-import BeforeAfter from './components/BeforeAfter';
-import Materials from './components/Materials';
-import Process from './components/Process';
-import CredibilityBand from './components/Statistics';
-import Testimonials from './components/Testimonials';
-import Gallery from './components/Gallery';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import CTASection from './components/CTASection';
-import TrustBand from './components/TrustBand';
-import { COMPANY } from './data/content';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
 
-// Preloader
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Cursor from './components/Cursor';
+import { CursorProvider } from './context/CursorContext';
+import { COMPANY } from './data/content';
+import GrainOverlay from './components/GrainOverlay';
+
+// Pages
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Portfolio from './pages/Portfolio';
+import Materials from './pages/Materials';
+import Process from './pages/Process';
+import Contact from './pages/Contact';
+
+// Scroll to top on route change
+function ScrollToTopRoute() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+// Preloader — 3D Logo & Shutter Reveal
 function Preloader() {
   return (
     <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="fixed inset-0 z-[200] bg-black-deep flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[200] flex flex-col pointer-events-none"
     >
+      {/* Top Shutter */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-col items-center"
-      >
-        <span className="font-display text-4xl tracking-ultra text-white font-light mb-1">
-          {COMPANY.name}
-        </span>
-        <span className="text-gold text-[10px] tracking-widest uppercase">
-          Luxury Wardrobe Specialists · Bangalore
-        </span>
-        <div className="mt-10 w-40 h-px bg-gray-luxury/30 overflow-hidden">
-          <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
-            transition={{ duration: 1.2, ease: 'easeInOut', repeat: Infinity }}
-            className="h-full w-1/2 bg-gradient-to-r from-transparent via-gold to-transparent"
+        initial={{ y: '0%' }}
+        exit={{ y: '-100%' }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+        className="h-1/2 w-full bg-black-deep border-b border-gold/10"
+      />
+      {/* Bottom Shutter */}
+      <motion.div
+        initial={{ y: '0%' }}
+        exit={{ y: '100%' }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+        className="h-1/2 w-full bg-black-deep border-t border-gold/10"
+      />
+
+      {/* Content Container (absolutely centered over the shutters) */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+          transition={{ 
+            opacity: { duration: 0.8 },
+            scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+            rotateY: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+            exit: { duration: 0.4 }
+          }}
+          className="flex flex-col items-center"
+        >
+          {/* Floating 3D Logo */}
+          <motion.img 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            src="/logo-3d.png" 
+            alt="Latushya 3D Logo" 
+            className="w-56 h-auto mb-8 drop-shadow-2xl" 
           />
-        </div>
-      </motion.div>
+          <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase">
+            Premium Interior Studio
+          </span>
+          <div className="mt-8 w-48 h-px bg-gray-luxury/30 overflow-hidden relative">
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: '100%' }}
+              transition={{ duration: 1.2, ease: 'easeInOut', repeat: Infinity }}
+              className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-gold/80 to-transparent"
+            />
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -60,7 +94,7 @@ function WhatsAppFloat() {
 
   return (
     <motion.a
-      href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
+      href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
       target="_blank"
       rel="noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -108,8 +142,32 @@ function ScrollToTop() {
   );
 }
 
-export default function App() {
+function AppContent() {
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
+
+  // Initialize Lenis smooth scroll with luxurious settings
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.6, // Slower, heavier scroll
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1800);
@@ -118,80 +176,45 @@ export default function App() {
 
   return (
     <>
-      <AnimatePresence>
-        {loading && <Preloader />}
+      <GrainOverlay />
+      <ScrollToTopRoute />
+      <Cursor />
+      
+      <AnimatePresence mode="wait">
+        {loading && <Preloader key="preloader" />}
       </AnimatePresence>
 
       {!loading && (
         <>
           <Navbar />
           <main>
-            {/* ─── NARRATIVE ARC ────────────────────────────────
-                Emotional hook → Why trust us → What we make →
-                Proof of work → How it works → Craftsmanship →
-                Conversion CTA → Brand depth → Social proof
-            ──────────────────────────────────────────────── */}
-
-            {/* 1. Hero — cinematic wardrobe impression */}
-            <Hero />
-
-            {/* 2. Why Latushya — earn trust BEFORE selling the product */}
-            <WhyChoose />
-
-            {/* 3. Credibility metrics — placeholder until real data available */}
-            <TrustBand />
-
-            <div className="section-divider" />
-
-            {/* 4. Wardrobe Expertise — five types we build */}
-            <Services />
-
-            <div className="section-divider" />
-
-            {/* 4. Portfolio — proof of work */}
-            <Projects />
-
-            {/* 5. Process — how a project unfolds */}
-            <Process />
-
-            {/* 6. Materials — craftsmanship depth */}
-            <Materials />
-
-            <div className="section-divider" />
-
-            {/* 7. Conversion CTA — peak moment after trust is built */}
-            <CTASection />
-
-            {/* 8. Brand story — for visitors who want to know more */}
-            <About />
-
-            {/* 9. Credibility band — supporting trust signals */}
-            <CredibilityBand />
-
-            {/* 10. Before & After — visual comparison */}
-            <BeforeAfter />
-
-            {/* 11. Testimonials — social proof */}
-            <Testimonials />
-
-            {/* 12. Gallery — wardrobe photography */}
-            <Gallery />
-
-            {/* 13. FAQ — objection handling */}
-            <FAQ />
-
-            {/* 14. Contact — final conversion */}
-            <Contact />
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/materials" element={<Materials />} />
+                <Route path="/process" element={<Process />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </AnimatePresence>
           </main>
           <Footer />
-
-          {/* Floating WhatsApp — only renders when number is set */}
           <WhatsAppFloat />
-
-          {/* Scroll to top */}
           <ScrollToTop />
         </>
       )}
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <CursorProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </CursorProvider>
   );
 }
