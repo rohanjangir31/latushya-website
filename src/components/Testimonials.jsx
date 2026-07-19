@@ -33,7 +33,7 @@ function TestimonialPlaceholder() {
           onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
           className="mt-4 btn-outline inline-block text-sm"
         >
-          <span>Book Your Wardrobe</span>
+          <span>Book Your Consultation</span>
         </a>
 
         <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />

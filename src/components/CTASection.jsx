@@ -11,7 +11,7 @@ export default function CTASection() {
   const handleCTA = () => {
     if (COMPANY.whatsapp) {
       window.open(
-        `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%27m%20interested%20in%20a%20custom%20wardrobe.`,
+        `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%27m%20interested%20in%20an%20interior%20consultation.`,
         '_blank'
       );
     } else {
@@ -61,7 +61,7 @@ export default function CTASection() {
           className="font-display font-light text-white leading-tight mb-8"
           style={{ fontSize: 'clamp(2rem, 5.5vw, 5rem)' }}
         >
-          Your perfect wardrobe{' '}
+          Your perfect space{' '}
           <span className="italic text-gold">starts here.</span>
         </motion.h2>
 
@@ -71,8 +71,8 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="text-gray-subtle text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-10"
         >
-          We visit your home, understand your space, and design a wardrobe that fits your life —
-          not just your room. No obligations. No sales pressure.
+          We visit your home, understand your space, and design an interior that fits your life —
+          not just your floorplan. No obligations. No sales pressure.
         </motion.p>
 
         <motion.button

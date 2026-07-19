@@ -7,15 +7,6 @@
 const services = [
   {
     id: 1,
-    icon: 'DoorOpen',
-    title: 'Bespoke Wardrobes',
-    tagline: 'Precision meets flexibility',
-    description:
-      'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
-    image: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=900&q=85',
-  },
-  {
-    id: 2,
     icon: 'Layout',
     title: 'Turnkey Interiors',
     tagline: 'From concept to handover',
@@ -24,7 +15,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85',
   },
   {
-    id: 3,
+    id: 2,
     icon: 'UtensilsCrossed',
     title: 'Modular Kitchens',
     tagline: 'The heart of the home',
@@ -33,13 +24,22 @@ const services = [
     image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=85',
   },
   {
-    id: 4,
+    id: 3,
     icon: 'Sofa',
     title: 'Living Room Design',
     tagline: 'Curated entertainment spaces',
     description:
       'Custom TV units, sophisticated wall panelling, and bespoke furniture arrangements designed to make your living area the perfect setting for hosting and relaxing.',
     image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=900&q=85',
+  },
+  {
+    id: 4,
+    icon: 'DoorOpen',
+    title: 'Bespoke Wardrobes',
+    tagline: 'Precision meets flexibility',
+    description:
+      'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
+    image: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=900&q=85',
   },
   {
     id: 5,

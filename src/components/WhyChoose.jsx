@@ -23,7 +23,7 @@ const CAPABILITIES = [
     num: '01',
     title: 'Bespoke Design',
     description:
-      'Every wardrobe is conceived from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
+      'Every space is conceived from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
   },
   {
     num: '02',
@@ -47,7 +47,7 @@ const CAPABILITIES = [
     num: '05',
     title: 'Lifetime Support',
     description:
-      'Post-installation support included as standard. We return to adjust, refine, or repair — because your wardrobe should perform indefinitely.',
+      'Post-installation support included as standard. We return to adjust, refine, or repair — because your home should perform indefinitely.',
   },
   {
     num: '06',

@@ -41,7 +41,7 @@ export default function About() {
               className="absolute -bottom-12 -right-8 w-56 h-72 z-20 hidden md:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+                src="https://images.unsplash.com/photo-1600607688066-890987fe835a?w=400&q=80"
                 alt="Bespoke interior finishing detail"
                 className="w-full h-full object-cover rounded-sm"
                 loading="lazy"

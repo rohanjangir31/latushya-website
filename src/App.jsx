@@ -18,6 +18,27 @@ import Portfolio from './pages/Portfolio';
 import Materials from './pages/Materials';
 import Process from './pages/Process';
 import Contact from './pages/Contact';
+import React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  render() {
+    if (this.state.hasError) {
+      return <div style={{color:'red', padding:'50px', zIndex:9999, position:'relative'}}>
+        <h1>Something went wrong.</h1>
+        <pre>{this.state.error.toString()}</pre>
+        <pre>{this.state.error.stack}</pre>
+      </div>;
+    }
+    return this.props.children;
+  }
+}
 
 // Scroll to top on route change
 function ScrollToTopRoute() {
@@ -175,7 +196,7 @@ function AppContent() {
   }, []);
 
   return (
-    <>
+    <ErrorBoundary>
       <GrainOverlay />
       <ScrollToTopRoute />
       <Cursor />
@@ -205,7 +226,7 @@ function AppContent() {
           <ScrollToTop />
         </>
       )}
-    </>
+    </ErrorBoundary>
   );
 }
 

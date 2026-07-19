@@ -29,15 +29,15 @@ const socialLinks = [
 ];
 
 const footerLinks = {
-  'Wardrobe Services': [
-    'Modular Wardrobes',
-    'Sliding Wardrobes',
-    'Walk-In Wardrobes',
-    'Hinged Wardrobes',
-    'Luxury Wardrobes',
-    'Custom Storage Solutions',
-    'Wardrobe Consultation',
-    'Space Optimisation',
+  'Our Services': [
+    'Turnkey Interiors',
+    'Modular Kitchens',
+    'Living Room Design',
+    'Bespoke Wardrobes',
+    'Space Planning',
+    'Custom Furniture',
+    'Design Consultation',
+    'Material Selection',
   ],
   'Quick Links': [
     { label: 'About Us',          href: '#about' },
@@ -59,7 +59,7 @@ export default function Footer() {
 
   const handleConsult = () => {
     if (COMPANY.whatsapp) {
-      window.open(`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`, '_blank');
+      window.open(`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20an%20interior%20consultation.`, '_blank');
     } else {
       document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
     }
@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-display text-2xl text-black-deep font-medium">
-                Your perfect wardrobe awaits.
+                Your perfect space awaits.
               </h3>
               <p className="text-black-deep/70 text-sm mt-1">
                 Book a free in-home consultation — no obligations, ever.
@@ -99,17 +99,17 @@ export default function Footer() {
                   {COMPANY.name}
                 </span>
                 <div className="text-gold text-[9px] tracking-widest uppercase mt-0.5">
-                  Luxury Wardrobe Specialists · Bangalore
+                  Premium Interior Design Studio · Bangalore
                 </div>
               </div>
 
               <p className="text-gray-light text-sm leading-relaxed mb-6">
-                Bangalore's premium wardrobe design and installation company. We create custom wardrobes — modular, sliding, walk-in, hinged, and luxury — tailored precisely to your space.
+                Bangalore's premium interior design and execution studio. We create custom living spaces — turnkey interiors, modular kitchens, and bespoke furniture — tailored precisely to your lifestyle.
               </p>
 
               {/* SEO keywords as natural text */}
               <p className="text-gray-light/30 text-xs leading-relaxed mb-6">
-                Modular Wardrobes · Sliding Wardrobes · Walk-In Wardrobes · Custom Wardrobes · Bangalore
+                Turnkey Interiors · Modular Kitchens · Living Room Design · Custom Furniture · Bangalore
               </p>
 
               {/* Social links */}
@@ -132,10 +132,10 @@ export default function Footer() {
             {/* Services column */}
             <div>
               <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-gold/20">
-                Wardrobe Services
+                Our Services
               </h4>
               <ul className="space-y-3">
-                {footerLinks['Wardrobe Services'].map((item) => (
+                {footerLinks['Our Services'].map((item) => (
                   <li key={item}>
                     <span className="text-gray-light text-sm hover:text-gold transition-colors duration-300 cursor-default flex items-center gap-2 group">
                       <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />

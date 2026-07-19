@@ -59,8 +59,8 @@ export default function Hero() {
         className="absolute inset-0 z-0 will-change-transform"
       >
         <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=90"
-          alt="Luxury custom wardrobe — Latushya Bangalore"
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=90"
+          alt="Luxury interior design — Latushya Bangalore"
           className="w-full h-full object-cover"
           style={{ objectPosition: '74% center' }}
           loading="eager"
@@ -100,7 +100,7 @@ export default function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 h-full flex items-end"
       >
-        <div className="w-full max-w-7xl mx-auto px-8 lg:px-16 pb-16 lg:pb-24">
+        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-16 pb-16 lg:pb-24">
           {/* Constrain text to left ~52% on desktop, full width on mobile */}
           <div className="max-w-[620px]">
 
@@ -143,7 +143,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.42, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(2.2rem, 4.8vw, 4.2rem)',
+                    fontSize: 'clamp(1.8rem, 4.8vw, 4.2rem)',
                     fontWeight: 300,
                     letterSpacing: '0.04em',
                     lineHeight: 1.0,
@@ -151,7 +151,7 @@ export default function Hero() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Bespoke
+                  Premium
                 </motion.h1>
               </div>
 
@@ -163,7 +163,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.52, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(3.6rem, 7.8vw, 7rem)',
+                    fontSize: 'clamp(2.8rem, 8.5vw, 7rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.02em',
                     lineHeight: 0.92,
@@ -184,7 +184,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.62, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(1.75rem, 3.8vw, 3.4rem)',
+                    fontSize: 'clamp(1.5rem, 4vw, 3.4rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
@@ -192,7 +192,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  & Luxury
+                  Crafted For
                 </motion.h1>
               </div>
 
@@ -204,7 +204,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.72, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(1.75rem, 3.8vw, 3.4rem)',
+                    fontSize: 'clamp(1.5rem, 4vw, 3.4rem)',
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
@@ -212,7 +212,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  Wardrobes.
+                  Your Lifestyle.
                 </motion.h1>
               </div>
             </div>

@@ -255,7 +255,7 @@ function FeaturedProject({ project, inView }) {
         <div
           data-cursor="view"
           className="relative overflow-hidden w-full"
-          style={{ height: 'clamp(340px, 58vh, 680px)', cursor: 'none', borderRadius: '12px' }}
+          style={{ height: 'clamp(260px, 50vh, 680px)', cursor: 'none', borderRadius: '12px' }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
@@ -352,7 +352,7 @@ function SplitProject({ project, index, inView, delay, imageLeft = true }) {
         <div
           data-cursor="view"
           className="relative overflow-hidden"
-          style={{ height: 'clamp(300px, 44vw, 560px)', cursor: 'none', borderRadius: '12px' }}
+          style={{ height: 'clamp(260px, 44vw, 560px)', cursor: 'none', borderRadius: '12px' }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >

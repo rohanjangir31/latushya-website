@@ -141,60 +141,69 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px]"
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px] border-b border-gold/20"
           >
             <div className="flex-1 flex flex-col justify-center items-center gap-8 px-8">
               {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 + 0.1 }}
-                >
-                  <Link
-                    to={link.href}
-                    onClick={handleNavClick}
-                    className={`font-display text-4xl transition-colors duration-300 ${location.pathname === link.href ? 'text-gold' : 'text-white/80 hover:text-gold'}`}
+                <div key={link.href} className="overflow-hidden">
+                  <motion.div
+                    initial={{ y: '100%' }}
+                    animate={{ y: '0%' }}
+                    exit={{ y: '100%' }}
+                    transition={{ duration: 0.7, delay: i * 0.08 + 0.1, ease: [0.76, 0, 0.24, 1] }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
+                    <Link
+                      to={link.href}
+                      onClick={handleNavClick}
+                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-gold italic' : 'text-white hover:text-gold'}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                </div>
               ))}
-              {COMPANY.whatsapp ? (
-                <motion.a
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-8 btn-gold"
-                >
-                  <span>Book Free Consultation</span>
-                </motion.a>
-              ) : (
+              
+              <div className="overflow-hidden mt-6">
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
+                  initial={{ y: '100%' }}
+                  animate={{ y: '0%' }}
+                  exit={{ y: '100%' }}
+                  transition={{ duration: 0.7, delay: navLinks.length * 0.08 + 0.1, ease: [0.76, 0, 0.24, 1] }}
                 >
-                  <Link
-                    to="/contact"
-                    onClick={handleNavClick}
-                    className="mt-8 btn-gold block"
-                  >
-                    <span>Book Free Consultation</span>
-                  </Link>
+                  {COMPANY.whatsapp ? (
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-gold"
+                    >
+                      <span>Book Free Consultation</span>
+                    </a>
+                  ) : (
+                    <Link
+                      to="/contact"
+                      onClick={handleNavClick}
+                      className="btn-gold block"
+                    >
+                      <span>Book Free Consultation</span>
+                    </Link>
+                  )}
                 </motion.div>
-              )}
+              </div>
             </div>
-            <div className="p-8 text-center text-gray-light text-xs tracking-widest">
-              {COMPANY.phone}
-            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="p-8 text-center text-gold/60 text-[10px] tracking-widest uppercase"
+            >
+              Premium Interior Studio · {COMPANY.phone}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
