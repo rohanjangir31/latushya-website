@@ -1,15 +1,20 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Shield, Wrench, MapPin, Clock } from 'lucide-react';
+import { Shield, Wrench, MapPin, CheckCircle2, Award } from 'lucide-react';
 
 // Credibility band — real, honest value signals.
-// No fabricated project counts, client numbers, or ratings.
 const CREDIBILITY_ITEMS = [
   {
-    Icon: Shield,
-    value: '100%',
-    label: 'Custom Designed',
-    sub: 'No templates, ever',
+    Icon: CheckCircle2,
+    value: '50+',
+    label: 'Projects Completed',
+    sub: 'Bangalore & surroundings',
+  },
+  {
+    Icon: Award,
+    value: '20+',
+    label: 'Years Experience',
+    sub: 'In bespoke interiors',
   },
   {
     Icon: Wrench,
@@ -19,15 +24,9 @@ const CREDIBILITY_ITEMS = [
   },
   {
     Icon: MapPin,
-    value: 'Pan Bangalore',
+    value: 'Bangalore',
     label: 'Service Area',
     sub: 'All neighbourhoods',
-  },
-  {
-    Icon: Clock,
-    value: 'Free',
-    label: 'First Consultation',
-    sub: 'No obligations',
   },
 ];
 
