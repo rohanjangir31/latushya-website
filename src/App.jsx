@@ -123,7 +123,7 @@ function WhatsAppFloat() {
       transition={{ delay: 3, duration: 0.5, type: 'spring' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-24 right-6 lg:bottom-8 lg:right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className="hidden lg:flex fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
       aria-label="Chat on WhatsApp"
       id="floating-whatsapp"
     >
