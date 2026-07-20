@@ -51,7 +51,7 @@ export default function CTASection() {
           transition={{ duration: 0.6 }}
           className="text-gold text-[9px] tracking-[0.32em] uppercase font-medium block mb-6"
         >
-          Free In-Home Consultation
+          The Design Concierge
         </motion.span>
 
         <motion.h2
@@ -61,8 +61,8 @@ export default function CTASection() {
           className="font-display font-light text-white leading-tight mb-8"
           style={{ fontSize: 'clamp(2rem, 5.5vw, 5rem)' }}
         >
-          Your perfect space{' '}
-          <span className="italic text-gold">starts here.</span>
+          A lifestyle curated{' '}
+          <span className="italic text-gold">for you.</span>
         </motion.h2>
 
         <motion.p
@@ -71,8 +71,7 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="text-gray-subtle text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-10"
         >
-          We visit your home, understand your space, and design an interior that fits your life —
-          not just your floorplan. No obligations. No sales pressure.
+          Experience our tailored approach to interior architecture. From initial concept to flawless execution, our design experts provide a highly personalized, hand-held service.
         </motion.p>
 
         <motion.button
@@ -85,7 +84,7 @@ export default function CTASection() {
           className="btn-gold text-sm"
           id="cta-section-btn"
         >
-          <span>Book Your Free Consultation</span>
+          <span>Request a Private Consultation</span>
         </motion.button>
       </div>
     </section>
