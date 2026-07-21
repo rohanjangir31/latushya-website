@@ -6,7 +6,7 @@
 
 const services = [
   {
-    id: 1,
+    id: 'turnkey-interiors',
     icon: 'Layout',
     title: 'Turnkey Interiors',
     tagline: 'From concept to handover',
@@ -15,7 +15,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85',
   },
   {
-    id: 2,
+    id: 'modular-kitchens',
     icon: 'UtensilsCrossed',
     title: 'Modular Kitchens',
     tagline: 'The heart of the home',
@@ -24,7 +24,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=85',
   },
   {
-    id: 3,
+    id: 'living-room-design',
     icon: 'Sofa',
     title: 'Living Room Design',
     tagline: 'Curated entertainment spaces',
@@ -33,7 +33,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=900&q=85',
   },
   {
-    id: 4,
+    id: 'bespoke-wardrobes',
     icon: 'DoorOpen',
     title: 'Bespoke Wardrobes',
     tagline: 'Precision meets flexibility',
@@ -42,7 +42,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=900&q=85',
   },
   {
-    id: 5,
+    id: 'space-planning',
     icon: 'PenTool',
     title: 'Space Planning',
     tagline: 'Intelligent spatial design',

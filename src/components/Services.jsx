@@ -24,8 +24,9 @@ function ServiceRow({ service, index }) {
   return (
     <div
       ref={ref}
+      id={service.id}
       className={`group relative overflow-hidden border-b border-gray-luxury/[0.1] last:border-b-0
-        grid grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-[500px]`}
+        grid grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-[500px] scroll-mt-[80px]`}
     >
       {/* ── IMAGE — takes 60% on desktop ─────────────────── */}
       <div

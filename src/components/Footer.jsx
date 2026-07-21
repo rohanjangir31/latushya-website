@@ -31,14 +31,11 @@ const socialLinks = [
 
 const footerLinks = {
   'Our Services': [
-    'Turnkey Interiors',
-    'Modular Kitchens',
-    'Living Room Design',
-    'Bespoke Wardrobes',
-    'Space Planning',
-    'Custom Furniture',
-    'Design Consultation',
-    'Material Selection',
+    { label: 'Turnkey Interiors', href: '/services#turnkey-interiors' },
+    { label: 'Modular Kitchens', href: '/services#modular-kitchens' },
+    { label: 'Living Room Design', href: '/services#living-room-design' },
+    { label: 'Bespoke Wardrobes', href: '/services#bespoke-wardrobes' },
+    { label: 'Space Planning', href: '/services#space-planning' },
   ],
   'Quick Links': [
     { label: 'Home',              href: '/' },
@@ -136,10 +133,10 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3">
                 {footerLinks['Our Services'].map((item) => (
-                  <li key={item}>
-                    <Link to="/services" className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group">
+                  <li key={item.label}>
+                    <Link to={item.href} className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group">
                       <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
-                      {item}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
