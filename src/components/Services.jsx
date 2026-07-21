@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Layout, UtensilsCrossed, Sofa, PenTool } from 'lucide-react';
-import { SERVICES } from '../data/content';
+import { SERVICES, COMPANY } from '../data/content';
 import { TextReveal } from '../utils/animations';
+import { Link } from 'react-router-dom';
 
 const DoorOpenIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -142,31 +143,25 @@ function ServiceRow({ service, index }) {
             {service.description}
           </motion.p>
 
-          {/* CTA — pure text link, no button */}
-          <motion.a
+          {/* CTA — styled like the reference image, now routing to /contact */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.58 }}
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="inline-flex items-center gap-3 group/link"
           >
-            <span className="text-gold text-[9px] tracking-[0.32em] uppercase font-medium
-              border-b border-gold/25 pb-px group-hover/link:border-gold/70
-              transition-colors duration-300">
-              Request a Quote
-            </span>
-            <motion.span
-              className="text-gold/70 text-xs"
-              animate={{ x: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-4 border-b border-gold/40 pb-1.5 group/link
+                hover:border-gold/90 transition-colors duration-300 w-max cursor-pointer"
             >
-              →
-            </motion.span>
-          </motion.a>
+              <span className="text-gold text-[10px] tracking-[0.32em] uppercase font-medium">
+                Inquire Now
+              </span>
+              <span className="text-gold text-sm group-hover/link:translate-x-1 transition-transform duration-300">
+                →
+              </span>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </div>

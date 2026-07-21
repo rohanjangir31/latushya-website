@@ -1,83 +1,161 @@
-import { motion } from 'framer-motion';
-import { Award } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { MATERIALS } from '../data/content';
-import { SectionHeader, StaggerContainer, fadeUpVariant, AnimatedSection } from '../utils/animations';
+import { TextReveal } from '../utils/animations';
 
-const categoryColor = { Hardware: 'text-gold', Substrate: 'text-white/60' };
+const EASE   = [0.25, 0.46, 0.45, 0.94];
+const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
+const SANS    = "'Inter', system-ui, sans-serif";
 
 export default function MaterialsSection() {
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, margin: '-50px' });
+
+  // Separate materials into categories
+  const hardware = MATERIALS.filter(m => m.category === 'Hardware');
+  const substrate = MATERIALS.filter(m => m.category === 'Substrate');
+
   return (
-    <section id="materials" className="py-32 bg-black-deep relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-gold/4 blur-3xl pointer-events-none" />
+    <section 
+      id="materials" 
+      ref={sectionRef}
+      style={{
+        background: '#0a0a0a',
+        paddingTop: '160px',
+        paddingBottom: '160px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        
+        {/* SECTION HEADER */}
+        <div style={{ marginBottom: '100px' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
+          >
+            <div style={{ width: '18px', height: '1px', background: 'rgba(212,175,55,0.65)' }} />
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.65)' }}>
+              The Foundation
+            </span>
+          </motion.div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeader
-          label="Quality Assurance"
-          title={<>Materials <span className="italic text-gold">We Trust</span></>}
-          subtitle="We select only proven brands for hardware and substrate — because an interior space is only as good as the components that build it."
-        />
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {MATERIALS.map((mat) => (
-            <motion.div
-              key={mat.id}
-              variants={fadeUpVariant}
-              className="group bg-black-charcoal border border-gray-luxury/20 p-8 hover:border-gold/30 hover:shadow-gold transition-all duration-500 relative overflow-hidden"
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
+            <TextReveal
+              text="Material _Integrity_"
+              style={{
+                fontFamily: DISPLAY,
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: 300,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.05,
+                color: '#ffffff',
+              }}
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.75, delay: 0.28 }}
+              style={{
+                fontFamily: SANS,
+                fontSize: '0.8125rem',
+                lineHeight: 1.8,
+                color: 'rgba(255,255,255,0.40)',
+                maxWidth: '320px',
+              }}
             >
-              {/* Top accent */}
-              <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full" />
-
-              {/* Category badge */}
-              <div className="flex items-center justify-between mb-6">
-                <span className={`text-[10px] tracking-widest uppercase font-medium ${categoryColor[mat.category] || 'text-gold'}`}>
-                  {mat.category} · {mat.origin}
-                </span>
-                <Award size={16} className="text-gold/30 group-hover:text-gold/60 transition-colors duration-300" />
-              </div>
-
-              {/* Logo placeholder or name */}
-              {mat.logo ? (
-                <img src={mat.logo} alt={`${mat.name} logo`} className="h-10 mb-5 object-contain" />
-              ) : (
-                <div className="mb-5">
-                  <h3 className="font-display text-3xl text-white font-light tracking-wide group-hover:text-gold transition-colors duration-300">
-                    {mat.name}
-                  </h3>
-                </div>
-              )}
-
-              <p className="text-gray-light text-sm leading-relaxed mb-6">
-                {mat.description}
-              </p>
-
-              {/* Qualities */}
-              <ul className="space-y-2">
-                {mat.qualities.map((q) => (
-                  <li key={q} className="flex items-center gap-3 text-sm text-gray-subtle">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                    {q}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </StaggerContainer>
-
-        {/* Trust statement */}
-        <AnimatedSection>
-          <div className="border border-gold/20 bg-black-charcoal/40 p-8 md:p-10 text-center relative">
-            <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-            <p className="font-display text-xl md:text-2xl text-white/80 font-light italic leading-relaxed max-w-3xl mx-auto">
-              "We never cut corners on materials. The hardware that goes into your home is the same quality used by premium furniture brands worldwide."
-            </p>
-            <div className="mt-6 flex justify-center">
-              <div className="gold-line" />
-            </div>
-            <p className="mt-4 text-gold text-xs tracking-widest uppercase">Latushya Quality Commitment</p>
+              An architectural space is only as timeless as the materials that construct it. We partner exclusively with industry-leading manufacturers to ensure absolute precision and longevity.
+            </motion.p>
           </div>
-        </AnimatedSection>
+        </div>
+
+        {/* MATERIAL CATEGORY 1: HARDWARE */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32 items-center">
+          <motion.div 
+            className="lg:col-span-7 h-[60vh] relative overflow-hidden"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
+          >
+            <img 
+              src="/projects/media__1784490387392.jpg" 
+              alt="Hardware Detail" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </motion.div>
+          
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
+            >
+              <h3 style={{ fontFamily: DISPLAY, fontSize: '40px', color: '#fff', marginBottom: '16px' }}>Precision Engineering</h3>
+              <p style={{ fontFamily: SANS, fontSize: '18px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
+                Every hinge, track, and handle is engineered for silent, flawless operation. We utilize German-engineered mechanisms to guarantee a lifetime of effortless movement.
+              </p>
+              
+              <div className="space-y-6">
+                {hardware.map(mat => (
+                  <div key={mat.name} className="border-b border-white/10 pb-6 group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span style={{ fontFamily: DISPLAY, fontSize: '28px', color: '#D4AF37' }}>{mat.name}</span>
+                      <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>{mat.origin}</span>
+                    </div>
+                    <p style={{ fontFamily: SANS, fontSize: '15px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{mat.description}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* MATERIAL CATEGORY 2: SUBSTRATE */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+          <div className="lg:col-span-5 order-2 lg:order-1">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.8, ease: EASE }}
+            >
+              <h3 style={{ fontFamily: DISPLAY, fontSize: '40px', color: '#fff', marginBottom: '16px' }}>Structural Cores</h3>
+              <p style={{ fontFamily: SANS, fontSize: '18px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
+                The hidden layers dictate the lifespan of your interiors. We exclusively use marine-grade, high-density substrates that resist moisture, impact, and time.
+              </p>
+              
+              <div className="space-y-6">
+                {substrate.map(mat => (
+                  <div key={mat.name} className="border-b border-white/10 pb-6 group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span style={{ fontFamily: DISPLAY, fontSize: '28px', color: '#fff' }}>{mat.name}</span>
+                      <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>{mat.origin}</span>
+                    </div>
+                    <p style={{ fontFamily: SANS, fontSize: '15px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{mat.description}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="lg:col-span-7 h-[60vh] relative overflow-hidden order-1 lg:order-2"
+            initial={{ opacity: 0, scale: 1.05 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
+          >
+            <img 
+              src="/projects/media__1784490387517.jpg" 
+              alt="Raw Wood Grain" 
+              className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 mix-blend-luminosity hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+            />
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

@@ -115,52 +115,51 @@ export default function Gallery() {
             <button
               onClick={closeLightbox}
               aria-label="Close lightbox"
-              className="absolute top-6 right-6 w-10 h-10 border border-gray-luxury/40 hover:border-gold/60 flex items-center justify-center text-gray-subtle hover:text-gold transition-all duration-300 z-10"
+              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
-              <X size={18} />
+              <X size={32} strokeWidth={1} />
             </button>
 
             {/* Prev */}
             <button
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-4 lg:left-6 w-12 h-12 border border-gray-luxury/40 hover:border-gold/60 flex items-center justify-center text-gray-subtle hover:text-gold transition-all duration-300 z-10"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={48} strokeWidth={1} />
             </button>
 
             {/* Next */}
             <button
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-4 lg:right-6 w-12 h-12 border border-gray-luxury/40 hover:border-gold/60 flex items-center justify-center text-gray-subtle hover:text-gold transition-all duration-300 z-10"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={48} strokeWidth={1} />
             </button>
 
             {/* Image */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={lightboxIndex}
-                initial={{ opacity: 0, scale: 0.92 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.25 }}
-                className="max-w-5xl max-h-[80vh] relative"
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="w-full h-full flex items-center justify-center p-4 lg:p-12 relative"
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
                   src={GALLERY_IMAGES[lightboxIndex].src}
                   alt={GALLERY_IMAGES[lightboxIndex].alt}
-                  className="max-w-full max-h-[80vh] object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
                   loading="eager"
                 />
-                <div className="absolute inset-0 border border-gold/10 pointer-events-none" />
 
-                {/* Caption */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black-deep to-transparent">
-                  <span className="section-label text-[10px]">{GALLERY_IMAGES[lightboxIndex].category}</span>
-                  <p className="text-white/80 text-sm mt-1">{GALLERY_IMAGES[lightboxIndex].alt}</p>
+                {/* Minimal Caption */}
+                <div className="absolute bottom-8 left-12 right-12 text-center pointer-events-none">
+                  <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{GALLERY_IMAGES[lightboxIndex].category}</span>
+                  <p className="text-white/60 text-sm font-light max-w-xl mx-auto">{GALLERY_IMAGES[lightboxIndex].alt}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

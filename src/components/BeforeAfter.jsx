@@ -70,26 +70,21 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
           </div>
         </div>
 
-        {/* Divider line */}
+        {/* Ultra-thin gold divider line */}
         <div
-          className="absolute top-0 bottom-0 w-px bg-gold z-20"
-          style={{ left: `${sliderPos}%` }}
-        />
-
-        {/* Drag handle */}
-        <div
-          className="absolute top-1/2 -translate-y-1/2 z-30 flex items-center justify-center"
-          style={{ left: `${sliderPos}%`, transform: 'translate(-50%, -50%)' }}
+          className="absolute top-0 bottom-0 z-20 pointer-events-none"
+          style={{
+            left: `${sliderPos}%`,
+            width: '1px',
+            backgroundColor: 'rgba(212,175,55,0.7)',
+            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+          }}
         >
-          <motion.div
-            className="w-10 h-10 rounded-full bg-gold flex items-center justify-center shadow-gold"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M5 4L1 8L5 12M11 4L15 8L11 12" stroke="#0F0F0F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </motion.div>
+          {/* Subtle minimal grab indicator */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1 w-6 h-12 bg-black-deep/40 backdrop-blur-md border border-gold/30 rounded-full">
+            <div className="w-px h-3 bg-gold/50" />
+            <div className="w-px h-3 bg-gold/50" />
+          </div>
         </div>
 
         {/* Overlay gradient on edges */}

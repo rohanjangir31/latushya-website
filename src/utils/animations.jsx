@@ -219,7 +219,7 @@ export function TextReveal({ text, className = '', delay = 0 }) {
       className={`inline-block ${className}`}
     >
       {tokens.map((token, index) => (
-        <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top">
+        <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top pb-[0.2em] -mb-[0.2em]">
           <motion.span
             variants={wordAnimation}
             className={`inline-block ${token.italic ? 'italic text-gold' : ''}`}
