@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { COMPANY } from '../data/content';
 
 // Inline SVG social icons
@@ -40,14 +41,13 @@ const footerLinks = {
     'Material Selection',
   ],
   'Quick Links': [
-    { label: 'About Us',          href: '#about' },
-    { label: 'Our Services',      href: '#services' },
-    { label: 'Portfolio',         href: '#portfolio' },
-    { label: 'Materials We Use',  href: '#materials' },
-    { label: 'Our Process',       href: '#process' },
-    { label: 'Before & After',    href: '#before-after' },
-    { label: 'FAQ',               href: '#faq' },
-    { label: 'Contact',           href: '#contact' },
+    { label: 'Home',              href: '/' },
+    { label: 'About Us',          href: '/about' },
+    { label: 'Our Services',      href: '/services' },
+    { label: 'Portfolio',         href: '/portfolio' },
+    { label: 'Materials We Use',  href: '/materials' },
+    { label: 'Our Process',       href: '/process' },
+    { label: 'Contact',           href: '/contact' },
   ],
 };
 
@@ -137,10 +137,10 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks['Our Services'].map((item) => (
                   <li key={item}>
-                    <span className="text-gray-light text-sm hover:text-gold transition-colors duration-300 cursor-default flex items-center gap-2 group">
+                    <Link to="/services" className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group">
                       <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
                       {item}
-                    </span>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -154,14 +154,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks['Quick Links'].map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+                    <Link
+                      to={item.href}
                       className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group"
                     >
                       <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
