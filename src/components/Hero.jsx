@@ -58,13 +58,14 @@ export default function Hero() {
         style={{ y: imageY }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <img
-          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=90"
-          alt="Luxury interior design — Latushya Bangalore"
+        <video
+          src="/hero-video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-          style={{ objectPosition: '74% center' }}
-          loading="eager"
-          fetchPriority="high"
+          style={{ objectPosition: 'center center' }}
         />
 
         {/* Base darkening — very restrained, only 25% so image reads richly */}
