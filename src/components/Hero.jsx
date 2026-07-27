@@ -65,7 +65,7 @@ export default function Hero() {
           loop
           playsInline
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center center' }}
+          style={{ objectPosition: 'center center', transform: 'scale(1.35)' }}
         />
 
         {/* Base darkening — very restrained, only 25% so image reads richly */}
