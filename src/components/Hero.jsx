@@ -51,47 +51,64 @@ export default function Hero() {
       id="hero"
       className="relative h-screen min-h-[640px] overflow-hidden bg-[#0a0a0a]"
     >
-      {/* ── FULL-BLEED BACKGROUND IMAGE ──────────────────────────
-          object-position pushes the wardrobe/worker toward the
-          right side, leaving the left area naturally darker. ── */}
+      {/* ── FULL-BLEED BACKGROUND IMAGE / VIDEO ──────────────────
+          On mobile, we place the video inside an aspect-video container with
+          CSS mask-image to dissolve the top and bottom edges directly into #0a0a0a.
+          This eliminates ALL sharp box edges on ANY DevTools or mobile screen size
+          while guaranteeing 100% of the word "LATUSHYA" stays in bounds!
+          On desktop, it switches to absolute inset-0 full-bleed object-cover. ── */}
       <motion.div
         style={{ y: imageY }}
-        className="absolute inset-0 z-0 will-change-transform"
+        className="absolute inset-0 z-0 will-change-transform bg-[#0a0a0a] flex flex-col justify-start lg:block pt-14 sm:pt-20 lg:pt-0"
       >
-        <video
-          src="/hero-video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-          style={{ objectPosition: 'center center', transform: 'scale(1.35)' }}
-        />
-
-        {/* Base darkening — very restrained, only 25% so image reads richly */}
         <div
-          className="absolute inset-0"
-          style={{ background: 'rgba(0,0,0,0.22)' }}
+          className="w-full relative lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_75%,transparent_100%)] lg:[mask-image:none] lg:[-webkit-mask-image:none]"
+        >
+          <video
+            src="/hero-video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover scale-[1.05] lg:scale-[1.35] transition-all duration-700"
+            style={{ objectPosition: 'center center' }}
+          />
+        </div>
+
+        {/* Base darkening — very restrained */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'rgba(0,0,0,0.18)' }}
         />
 
-        {/* ── PRIMARY TEXT GRADIENT ────────────────────────────
-            Radial gradient anchored at the LEFT that fades to
+        {/* ── DESKTOP PRIMARY TEXT GRADIENT ────────────────────
+            Radial/linear gradient anchored at the LEFT that fades to
             transparent by 55% width. Only the text zone is dark.
-            The right half of the image stays fully lit. ── */}
+            Hidden on mobile so it doesn't black out the video. ── */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden lg:block pointer-events-none"
           style={{
             background:
               'linear-gradient(to right, rgba(4,2,1,0.97) 0%, rgba(4,2,1,0.88) 22%, rgba(4,2,1,0.64) 38%, rgba(0,0,0,0.14) 56%, transparent 70%)',
           }}
         />
 
-        {/* Bottom gradient — grounds the composition */}
+        {/* ── MOBILE SEAMLESS BACKGROUND BLEND ────────────────────
+            Gently transitions the upper video area into the lower dark canvas where text sits ── */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 lg:hidden pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, rgba(6,4,2,0.75) 0%, rgba(6,4,2,0.30) 22%, transparent 45%)',
+              'linear-gradient(to bottom, #0a0a0a 0%, transparent 15%, transparent 55%, rgba(10,10,10,0.85) 72%, #0a0a0a 88%, #0a0a0a 100%)',
+          }}
+        />
+
+        {/* Bottom gradient — grounds the composition */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(6,4,2,0.85) 0%, rgba(6,4,2,0.30) 25%, transparent 50%)',
           }}
         />
       </motion.div>

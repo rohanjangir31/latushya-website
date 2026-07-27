@@ -59,62 +59,133 @@ function ScrollToTopRoute() {
   return null;
 }
 
-// Preloader — 3D Logo & Shutter Reveal
+// Preloader — Editorial 2D Logo & Staggered Architectural Panels Reveal
 function Preloader() {
-  return (
-    <motion.div
-      className="fixed inset-0 z-[200] flex flex-col pointer-events-none"
-    >
-      {/* Top Shutter */}
-      <motion.div
-        initial={{ y: '0%' }}
-        exit={{ y: '-100%' }}
-        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-        className="h-1/2 w-full bg-black-deep border-b border-gold/10"
-      />
-      {/* Bottom Shutter */}
-      <motion.div
-        initial={{ y: '0%' }}
-        exit={{ y: '100%' }}
-        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-        className="h-1/2 w-full bg-black-deep border-t border-gold/10"
-      />
+  const [progress, setProgress] = useState(0);
 
-      {/* Content Container (absolutely centered over the shutters) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+  useEffect(() => {
+    let start = 0;
+    const end = 100;
+    const duration = 1600; // 1.6s smooth count up
+    const startTime = performance.now();
+
+    const updateProgress = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const t = Math.min(1, elapsed / duration);
+      // Ease out cubic for realistic decelerating progress
+      const easeOut = 1 - Math.pow(1 - t, 3);
+      const current = Math.floor(start + (end - start) * easeOut);
+      
+      setProgress(current);
+
+      if (t < 1) {
+        requestAnimationFrame(updateProgress);
+      }
+    };
+
+    const animationFrame = requestAnimationFrame(updateProgress);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
+  return (
+    <motion.div className="fixed inset-0 z-[200] pointer-events-auto select-none overflow-hidden">
+      {/* 5 Staggered Architectural Panels (Wardrobe Sliding Partition Concept) */}
+      <div className="absolute inset-0 grid grid-cols-5 pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ y: '0%' }}
+            exit={{ y: '-101%' }}
+            transition={{
+              duration: 0.95,
+              ease: [0.76, 0, 0.24, 1],
+              delay: 0.15 + i * 0.08,
+            }}
+            className="w-full h-full bg-[#0a0a0a] border-r border-gold/10 last:border-r-0 relative overflow-hidden"
+          >
+            {/* Subtle vertical architectural lighting on right edge */}
+            <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-gold/30 to-transparent opacity-60" />
+            {/* Trailing gold trim along the bottom edge as panels rise */}
+            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-gold/20 via-gold to-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.6)]" />
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Center Brand Container */}
+      <div className="absolute inset-0 z-[210] flex flex-col items-center justify-center pointer-events-none px-6">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-          transition={{ 
-            opacity: { duration: 0.8 },
-            scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-            rotateY: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-            exit: { duration: 0.4 }
+          initial={{ opacity: 0, scale: 0.9, filter: 'blur(12px)' }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+          transition={{
+            duration: 1.0,
+            ease: [0.16, 1, 0.3, 1],
+            exit: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center relative"
         >
-          {/* Floating 3D Logo */}
-          <motion.img 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            src="/logo-3d.png" 
-            alt="Latushya 3D Logo" 
-            className="w-56 h-auto mb-8 drop-shadow-2xl" 
+          {/* Ambient luxury gold glow */}
+          <div className="absolute -inset-8 bg-gold/15 rounded-full blur-3xl pointer-events-none animate-pulse-gold opacity-80" />
+
+          {/* Crisp 2D Logo */}
+          <img
+            src="/logo-2d.png"
+            alt="Latushya Premium Interior Studio"
+            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(212,175,55,0.2)] mb-6"
           />
-          <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase">
-            Premium Interior Studio
-          </span>
-          <div className="mt-8 w-48 h-px bg-gray-luxury/30 overflow-hidden relative">
+
+          {/* Elegant expanding gold dividing line */}
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: '180px', opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="h-[1px] bg-gradient-to-r from-transparent via-gold/70 to-transparent relative overflow-hidden mb-5"
+          >
             <motion.div
               initial={{ x: '-100%' }}
               animate={{ x: '100%' }}
-              transition={{ duration: 1.2, ease: 'easeInOut', repeat: Infinity }}
-              className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-gold/80 to-transparent"
+              transition={{ duration: 1.5, ease: 'easeInOut', repeat: Infinity }}
+              className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
             />
-          </div>
+          </motion.div>
+
+          <motion.span
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-gold/90 font-display text-xs md:text-sm tracking-ultra uppercase text-center font-light"
+          >
+            Premium Interior Studio
+          </motion.span>
         </motion.div>
       </div>
+
+      {/* Bottom Architectural Coordinates & Live Loading Counter */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.4,
+          exit: { duration: 0.35, ease: [0.76, 0, 0.24, 1] },
+        }}
+        className="absolute bottom-6 md:bottom-10 left-6 md:left-12 right-6 md:right-12 z-[210] flex items-end justify-between pointer-events-none"
+      >
+        {/* Left: Location & Studio Specialty */}
+        <div className="flex flex-col gap-1 text-[10px] md:text-xs text-gray-400 font-sans tracking-[0.25em] uppercase">
+          <span className="text-gold font-medium">Bangalore, India</span>
+          <span className="text-white/60">Bespoke Wardrobes & Turnkey Interiors</span>
+        </div>
+
+        {/* Right: Real-time Loading Percentage */}
+        <div className="flex items-baseline gap-1">
+          <span className="font-display text-4xl md:text-5xl text-gold font-light tracking-tight leading-none">
+            {progress.toString().padStart(2, '0')}
+          </span>
+          <span className="text-gold/70 text-xs md:text-sm font-sans tracking-widest">%</span>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -201,7 +272,8 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1800);
+    // 1600ms count-up + 400ms hold at 100% for a satisfying reveal
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
