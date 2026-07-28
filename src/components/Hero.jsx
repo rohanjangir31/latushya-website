@@ -62,15 +62,28 @@ export default function Hero() {
         className="absolute inset-0 z-0 will-change-transform bg-[#0a0a0a] flex flex-col justify-start lg:block pt-14 sm:pt-20 lg:pt-0"
       >
         <div
-          className="w-full relative lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_75%,transparent_100%)] lg:[mask-image:none] lg:[-webkit-mask-image:none]"
+          className="w-[140%] -left-[20%] relative lg:w-full lg:left-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
+          style={{
+            WebkitMaskImage: 'var(--mobile-mask, none)',
+            WebkitMaskComposite: 'source-in',
+            maskImage: 'var(--mobile-mask, none)',
+            maskComposite: 'intersect'
+          }}
         >
+          <style>{`
+            @media (max-width: 1023px) {
+              .aspect-video {
+                --mobile-mask: linear-gradient(to bottom, transparent 0%, black 18%, black 75%, transparent 100%);
+              }
+            }
+          `}</style>
           <video
             src="/hero-video.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover scale-[1.05] lg:scale-[1.35] transition-all duration-700"
+            className="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
             style={{ objectPosition: 'center center' }}
           />
         </div>
