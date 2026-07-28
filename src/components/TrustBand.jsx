@@ -34,8 +34,8 @@ export default function TrustBand() {
   return (
     <section ref={ref} className="py-16 md:py-20 bg-black-charcoal relative overflow-hidden">
       {/* Top and bottom ruled lines */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/25 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/25 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 divide-x divide-gray-luxury/15">
@@ -49,7 +49,7 @@ export default function TrustBand() {
             >
               {/* Placeholder value */}
               <span
-                className="font-display font-light text-gold leading-none mb-3
+                className="font-display font-light text-pink leading-none mb-3
                   group-hover:scale-105 transition-transform duration-300"
                 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)' }}
               >
@@ -66,8 +66,8 @@ export default function TrustBand() {
                 {sub}
               </span>
 
-              {/* Animated gold underline */}
-              <div className="mt-4 h-px w-4 bg-gold/30 group-hover:w-8 group-hover:bg-gold/60
+              {/* Animated pink underline */}
+              <div className="mt-4 h-px w-4 bg-pink/30 group-hover:w-8 group-hover:bg-pink/60
                 transition-all duration-400" />
             </motion.div>
           ))}

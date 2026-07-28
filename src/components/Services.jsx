@@ -62,7 +62,7 @@ function ServiceRow({ service, index }) {
           className={`absolute bottom-5 flex items-center gap-3 z-10
             ${isEven ? 'left-5' : 'right-5 flex-row-reverse'}`}
         >
-          <div className="w-8 h-px bg-gold/35" />
+          <div className="w-8 h-px bg-pink/35" />
           <span className="text-white/30 text-[8px] tracking-[0.32em] uppercase">
             Bangalore · Custom Made
           </span>
@@ -90,7 +90,7 @@ function ServiceRow({ service, index }) {
         </div>
 
         {/* Hover top-line — but only on the text panel, not the image */}
-        <div className={`absolute top-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full
+        <div className={`absolute top-0 w-0 h-0.5 bg-pink transition-all duration-700 group-hover:w-full
           ${isEven ? 'left-0' : 'right-0'}`}
         />
 
@@ -105,10 +105,10 @@ function ServiceRow({ service, index }) {
             transition={{ duration: 0.7, delay: 0.18 }}
             className="flex items-center gap-3 mb-6"
           >
-            <div className="w-9 h-9 border border-gold/25 group-hover:border-gold/60 group-hover:bg-gold/[0.08] flex items-center justify-center transition-all duration-400 flex-shrink-0">
-              <Icon className="text-gold" />
+            <div className="w-9 h-9 border border-pink/25 group-hover:border-pink/60 group-hover:bg-pink/[0.08] flex items-center justify-center transition-all duration-400 flex-shrink-0">
+              <Icon className="text-pink" />
             </div>
-            <span className="text-gold/70 text-[8px] tracking-[0.38em] uppercase font-medium">
+            <span className="text-pink/70 text-[8px] tracking-[0.38em] uppercase font-medium">
               {service.tagline}
             </span>
           </motion.div>
@@ -118,19 +118,19 @@ function ServiceRow({ service, index }) {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.85, delay: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-display font-light text-white group-hover:text-gold/90
+            className="font-display font-light text-white group-hover:text-pink/90
               transition-colors duration-400 leading-[1.05] mb-5"
             style={{ fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}
           >
             {service.title}
           </motion.h3>
 
-          {/* Animated gold rule — grows in on scroll */}
+          {/* Animated pink rule — grows in on scroll */}
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: '2.5rem' } : {}}
             transition={{ duration: 0.55, delay: 0.4 }}
-            className="h-px bg-gold/45 mb-6"
+            className="h-px bg-pink/45 mb-6"
           />
 
           {/* Description */}
@@ -151,13 +151,13 @@ function ServiceRow({ service, index }) {
           >
             <Link
               to="/contact"
-              className="inline-flex items-center gap-4 border-b border-gold/40 pb-1.5 group/link
-                hover:border-gold/90 transition-colors duration-300 w-max cursor-pointer"
+              className="inline-flex items-center gap-4 border-b border-pink/40 pb-1.5 group/link
+                hover:border-pink/90 transition-colors duration-300 w-max cursor-pointer"
             >
-              <span className="text-gold text-[10px] tracking-[0.32em] uppercase font-medium">
+              <span className="text-pink text-[10px] tracking-[0.32em] uppercase font-medium">
                 Inquire Now
               </span>
-              <span className="text-gold text-sm group-hover/link:translate-x-1 transition-transform duration-300">
+              <span className="text-pink text-sm group-hover/link:translate-x-1 transition-transform duration-300">
                 →
               </span>
             </Link>
@@ -183,8 +183,8 @@ export default function Services() {
           transition={{ duration: 0.7 }}
           className="flex items-center gap-4 mb-5"
         >
-          <div className="w-12 h-[2px] bg-gold" style={{ boxShadow: '0 0 10px rgba(212,175,55,0.4)' }} />
-          <span className="text-gold text-xs tracking-[0.4em] uppercase font-semibold">
+          <div className="w-12 h-[2px] bg-pink" style={{ boxShadow: '0 0 10px rgba(212, 150, 195,0.4)' }} />
+          <span className="text-pink text-xs tracking-[0.4em] uppercase font-semibold">
             Our Expertise
           </span>
         </motion.div>
@@ -210,7 +210,7 @@ export default function Services() {
           initial={{ width: 0 }}
           animate={headerInView ? { width: '100%' } : {}}
           transition={{ duration: 1.1, delay: 0.35 }}
-          className="mt-10 h-px bg-gradient-to-r from-gold/35 via-gold/8 to-transparent"
+          className="mt-10 h-px bg-gradient-to-r from-pink/35 via-pink/8 to-transparent"
         />
       </div>
 

@@ -48,7 +48,7 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
         />
 
         {/* After label */}
-        <div className="absolute top-4 right-4 bg-gold/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 z-10">
+        <div className="absolute top-4 right-4 bg-pink/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 z-10">
           {afterLabel}
         </div>
 
@@ -70,26 +70,26 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
           </div>
         </div>
 
-        {/* Ultra-thin gold divider line */}
+        {/* Ultra-thin pink divider line */}
         <div
           className="absolute top-0 bottom-0 z-20 pointer-events-none"
           style={{
             left: `${sliderPos}%`,
             width: '1px',
-            backgroundColor: 'rgba(212,175,55,0.7)',
+            backgroundColor: 'rgba(212, 150, 195,0.7)',
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
           }}
         >
           {/* Subtle minimal grab indicator */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1 w-6 h-12 bg-black-deep/40 backdrop-blur-md border border-gold/30 rounded-full">
-            <div className="w-px h-3 bg-gold/50" />
-            <div className="w-px h-3 bg-gold/50" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1 w-6 h-12 bg-black-deep/40 backdrop-blur-md border border-pink/30 rounded-full">
+            <div className="w-px h-3 bg-pink/50" />
+            <div className="w-px h-3 bg-pink/50" />
           </div>
         </div>
 
         {/* Overlay gradient on edges */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 border border-gold/10" />
+          <div className="absolute inset-0 border border-pink/10" />
         </div>
       </div>
 
@@ -105,10 +105,10 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
 // Placeholder version when real photos aren't available
 function PlaceholderComparison() {
   return (
-    <div className="relative border border-dashed border-gold/20 bg-black-card/30 h-[420px] flex flex-col items-center justify-center">
+    <div className="relative border border-dashed border-pink/20 bg-black-card/30 h-[420px] flex flex-col items-center justify-center">
         <div className="text-center px-8">
-          <div className="w-16 h-16 border border-gold/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="w-16 h-16 border border-pink/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D496C3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2"/>
               <circle cx="9" cy="9" r="2"/>
               <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
@@ -152,12 +152,12 @@ export default function BeforeAfter() {
 
   return (
     <section id="before-after" className="py-32 bg-black-charcoal relative overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <SectionHeader
           label="Transformations"
-          title={<>Before <span className="italic text-gold">&</span> After</>}
+          title={<>Before <span className="italic text-pink">&</span> After</>}
           subtitle="Drag the slider to see how Latushya transforms an ordinary space into a precision-crafted wardrobe."
         />
 
@@ -187,7 +187,7 @@ export default function BeforeAfter() {
 
         {allPlaceholders && (
           <AnimatedSection className="text-center mt-8">
-            <div className="inline-block border border-gold/20 bg-black-card px-8 py-4">
+            <div className="inline-block border border-pink/20 bg-black-card px-8 py-4">
               <p className="text-gray-subtle text-sm">
                 Our completed project photography is currently in production. Every transformation will be documented in full detail.
               </p>

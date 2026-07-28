@@ -14,12 +14,19 @@ export default {
           soft: '#222222',
           card: '#161616',
         },
-        gold: {
-          DEFAULT: '#D4AF37',
-          light: '#E8CB6A',
-          dark: '#B8962E',
-          muted: '#C9A84C',
-          pale: '#F0E0A0',
+        pink: {
+          DEFAULT: '#D496C3',
+          light: '#E2B1D6',
+          dark: '#B675A2',
+          muted: '#C48BAF',
+          pale: '#F2DFED',
+        },
+        blue: {
+          DEFAULT: '#67CBE1',
+          light: '#8EDDF0',
+          dark: '#4A9CB0',
+          muted: '#5CBED4',
+          pale: '#DEF4F9',
         },
         white: {
           DEFAULT: '#FFFFFF',
@@ -49,20 +56,20 @@ export default {
         ultra: '0.4em',
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F0E0A0 50%, #B8962E 100%)',
+        'pink-gradient': 'linear-gradient(135deg, #D496C3 0%, #67CBE1 100%)',
         'dark-gradient': 'linear-gradient(180deg, #0F0F0F 0%, #1A1A1A 100%)',
         'hero-overlay': 'linear-gradient(to right, rgba(15,15,15,0.9) 0%, rgba(15,15,15,0.5) 60%, rgba(15,15,15,0.2) 100%)',
       },
       boxShadow: {
-        'gold': '0 0 30px rgba(212, 175, 55, 0.15)',
-        'gold-lg': '0 0 60px rgba(212, 175, 55, 0.25)',
+        'pink': '0 0 30px rgba(212, 150, 195, 0.15)',
+        'pink-lg': '0 0 60px rgba(212, 150, 195, 0.25)',
         'luxury': '0 25px 80px rgba(0,0,0,0.6)',
         'card': '0 8px 40px rgba(0,0,0,0.4)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'shimmer': 'shimmer 3s linear infinite',
-        'pulse-gold': 'pulseGold 2s ease-in-out infinite',
+        'pulse-pink': 'pulsePink 2s ease-in-out infinite',
         'scroll': 'scroll 2s ease-in-out infinite',
       },
       keyframes: {
@@ -74,9 +81,9 @@ export default {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
-        pulseGold: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(212,175,55,0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(212,175,55,0.6)' },
+        pulsePink: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(212, 150, 195, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(212, 150, 195, 0.6)' },
         },
         scroll: {
           '0%': { transform: 'translateY(0)', opacity: '1' },

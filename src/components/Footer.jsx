@@ -64,9 +64,9 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-black-charcoal border-t border-gold/10 relative">
+      <footer className="bg-black-charcoal border-t border-pink/10 relative">
         {/* Top CTA band */}
-        <div className="bg-gold py-8">
+        <div className="bg-pink py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-display text-2xl text-black-deep font-medium">
@@ -78,7 +78,7 @@ export default function Footer() {
             </div>
             <button
               onClick={handleConsult}
-              className="flex-shrink-0 bg-black-deep text-gold font-semibold px-8 py-4 text-xs tracking-widest uppercase hover:bg-black-charcoal transition-colors duration-300"
+              className="flex-shrink-0 bg-black-deep text-pink font-semibold px-8 py-4 text-xs tracking-widest uppercase hover:bg-black-charcoal transition-colors duration-300"
               id="footer-cta"
             >
               Book Free Consultation
@@ -95,7 +95,7 @@ export default function Footer() {
                 <span className="font-display text-2xl tracking-ultra text-white font-light">
                   {COMPANY.name}
                 </span>
-                <div className="text-gold text-[9px] tracking-widest uppercase mt-0.5">
+                <div className="text-pink text-[9px] tracking-widest uppercase mt-0.5">
                   Premium Interior Design Studio · Bangalore
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="w-10 h-10 border border-gray-luxury/30 hover:border-gold/60 flex items-center justify-center text-gray-subtle hover:text-gold transition-all duration-300 group"
+                    className="w-10 h-10 border border-gray-luxury/30 hover:border-pink/60 flex items-center justify-center text-gray-subtle hover:text-pink transition-all duration-300 group"
                   >
                     <Icon />
                   </a>
@@ -128,14 +128,14 @@ export default function Footer() {
 
             {/* Services column */}
             <div>
-              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-gold/20">
+              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
                 Our Services
               </h4>
               <ul className="space-y-3">
                 {footerLinks['Our Services'].map((item) => (
                   <li key={item.label}>
-                    <Link to={item.href} className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group">
-                      <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
+                    <Link to={item.href} className="text-gray-light text-sm hover:text-pink transition-colors duration-300 flex items-center gap-2 group">
+                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-pink transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>
@@ -145,7 +145,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-gold/20">
+              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
                 Quick Links
               </h4>
               <ul className="space-y-3">
@@ -153,9 +153,9 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.href}
-                      className="text-gray-light text-sm hover:text-gold transition-colors duration-300 flex items-center gap-2 group"
+                      className="text-gray-light text-sm hover:text-pink transition-colors duration-300 flex items-center gap-2 group"
                     >
-                      <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
+                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-pink transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>
@@ -165,12 +165,12 @@ export default function Footer() {
 
             {/* Contact column */}
             <div>
-              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-gold/20">
+              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
                 Contact
               </h4>
               <ul className="space-y-5">
                 <li className="flex items-start gap-3">
-                  <MapPin size={14} className="text-gold flex-shrink-0 mt-0.5" />
+                  <MapPin size={14} className="text-pink flex-shrink-0 mt-0.5" />
                   {COMPANY.address ? (
                     <span className="text-gray-light text-sm leading-relaxed">{COMPANY.address}</span>
                   ) : (
@@ -178,9 +178,9 @@ export default function Footer() {
                   )}
                 </li>
                 <li className="flex items-center gap-3">
-                  <Phone size={14} className="text-gold flex-shrink-0" />
+                  <Phone size={14} className="text-pink flex-shrink-0" />
                   {COMPANY.phone ? (
-                    <a href={`tel:${COMPANY.phone}`} className="text-gray-light hover:text-gold transition-colors text-sm">
+                    <a href={`tel:${COMPANY.phone}`} className="text-gray-light hover:text-pink transition-colors text-sm">
                       {COMPANY.phone}
                     </a>
                   ) : (
@@ -188,9 +188,9 @@ export default function Footer() {
                   )}
                 </li>
                 <li className="flex items-center gap-3">
-                  <Mail size={14} className="text-gold flex-shrink-0" />
+                  <Mail size={14} className="text-pink flex-shrink-0" />
                   {COMPANY.email ? (
-                    <a href={`mailto:${COMPANY.email}`} className="text-gray-light hover:text-gold transition-colors text-sm">
+                    <a href={`mailto:${COMPANY.email}`} className="text-gray-light hover:text-pink transition-colors text-sm">
                       {COMPANY.email}
                     </a>
                   ) : (
@@ -200,7 +200,7 @@ export default function Footer() {
                 <li className="pt-2">
                   <button
                     onClick={handleConsult}
-                    className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-gold border border-gold/40 hover:bg-gold hover:text-black-deep px-5 py-3 transition-all duration-300"
+                    className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-pink border border-pink/40 hover:bg-pink hover:text-black-deep px-5 py-3 transition-all duration-300"
                   >
                     Free Consultation
                   </button>
@@ -217,7 +217,7 @@ export default function Footer() {
               © {new Date().getFullYear()} {COMPANY.name} — Premium Wardrobes, {COMPANY.city}
             </p>
             <p className="text-gray-light/20 text-xs flex items-center gap-1.5">
-              Crafted with <Heart size={9} className="text-gold fill-gold" /> for beautiful living spaces
+              Crafted with <Heart size={9} className="text-pink fill-pink" /> for beautiful living spaces
             </p>
           </div>
         </div>
@@ -225,7 +225,7 @@ export default function Footer() {
 
       {/* Mobile sticky CTA bar — always visible on mobile, iOS safe area aware */}
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden pb-safe">
-        <div className="grid grid-cols-2 border-t border-gold/20">
+        <div className="grid grid-cols-2 border-t border-pink/20">
           {COMPANY.whatsapp ? (
             <a
               href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20custom%20wardrobe.`}
@@ -242,7 +242,7 @@ export default function Footer() {
           ) : (
             <button
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center justify-center gap-2 bg-gold text-black-deep text-xs font-semibold tracking-widest uppercase py-4"
+              className="flex items-center justify-center gap-2 bg-pink text-black-deep text-xs font-semibold tracking-widest uppercase py-4"
               id="mobile-sticky-consult"
             >
               Free Consultation
@@ -252,7 +252,7 @@ export default function Footer() {
           {COMPANY.phone ? (
             <a
               href={`tel:${COMPANY.phone}`}
-              className="flex items-center justify-center gap-2 bg-black-charcoal text-gold text-xs font-semibold tracking-widest uppercase py-4 border-l border-gold/20"
+              className="flex items-center justify-center gap-2 bg-black-charcoal text-pink text-xs font-semibold tracking-widest uppercase py-4 border-l border-pink/20"
               id="mobile-sticky-call"
             >
               <Phone size={14} />
@@ -261,7 +261,7 @@ export default function Footer() {
           ) : (
             <button
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center justify-center gap-2 bg-black-charcoal text-gold text-xs font-semibold tracking-widest uppercase py-4 border-l border-gold/20"
+              className="flex items-center justify-center gap-2 bg-black-charcoal text-pink text-xs font-semibold tracking-widest uppercase py-4 border-l border-pink/20"
               id="mobile-sticky-enquire"
             >
               Send Enquiry

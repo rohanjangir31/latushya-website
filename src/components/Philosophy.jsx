@@ -28,8 +28,8 @@ export default function Philosophy() {
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-12 h-px bg-gold/50" />
-            <span className="text-gold text-xs tracking-[0.3em] uppercase font-semibold">Our Philosophy</span>
+            <div className="w-12 h-px bg-pink/50" />
+            <span className="text-pink text-xs tracking-[0.3em] uppercase font-semibold">Our Philosophy</span>
           </motion.div>
 
           <motion.h2 
@@ -70,8 +70,8 @@ export default function Philosophy() {
           </motion.div>
 
           {/* Decorative Corner Accents */}
-          <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         </div>
         
       </div>

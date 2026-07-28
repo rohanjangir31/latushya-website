@@ -43,7 +43,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-[78px] flex items-center ${
           scrolled || menuOpen
-            ? 'bg-black-deep/95 backdrop-blur-xl border-b border-gold/10'
+            ? 'bg-black-deep/95 backdrop-blur-xl border-b border-pink/10'
             : 'bg-transparent'
         }`}
       >
@@ -78,8 +78,8 @@ export default function Navbar() {
                   onClick={handleNavClick}
                   onMouseEnter={() => setCursorState('hover')}
                   onMouseLeave={() => setCursorState('default')}
-                  className={`link-underline-gold text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
-                    ${isActive ? 'text-gold is-active' : 'text-gray-subtle hover:text-white'}`}
+                  className={`link-underline-pink text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
+                    ${isActive ? 'text-pink is-active' : 'text-gray-subtle hover:text-white'}`}
                 >
                   {link.label}
                 </Link>
@@ -95,7 +95,7 @@ export default function Navbar() {
                   href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-gold"
+                  className="btn-pink"
                   id="nav-cta"
                   onMouseEnter={() => setCursorState('hover')}
                   onMouseLeave={() => setCursorState('default')}
@@ -105,7 +105,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   to="/contact"
-                  className="btn-gold"
+                  className="btn-pink"
                   id="nav-cta"
                   onMouseEnter={() => setCursorState('hover')}
                   onMouseLeave={() => setCursorState('default')}
@@ -124,7 +124,7 @@ export default function Navbar() {
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-gold"
+              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-pink"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
@@ -132,7 +132,7 @@ export default function Navbar() {
             />
             <motion.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-gold"
+              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-pink"
             />
           </button>
         </div>
@@ -146,7 +146,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px] border-b border-gold/20"
+            className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px] border-b border-pink/20"
           >
             <div className="flex-1 flex flex-col justify-center items-center gap-8 px-8">
               {navLinks.map((link, i) => (
@@ -160,7 +160,7 @@ export default function Navbar() {
                     <Link
                       to={link.href}
                       onClick={handleNavClick}
-                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-gold italic' : 'text-white hover:text-gold'}`}
+                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-pink italic' : 'text-white hover:text-pink'}`}
                     >
                       {link.label}
                     </Link>
@@ -180,7 +180,7 @@ export default function Navbar() {
                       href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-gold"
+                      className="btn-pink"
                     >
                       <span>Book Free Consultation</span>
                     </a>
@@ -188,7 +188,7 @@ export default function Navbar() {
                     <Link
                       to="/contact"
                       onClick={handleNavClick}
-                      className="btn-gold block"
+                      className="btn-pink block"
                     >
                       <span>Book Free Consultation</span>
                     </Link>
@@ -201,7 +201,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="p-8 text-center text-gold/60 text-[10px] tracking-widest uppercase"
+              className="p-8 text-center text-pink/60 text-[10px] tracking-widest uppercase"
             >
               Premium Interior Studio · {COMPANY.phone}
             </motion.div>

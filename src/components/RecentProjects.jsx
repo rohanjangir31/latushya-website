@@ -6,10 +6,10 @@ import { SectionHeader, StaggerContainer, fadeUpVariant } from '../utils/animati
 function RecentProjectCard({ project }) {
   if (project.isPlaceholder) {
     return (
-      <div className="group border border-dashed border-gold/20 bg-black-card/30 overflow-hidden">
+      <div className="group border border-dashed border-pink/20 bg-black-card/30 overflow-hidden">
         <div className="h-52 bg-black-soft/50 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3 text-center px-6">
-            <ImageOff size={28} className="text-gold/20" />
+            <ImageOff size={28} className="text-pink/20" />
             <span className="text-gray-light/30 text-sm">Project photo coming soon</span>
           </div>
         </div>
@@ -32,7 +32,7 @@ function RecentProjectCard({ project }) {
   return (
     <motion.div
       variants={fadeUpVariant}
-      className="group border border-gray-luxury/20 bg-black-card overflow-hidden hover:border-gold/30 hover:shadow-gold transition-all duration-500"
+      className="group border border-gray-luxury/20 bg-black-card overflow-hidden hover:border-pink/30 hover:shadow-pink transition-all duration-500"
     >
       {/* Project image */}
       <div className="relative h-52 overflow-hidden">
@@ -43,11 +43,11 @@ function RecentProjectCard({ project }) {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black-deep/60 to-transparent" />
-        <div className="absolute top-0 left-0 w-0 h-0.5 bg-gold transition-all duration-700 group-hover:w-full" />
+        <div className="absolute top-0 left-0 w-0 h-0.5 bg-pink transition-all duration-700 group-hover:w-full" />
 
         {/* Wardrobe type badge */}
         <div className="absolute bottom-4 left-4">
-          <span className="bg-gold/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1">
+          <span className="bg-pink/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1">
             {project.projectType}
           </span>
         </div>
@@ -55,31 +55,31 @@ function RecentProjectCard({ project }) {
 
       {/* Project details */}
       <div className="p-6">
-        <h3 className="font-display text-xl text-white mb-4 font-medium group-hover:text-gold transition-colors duration-300">
+        <h3 className="font-display text-xl text-white mb-4 font-medium group-hover:text-pink transition-colors duration-300">
           {project.name}
         </h3>
 
         <div className="space-y-3">
           <div className="flex items-center gap-3 text-sm text-gray-light">
-            <MapPin size={13} className="text-gold flex-shrink-0" />
+            <MapPin size={13} className="text-pink flex-shrink-0" />
             {project.location}
           </div>
           {project.duration && (
             <div className="flex items-center gap-3 text-sm text-gray-light">
-              <Clock size={13} className="text-gold flex-shrink-0" />
+              <Clock size={13} className="text-pink flex-shrink-0" />
               Completed in {project.duration}
             </div>
           )}
           {project.materials && (
             <div className="flex items-center gap-3 text-sm text-gray-light">
-              <Wrench size={13} className="text-gold flex-shrink-0" />
+              <Wrench size={13} className="text-pink flex-shrink-0" />
               {project.materials}
             </div>
           )}
         </div>
 
         {project.description && (
-          <p className="mt-4 text-gray-light/60 text-sm leading-relaxed border-t border-gold/10 pt-4">
+          <p className="mt-4 text-gray-light/60 text-sm leading-relaxed border-t border-pink/10 pt-4">
             {project.description}
           </p>
         )}
@@ -93,12 +93,12 @@ export default function RecentProjects() {
 
   return (
     <section id="recent-projects" className="py-32 bg-black-deep relative overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/15 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <SectionHeader
           label="Latest Work"
-          title={<>Recent <span className="italic text-gold">Projects</span></>}
+          title={<>Recent <span className="italic text-pink">Projects</span></>}
           subtitle={
             allPlaceholder
               ? "Real project details — name, location, materials, and timeline — will appear here as projects are completed."
@@ -114,7 +114,7 @@ export default function RecentProjects() {
 
         {allPlaceholder && (
           <div className="text-center mt-10">
-            <div className="inline-block border border-gold/20 bg-black-charcoal px-8 py-5">
+            <div className="inline-block border border-pink/20 bg-black-charcoal px-8 py-5">
               <p className="text-gray-subtle text-sm leading-relaxed">
                 📋 Project records are being set up. Each entry will include the project name, location, project type, materials used, and timeline.
               </p>

@@ -101,12 +101,12 @@ function Preloader() {
               ease: [0.76, 0, 0.24, 1],
               delay: 0.15 + i * 0.08,
             }}
-            className="w-full h-full bg-[#0a0a0a] border-r border-gold/10 last:border-r-0 relative overflow-hidden"
+            className="w-full h-full bg-[#0a0a0a] border-r border-pink/10 last:border-r-0 relative overflow-hidden"
           >
             {/* Subtle vertical architectural lighting on right edge */}
-            <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-gold/30 to-transparent opacity-60" />
-            {/* Trailing gold trim along the bottom edge as panels rise */}
-            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-gold/20 via-gold to-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.6)]" />
+            <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-pink/30 to-transparent opacity-60" />
+            {/* Trailing pink trim along the bottom edge as panels rise */}
+            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(212, 150, 195,0.6)]" />
           </motion.div>
         ))}
       </div>
@@ -124,22 +124,22 @@ function Preloader() {
           }}
           className="flex flex-col items-center relative"
         >
-          {/* Ambient luxury gold glow */}
-          <div className="absolute -inset-8 bg-gold/15 rounded-full blur-3xl pointer-events-none animate-pulse-gold opacity-80" />
+          {/* Ambient luxury pink glow */}
+          <div className="absolute -inset-8 bg-pink/15 rounded-full blur-3xl pointer-events-none animate-pulse-pink opacity-80" />
 
           {/* Crisp 2D Logo */}
           <img
             src="/logo-2d.png"
             alt="Latushya Premium Interior Studio"
-            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(212,175,55,0.2)] mb-6"
+            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(212, 150, 195,0.2)] mb-6"
           />
 
-          {/* Elegant expanding gold dividing line */}
+          {/* Elegant expanding pink dividing line */}
           <motion.div
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: '180px', opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="h-[1px] bg-gradient-to-r from-transparent via-gold/70 to-transparent relative overflow-hidden mb-5"
+            className="h-[1px] bg-gradient-to-r from-transparent via-pink/70 to-transparent relative overflow-hidden mb-5"
           >
             <motion.div
               initial={{ x: '-100%' }}
@@ -153,7 +153,7 @@ function Preloader() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-gold/90 font-display text-xs md:text-sm tracking-ultra uppercase text-center font-light"
+            className="text-pink/90 font-display text-xs md:text-sm tracking-ultra uppercase text-center font-light"
           >
             Premium Interior Studio
           </motion.span>
@@ -174,16 +174,16 @@ function Preloader() {
       >
         {/* Left: Location & Studio Specialty */}
         <div className="flex flex-col gap-1 text-[10px] md:text-xs text-gray-400 font-sans tracking-[0.25em] uppercase">
-          <span className="text-gold font-medium">Bangalore, India</span>
+          <span className="text-pink font-medium">Bangalore, India</span>
           <span className="text-white/60">Bespoke Wardrobes & Turnkey Interiors</span>
         </div>
 
         {/* Right: Real-time Loading Percentage */}
         <div className="flex items-baseline gap-1">
-          <span className="font-display text-4xl md:text-5xl text-gold font-light tracking-tight leading-none">
+          <span className="font-display text-4xl md:text-5xl text-pink font-light tracking-tight leading-none">
             {progress.toString().padStart(2, '0')}
           </span>
-          <span className="text-gold/70 text-xs md:text-sm font-sans tracking-widest">%</span>
+          <span className="text-pink/70 text-xs md:text-sm font-sans tracking-widest">%</span>
         </div>
       </motion.div>
     </motion.div>
@@ -233,7 +233,7 @@ function ScrollToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-24 left-6 lg:bottom-8 lg:left-8 z-50 w-10 h-10 border border-gold/40 hover:border-gold hover:bg-gold/10 flex items-center justify-center text-gold transition-all duration-300 group"
+          className="fixed bottom-24 left-6 lg:bottom-8 lg:left-8 z-50 w-10 h-10 border border-pink/40 hover:border-pink hover:bg-pink/10 flex items-center justify-center text-pink transition-all duration-300 group"
           aria-label="Scroll to top"
           id="scroll-to-top"
         >

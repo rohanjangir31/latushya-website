@@ -70,11 +70,11 @@
   }
 
   ::selection {
-    background: rgba(212, 175, 55, 0.3);
-    color: #D4AF37;
+    background: rgba(212, 150, 195, 0.3);
+    color: #D496C3;
   }
 
-  /* Gold scrollbar */
+  /* Pink scrollbar */
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -82,7 +82,7 @@
     background: #0F0F0F;
   }
   ::-webkit-scrollbar-thumb {
-    background: #D4AF37;
+    background: #D496C3;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -103,31 +103,31 @@
 @layer components {
   /* ─── Buttons ─────────────────────────────────────────── */
   /* 300ms ease-out lift — consistent across the whole site  */
-  .btn-gold {
-    @apply relative overflow-hidden inline-flex items-center justify-center bg-gold text-black-deep font-semibold
+  .btn-pink {
+    @apply relative overflow-hidden inline-flex items-center justify-center bg-pink text-black-deep font-semibold
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter] duration-300
-           focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink focus-visible:outline-offset-2;
   }
-  .btn-gold::before {
+  .btn-pink::before {
     content: '';
-    @apply absolute inset-0 bg-gold-light translate-x-full;
+    @apply absolute inset-0 bg-pink-light translate-x-full;
     transition: transform 300ms ease-out;
   }
-  .btn-gold:hover         { transform: translateY(-2px); filter: brightness(1.06); }
-  .btn-gold:hover::before { transform: translateX(0); }
-  .btn-gold:active        { transform: translateY(0px); filter: brightness(1.0); }
-  .btn-gold span          { @apply relative z-10; }
+  .btn-pink:hover         { transform: translateY(-2px); filter: brightness(1.06); }
+  .btn-pink:hover::before { transform: translateX(0); }
+  .btn-pink:active        { transform: translateY(0px); filter: brightness(1.0); }
+  .btn-pink span          { @apply relative z-10; }
 
   .btn-outline {
-    @apply relative overflow-hidden inline-flex items-center justify-center border border-gold text-gold font-semibold
+    @apply relative overflow-hidden inline-flex items-center justify-center border border-pink text-pink font-semibold
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter,color] duration-300
-           focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2;
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink focus-visible:outline-offset-2;
   }
   .btn-outline::before {
     content: '';
-    @apply absolute inset-0 bg-gold translate-x-full;
+    @apply absolute inset-0 bg-pink translate-x-full;
     transition: transform 300ms ease-out;
   }
   .btn-outline:hover         { transform: translateY(-2px); filter: brightness(1.06); @apply text-black-deep; }
@@ -136,15 +136,15 @@
   .btn-outline span          { @apply relative z-10; }
 
   /* ─── Typography ──────────────────────────────────────── */
-  .gold-text {
-    background: linear-gradient(135deg, #D4AF37 0%, #F0E0A0 50%, #B8962E 100%);
+  .pink-text {
+    background: linear-gradient(135deg, #D496C3 0%, #67CBE1 50%, #4A9CB0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .section-label {
-    @apply text-gold tracking-ultra uppercase text-xs font-medium;
+    @apply text-pink tracking-ultra uppercase text-xs font-medium;
   }
 
   /* ─── Cards ───────────────────────────────────────────── */
@@ -155,19 +155,19 @@
   }
   .luxury-card:hover {
     transform: translateY(-3px);
-    @apply border-gold/40;
+    @apply border-pink/40;
   }
 
   /* ─── Decorative ──────────────────────────────────────── */
-  .gold-line {
-    @apply w-16 h-px bg-gradient-to-r from-gold to-transparent;
+  .pink-line {
+    @apply w-16 h-px bg-gradient-to-r from-pink to-transparent;
   }
 
   .glass {
     background: rgba(26, 26, 26, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 150, 195, 0.1);
   }
 
   /* ─── Section divider ─────────────────────────────────── */
@@ -175,12 +175,12 @@
      Use as <div className="section-divider" /> */
   .section-divider {
     @apply relative h-px w-full overflow-visible;
-    background: linear-gradient(to right, transparent 0%, rgba(212,175,55,0.2) 30%, rgba(212,175,55,0.2) 70%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, rgba(212, 150, 195,0.2) 30%, rgba(212, 150, 195,0.2) 70%, transparent 100%);
   }
   .section-divider::after {
     content: '◆';
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-           text-gold/30 text-[6px] bg-black-deep px-2;
+           text-pink/30 text-[6px] bg-black-deep px-2;
   }
 
   /* ─── Image hover ─────────────────────────────────────── */
@@ -214,22 +214,22 @@
     width: 100%;
   }
 
-  /* Gold variant — underline is always gold */
-  .link-underline-gold {
+  /* Pink variant — underline is always pink */
+  .link-underline-pink {
     @apply relative;
   }
-  .link-underline-gold::after {
+  .link-underline-pink::after {
     content: '';
-    @apply absolute bottom-0 left-0 h-px bg-gold;
+    @apply absolute bottom-0 left-0 h-px bg-pink;
     width: 0;
     transition: width 250ms ease-out;
   }
-  .link-underline-gold:hover::after {
+  .link-underline-pink:hover::after {
     width: 100%;
   }
 
   /* Active state — underline is permanently visible (used by Navbar) */
-  .link-underline-gold.is-active::after {
+  .link-underline-pink.is-active::after {
     width: 100%;
   }
 }
@@ -272,15 +272,15 @@
   }
 }
 
-/* ─── Shimmer animation for gold text ──────────────────── */
-.shimmer-gold {
+/* ─── Shimmer animation for pink text ──────────────────── */
+.shimmer-pink {
   background: linear-gradient(
     90deg,
-    #D4AF37 0%,
-    #F0E0A0 25%,
-    #D4AF37 50%,
-    #B8962E 75%,
-    #D4AF37 100%
+    #D496C3 0%,
+    #67CBE1 25%,
+    #D496C3 50%,
+    #4A9CB0 75%,
+    #D496C3 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

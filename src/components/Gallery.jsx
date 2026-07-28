@@ -46,7 +46,7 @@ export default function Gallery() {
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <SectionHeader
           label="Our Gallery"
-          title={<>Spaces That <span className="italic text-gold">Inspire</span></>}
+          title={<>Spaces That <span className="italic text-pink">Inspire</span></>}
           subtitle="A visual journey through our interior work — every image tells a story of craftsmanship and precision."
         />
 
@@ -79,18 +79,18 @@ export default function Gallery() {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black-deep/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                   <div className="flex flex-col items-center gap-3">
-                    <ZoomIn size={24} className="text-gold" />
+                    <ZoomIn size={24} className="text-pink" />
                     <span className="text-white text-xs tracking-widest uppercase">{image.category}</span>
                   </div>
                 </div>
 
                 {/* Category tag */}
                 <div className="absolute top-3 left-3 bg-black-deep/70 backdrop-blur-sm px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <span className="text-gold text-[10px] tracking-widest uppercase">{image.category}</span>
+                  <span className="text-pink text-[10px] tracking-widest uppercase">{image.category}</span>
                 </div>
 
                 {/* Hover border */}
-                <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/20 transition-all duration-500 pointer-events-none z-10" />
+                <div className="absolute inset-0 border border-pink/0 group-hover:border-pink/20 transition-all duration-500 pointer-events-none z-10" />
               </ImageReveal>
             </motion.div>
           ))}
@@ -115,7 +115,7 @@ export default function Gallery() {
             <button
               onClick={closeLightbox}
               aria-label="Close lightbox"
-              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <X size={32} strokeWidth={1} />
             </button>
@@ -124,7 +124,7 @@ export default function Gallery() {
             <button
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <ChevronLeft size={48} strokeWidth={1} />
             </button>
@@ -133,7 +133,7 @@ export default function Gallery() {
             <button
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <ChevronRight size={48} strokeWidth={1} />
             </button>
@@ -158,7 +158,7 @@ export default function Gallery() {
 
                 {/* Minimal Caption */}
                 <div className="absolute bottom-8 left-12 right-12 text-center pointer-events-none">
-                  <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{GALLERY_IMAGES[lightboxIndex].category}</span>
+                  <span className="text-pink/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{GALLERY_IMAGES[lightboxIndex].category}</span>
                   <p className="text-white/60 text-sm font-light max-w-xl mx-auto">{GALLERY_IMAGES[lightboxIndex].alt}</p>
                 </div>
               </motion.div>

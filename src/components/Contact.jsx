@@ -37,14 +37,14 @@ export default function Contact() {
            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")" }} 
       />
       
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-pink/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6 lg:px-16 relative z-10 text-center">
         
         {/* ── Header ──────────────────────────────────────────── */}
         <motion.span
           {...fadeUp(0)}
-          className="block text-gold text-[10px] tracking-[0.4em] uppercase font-medium mb-8"
+          className="block text-pink text-[10px] tracking-[0.4em] uppercase font-medium mb-8"
         >
           Private Consultation
         </motion.span>
@@ -54,7 +54,7 @@ export default function Contact() {
           className="font-display font-light text-white leading-[1.1] tracking-tight mb-8"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
         >
-          Request an <span className="italic text-gold">Invitation</span>
+          Request an <span className="italic text-pink">Invitation</span>
         </motion.h2>
 
         <motion.p
@@ -81,12 +81,12 @@ export default function Contact() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-gold transition-colors peer placeholder-transparent"
+                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-pink transition-colors peer placeholder-transparent"
                 placeholder="Name"
               />
               <label 
                 htmlFor="name" 
-                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-gold peer-focus:text-xs"
+                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-pink peer-focus:text-xs"
               >
                 Full Name
               </label>
@@ -101,12 +101,12 @@ export default function Contact() {
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-gold transition-colors peer placeholder-transparent"
+                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-pink transition-colors peer placeholder-transparent"
                 placeholder="Phone"
               />
               <label 
                 htmlFor="phone" 
-                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-gold peer-focus:text-xs"
+                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-pink peer-focus:text-xs"
               >
                 Phone Number
               </label>
@@ -121,12 +121,12 @@ export default function Contact() {
                 required
                 value={formData.project}
                 onChange={handleChange}
-                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-gold transition-colors peer placeholder-transparent"
+                className="block w-full bg-transparent outline-none focus:outline-none border-0 border-b border-white/20 py-4 text-white text-xl focus:ring-0 focus:border-pink transition-colors peer placeholder-transparent"
                 placeholder="Project"
               />
               <label 
                 htmlFor="project" 
-                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-gold peer-focus:text-xs whitespace-nowrap truncate max-w-full"
+                className="absolute left-0 -top-6 text-white/40 text-xs tracking-widest uppercase transition-all peer-placeholder-shown:text-lg peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-pink peer-focus:text-xs whitespace-nowrap truncate max-w-full"
               >
                 Project Scope (e.g. Wardrobe, Kitchen)
               </label>
@@ -137,7 +137,7 @@ export default function Contact() {
           <div className="flex justify-center">
             <button 
               type="submit"
-              className="btn-gold px-12 py-5 text-sm tracking-[0.2em]"
+              className="btn-pink px-12 py-5 text-sm tracking-[0.2em]"
             >
               <span>Submit Inquiry</span>
             </button>

@@ -144,14 +144,14 @@ export default function Hero() {
             >
               <div
                 className="h-px w-6"
-                style={{ background: 'rgba(212,175,55,0.7)' }}
+                style={{ background: 'rgba(212, 150, 195,0.7)' }}
               />
               <span
                 className="uppercase font-medium"
                 style={{
                   fontSize: '0.625rem',
                   letterSpacing: '0.32em',
-                  color: 'rgba(212,175,55,0.75)',
+                  color: 'rgba(212, 150, 195,0.75)',
                 }}
               >
                 {COMPANY.specialty}
@@ -227,7 +227,7 @@ export default function Hero() {
                 </motion.h1>
               </div>
 
-              {/* Line 4: Your Lifestyle — single gold accent */}
+              {/* Line 4: Your Lifestyle — single pink accent */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -239,7 +239,7 @@ export default function Hero() {
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
-                    color: '#D4AF37',
+                    color: '#D496C3',
                     fontStyle: 'italic',
                   }}
                 >
@@ -256,7 +256,7 @@ export default function Hero() {
               style={{
                 height: '1px',
                 width: '3rem',
-                background: 'rgba(212,175,55,0.28)',
+                background: 'rgba(212, 150, 195,0.28)',
                 transformOrigin: 'left',
                 marginBottom: 'clamp(1rem, 2vw, 1.6rem)',
               }}
@@ -290,7 +290,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row items-start"
               style={{ gap: '24px' }}
             >
-              {/* Primary — Solid Gold */}
+              {/* Primary — Solid Pink */}
               <button
                 onClick={handleConsult}
                 id="hero-cta-consult"
@@ -299,7 +299,7 @@ export default function Hero() {
                   height: '72px',
                   paddingLeft: '2.75rem',
                   paddingRight: '2.75rem',
-                  background: '#D4AF37',
+                  background: '#D496C3',
                   color: '#0a0a0a',
                   fontWeight: 600,
                   fontSize: '0.6875rem',
@@ -317,7 +317,7 @@ export default function Hero() {
                   e.currentTarget.style.background = '#E8CB6A';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#D4AF37';
+                  e.currentTarget.style.background = '#D496C3';
                 }}
               >
                 Book Consultation
@@ -334,12 +334,12 @@ export default function Hero() {
                   paddingLeft: '2.25rem',
                   paddingRight: '2.25rem',
                   background: 'transparent',
-                  color: 'rgba(212,175,55,0.90)',
+                  color: 'rgba(212, 150, 195,0.90)',
                   fontWeight: 500,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  border: '1px solid rgba(212,175,55,0.45)',
+                  border: '1px solid rgba(212, 150, 195,0.45)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -350,13 +350,13 @@ export default function Hero() {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(212,175,55,0.85)';
-                  e.currentTarget.style.color = '#D4AF37';
-                  e.currentTarget.style.background = 'rgba(212,175,55,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 150, 195,0.85)';
+                  e.currentTarget.style.color = '#D496C3';
+                  e.currentTarget.style.background = 'rgba(212, 150, 195,0.06)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(212,175,55,0.45)';
-                  e.currentTarget.style.color = 'rgba(212,175,55,0.90)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 150, 195,0.45)';
+                  e.currentTarget.style.color = 'rgba(212, 150, 195,0.90)';
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
@@ -382,7 +382,7 @@ export default function Hero() {
           style={{
             width: '1px',
             height: '36px',
-            background: 'linear-gradient(to bottom, rgba(212,175,55,0.55), rgba(212,175,55,0))',
+            background: 'linear-gradient(to bottom, rgba(212, 150, 195,0.55), rgba(212, 150, 195,0))',
           }}
         />
       </motion.div>

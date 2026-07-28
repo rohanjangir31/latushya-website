@@ -148,7 +148,7 @@ export function SectionHeader({ label, title, subtitle, centered = true, light =
       )}
       <AnimatedSection delay={0.3}>
         <div className={`mt-6 ${centered ? 'flex justify-center' : ''}`}>
-          <div className="gold-line" />
+          <div className="pink-line" />
         </div>
       </AnimatedSection>
     </div>
@@ -223,7 +223,7 @@ export function TextReveal({ text, className = '', style = {}, delay = 0 }) {
         <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top pb-[0.2em] -mb-[0.2em]">
           <motion.span
             variants={wordAnimation}
-            className={`inline-block ${token.italic ? 'italic text-gold' : ''}`}
+            className={`inline-block ${token.italic ? 'italic text-pink' : ''}`}
           >
             {token.text}
           </motion.span>

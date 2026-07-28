@@ -40,28 +40,28 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
     >
       {/* Active Line Indicator */}
       <div 
-        className="absolute left-0 top-0 w-px bg-gold transition-all duration-1000"
+        className="absolute left-0 top-0 w-px bg-pink transition-all duration-1000"
         style={{
           height: isActive ? '100%' : '0%',
-          boxShadow: isActive ? '0 0 10px rgba(212,175,55,0.5)' : 'none'
+          boxShadow: isActive ? '0 0 10px rgba(212, 150, 195,0.5)' : 'none'
         }}
       />
 
       {/* Active Dot */}
       <div 
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-gold/40 flex items-center justify-center transition-all duration-700 bg-[#0a0a0a]"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-pink/40 flex items-center justify-center transition-all duration-700 bg-[#0a0a0a]"
         style={{
           width: isActive ? '24px' : '12px',
           height: isActive ? '24px' : '12px',
-          borderColor: isActive ? 'rgba(212,175,55,1)' : 'rgba(212,175,55,0.2)',
+          borderColor: isActive ? 'rgba(212, 150, 195,1)' : 'rgba(212, 150, 195,0.2)',
         }}
       >
         <div 
-          className="rounded-full bg-gold transition-all duration-700"
+          className="rounded-full bg-pink transition-all duration-700"
           style={{
             width: isActive ? '6px' : '0px',
             height: isActive ? '6px' : '0px',
-            boxShadow: isActive ? '0 0 8px rgba(212,175,55,0.8)' : 'none'
+            boxShadow: isActive ? '0 0 8px rgba(212, 150, 195,0.8)' : 'none'
           }}
         />
       </div>
@@ -77,7 +77,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
           fontSize: 'clamp(8rem, 15vw, 14rem)',
           fontWeight: 700,
           color: 'transparent',
-          WebkitTextStroke: isActive ? '1px rgba(212,175,55,0.15)' : '1px rgba(255,255,255,0.03)',
+          WebkitTextStroke: isActive ? '1px rgba(212, 150, 195,0.15)' : '1px rgba(255,255,255,0.03)',
           lineHeight: 1,
           zIndex: 0,
           pointerEvents: 'none',
@@ -94,7 +94,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
             fontSize: '44px',
             fontWeight: 300,
             letterSpacing: '-0.015em',
-            color: isActive ? '#D4AF37' : 'rgba(255,255,255,0.8)',
+            color: isActive ? '#D496C3' : 'rgba(255,255,255,0.8)',
             marginBottom: '20px',
             transition: 'color 0.8s ease',
           }}
@@ -145,8 +145,8 @@ export default function Process() {
             transition={{ duration: 0.65 }}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
-            <div style={{ width: '18px', height: '1px', background: 'rgba(212,175,55,0.65)' }} />
-            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.65)' }}>
+            <div style={{ width: '18px', height: '1px', background: 'rgba(212, 150, 195,0.65)' }} />
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212, 150, 195,0.65)' }}>
               Methodology
             </span>
           </motion.div>
@@ -209,7 +209,7 @@ export default function Process() {
                 {PROCESS_IMAGES.map((_, i) => (
                   <div key={i} className="h-[2px] flex-1 bg-white/20 overflow-hidden">
                     <motion.div 
-                      className="h-full bg-gold"
+                      className="h-full bg-pink"
                       initial={{ width: '0%' }}
                       animate={{ width: visibleImage >= i ? '100%' : '0%' }}
                       transition={{ duration: 0.6, ease: EASE }}

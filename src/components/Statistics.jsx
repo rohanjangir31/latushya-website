@@ -18,9 +18,9 @@ const CREDIBILITY_ITEMS = [
   },
   {
     Icon: Wrench,
-    value: 'Blum · Häfele',
+    value: 'Hettich · Häfele',
     label: 'Hardware Brands',
-    sub: 'Austrian & German',
+    sub: 'German Engineering',
   },
   {
     Icon: Shield,
@@ -55,12 +55,12 @@ export default function CredibilityBand() {
         <div className="absolute inset-0 bg-black-deep/90" />
       </div>
 
-      {/* Gold lines */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+      {/* Pink lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/40 to-transparent" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 divide-y-2 lg:divide-y-0 divide-gold/10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 divide-y-2 lg:divide-y-0 divide-pink/10">
           {CREDIBILITY_ITEMS.map(({ Icon, value, label, sub }, i) => (
             <motion.div
               key={label}
@@ -70,23 +70,23 @@ export default function CredibilityBand() {
               className="flex flex-col items-center text-center group px-6 py-4 relative"
             >
               {/* Vertical divider */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 h-10 w-px bg-gold/15 hidden lg:block" />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 h-10 w-px bg-pink/15 hidden lg:block" />
 
-              <div className="w-10 h-10 border border-gold/30 flex items-center justify-center mb-4 group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300">
-                <Icon size={18} className="text-gold" />
+              <div className="w-10 h-10 border border-pink/30 flex items-center justify-center mb-4 group-hover:border-pink group-hover:bg-pink/10 transition-all duration-300">
+                <Icon size={18} className="text-pink" />
               </div>
 
               <div className="font-display text-xl md:text-2xl text-white font-light mb-1">
                 {value}
               </div>
-              <div className="text-gold text-[10px] tracking-widest uppercase font-medium mb-1">
+              <div className="text-pink text-[10px] tracking-widest uppercase font-medium mb-1">
                 {label}
               </div>
               <div className="text-gray-light/80 text-[10px] tracking-wide">
                 {sub}
               </div>
 
-              <div className="mt-3 w-6 h-px bg-gold/30 group-hover:w-12 group-hover:bg-gold transition-all duration-500" />
+              <div className="mt-3 w-6 h-px bg-pink/30 group-hover:w-12 group-hover:bg-pink transition-all duration-500" />
             </motion.div>
           ))}
         </div>

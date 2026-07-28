@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section id="about" className="relative py-32 lg:py-48 bg-black-deep overflow-hidden">
       {/* Absolute minimal background element */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-pink/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
@@ -37,14 +37,14 @@ export default function About() {
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 1, delay: 0.6 }}
-              className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-gold to-transparent hidden lg:block"
+              className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-pink to-transparent hidden lg:block"
             />
           </div>
 
           {/* Right — The Manifesto */}
           <div className="lg:col-span-7 lg:pl-12">
             <AnimatedSection>
-              <span className="block text-gold text-[10px] tracking-[0.4em] uppercase font-medium mb-8">
+              <span className="block text-pink text-[10px] tracking-[0.4em] uppercase font-medium mb-8">
                 Studio Philosophy
               </span>
             </AnimatedSection>
@@ -52,7 +52,7 @@ export default function About() {
             <div className="font-display text-4xl md:text-5xl lg:text-[64px] font-light text-white leading-[1.1] mb-12">
               <TextReveal text="We do not decorate." delay={0.1} />
               <br />
-              <span className="italic text-gold">
+              <span className="italic text-pink">
                 <TextReveal text="We construct living spaces." delay={0.3} />
               </span>
             </div>
@@ -75,9 +75,9 @@ export default function About() {
               <div className="mt-16 pt-12 border-t border-white/10 flex items-center justify-between">
                 <div>
                   <p className="font-display text-2xl text-white tracking-wide">The Founders</p>
-                  <p className="text-gold text-[10px] tracking-widest uppercase mt-2">Latushya Interiors</p>
+                  <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Latushya Interiors</p>
                 </div>
-                <div className="w-16 h-px bg-gold/50" />
+                <div className="w-16 h-px bg-pink/50" />
               </div>
             </AnimatedSection>
           </div>

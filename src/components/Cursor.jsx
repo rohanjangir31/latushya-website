@@ -56,15 +56,15 @@ export default function Cursor() {
     default: {
       width: 32,
       height: 32,
-      backgroundColor: 'rgba(212, 175, 55, 0)',
-      border: '1px solid rgba(212, 175, 55, 0.4)',
+      backgroundColor: 'rgba(212, 150, 195, 0)',
+      border: '1px solid rgba(212, 150, 195, 0.4)',
       mixBlendMode: 'normal',
     },
     hover: {
       width: 64,
       height: 64,
-      backgroundColor: 'rgba(212, 175, 55, 0.1)',
-      border: '1px solid rgba(212, 175, 55, 0.8)',
+      backgroundColor: 'rgba(212, 150, 195, 0.1)',
+      border: '1px solid rgba(212, 150, 195, 0.8)',
       mixBlendMode: 'normal',
     },
     view: {
@@ -124,7 +124,7 @@ export default function Cursor() {
             scale: cursorState === 'hover' ? 0 : 1,
           }}
           transition={{ duration: 0.2 }}
-          className="relative -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-gold rounded-full"
+          className="relative -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-pink rounded-full"
         />
       </motion.div>
     </>

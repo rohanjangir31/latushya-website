@@ -10,13 +10,13 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-32 bg-black-charcoal relative overflow-hidden">
       <div className="absolute right-0 top-0 w-96 h-full opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-l from-gold/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-pink/5 to-transparent" />
       </div>
 
       <div className="max-w-4xl mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeader
           label="FAQ"
-          title={<>Common <span className="italic text-gold">Questions</span></>}
+          title={<>Common <span className="italic text-pink">Questions</span></>}
           subtitle="Everything you need to know about ordering a custom wardrobe from Latushya."
         />
 
@@ -26,8 +26,8 @@ export default function FAQ() {
               <div
                 className={`border transition-all duration-400 overflow-hidden ${
                   openId === item.id
-                    ? 'border-gold/40 bg-black-card'
-                    : 'border-gray-luxury/20 bg-black-card hover:border-gold/20'
+                    ? 'border-pink/40 bg-black-card'
+                    : 'border-gray-luxury/20 bg-black-card hover:border-pink/20'
                 }`}
               >
                 <button
@@ -36,19 +36,19 @@ export default function FAQ() {
                   aria-expanded={openId === item.id}
                 >
                   <div className="flex items-center gap-5">
-                    <span className="font-display text-2xl text-gold/25 font-bold flex-shrink-0">
+                    <span className="font-display text-2xl text-pink/25 font-bold flex-shrink-0">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span className={`font-medium text-base transition-colors duration-300 ${
-                      openId === item.id ? 'text-gold' : 'text-white group-hover:text-white/90'
+                      openId === item.id ? 'text-pink' : 'text-white group-hover:text-white/90'
                     }`}>
                       {item.question}
                     </span>
                   </div>
                   <div className={`flex-shrink-0 w-8 h-8 border flex items-center justify-center transition-all duration-300 ${
                     openId === item.id
-                      ? 'border-gold bg-gold text-black-deep'
-                      : 'border-gray-luxury/40 text-gray-subtle group-hover:border-gold/40 group-hover:text-gold'
+                      ? 'border-pink bg-pink text-black-deep'
+                      : 'border-gray-luxury/40 text-gray-subtle group-hover:border-pink/40 group-hover:text-pink'
                   }`}>
                     {openId === item.id ? <Minus size={14} /> : <Plus size={14} />}
                   </div>
@@ -62,7 +62,7 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                      <div className="px-7 pb-7 pl-20 text-gray-light text-sm leading-relaxed border-t border-gold/10">
+                      <div className="px-7 pb-7 pl-20 text-gray-light text-sm leading-relaxed border-t border-pink/10">
                         <div className="pt-5">{item.answer}</div>
                       </div>
                     </motion.div>
@@ -78,7 +78,7 @@ export default function FAQ() {
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="btn-gold inline-block"
+            className="btn-pink inline-block"
             id="faq-cta"
           >
             <span>Ask Us Directly</span>

@@ -15,7 +15,7 @@ import ImageReveal from './ImageReveal';
 // Rules:
 //   • Image always dominates — text is service, never decoration on image
 //   • 140px between projects — space is the luxury signal
-//   • Title 36px Cormorant · Location 12px gold caps · Description 3 lines max
+//   • Title 36px Cormorant · Location 12px pink caps · Description 3 lines max
 //   • "View Project →" text link — underline appears on hover only
 //   • Hover: scale 1.02 + very subtle dark wash, nothing else
 // ─────────────────────────────────────────────────────────────────────────
@@ -68,18 +68,18 @@ function PlaceholderOverlay({ index, imageHeight, hovered }) {
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
         <div style={{
           width: '40px', height: '40px',
-          border: '1px solid rgba(212,175,55,0.2)',
+          border: '1px solid rgba(212, 150, 195,0.2)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <span style={{
             fontFamily: DISPLAY, fontSize: '1.1rem',
-            fontWeight: 300, color: 'rgba(212,175,55,0.4)',
+            fontWeight: 300, color: 'rgba(212, 150, 195,0.4)',
           }}>L</span>
         </div>
         <span style={{
           fontFamily: SANS, fontSize: '0.5rem',
           letterSpacing: '0.45em', textTransform: 'uppercase',
-          color: 'rgba(212,175,55,0.35)',
+          color: 'rgba(212, 150, 195,0.35)',
         }}>Photography Pending</span>
       </div>
     </>
@@ -130,10 +130,10 @@ function ViewLink({ onClick }) {
         fontWeight: 500,
         letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        color: h ? '#D4AF37' : 'rgba(212,175,55,0.65)',
+        color: h ? '#D496C3' : 'rgba(212, 150, 195,0.65)',
         textDecoration: 'none',
         paddingBottom: '3px',
-        borderBottom: h ? '1px solid rgba(212,175,55,0.6)' : '1px solid transparent',
+        borderBottom: h ? '1px solid rgba(212, 150, 195,0.6)' : '1px solid transparent',
         transition: 'color 0.35s ease, border-color 0.35s ease',
         cursor: 'pointer',
       }}
@@ -160,14 +160,14 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
       transition={{ duration: 0.9, delay, ease: EASE }}
       style={{ textAlign: align }}
     >
-      {/* Location — 12px, gold, uppercase */}
+      {/* Location — 12px, pink, uppercase */}
       <p style={{
         fontFamily: SANS,
         fontSize: '0.75rem',
         fontWeight: 500,
         letterSpacing: '0.28em',
         textTransform: 'uppercase',
-        color: 'rgba(212,175,55,0.72)',
+        color: 'rgba(212, 150, 195,0.72)',
         marginBottom: '14px',
       }}>
         {project.location || 'Bangalore'}
@@ -198,11 +198,11 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
         {isPlaceholder ? 'Coming Soon' : project.title}
       </h3>
 
-      {/* Thin gold rule */}
+      {/* Thin pink rule */}
       <div style={{
         width: '32px',
         height: '1px',
-        background: 'rgba(212,175,55,0.3)',
+        background: 'rgba(212, 150, 195,0.3)',
         marginBottom: '20px',
         marginLeft: align === 'right' ? 'auto' : 0,
         marginRight: align === 'left' ? 'auto' : 0,
@@ -277,11 +277,11 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
             letterSpacing: '0.42em', textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.22)',
           }}>01</span>
-          <div style={{ width: '24px', height: '1px', background: 'rgba(212,175,55,0.3)' }} />
+          <div style={{ width: '24px', height: '1px', background: 'rgba(212, 150, 195,0.3)' }} />
           <span style={{
             fontFamily: SANS, fontSize: '0.75rem',
             fontWeight: 500, letterSpacing: '0.28em',
-            textTransform: 'uppercase', color: 'rgba(212,175,55,0.72)',
+            textTransform: 'uppercase', color: 'rgba(212, 150, 195,0.72)',
           }}>
             {project.location || 'Bangalore'}
           </span>
@@ -475,11 +475,11 @@ export default function Projects() {
             transition={{ duration: 0.7 }}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}
           >
-            <div style={{ width: '18px', height: '1px', background: 'rgba(212,175,55,0.65)' }} />
+            <div style={{ width: '18px', height: '1px', background: 'rgba(212, 150, 195,0.65)' }} />
             <span style={{
               fontFamily: SANS, fontSize: '0.5625rem',
               letterSpacing: '0.38em', textTransform: 'uppercase',
-              color: 'rgba(212,175,55,0.65)',
+              color: 'rgba(212, 150, 195,0.65)',
             }}>Design Masterpieces</span>
           </motion.div>
 
@@ -499,7 +499,7 @@ export default function Projects() {
               }}
             >
               Spaces We've{' '}
-              <em style={{ fontStyle: 'italic', color: '#D4AF37' }}>Transformed</em>
+              <em style={{ fontStyle: 'italic', color: '#D496C3' }}>Transformed</em>
             </motion.h2>
 
             <motion.p
@@ -523,7 +523,7 @@ export default function Projects() {
             transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
             style={{
               height: '1px',
-              background: 'linear-gradient(to right, rgba(212,175,55,0.22), rgba(212,175,55,0.05) 55%, transparent)',
+              background: 'linear-gradient(to right, rgba(212, 150, 195,0.22), rgba(212, 150, 195,0.05) 55%, transparent)',
               transformOrigin: 'left',
               marginTop: '36px',
             }}
@@ -607,7 +607,7 @@ export default function Projects() {
             style={{
               marginTop: '96px',
               paddingLeft: '18px',
-              borderLeft: '1px solid rgba(212,175,55,0.15)',
+              borderLeft: '1px solid rgba(212, 150, 195,0.15)',
             }}
           >
             <p style={{
@@ -642,7 +642,7 @@ export default function Projects() {
             <button
               onClick={closeGallery}
               aria-label="Close lightbox"
-              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <X size={32} strokeWidth={1} />
             </button>
@@ -651,7 +651,7 @@ export default function Projects() {
             <button
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <ChevronLeft size={48} strokeWidth={1} />
             </button>
@@ -660,7 +660,7 @@ export default function Projects() {
             <button
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
             >
               <ChevronRight size={48} strokeWidth={1} />
             </button>
@@ -685,7 +685,7 @@ export default function Projects() {
 
                 {/* Minimal Caption */}
                 <div className="absolute bottom-8 left-12 right-12 text-center pointer-events-none">
-                  <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
+                  <span className="text-pink/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
                   <p className="text-white/60 text-sm font-light max-w-xl mx-auto">{activeProject.gallery[galleryIndex].caption}</p>
                 </div>
               </motion.div>

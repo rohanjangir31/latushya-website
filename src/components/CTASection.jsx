@@ -39,9 +39,9 @@ export default function CTASection() {
         <div className="absolute inset-0 bg-gradient-to-r from-black-deep/70 via-transparent to-black-deep/70" />
       </div>
 
-      {/* Gold ruled lines */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent z-10" />
+      {/* Pink ruled lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/40 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/40 to-transparent z-10" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 text-center">
@@ -49,7 +49,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-gold text-[9px] tracking-[0.32em] uppercase font-medium block mb-6"
+          className="text-pink text-[9px] tracking-[0.32em] uppercase font-medium block mb-6"
         >
           The Design Concierge
         </motion.span>
@@ -62,7 +62,7 @@ export default function CTASection() {
           style={{ fontSize: 'clamp(2rem, 5.5vw, 5rem)' }}
         >
           A lifestyle curated{' '}
-          <span className="italic text-gold">for you.</span>
+          <span className="italic text-pink">for you.</span>
         </motion.h2>
 
         <motion.p
@@ -81,7 +81,7 @@ export default function CTASection() {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleCTA}
-          className="btn-gold text-sm"
+          className="btn-pink text-sm"
           id="cta-section-btn"
         >
           <span>Request a Private Consultation</span>

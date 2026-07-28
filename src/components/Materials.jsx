@@ -8,29 +8,29 @@ const EASE   = [0.25, 0.46, 0.45, 0.94];
 const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
 const SANS    = "'Inter', system-ui, sans-serif";
 
-function MaterialCard({ mat, index, isGold }) {
+function MaterialCard({ mat, index, isPink }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay: 0.1 * index, ease: EASE }}
-      className="group relative p-6 md:p-8 bg-white/[0.02] border border-white/5 hover:border-gold/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden"
+      className="group relative p-6 md:p-8 bg-white/[0.02] border border-white/5 hover:border-pink/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden"
     >
       {/* Subtle background glow effect on hover */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-pink/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       <div className="flex justify-between items-start mb-4 relative z-10">
         <div>
-          <span style={{ fontFamily: DISPLAY, fontSize: '32px', color: isGold ? '#D4AF37' : '#fff' }} className="block mb-1 group-hover:translate-x-1 transition-transform duration-500">
+          <span style={{ fontFamily: DISPLAY, fontSize: '32px', color: isPink ? '#D496C3' : '#fff' }} className="block mb-1 group-hover:translate-x-1 transition-transform duration-500">
             {mat.name}
           </span>
           <span style={{ fontFamily: SANS, fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
             {mat.origin}
           </span>
         </div>
-        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/40 group-hover:bg-gold/10 transition-all duration-500 shrink-0">
-          <ArrowUpRight size={14} className="text-white/40 group-hover:text-gold transition-colors duration-500" />
+        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-pink/40 group-hover:bg-pink/10 transition-all duration-500 shrink-0">
+          <ArrowUpRight size={14} className="text-white/40 group-hover:text-pink transition-colors duration-500" />
         </div>
       </div>
       
@@ -44,7 +44,7 @@ function MaterialCard({ mat, index, isGold }) {
           {mat.qualities.map((quality, i) => (
             <span 
               key={i} 
-              className="px-3 py-1 text-[10px] uppercase tracking-widest bg-black-deep/50 border border-white/10 text-white/50 group-hover:border-gold/20 group-hover:text-gold/80 transition-all duration-500"
+              className="px-3 py-1 text-[10px] uppercase tracking-widest bg-black-deep/50 border border-white/10 text-white/50 group-hover:border-pink/20 group-hover:text-pink/80 transition-all duration-500"
             >
               {quality}
             </span>
@@ -85,8 +85,8 @@ export default function MaterialsSection() {
             transition={{ duration: 0.65 }}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
-            <div style={{ width: '18px', height: '1px', background: 'rgba(212,175,55,0.65)' }} />
-            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.65)' }}>
+            <div style={{ width: '18px', height: '1px', background: 'rgba(212, 150, 195,0.65)' }} />
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212, 150, 195,0.65)' }}>
               The Foundation
             </span>
           </motion.div>
@@ -148,7 +148,7 @@ export default function MaterialsSection() {
               
               <div className="flex flex-col gap-4">
                 {hardware.map((mat, i) => (
-                  <MaterialCard key={mat.id} mat={mat} index={i} isGold={true} />
+                  <MaterialCard key={mat.id} mat={mat} index={i} isPink={true} />
                 ))}
               </div>
             </motion.div>
@@ -171,7 +171,7 @@ export default function MaterialsSection() {
               
               <div className="flex flex-col gap-4">
                 {substrate.map((mat, i) => (
-                  <MaterialCard key={mat.id} mat={mat} index={i} isGold={false} />
+                  <MaterialCard key={mat.id} mat={mat} index={i} isPink={false} />
                 ))}
               </div>
             </motion.div>
