@@ -16,9 +16,10 @@ const PROCESS_IMAGES = [
   '/projects/media__1784490387524.jpg'
 ];
 
-function TimelineStep({ step, index, setVisibleImage }) {
+function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
   const stepRef = useRef(null);
   const inView = useInView(stepRef, { margin: '-50% 0px -50% 0px' });
+  const isActive = activeIndex === index;
 
   useEffect(() => {
     if (inView) setVisibleImage(index);
@@ -28,27 +29,59 @@ function TimelineStep({ step, index, setVisibleImage }) {
     <div
       ref={stepRef}
       style={{
-        paddingTop: '20vh',
-        paddingBottom: '20vh',
+        paddingTop: '15vh',
+        paddingBottom: '15vh',
         position: 'relative',
-        opacity: inView ? 1 : 0.3,
-        transition: 'opacity 0.6s ease',
+        opacity: isActive ? 1 : 0.25,
+        transform: isActive ? 'translateX(0)' : 'translateX(-10px)',
+        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       }}
+      className="pl-8 md:pl-16 border-l border-white/5"
     >
-      {/* Oversized background numeral */}
+      {/* Active Line Indicator */}
+      <div 
+        className="absolute left-0 top-0 w-px bg-gold transition-all duration-1000"
+        style={{
+          height: isActive ? '100%' : '0%',
+          boxShadow: isActive ? '0 0 10px rgba(212,175,55,0.5)' : 'none'
+        }}
+      />
+
+      {/* Active Dot */}
+      <div 
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border border-gold/40 flex items-center justify-center transition-all duration-700 bg-[#0a0a0a]"
+        style={{
+          width: isActive ? '24px' : '12px',
+          height: isActive ? '24px' : '12px',
+          borderColor: isActive ? 'rgba(212,175,55,1)' : 'rgba(212,175,55,0.2)',
+        }}
+      >
+        <div 
+          className="rounded-full bg-gold transition-all duration-700"
+          style={{
+            width: isActive ? '6px' : '0px',
+            height: isActive ? '6px' : '0px',
+            boxShadow: isActive ? '0 0 8px rgba(212,175,55,0.8)' : 'none'
+          }}
+        />
+      </div>
+
+      {/* Oversized background numeral with stroke effect */}
       <div
         style={{
           position: 'absolute',
           top: '50%',
           transform: 'translateY(-50%)',
-          left: '-40px',
+          left: '20px',
           fontFamily: DISPLAY,
-          fontSize: 'clamp(8rem, 15vw, 12rem)',
+          fontSize: 'clamp(8rem, 15vw, 14rem)',
           fontWeight: 700,
-          color: 'rgba(255,255,255,0.03)',
+          color: 'transparent',
+          WebkitTextStroke: isActive ? '1px rgba(212,175,55,0.15)' : '1px rgba(255,255,255,0.03)',
           lineHeight: 1,
           zIndex: 0,
           pointerEvents: 'none',
+          transition: 'all 0.8s ease',
         }}
       >
         {step.step}
@@ -58,26 +91,26 @@ function TimelineStep({ step, index, setVisibleImage }) {
         <h3
           style={{
             fontFamily: DISPLAY,
-            fontSize: '40px',
-            fontWeight: 400,
+            fontSize: '44px',
+            fontWeight: 300,
             letterSpacing: '-0.015em',
-            color: 'rgba(255,255,255,0.95)',
-            marginBottom: '24px',
+            color: isActive ? '#D4AF37' : 'rgba(255,255,255,0.8)',
+            marginBottom: '20px',
+            transition: 'color 0.8s ease',
           }}
         >
           {step.title}
         </h3>
 
-        <div style={{ width: '40px', height: '1px', background: 'rgba(212,175,55,0.4)', marginBottom: '24px' }} />
-
         <p
           style={{
             fontFamily: SANS,
-            fontSize: '20px',
+            fontSize: '18px',
             fontWeight: 300,
-            lineHeight: 1.8,
+            lineHeight: 1.85,
             color: 'rgba(255,255,255,0.6)',
-            maxWidth: '460px',
+            maxWidth: '420px',
+            marginTop: '24px'
           }}
         >
           {step.description}
@@ -143,6 +176,7 @@ export default function Process() {
                   step={step}
                   index={index}
                   setVisibleImage={setVisibleImage}
+                  activeIndex={visibleImage}
                 />
               ))}
             </div>

@@ -1,5 +1,6 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PROJECTS } from '../data/content';
 import ImageReveal from './ImageReveal';
 
@@ -113,13 +114,11 @@ function LiveImage({ project, hovered }) {
 }
 
 // ── TEXT LINK — "View Project →" ──────────────────────────────────────────
-function ViewLink({ id }) {
+function ViewLink({ onClick }) {
   const [h, setH] = useState(false);
   return (
-    <a
-      href="#contact"
-      id={id}
-      onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+    <button
+      onClick={onClick}
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       style={{
@@ -141,12 +140,12 @@ function ViewLink({ id }) {
     >
       <span>View Project</span>
       <span style={{ fontSize: '0.75rem', letterSpacing: 0 }}>→</span>
-    </a>
+    </button>
   );
 }
 
 // ── TEXT BLOCK — shared by all split layouts ──────────────────────────────
-function TextBlock({ project, delay, inView, align = 'left' }) {
+function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
   const isPlaceholder = project.isPlaceholder;
 
   // Short description — kept to 2–3 lines max
@@ -230,7 +229,7 @@ function TextBlock({ project, delay, inView, align = 'left' }) {
 
       {/* View Project → */}
       {!isPlaceholder && (
-        <ViewLink id={`project-link-${project.id}`} />
+        <ViewLink onClick={onOpenGallery} />
       )}
     </motion.div>
   );
@@ -241,7 +240,7 @@ function TextBlock({ project, delay, inView, align = 'left' }) {
 // ─────────────────────────────────────────────────────────────────────────
 
 // ── 1. FEATURED LEAD — full-width, caption below ─────────────────────────
-function FeaturedProject({ project, inView }) {
+function FeaturedProject({ project, inView, onOpenGallery }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -255,9 +254,10 @@ function FeaturedProject({ project, inView }) {
         <div
           data-cursor="view"
           className="relative overflow-hidden w-full"
-          style={{ height: 'clamp(260px, 50vh, 680px)', cursor: 'none', borderRadius: '12px' }}
+          style={{ height: 'clamp(260px, 50vh, 680px)', cursor: project.isPlaceholder ? 'default' : 'pointer', borderRadius: '12px' }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onClick={() => !project.isPlaceholder && onOpenGallery()}
         >
           {project.isPlaceholder ? (
             <PlaceholderOverlay index={0} hovered={hovered} />
@@ -332,7 +332,7 @@ function FeaturedProject({ project, inView }) {
             : (project.description || 'A bespoke interior installation, designed around the client\'s lifestyle and aesthetic vision.')}
         </motion.p>
 
-        {!project.isPlaceholder && <ViewLink id="portfolio-cta-featured" />}
+        {!project.isPlaceholder && <ViewLink onClick={onOpenGallery} />}
       </div>
     </motion.div>
   );
@@ -341,7 +341,7 @@ function FeaturedProject({ project, inView }) {
 // ── 2. SPLIT PROJECT — image left, text right  OR  text left, image right ─
 // imageLeft = true  → [image 62%] [text 38%]
 // imageLeft = false → [text 38%] [image 62%]
-function SplitProject({ project, index, inView, delay, imageLeft = true }) {
+function SplitProject({ project, index, inView, delay, imageLeft = true, onOpenGallery }) {
   const [hovered, setHovered] = useState(false);
 
   const imgNumber = String(index + 1).padStart(2, '0');
@@ -352,9 +352,10 @@ function SplitProject({ project, index, inView, delay, imageLeft = true }) {
         <div
           data-cursor="view"
           className="relative overflow-hidden"
-          style={{ height: 'clamp(260px, 44vw, 560px)', cursor: 'none', borderRadius: '12px' }}
+          style={{ height: 'clamp(260px, 44vw, 560px)', cursor: project.isPlaceholder ? 'default' : 'pointer', borderRadius: '12px' }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onClick={() => !project.isPlaceholder && onOpenGallery()}
         >
           {project.isPlaceholder ? (
             <PlaceholderOverlay index={index} hovered={hovered} />
@@ -386,6 +387,7 @@ function SplitProject({ project, index, inView, delay, imageLeft = true }) {
           delay={delay + 0.15}
           inView={inView}
           align="left"
+          onOpenGallery={onOpenGallery}
         />
       </div>
     </div>
@@ -411,6 +413,44 @@ export default function Projects() {
 
   const allPlaceholder = PROJECTS.every(p => p.isPlaceholder);
   const [p0, p1, p2, p3, p4] = PROJECTS;
+
+  // Gallery state
+  const [activeProject, setActiveProject] = useState(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const openGallery = (project) => {
+    if (!project || !project.gallery || project.gallery.length === 0) return;
+    setActiveProject(project);
+    setGalleryIndex(0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeGallery = () => {
+    setActiveProject(null);
+    document.body.style.overflow = '';
+  };
+
+  const prevImage = (e) => {
+    e.stopPropagation();
+    setGalleryIndex((i) => (i - 1 + activeProject.gallery.length) % activeProject.gallery.length);
+  };
+
+  const nextImage = (e) => {
+    e.stopPropagation();
+    setGalleryIndex((i) => (i + 1) % activeProject.gallery.length);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!activeProject) return;
+      if (e.key === 'ArrowLeft')  setGalleryIndex((i) => (i - 1 + activeProject.gallery.length) % activeProject.gallery.length);
+      if (e.key === 'ArrowRight') setGalleryIndex((i) => (i + 1) % activeProject.gallery.length);
+      if (e.key === 'Escape')     closeGallery();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeProject]);
 
   return (
     <section
@@ -494,7 +534,7 @@ export default function Projects() {
             The single most prominent piece. Full container width.
             Caption lives below, left-aligned, maximum 520px.
         ────────────────────────────────────────────────────────────────── */}
-        {p0 && <FeaturedProject project={p0} inView={inView} />}
+        {p0 && <FeaturedProject project={p0} inView={inView} onOpenGallery={() => openGallery(p0)} />}
 
         {/* ── PROJECT 2 — SPLIT LEFT (image 62% | text 38%) ──────────────
             First split entry. Image dominates left two-thirds.
@@ -507,6 +547,7 @@ export default function Projects() {
               inView={inView}
               delay={0.12}
               imageLeft={true}
+              onOpenGallery={() => openGallery(p1)}
             />
           </div>
         )}
@@ -522,6 +563,7 @@ export default function Projects() {
               inView={inView}
               delay={0.10}
               imageLeft={false}
+              onOpenGallery={() => openGallery(p2)}
             />
           </div>
         )}
@@ -536,6 +578,7 @@ export default function Projects() {
               inView={inView}
               delay={0.10}
               imageLeft={true}
+              onOpenGallery={() => openGallery(p3)}
             />
           </div>
         )}
@@ -550,6 +593,7 @@ export default function Projects() {
               inView={inView}
               delay={0.10}
               imageLeft={false}
+              onOpenGallery={() => openGallery(p4)}
             />
           </div>
         )}
@@ -578,63 +622,82 @@ export default function Projects() {
           </motion.div>
         )}
 
-        {/* ── SECTION CTA ──────────────────────────────────────────────────
-            One quiet line, centered. No button.
-        ────────────────────────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
-          style={{ marginTop: '100px', textAlign: 'center' }}
-        >
-          {/* Thin decorative line before CTA */}
-          <div style={{
-            width: '1px', height: '48px',
-            background: 'linear-gradient(to bottom, transparent, rgba(212,175,55,0.3))',
-            margin: '0 auto 24px',
-          }} />
-
-          <a
-            href="#contact"
-            id="portfolio-cta"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontFamily: SANS,
-              fontSize: '0.6875rem',
-              fontWeight: 500,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: 'rgba(212,175,55,0.7)',
-              textDecoration: 'none',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#D4AF37';
-              e.currentTarget.querySelector('span.label').style.borderBottomColor = 'rgba(212,175,55,0.65)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'rgba(212,175,55,0.7)';
-              e.currentTarget.querySelector('span.label').style.borderBottomColor = 'transparent';
-            }}
-          >
-            <span
-              className="label"
-              style={{
-                borderBottom: '1px solid transparent',
-                paddingBottom: '2px',
-                transition: 'border-color 0.35s ease',
-              }}
-            >
-              View Complete Portfolio
-            </span>
-            <span style={{ fontSize: '0.8rem', letterSpacing: 0 }}>→</span>
-          </a>
-        </motion.div>
-
       </div>
+
+      {/* ── LIGHTBOX ────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {activeProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] bg-black-deep/97 flex items-center justify-center p-4"
+            onClick={closeGallery}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Project gallery lightbox"
+          >
+            {/* Close */}
+            <button
+              onClick={closeGallery}
+              aria-label="Close lightbox"
+              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+            >
+              <X size={32} strokeWidth={1} />
+            </button>
+
+            {/* Prev */}
+            <button
+              onClick={prevImage}
+              aria-label="Previous image"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+            >
+              <ChevronLeft size={48} strokeWidth={1} />
+            </button>
+
+            {/* Next */}
+            <button
+              onClick={nextImage}
+              aria-label="Next image"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-gold hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+            >
+              <ChevronRight size={48} strokeWidth={1} />
+            </button>
+
+            {/* Image */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={galleryIndex}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="w-full h-full flex items-center justify-center p-4 lg:p-12 relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={activeProject.gallery[galleryIndex].src}
+                  alt={activeProject.gallery[galleryIndex].caption}
+                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  loading="eager"
+                />
+
+                {/* Minimal Caption */}
+                <div className="absolute bottom-8 left-12 right-12 text-center pointer-events-none">
+                  <span className="text-gold/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
+                  <p className="text-white/60 text-sm font-light max-w-xl mx-auto">{activeProject.gallery[galleryIndex].caption}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Counter */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-gray-subtle text-xs tracking-widest">
+              {String(galleryIndex + 1).padStart(2, '0')} / {String(activeProject.gallery.length).padStart(2, '0')}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

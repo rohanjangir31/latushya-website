@@ -147,7 +147,7 @@ export default function Contact() {
         {/* ── Footer Info ──────────────────────────────────── */}
         <motion.div
           {...fadeUp(0.5)}
-          className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 text-white/40 text-xs tracking-widest uppercase"
+          className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 text-white/80 font-medium text-xs tracking-widest uppercase"
         >
           <p>Strictly By Appointment</p>
           <p>{COMPANY.city}</p>

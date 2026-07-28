@@ -175,7 +175,7 @@ export const wordStagger = {
   }
 };
 
-export function TextReveal({ text, className = '', delay = 0 }) {
+export function TextReveal({ text, className = '', style = {}, delay = 0 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   
@@ -217,6 +217,7 @@ export function TextReveal({ text, className = '', delay = 0 }) {
         visible: { transition: { staggerChildren: 0.06, delayChildren: delay } }
       }}
       className={`inline-block ${className}`}
+      style={style}
     >
       {tokens.map((token, index) => (
         <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top pb-[0.2em] -mb-[0.2em]">

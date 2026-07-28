@@ -183,8 +183,8 @@ export default function Services() {
           transition={{ duration: 0.7 }}
           className="flex items-center gap-4 mb-5"
         >
-          <div className="w-5 h-px bg-gold" />
-          <span className="text-gold text-[9px] tracking-[0.35em] uppercase font-medium">
+          <div className="w-12 h-[2px] bg-gold" style={{ boxShadow: '0 0 10px rgba(212,175,55,0.4)' }} />
+          <span className="text-gold text-xs tracking-[0.4em] uppercase font-semibold">
             Our Expertise
           </span>
         </motion.div>
@@ -193,14 +193,14 @@ export default function Services() {
           <TextReveal
             text="Comprehensive _Interior Solutions_"
             className="font-display font-light text-white leading-[1.05]"
-            style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}
+            style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)' }}
           />
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.28 }}
-            className="text-gray-subtle text-sm max-w-[280px] leading-relaxed lg:text-right font-light"
+            className="text-white/80 text-sm md:text-base max-w-[300px] leading-relaxed lg:text-right font-light"
           >
             Designed for your space. Crafted for your lifestyle.
           </motion.p>

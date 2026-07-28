@@ -2,10 +2,58 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { MATERIALS } from '../data/content';
 import { TextReveal } from '../utils/animations';
+import { ArrowUpRight } from 'lucide-react';
 
 const EASE   = [0.25, 0.46, 0.45, 0.94];
 const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
 const SANS    = "'Inter', system-ui, sans-serif";
+
+function MaterialCard({ mat, index, isGold }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay: 0.1 * index, ease: EASE }}
+      className="group relative p-6 md:p-8 bg-white/[0.02] border border-white/5 hover:border-gold/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden"
+    >
+      {/* Subtle background glow effect on hover */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+      <div className="flex justify-between items-start mb-4 relative z-10">
+        <div>
+          <span style={{ fontFamily: DISPLAY, fontSize: '32px', color: isGold ? '#D4AF37' : '#fff' }} className="block mb-1 group-hover:translate-x-1 transition-transform duration-500">
+            {mat.name}
+          </span>
+          <span style={{ fontFamily: SANS, fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
+            {mat.origin}
+          </span>
+        </div>
+        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/40 group-hover:bg-gold/10 transition-all duration-500 shrink-0">
+          <ArrowUpRight size={14} className="text-white/40 group-hover:text-gold transition-colors duration-500" />
+        </div>
+      </div>
+      
+      <p style={{ fontFamily: SANS, fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }} className="mb-6 relative z-10 group-hover:text-white/75 transition-colors duration-500">
+        {mat.description}
+      </p>
+
+      {/* Exposing the hidden 'qualities' data as premium pill tags */}
+      {mat.qualities && mat.qualities.length > 0 && (
+        <div className="flex flex-wrap gap-2 relative z-10">
+          {mat.qualities.map((quality, i) => (
+            <span 
+              key={i} 
+              className="px-3 py-1 text-[10px] uppercase tracking-widest bg-black-deep/50 border border-white/10 text-white/50 group-hover:border-gold/20 group-hover:text-gold/80 transition-all duration-500"
+            >
+              {quality}
+            </span>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  );
+}
 
 export default function MaterialsSection() {
   const sectionRef = useRef(null);
@@ -75,7 +123,7 @@ export default function MaterialsSection() {
         {/* MATERIAL CATEGORY 1: HARDWARE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32 items-center">
           <motion.div 
-            className="lg:col-span-7 h-[60vh] relative overflow-hidden"
+            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
@@ -95,18 +143,12 @@ export default function MaterialsSection() {
             >
               <h3 style={{ fontFamily: DISPLAY, fontSize: '40px', color: '#fff', marginBottom: '16px' }}>Precision Engineering</h3>
               <p style={{ fontFamily: SANS, fontSize: '18px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
-                Every hinge, track, and handle is engineered for silent, flawless operation. We utilize German-engineered mechanisms to guarantee a lifetime of effortless movement.
+                Every hinge, track, and handle is engineered for silent, flawless operation. We utilize Austrian and German-engineered mechanisms to guarantee a lifetime of effortless movement.
               </p>
               
-              <div className="space-y-6">
-                {hardware.map(mat => (
-                  <div key={mat.name} className="border-b border-white/10 pb-6 group">
-                    <div className="flex justify-between items-center mb-2">
-                      <span style={{ fontFamily: DISPLAY, fontSize: '28px', color: '#D4AF37' }}>{mat.name}</span>
-                      <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>{mat.origin}</span>
-                    </div>
-                    <p style={{ fontFamily: SANS, fontSize: '15px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{mat.description}</p>
-                  </div>
+              <div className="flex flex-col gap-4">
+                {hardware.map((mat, i) => (
+                  <MaterialCard key={mat.id} mat={mat} index={i} isGold={true} />
                 ))}
               </div>
             </motion.div>
@@ -127,22 +169,16 @@ export default function MaterialsSection() {
                 The hidden layers dictate the lifespan of your interiors. We exclusively use marine-grade, high-density substrates that resist moisture, impact, and time.
               </p>
               
-              <div className="space-y-6">
-                {substrate.map(mat => (
-                  <div key={mat.name} className="border-b border-white/10 pb-6 group">
-                    <div className="flex justify-between items-center mb-2">
-                      <span style={{ fontFamily: DISPLAY, fontSize: '28px', color: '#fff' }}>{mat.name}</span>
-                      <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>{mat.origin}</span>
-                    </div>
-                    <p style={{ fontFamily: SANS, fontSize: '15px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{mat.description}</p>
-                  </div>
+              <div className="flex flex-col gap-4">
+                {substrate.map((mat, i) => (
+                  <MaterialCard key={mat.id} mat={mat} index={i} isGold={false} />
                 ))}
               </div>
             </motion.div>
           </div>
 
           <motion.div 
-            className="lg:col-span-7 h-[60vh] relative overflow-hidden order-1 lg:order-2"
+            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden order-1 lg:order-2"
             initial={{ opacity: 0, scale: 1.05 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-50px' }}

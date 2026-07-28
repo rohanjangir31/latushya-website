@@ -18,9 +18,9 @@ const CREDIBILITY_ITEMS = [
   },
   {
     Icon: Wrench,
-    value: 'Häfele · Hettich',
+    value: 'Blum · Häfele',
     label: 'Hardware Brands',
-    sub: 'German engineering',
+    sub: 'Austrian & German',
   },
   {
     Icon: Shield,
@@ -76,7 +76,7 @@ export default function CredibilityBand() {
                 <Icon size={18} className="text-gold" />
               </div>
 
-              <div className="font-display text-2xl md:text-3xl text-white font-light mb-1">
+              <div className="font-display text-xl md:text-2xl text-white font-light mb-1">
                 {value}
               </div>
               <div className="text-gold text-[10px] tracking-widest uppercase font-medium mb-1">

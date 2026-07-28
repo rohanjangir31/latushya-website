@@ -33,7 +33,7 @@ export const WHY_CHOOSE = [
   {
     id: 2,
     title: 'Premium Hardware',
-    description: 'We install only trusted brands — Häfele, Hettich, and Ebco — known for their durability, smooth operation, and long-lasting performance.',
+    description: 'We install only trusted luxury brands — Häfele, Hettich, and Blum — known for their flawless engineering, silent operation, and lifetime performance.',
   },
   {
     id: 3,
@@ -81,12 +81,12 @@ export const MATERIALS = [
   },
   {
     id: 3,
-    name: 'Ebco',
+    name: 'Blum',
     category: 'Hardware',
-    origin: 'India',
+    origin: 'Austria',
     description:
-      "India's leading furniture hardware brand — offering reliable, cost-effective fittings without compromising on quality or finish.",
-    qualities: ['Made in India', 'Wide range', 'Reliable quality'],
+      "The pinnacle of Austrian motion technology. We use Blum's Aventos lift systems and Legrabox drawers for an unparalleled, weightless opening experience.",
+    qualities: ['Austrian engineering', 'Aventos lift systems', 'Feather-light glide'],
     logo: null,
   },
   {
@@ -171,7 +171,7 @@ export const FAQ_ITEMS = [
   {
     id: 3,
     question: 'Which hardware and materials do you use?',
-    answer: 'We use Häfele and Hettich hardware for sliding and hinge systems, Ebco for fittings, and Century Ply or Greenply as substrate. Laminates are sourced from premium brands for a durable, clean finish.',
+    answer: 'We use premium Blum, Häfele, and Hettich hardware for sliding, hinge, and lift systems. Century Ply or Greenply is used as the core substrate, wrapped in imported premium laminates or acrylics for a flawless finish.',
   },
   {
     id: 4,

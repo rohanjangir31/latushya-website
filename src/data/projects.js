@@ -22,6 +22,11 @@ const projects = [
     image: '/projects/media__1784490387524.jpg',
     isPlaceholder: false,
     size: 'large',
+    gallery: [
+      { id: '1-1', src: '/projects/media__1784490387524.jpg', caption: 'Living Area Transformation' },
+      { id: '1-2', src: '/projects/media__1784490387502.jpg', caption: 'Master Bedroom Suite' },
+      { id: '1-3', src: '/projects/media__1784490387507.jpg', caption: 'Custom Modular Kitchen' }
+    ]
   },
   {
     id: 2,
@@ -35,6 +40,10 @@ const projects = [
     image: '/projects/media__1784490387507.jpg',
     isPlaceholder: false,
     size: 'medium',
+    gallery: [
+      { id: '2-1', src: '/projects/media__1784490387507.jpg', caption: 'Seamless Acrylic Finish' },
+      { id: '2-2', src: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=1200&q=80', caption: 'Built-in Appliances' }
+    ]
   },
   {
     id: 3,
@@ -48,6 +57,10 @@ const projects = [
     image: '/projects/media__1784490387502.jpg',
     isPlaceholder: false,
     size: 'medium',
+    gallery: [
+      { id: '3-1', src: '/projects/media__1784490387502.jpg', caption: 'Serene Bedroom Interior' },
+      { id: '3-2', src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', caption: 'Custom Wardrobe Details' }
+    ]
   },
   {
     id: 4,
@@ -61,6 +74,10 @@ const projects = [
     image: '/projects/media__1784490387517.jpg',
     isPlaceholder: false,
     size: 'large',
+    gallery: [
+      { id: '4-1', src: '/projects/media__1784490387517.jpg', caption: 'Geometric Glass Design' },
+      { id: '4-2', src: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80', caption: 'Premium Hardware Action' }
+    ]
   },
   {
     id: 5,
@@ -74,6 +91,10 @@ const projects = [
     image: '/projects/media__1784490387392.jpg',
     isPlaceholder: false,
     size: 'medium',
+    gallery: [
+      { id: '5-1', src: '/projects/media__1784490387392.jpg', caption: 'Handcrafted Console' },
+      { id: '5-2', src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', caption: 'Intricate Carvings Detail' }
+    ]
   },
   {
     id: 6,
@@ -87,6 +108,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
     isPlaceholder: true,
     size: 'medium',
+    gallery: []
   },
 ];
 
