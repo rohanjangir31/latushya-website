@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import WhyChoose from '../components/WhyChoose';
 import CredibilityBand from '../components/Statistics';
 import Philosophy from '../components/Philosophy';
+import WardrobeShowcase from '../components/WardrobeShowcase';
 import FeaturedProject from '../components/FeaturedProject';
 import Testimonials from '../components/Testimonials';
 import CTASection from '../components/CTASection';
@@ -12,6 +13,7 @@ export default function Home() {
     <PageTransition>
       <Hero />
       <Philosophy />
+      <WardrobeShowcase />
       <WhyChoose />
       <CredibilityBand />
       <FeaturedProject />
