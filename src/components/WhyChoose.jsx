@@ -78,8 +78,8 @@ function CapabilityRow({ item, index, totalInView }) {
         style={{
           height: '1px',
           background: hovered
-            ? 'rgba(212, 150, 195,0.25)'
-            : 'rgba(212, 150, 195,0.11)',
+            ? 'rgba(233, 30, 99,0.25)'
+            : 'rgba(233, 30, 99,0.11)',
           transition: 'background 350ms ease',
         }}
       />
@@ -104,7 +104,7 @@ function CapabilityRow({ item, index, totalInView }) {
               fontWeight: 300,
               lineHeight: 1,
               letterSpacing: '-0.02em',
-              color: hovered ? 'rgba(212, 150, 195,0.55)' : 'rgba(212, 150, 195,0.20)',
+              color: hovered ? 'rgba(233, 30, 99,0.55)' : 'rgba(233, 30, 99,0.20)',
               transition: 'color 350ms ease',
               userSelect: 'none',
               display: 'block',
@@ -160,7 +160,7 @@ export default function WhyChoose() {
     <section
       id="why-choose"
       style={{
-        background: '#0F0F0F',
+        background: '#050B14',
         paddingTop: '160px',
         paddingBottom: '160px',
       }}
@@ -188,7 +188,7 @@ export default function WhyChoose() {
               style={{
                 width: '18px',
                 height: '1px',
-                background: 'rgba(212, 150, 195,0.65)',
+                background: 'rgba(233, 30, 99,0.65)',
               }}
             />
             <span
@@ -198,7 +198,7 @@ export default function WhyChoose() {
                 fontWeight: 500,
                 letterSpacing: '0.38em',
                 textTransform: 'uppercase',
-                color: 'rgba(212, 150, 195,0.65)',
+                color: 'rgba(233, 30, 99,0.65)',
               }}
             >
               Why Latushya
@@ -229,7 +229,7 @@ export default function WhyChoose() {
               }}
             >
               Six Reasons to{' '}
-              <em style={{ fontStyle: 'italic', color: '#D496C3' }}>Choose Us</em>
+              <em style={{ fontStyle: 'italic', color: '#E91E63' }}>Choose Us</em>
             </motion.h2>
 
             <motion.p
@@ -256,7 +256,7 @@ export default function WhyChoose() {
             transition={{ duration: 1.4, delay: 0.32, ease: EASE }}
             style={{
               height: '1px',
-              background: 'linear-gradient(to right, rgba(212, 150, 195,0.22), rgba(212, 150, 195,0.05) 55%, transparent)',
+              background: 'linear-gradient(to right, rgba(233, 30, 99,0.22), rgba(233, 30, 99,0.05) 55%, transparent)',
               transformOrigin: 'left',
               marginTop: '36px',
             }}
@@ -278,7 +278,7 @@ export default function WhyChoose() {
           <div
             style={{
               height: '1px',
-              background: 'rgba(212, 150, 195,0.11)',
+              background: 'rgba(233, 30, 99,0.11)',
             }}
           />
         </div>

@@ -22,7 +22,7 @@ function MaterialCard({ mat, index, isPink }) {
 
       <div className="flex justify-between items-start mb-4 relative z-10">
         <div>
-          <span style={{ fontFamily: DISPLAY, fontSize: '32px', color: isPink ? '#D496C3' : '#fff' }} className="block mb-1 group-hover:translate-x-1 transition-transform duration-500">
+          <span style={{ fontFamily: DISPLAY, fontSize: '32px', color: isPink ? '#E91E63' : '#fff' }} className="block mb-1 group-hover:translate-x-1 transition-transform duration-500">
             {mat.name}
           </span>
           <span style={{ fontFamily: SANS, fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
@@ -68,7 +68,7 @@ export default function MaterialsSection() {
       id="materials" 
       ref={sectionRef}
       style={{
-        background: '#0a0a0a',
+        background: '#03070E',
         paddingTop: '160px',
         paddingBottom: '160px',
         position: 'relative',
@@ -85,8 +85,8 @@ export default function MaterialsSection() {
             transition={{ duration: 0.65 }}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
-            <div style={{ width: '18px', height: '1px', background: 'rgba(212, 150, 195,0.65)' }} />
-            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(212, 150, 195,0.65)' }}>
+            <div style={{ width: '18px', height: '1px', background: 'rgba(233, 30, 99,0.65)' }} />
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(233, 30, 99,0.65)' }}>
               The Foundation
             </span>
           </motion.div>

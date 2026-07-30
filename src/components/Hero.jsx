@@ -49,17 +49,17 @@ export default function Hero() {
     <section
       ref={ref}
       id="hero"
-      className="relative h-screen min-h-[640px] overflow-hidden bg-[#0a0a0a]"
+      className="relative h-screen min-h-[640px] overflow-hidden bg-[#03070E]"
     >
       {/* ── FULL-BLEED BACKGROUND IMAGE / VIDEO ──────────────────
           On mobile, we place the video inside an aspect-video container with
-          CSS mask-image to dissolve the top and bottom edges directly into #0a0a0a.
+          CSS mask-image to dissolve the top and bottom edges directly into #03070E.
           This eliminates ALL sharp box edges on ANY DevTools or mobile screen size
           while guaranteeing 100% of the word "LATUSHYA" stays in bounds!
           On desktop, it switches to absolute inset-0 full-bleed object-cover. ── */}
       <motion.div
         style={{ y: imageY }}
-        className="absolute inset-0 z-0 will-change-transform bg-[#0a0a0a] flex flex-col justify-start lg:block pt-14 sm:pt-20 lg:pt-0"
+        className="absolute inset-0 z-0 will-change-transform bg-[#03070E] flex flex-col justify-start lg:block pt-14 sm:pt-20 lg:pt-0"
       >
         <div
           className="w-[140%] -left-[20%] relative lg:w-full lg:left-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
@@ -112,7 +112,7 @@ export default function Hero() {
           className="absolute inset-0 lg:hidden pointer-events-none"
           style={{
             background:
-              'linear-gradient(to bottom, #0a0a0a 0%, transparent 15%, transparent 55%, rgba(10,10,10,0.85) 72%, #0a0a0a 88%, #0a0a0a 100%)',
+              'linear-gradient(to bottom, #03070E 0%, transparent 15%, transparent 55%, rgba(10,10,10,0.85) 72%, #03070E 88%, #03070E 100%)',
           }}
         />
 
@@ -144,14 +144,14 @@ export default function Hero() {
             >
               <div
                 className="h-px w-6"
-                style={{ background: 'rgba(212, 150, 195,0.7)' }}
+                style={{ background: 'rgba(233, 30, 99,0.7)' }}
               />
               <span
                 className="uppercase font-medium"
                 style={{
                   fontSize: '0.625rem',
                   letterSpacing: '0.32em',
-                  color: 'rgba(212, 150, 195,0.75)',
+                  color: 'rgba(233, 30, 99,0.75)',
                 }}
               >
                 {COMPANY.specialty}
@@ -166,7 +166,7 @@ export default function Hero() {
                 All display / serif. Weight + size do the work. ── */}
             <div className="mb-7 lg:mb-9">
 
-              {/* Line 1: Luxury — entry word, slightly smaller */}
+              {/* Line 1: Bespoke — entry word, slightly smaller */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -182,7 +182,7 @@ export default function Hero() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Premium
+                  Bespoke
                 </motion.h1>
               </div>
 
@@ -202,12 +202,12 @@ export default function Hero() {
                     marginBottom: '16px',
                   }}
                 >
-                  Interiors
+                  Wardrobes
                 </motion.h1>
               </div>
 
               {/* Lines 3–4: italic subtitle — tightly coupled, 16px gap from Wardrobes */}
-              {/* Line 3: Crafted Around */}
+              {/* Line 3: & Premium Interiors */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -223,7 +223,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  Crafted For
+                  & Premium Interiors
                 </motion.h1>
               </div>
 
@@ -239,7 +239,7 @@ export default function Hero() {
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
-                    color: '#D496C3',
+                    color: '#E91E63',
                     fontStyle: 'italic',
                   }}
                 >
@@ -256,7 +256,7 @@ export default function Hero() {
               style={{
                 height: '1px',
                 width: '3rem',
-                background: 'rgba(212, 150, 195,0.28)',
+                background: 'rgba(233, 30, 99,0.28)',
                 transformOrigin: 'left',
                 marginBottom: 'clamp(1rem, 2vw, 1.6rem)',
               }}
@@ -299,8 +299,8 @@ export default function Hero() {
                   height: '72px',
                   paddingLeft: '2.75rem',
                   paddingRight: '2.75rem',
-                  background: '#D496C3',
-                  color: '#0a0a0a',
+                  background: '#E91E63',
+                  color: '#03070E',
                   fontWeight: 600,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
@@ -317,7 +317,7 @@ export default function Hero() {
                   e.currentTarget.style.background = '#E8CB6A';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#D496C3';
+                  e.currentTarget.style.background = '#E91E63';
                 }}
               >
                 Book Consultation
@@ -334,12 +334,12 @@ export default function Hero() {
                   paddingLeft: '2.25rem',
                   paddingRight: '2.25rem',
                   background: 'transparent',
-                  color: 'rgba(212, 150, 195,0.90)',
+                  color: 'rgba(233, 30, 99,0.90)',
                   fontWeight: 500,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  border: '1px solid rgba(212, 150, 195,0.45)',
+                  border: '1px solid rgba(233, 30, 99,0.45)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -350,13 +350,13 @@ export default function Hero() {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(212, 150, 195,0.85)';
-                  e.currentTarget.style.color = '#D496C3';
-                  e.currentTarget.style.background = 'rgba(212, 150, 195,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(233, 30, 99,0.85)';
+                  e.currentTarget.style.color = '#E91E63';
+                  e.currentTarget.style.background = 'rgba(233, 30, 99,0.06)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(212, 150, 195,0.45)';
-                  e.currentTarget.style.color = 'rgba(212, 150, 195,0.90)';
+                  e.currentTarget.style.borderColor = 'rgba(233, 30, 99,0.45)';
+                  e.currentTarget.style.color = 'rgba(233, 30, 99,0.90)';
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
@@ -382,7 +382,7 @@ export default function Hero() {
           style={{
             width: '1px',
             height: '36px',
-            background: 'linear-gradient(to bottom, rgba(212, 150, 195,0.55), rgba(212, 150, 195,0))',
+            background: 'linear-gradient(to bottom, rgba(233, 30, 99,0.55), rgba(233, 30, 99,0))',
           }}
         />
       </motion.div>

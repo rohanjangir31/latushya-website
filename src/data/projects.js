@@ -42,7 +42,7 @@ const projects = [
     size: 'medium',
     gallery: [
       { id: '2-1', src: '/projects/media__1784490387507.jpg', caption: 'Seamless Acrylic Finish' },
-      { id: '2-2', src: 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=1200&q=80', caption: 'Built-in Appliances' }
+      { id: '2-2', src: '/projects/media__1784490387502.jpg', caption: 'Built-in Appliances' }
     ]
   },
   {
@@ -59,7 +59,7 @@ const projects = [
     size: 'medium',
     gallery: [
       { id: '3-1', src: '/projects/media__1784490387502.jpg', caption: 'Serene Bedroom Interior' },
-      { id: '3-2', src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', caption: 'Custom Wardrobe Details' }
+      { id: '3-2', src: '/projects/media__1784490387517.jpg', caption: 'Custom Wardrobe Details' }
     ]
   },
   {
@@ -76,7 +76,7 @@ const projects = [
     size: 'large',
     gallery: [
       { id: '4-1', src: '/projects/media__1784490387517.jpg', caption: 'Geometric Glass Design' },
-      { id: '4-2', src: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80', caption: 'Premium Hardware Action' }
+      { id: '4-2', src: '/projects/media__1784490387524.jpg', caption: 'Premium Hardware Action' }
     ]
   },
   {
@@ -93,22 +93,24 @@ const projects = [
     size: 'medium',
     gallery: [
       { id: '5-1', src: '/projects/media__1784490387392.jpg', caption: 'Handcrafted Console' },
-      { id: '5-2', src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', caption: 'Intricate Carvings Detail' }
+      { id: '5-2', src: '/projects/media__1784490387507.jpg', caption: 'Intricate Carvings Detail' }
     ]
   },
   {
     id: 6,
-    category: 'Living Room Design',
-    title: 'Classic Modern Living',
+    category: 'Walk-in Closets',
+    title: 'Luxury Walk-in Closet',
     location: 'Sadashivanagar, Bangalore',
-    projectType: 'Living & Dining',
-    materials: 'Solid Wood, Brass Accents',
+    projectType: 'Bespoke Wardrobes',
+    materials: 'Walnut Veneer, Fluted Glass',
     duration: '20 Days',
-    description: 'A warm, inviting living and dining space blending classic wooden elements with modern brass accents.',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
-    isPlaceholder: true,
+    description: 'A spacious and luxurious walk-in closet featuring warm walnut veneers, integrated island storage, and dedicated shoe displays.',
+    image: '/projects/media__1784490387502.jpg',
+    isPlaceholder: false,
     size: 'medium',
-    gallery: []
+    gallery: [
+      { id: '6-1', src: '/projects/media__1784490387502.jpg', caption: 'Integrated Island Storage' }
+    ]
   },
 ];
 

@@ -26,8 +26,8 @@ export default function FeaturedProject() {
         className="absolute inset-0 w-full h-full origin-bottom"
       >
         <img 
-          src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2000&auto=format&fit=crop" 
-          alt="Featured luxury interior project"
+          src="/projects/media__1784490387524.jpg" 
+          alt="Featured luxury wardrobe interior"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -50,11 +50,11 @@ export default function FeaturedProject() {
           </span>
           
           <h3 className="font-display font-light text-white text-3xl lg:text-4xl mb-4 leading-tight">
-            The Lavelle Road <br/><i className="text-gray-light/60">Penthouse</i>
+            The Master Suite <br/><i className="text-gray-light/60">Wardrobe</i>
           </h3>
           
           <p className="text-gray-subtle text-sm leading-loose mb-8">
-            A masterclass in modern minimalism. We designed and executed a fully bespoke interior utilizing rich walnut veneers, fluted glass, and invisible hardware to create a seamless living experience.
+            A masterclass in modern storage. We designed and executed a fully bespoke wardrobe utilizing rich veneers, fluted glass, and invisible German hardware to create a seamless organizational experience.
           </p>
           
           <Link 

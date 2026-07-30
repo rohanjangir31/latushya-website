@@ -28,11 +28,11 @@ const SANS = "'Inter', system-ui, sans-serif";
 
 // Distinct wardrobe images for each placeholder slot
 const SLOT_IMAGES = [
-  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80',
-  'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80',
-  'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=1200&q=80',
-  'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80',
-  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80',
+  '/projects/media__1784490387524.jpg',
+  '/projects/media__1784490387507.jpg',
+  '/projects/media__1784490387502.jpg',
+  '/projects/media__1784490387517.jpg',
+  '/projects/media__1784490387392.jpg',
 ];
 
 // ── PLACEHOLDER OVERLAY ───────────────────────────────────────────────────
@@ -59,8 +59,8 @@ function PlaceholderOverlay({ index, imageHeight, hovered }) {
         className="absolute inset-0"
         style={{
           background: hovered
-            ? 'rgba(8,6,4,0.64)'
-            : 'rgba(8,6,4,0.72)',
+            ? 'rgba(5, 11, 20,0.64)'
+            : 'rgba(5, 11, 20,0.72)',
           transition: 'background 0.6s ease',
         }}
       />
@@ -68,18 +68,18 @@ function PlaceholderOverlay({ index, imageHeight, hovered }) {
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
         <div style={{
           width: '40px', height: '40px',
-          border: '1px solid rgba(212, 150, 195,0.2)',
+          border: '1px solid rgba(233, 30, 99,0.2)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <span style={{
             fontFamily: DISPLAY, fontSize: '1.1rem',
-            fontWeight: 300, color: 'rgba(212, 150, 195,0.4)',
+            fontWeight: 300, color: 'rgba(233, 30, 99,0.4)',
           }}>L</span>
         </div>
         <span style={{
           fontFamily: SANS, fontSize: '0.5rem',
           letterSpacing: '0.45em', textTransform: 'uppercase',
-          color: 'rgba(212, 150, 195,0.35)',
+          color: 'rgba(233, 30, 99,0.35)',
         }}>Photography Pending</span>
       </div>
     </>
@@ -130,10 +130,10 @@ function ViewLink({ onClick }) {
         fontWeight: 500,
         letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        color: h ? '#D496C3' : 'rgba(212, 150, 195,0.65)',
+        color: h ? '#E91E63' : 'rgba(233, 30, 99,0.65)',
         textDecoration: 'none',
         paddingBottom: '3px',
-        borderBottom: h ? '1px solid rgba(212, 150, 195,0.6)' : '1px solid transparent',
+        borderBottom: h ? '1px solid rgba(233, 30, 99,0.6)' : '1px solid transparent',
         transition: 'color 0.35s ease, border-color 0.35s ease',
         cursor: 'pointer',
       }}
@@ -167,7 +167,7 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
         fontWeight: 500,
         letterSpacing: '0.28em',
         textTransform: 'uppercase',
-        color: 'rgba(212, 150, 195,0.72)',
+        color: 'rgba(233, 30, 99,0.72)',
         marginBottom: '14px',
       }}>
         {project.location || 'Bangalore'}
@@ -202,7 +202,7 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
       <div style={{
         width: '32px',
         height: '1px',
-        background: 'rgba(212, 150, 195,0.3)',
+        background: 'rgba(233, 30, 99,0.3)',
         marginBottom: '20px',
         marginLeft: align === 'right' ? 'auto' : 0,
         marginRight: align === 'left' ? 'auto' : 0,
@@ -277,11 +277,11 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
             letterSpacing: '0.42em', textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.22)',
           }}>01</span>
-          <div style={{ width: '24px', height: '1px', background: 'rgba(212, 150, 195,0.3)' }} />
+          <div style={{ width: '24px', height: '1px', background: 'rgba(233, 30, 99,0.3)' }} />
           <span style={{
             fontFamily: SANS, fontSize: '0.75rem',
             fontWeight: 500, letterSpacing: '0.28em',
-            textTransform: 'uppercase', color: 'rgba(212, 150, 195,0.72)',
+            textTransform: 'uppercase', color: 'rgba(233, 30, 99,0.72)',
           }}>
             {project.location || 'Bangalore'}
           </span>
@@ -456,7 +456,7 @@ export default function Projects() {
     <section
       id="portfolio"
       style={{
-        background: '#111111',
+        background: '#050B14',
         paddingTop: '130px',
         paddingBottom: '150px',
       }}
@@ -475,11 +475,11 @@ export default function Projects() {
             transition={{ duration: 0.7 }}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}
           >
-            <div style={{ width: '18px', height: '1px', background: 'rgba(212, 150, 195,0.65)' }} />
+            <div style={{ width: '18px', height: '1px', background: 'rgba(233, 30, 99,0.65)' }} />
             <span style={{
               fontFamily: SANS, fontSize: '0.5625rem',
               letterSpacing: '0.38em', textTransform: 'uppercase',
-              color: 'rgba(212, 150, 195,0.65)',
+              color: 'rgba(233, 30, 99,0.65)',
             }}>Design Masterpieces</span>
           </motion.div>
 
@@ -499,7 +499,7 @@ export default function Projects() {
               }}
             >
               Spaces We've{' '}
-              <em style={{ fontStyle: 'italic', color: '#D496C3' }}>Transformed</em>
+              <em style={{ fontStyle: 'italic', color: '#E91E63' }}>Transformed</em>
             </motion.h2>
 
             <motion.p
@@ -523,7 +523,7 @@ export default function Projects() {
             transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
             style={{
               height: '1px',
-              background: 'linear-gradient(to right, rgba(212, 150, 195,0.22), rgba(212, 150, 195,0.05) 55%, transparent)',
+              background: 'linear-gradient(to right, rgba(233, 30, 99,0.22), rgba(233, 30, 99,0.05) 55%, transparent)',
               transformOrigin: 'left',
               marginTop: '36px',
             }}
@@ -607,7 +607,7 @@ export default function Projects() {
             style={{
               marginTop: '96px',
               paddingLeft: '18px',
-              borderLeft: '1px solid rgba(212, 150, 195,0.15)',
+              borderLeft: '1px solid rgba(233, 30, 99,0.15)',
             }}
           >
             <p style={{

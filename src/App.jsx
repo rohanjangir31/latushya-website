@@ -101,12 +101,12 @@ function Preloader() {
               ease: [0.76, 0, 0.24, 1],
               delay: 0.15 + i * 0.08,
             }}
-            className="w-full h-full bg-[#0a0a0a] border-r border-pink/10 last:border-r-0 relative overflow-hidden"
+            className="w-full h-full bg-[#03070E] border-r border-pink/10 last:border-r-0 relative overflow-hidden"
           >
             {/* Subtle vertical architectural lighting on right edge */}
             <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-pink/30 to-transparent opacity-60" />
             {/* Trailing pink trim along the bottom edge as panels rise */}
-            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(212, 150, 195,0.6)]" />
+            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(233, 30, 99,0.6)]" />
           </motion.div>
         ))}
       </div>
@@ -131,7 +131,7 @@ function Preloader() {
           <img
             src="/logo-2d.png"
             alt="Latushya Premium Interior Studio"
-            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(212, 150, 195,0.2)] mb-6"
+            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(233, 30, 99,0.2)] mb-6"
           />
 
           {/* Elegant expanding pink dividing line */}

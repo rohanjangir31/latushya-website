@@ -21,7 +21,7 @@
   }
 
   body {
-    background-color: #0F0F0F;
+    background-color: #050B14;
     color: #FFFFFF;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -70,8 +70,8 @@
   }
 
   ::selection {
-    background: rgba(212, 150, 195, 0.3);
-    color: #D496C3;
+    background: rgba(233, 30, 99, 0.3);
+    color: #E91E63;
   }
 
   /* Pink scrollbar */
@@ -79,10 +79,10 @@
     width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #0F0F0F;
+    background: #03070E;
   }
   ::-webkit-scrollbar-thumb {
-    background: #D496C3;
+    background: #E91E63;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -94,7 +94,7 @@
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px #0a0a0a inset !important;
+      -webkit-box-shadow: 0 0 0 30px #050B14 inset !important;
       -webkit-text-fill-color: white !important;
       transition: background-color 5000s ease-in-out 0s;
   }
@@ -137,7 +137,7 @@
 
   /* ─── Typography ──────────────────────────────────────── */
   .pink-text {
-    background: linear-gradient(135deg, #D496C3 0%, #67CBE1 50%, #4A9CB0 100%);
+    background: linear-gradient(135deg, #E91E63 0%, #F06292 50%, #F48FB1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -164,10 +164,10 @@
   }
 
   .glass {
-    background: rgba(26, 26, 26, 0.7);
+    background: rgba(13, 22, 38, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(212, 150, 195, 0.1);
+    border: 1px solid rgba(233, 30, 99, 0.1);
   }
 
   /* ─── Section divider ─────────────────────────────────── */
@@ -175,7 +175,7 @@
      Use as <div className="section-divider" /> */
   .section-divider {
     @apply relative h-px w-full overflow-visible;
-    background: linear-gradient(to right, transparent 0%, rgba(212, 150, 195,0.2) 30%, rgba(212, 150, 195,0.2) 70%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, rgba(233, 30, 99,0.2) 30%, rgba(233, 30, 99,0.2) 70%, transparent 100%);
   }
   .section-divider::after {
     content: '◆';
@@ -276,11 +276,11 @@
 .shimmer-pink {
   background: linear-gradient(
     90deg,
-    #D496C3 0%,
-    #67CBE1 25%,
-    #D496C3 50%,
-    #4A9CB0 75%,
-    #D496C3 100%
+    #E91E63 0%,
+    #F06292 25%,
+    #E91E63 50%,
+    #F48FB1 75%,
+    #E91E63 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

@@ -56,15 +56,15 @@ export default function Cursor() {
     default: {
       width: 32,
       height: 32,
-      backgroundColor: 'rgba(212, 150, 195, 0)',
-      border: '1px solid rgba(212, 150, 195, 0.4)',
+      backgroundColor: 'rgba(233, 30, 99, 0)',
+      border: '1px solid rgba(233, 30, 99, 0.4)',
       mixBlendMode: 'normal',
     },
     hover: {
       width: 64,
       height: 64,
-      backgroundColor: 'rgba(212, 150, 195, 0.1)',
-      border: '1px solid rgba(212, 150, 195, 0.8)',
+      backgroundColor: 'rgba(233, 30, 99, 0.1)',
+      border: '1px solid rgba(233, 30, 99, 0.8)',
       mixBlendMode: 'normal',
     },
     view: {

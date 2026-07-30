@@ -8,18 +8,18 @@ export default {
     extend: {
       colors: {
         black: {
-          DEFAULT: '#0F0F0F',
-          deep: '#0F0F0F',
-          charcoal: '#1A1A1A',
-          soft: '#222222',
-          card: '#161616',
+          DEFAULT: '#050B14',
+          deep: '#03070E',
+          charcoal: '#0D1626',
+          soft: '#152238',
+          card: '#0A1220',
         },
         pink: {
-          DEFAULT: '#D496C3',
-          light: '#E2B1D6',
-          dark: '#B675A2',
-          muted: '#C48BAF',
-          pale: '#F2DFED',
+          DEFAULT: '#E91E63',
+          light: '#F06292',
+          dark: '#C2185B',
+          muted: '#D81B60',
+          pale: '#F8BBD0',
         },
         blue: {
           DEFAULT: '#67CBE1',
@@ -56,13 +56,13 @@ export default {
         ultra: '0.4em',
       },
       backgroundImage: {
-        'pink-gradient': 'linear-gradient(135deg, #D496C3 0%, #67CBE1 100%)',
-        'dark-gradient': 'linear-gradient(180deg, #0F0F0F 0%, #1A1A1A 100%)',
-        'hero-overlay': 'linear-gradient(to right, rgba(15,15,15,0.9) 0%, rgba(15,15,15,0.5) 60%, rgba(15,15,15,0.2) 100%)',
+        'pink-gradient': 'linear-gradient(135deg, #E91E63 0%, #F06292 100%)',
+        'dark-gradient': 'linear-gradient(180deg, #050B14 0%, #0D1626 100%)',
+        'hero-overlay': 'linear-gradient(to right, rgba(5,11,20,0.9) 0%, rgba(5,11,20,0.5) 60%, rgba(5,11,20,0.2) 100%)',
       },
       boxShadow: {
-        'pink': '0 0 30px rgba(212, 150, 195, 0.15)',
-        'pink-lg': '0 0 60px rgba(212, 150, 195, 0.25)',
+        'pink': '0 0 30px rgba(233, 30, 99, 0.15)',
+        'pink-lg': '0 0 60px rgba(233, 30, 99, 0.25)',
         'luxury': '0 25px 80px rgba(0,0,0,0.6)',
         'card': '0 8px 40px rgba(0,0,0,0.4)',
       },
@@ -82,8 +82,8 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulsePink: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(212, 150, 195, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(212, 150, 195, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(233, 30, 99, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(233, 30, 99, 0.6)' },
         },
         scroll: {
           '0%': { transform: 'translateY(0)', opacity: '1' },

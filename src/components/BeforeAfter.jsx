@@ -76,7 +76,7 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
           style={{
             left: `${sliderPos}%`,
             width: '1px',
-            backgroundColor: 'rgba(212, 150, 195,0.7)',
+            backgroundColor: 'rgba(233, 30, 99,0.7)',
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
           }}
         >
@@ -108,7 +108,7 @@ function PlaceholderComparison() {
     <div className="relative border border-dashed border-pink/20 bg-black-card/30 h-[420px] flex flex-col items-center justify-center">
         <div className="text-center px-8">
           <div className="w-16 h-16 border border-pink/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D496C3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E91E63" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2"/>
               <circle cx="9" cy="9" r="2"/>
               <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>

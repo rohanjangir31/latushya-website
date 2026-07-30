@@ -49,7 +49,7 @@ export default function Philosophy() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="text-gray-subtle text-sm lg:text-base leading-loose max-w-md"
           >
-            We believe that true luxury is quiet. It is found in the perfect alignment of architectural lines, the tactile warmth of premium materials, and the seamless integration of form and function. At Latushya, every space we craft is an homage to timeless Italian design principles, tailored exclusively to your lifestyle.
+            We believe that true luxury is functional. It is found in the silent glide of a wardrobe shutter, the tactile warmth of premium laminates, and the seamless integration of intelligent storage. At Latushya, every bespoke interior we engineer is an homage to uncompromising quality, tailored exclusively to your daily routine.
           </motion.p>
         </div>
 
@@ -60,8 +60,8 @@ export default function Philosophy() {
             className="absolute inset-0 w-full h-full origin-bottom"
           >
             <img 
-              src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2000&auto=format&fit=crop" 
-              alt="Minimalist luxury interior"
+              src="/projects/media__1784490387517.jpg" 
+              alt="Bespoke Wardrobe Design"
               className="w-full h-full object-cover"
               loading="lazy"
             />
