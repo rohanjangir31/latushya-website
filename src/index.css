@@ -216,12 +216,22 @@
   }
   .link-underline-pink::after {
     content: '';
-    @apply absolute bottom-0 left-0 h-px bg-pink;
+    @apply absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink to-blue;
     width: 0;
     transition: width 250ms ease-out;
   }
   .link-underline-pink:hover::after {
     width: 100%;
+  }
+
+  /* Text gradient on hover/active */
+  .hover-text-gradient:hover,
+  .hover-text-gradient.is-active {
+    @apply bg-gradient-to-r from-pink to-blue;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   /* Active state — underline is permanently visible (used by Navbar) */

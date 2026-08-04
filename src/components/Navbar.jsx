@@ -78,8 +78,8 @@ export default function Navbar() {
                   onClick={handleNavClick}
                   onMouseEnter={() => setCursorState('hover')}
                   onMouseLeave={() => setCursorState('default')}
-                  className={`link-underline-pink text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
-                    ${isActive ? 'text-pink is-active' : 'text-gray-subtle hover:text-blue'}`}
+                  className={`link-underline-pink hover-text-gradient text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5 text-gray-subtle
+                    ${isActive ? 'is-active' : ''}`}
                 >
                   {link.label}
                 </Link>
