@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { COMPANY } from '../data/content';
 import QuoteForm from './QuoteForm';
 
@@ -332,9 +333,8 @@ export default function Hero() {
               </button>
 
               {/* Secondary — Ghost/Outline */}
-              <a
-                href="#portfolio"
-                onClick={handlePortfolio}
+              <Link
+                to="/portfolio"
                 id="hero-cta-portfolio"
                 className="font-sans"
                 style={{
@@ -370,7 +370,7 @@ export default function Hero() {
                 }}
               >
                 View Portfolio
-              </a>
+              </Link>
             </motion.div>
 
           </div>

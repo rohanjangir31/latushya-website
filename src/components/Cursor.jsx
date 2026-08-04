@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { useCursor } from '../context/CursorContext';
 
 export default function Cursor() {
   const { cursorState, setCursorState } = useCursor();
   
-  // Track raw mouse position outside of React state
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth springs for the outer ring (snappy and responsive)
-  const springConfig = { damping: 25, stiffness: 700, mass: 0.15 };
+  // Snappy springs for the outer shape
+  const springConfig = { damping: 25, stiffness: 700, mass: 0.1 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Fast springs for the inner dot (almost instant tracking)
-  const dotConfig = { damping: 20, stiffness: 1200, mass: 0.05 };
+  // Instant springs for the inner dot
+  const dotConfig = { damping: 20, stiffness: 1200, mass: 0.02 };
   const dotX = useSpring(mouseX, dotConfig);
   const dotY = useSpring(mouseY, dotConfig);
 
@@ -52,35 +51,42 @@ export default function Cursor() {
     };
   }, [mouseX, mouseY, isVisible, setCursorState]);
 
-  // Variants for different cursor states (handles size, color, blending)
+  // Ultra-premium minimalist variants
   const ringVariants = {
     default: {
-      width: 32,
-      height: 32,
-      backgroundColor: 'rgba(201, 75, 115, 0)',
-      border: '1px solid rgba(90, 185, 234, 0.3)',
-      mixBlendMode: 'normal',
+      width: 0,
+      height: 0,
+      backgroundColor: 'transparent',
+      border: '0px solid transparent',
+      borderRadius: '50%',
+      mixBlendMode: 'difference',
+      opacity: 0,
     },
     hover: {
-      width: 64,
-      height: 64,
-      backgroundColor: 'rgba(201, 75, 115, 0.1)',
-      border: '1px solid rgba(90, 185, 234, 0.3)',
-      mixBlendMode: 'normal',
+      width: 32,
+      height: 32,
+      backgroundColor: '#FFFFFF',
+      border: '0px solid transparent',
+      borderRadius: '50%',
+      mixBlendMode: 'difference',
+      opacity: 1,
     },
     view: {
-      width: 80,
-      height: 80,
-      backgroundColor: 'rgba(255, 255, 255, 1)',
+      width: 48,
+      height: 48,
+      backgroundColor: 'transparent',
       border: 'none',
+      borderRadius: '50%',
       mixBlendMode: 'difference',
+      boxShadow: 'none',
+      opacity: 1,
     },
     hidden: {
       opacity: 0,
+      scale: 0.8,
     }
   };
 
-  // Only show custom cursor on non-touch devices
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
     return null;
   }
@@ -89,44 +95,52 @@ export default function Cursor() {
 
   return (
     <>
-      {/* Outer Ring Wrapper (Handles purely positional GPU translation) */}
       <motion.div
         style={{ x: smoothX, y: smoothY }}
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
       >
-        {/* Inner Ring (Handles centering, size, and style variants) */}
         <motion.div
           variants={ringVariants}
           animate={cursorState}
-          transition={{ type: 'spring', stiffness: 700, damping: 25, mass: 0.15 }}
-          className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full overflow-hidden"
+          transition={{ type: 'spring', stiffness: 700, damping: 25, mass: 0.1 }}
+          className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden"
         >
-          {cursorState === 'view' && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              className="text-black-deep text-[10px] tracking-widest font-bold uppercase mix-blend-normal"
-            >
-              View
-            </motion.span>
-          )}
+          <AnimatePresence>
+            {cursorState === 'view' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0, rotate: -45 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 0, rotate: 45 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="flex items-center justify-center text-white"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="19" x2="19" y2="5"></line>
+                  <polyline points="9 5 19 5 19 15"></polyline>
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </motion.div>
 
-      {/* Tiny Center Dot Wrapper */}
       <motion.div
         style={{ x: dotX, y: dotY }}
-        className="fixed top-0 left-0 pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
       >
         <motion.div
           animate={{
             opacity: cursorState === 'view' || cursorState === 'hidden' ? 0 : 1,
             scale: cursorState === 'hover' ? 0 : 1,
           }}
-          transition={{ duration: 0.2 }}
-          className="relative -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-pink rounded-full"
-        />
+          transition={{ duration: 0.15 }}
+          className="relative text-white -translate-x-[2px] -translate-y-[2px]"
+        >
+          {/* Custom thick, rounded premium pointer */}
+          <svg width="28" height="28" viewBox="-2 -2 20 20" fill="currentColor" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+            <path d="M0 0 L0 14 L4.5 10 L11 10 Z" />
+          </svg>
+        </motion.div>
       </motion.div>
     </>
   );
