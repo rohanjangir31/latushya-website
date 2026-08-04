@@ -13,8 +13,8 @@ export default function Cursor() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Instant springs for the inner dot
-  const dotConfig = { damping: 20, stiffness: 1200, mass: 0.02 };
+  // Smooth, gliding springs for the inner pointer
+  const dotConfig = { damping: 28, stiffness: 500, mass: 0.05 };
   const dotX = useSpring(mouseX, dotConfig);
   const dotY = useSpring(mouseY, dotConfig);
 
@@ -63,21 +63,21 @@ export default function Cursor() {
       opacity: 0,
     },
     hover: {
-      width: 32,
-      height: 32,
-      backgroundColor: '#FFFFFF',
-      border: '0px solid transparent',
+      width: 40,
+      height: 40,
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      border: '1px solid rgba(255, 255, 255, 0.5)',
       borderRadius: '50%',
-      mixBlendMode: 'difference',
+      mixBlendMode: 'normal',
       opacity: 1,
     },
     view: {
-      width: 48,
-      height: 48,
-      backgroundColor: 'transparent',
-      border: 'none',
+      width: 60,
+      height: 60,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      border: '1px solid rgba(255, 255, 255, 0.2)',
       borderRadius: '50%',
-      mixBlendMode: 'difference',
+      mixBlendMode: 'normal',
       boxShadow: 'none',
       opacity: 1,
     },
@@ -102,8 +102,8 @@ export default function Cursor() {
         <motion.div
           variants={ringVariants}
           animate={cursorState}
-          transition={{ type: 'spring', stiffness: 700, damping: 25, mass: 0.1 }}
-          className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden"
+          transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.1 }}
+          className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden backdrop-blur-sm"
         >
           <AnimatePresence>
             {cursorState === 'view' && (
@@ -114,7 +114,7 @@ export default function Cursor() {
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="flex items-center justify-center text-white"
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="19" x2="19" y2="5"></line>
                   <polyline points="9 5 19 5 19 15"></polyline>
                 </svg>
@@ -124,21 +124,26 @@ export default function Cursor() {
         </motion.div>
       </motion.div>
 
+      {/* Inner Stylized Pointer */}
       <motion.div
         style={{ x: dotX, y: dotY }}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
       >
         <motion.div
           animate={{
-            opacity: cursorState === 'view' || cursorState === 'hidden' ? 0 : 1,
-            scale: cursorState === 'hover' ? 0 : 1,
+            opacity: cursorState === 'hover' || cursorState === 'hidden' || cursorState === 'view' ? 0 : 1,
+            scale: cursorState === 'hover' || cursorState === 'view' ? 0 : 1,
           }}
-          transition={{ duration: 0.15 }}
-          className="relative text-white -translate-x-[2px] -translate-y-[2px]"
+          transition={{ duration: 0.15, ease: "easeInOut" }}
+          className="relative origin-top-left -translate-x-[9px] -translate-y-[6px]"
         >
-          {/* Custom thick, rounded premium pointer */}
-          <svg width="28" height="28" viewBox="-2 -2 20 20" fill="currentColor" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
-            <path d="M0 0 L0 14 L4.5 10 L11 10 Z" />
+          {/* Custom white and yellow ultra-chubby pointer requested by user */}
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0px 2px 5px rgba(0,0,0,0.25))' }}>
+            {/* Yellow Tail - shifted left by starting further down the edge, so it visually centers */}
+            <line x1="12" y1="19" x2="16" y2="23" stroke="#FFB800" strokeWidth="8" strokeLinecap="round" />
+            
+            {/* White Arrow Body - geometrically flawless 45-degree angle with huge stroke for a bubbly look */}
+            <path d="M9 6 L9 22 L14 17 L20 17 Z" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="6" strokeLinejoin="round" strokeLinecap="round" />
           </svg>
         </motion.div>
       </motion.div>

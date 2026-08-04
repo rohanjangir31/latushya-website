@@ -22,7 +22,7 @@ function TestimonialPlaceholder() {
           We're collecting authentic reviews from our clients. Once published, real customer stories will appear here. We don't believe in fabricated testimonials.
         </p>
 
-        <div className="mt-8 w-12 h-px bg-pink/30" />
+        <div className="mt-8 w-12 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
 
         <p className="mt-6 text-pink/60 text-xs tracking-widest uppercase">
           Be our first reviewer
@@ -147,7 +147,7 @@ export default function Testimonials() {
                       key={i}
                       onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
                       aria-label={`Go to review ${i + 1}`}
-                      className={`transition-all duration-300 ${i === current ? 'w-8 h-1 bg-pink' : 'w-2 h-1 bg-gray-luxury hover:bg-gray-mid'}`}
+                      className={`transition-all duration-300 ${i === current ? 'w-8 h-1 bg-gradient-to-r from-pink to-blue' : 'w-2 h-1 bg-gray-luxury hover:bg-gray-mid'}`}
                     />
                   ))}
                 </div>

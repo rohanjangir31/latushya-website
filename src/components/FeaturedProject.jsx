@@ -59,13 +59,13 @@ export default function FeaturedProject() {
           
           <Link 
             to="/portfolio"
-            className="inline-flex items-center gap-3 text-white text-xs tracking-widest uppercase hover:text-pink transition-colors duration-300 group"
+            className="inline-flex items-center gap-3 text-white text-xs tracking-widest uppercase transition-colors duration-300 group"
           >
-            <span className="relative">
+            <span className="relative hover-text-gradient">
               Explore Portfolio
-              <span className="absolute left-0 right-0 -bottom-1 h-px bg-pink/30 group-hover:bg-pink transition-colors duration-300" />
+              <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:bg-gradient-to-r transition-colors duration-300" />
             </span>
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300 icon-gradient-hover" />
           </Link>
         </motion.div>
       </div>

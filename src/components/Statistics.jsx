@@ -86,7 +86,7 @@ export default function CredibilityBand() {
                 {sub}
               </div>
 
-              <div className="mt-3 w-6 h-px bg-pink/30 group-hover:w-12 group-hover:bg-pink transition-all duration-500" />
+              <div className="mt-3 w-6 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-12 group-hover:bg-pink transition-all duration-500" />
             </motion.div>
           ))}
         </div>

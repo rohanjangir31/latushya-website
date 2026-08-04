@@ -62,7 +62,7 @@ function ServiceRow({ service, index }) {
           className={`absolute bottom-5 flex items-center gap-3 z-10
             ${isEven ? 'left-5' : 'right-5 flex-row-reverse'}`}
         >
-          <div className="w-8 h-px bg-pink/35" />
+          <div className="w-8 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
           <span className="text-white/30 text-[8px] tracking-[0.32em] uppercase">
             Bangalore · Custom Made
           </span>
@@ -130,7 +130,7 @@ function ServiceRow({ service, index }) {
             initial={{ width: 0 }}
             animate={inView ? { width: '2.5rem' } : {}}
             transition={{ duration: 0.55, delay: 0.4 }}
-            className="h-px bg-pink/45 mb-6"
+            className="h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 mb-6"
           />
 
           {/* Description */}

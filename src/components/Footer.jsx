@@ -135,7 +135,7 @@ export default function Footer() {
                 {footerLinks['Our Services'].map((item) => (
                   <li key={item.label}>
                     <Link to={item.href} className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group">
-                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
+                      <span className="w-3 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>
@@ -155,7 +155,7 @@ export default function Footer() {
                       to={item.href}
                       className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group"
                     >
-                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
+                      <span className="w-3 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>

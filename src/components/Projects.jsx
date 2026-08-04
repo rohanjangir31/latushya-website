@@ -638,34 +638,25 @@ export default function Projects() {
             aria-modal="true"
             aria-label="Project gallery lightbox"
           >
-            {/* Close */}
-            <button
-              onClick={closeGallery}
-              aria-label="Close lightbox"
-              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
-            >
-              <X size={32} strokeWidth={1} />
-            </button>
-
             {/* Prev */}
             <button
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
-              <ChevronLeft size={48} strokeWidth={1} />
+              <ChevronLeft size={32} strokeWidth={2} />
             </button>
 
             {/* Next */}
             <button
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
-              <ChevronRight size={48} strokeWidth={1} />
+              <ChevronRight size={32} strokeWidth={2} />
             </button>
 
-            {/* Image */}
+            {/* Image Wrapper */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={galleryIndex}
@@ -673,20 +664,29 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="w-full h-full flex items-center justify-center p-4 lg:p-12 relative"
+                className="relative flex flex-col items-center max-w-[90vw] max-h-[80vh]"
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Close Button Attached to Photo Corner */}
+                <button
+                  onClick={closeGallery}
+                  aria-label="Close lightbox"
+                  className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
+                >
+                  <X size={24} strokeWidth={3} />
+                </button>
+
                 <img
                   src={activeProject.gallery[galleryIndex].src}
                   alt={activeProject.gallery[galleryIndex].caption}
-                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  className="max-w-full max-h-[80vh] object-contain drop-shadow-2xl rounded-sm"
                   loading="eager"
                 />
 
                 {/* Minimal Caption */}
-                <div className="absolute bottom-8 left-12 right-12 text-center pointer-events-none">
-                  <span className="text-pink/80 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
-                  <p className="text-white/60 text-sm font-light max-w-xl mx-auto">{activeProject.gallery[galleryIndex].caption}</p>
+                <div className="absolute -bottom-16 left-0 right-0 text-center pointer-events-none">
+                  <span className="text-pink/90 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
+                  <p className="text-white/80 text-sm font-light max-w-xl mx-auto">{activeProject.gallery[galleryIndex].caption}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

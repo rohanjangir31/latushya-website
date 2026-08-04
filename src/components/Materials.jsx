@@ -30,7 +30,7 @@ function MaterialCard({ mat, index, isPink }) {
           </span>
         </div>
         <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-pink/40 group-hover:bg-pink/10 transition-all duration-500 shrink-0">
-          <ArrowUpRight size={14} className="text-white/40 group-hover:text-pink transition-colors duration-500" />
+          <ArrowUpRight size={14} className="text-white/40 icon-gradient-hover" />
         </div>
       </div>
       

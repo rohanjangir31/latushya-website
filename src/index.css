@@ -11,7 +11,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    cursor: none !important;
   }
 
   html {
@@ -32,9 +31,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Hide default cursor on desktop for custom cursor */
+  /* Custom Cursor Rules */
   @media (pointer: fine) {
-    *, a, button {
+    /* Hide the default cursor completely across the entire app */
+    *,
+    *::before,
+    *::after {
       cursor: none !important;
     }
   }
@@ -156,7 +158,7 @@
 
   /* ─── Decorative ──────────────────────────────────────── */
   .pink-line {
-    @apply w-16 h-px bg-gradient-to-r from-pink to-transparent;
+    @apply w-16 h-[2px] bg-gradient-to-r from-pink to-blue opacity-90;
   }
 
   .glass {
@@ -232,6 +234,14 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
+  }
+
+  /* SVG Stroke gradient on hover */
+  .icon-gradient-hover {
+    transition: stroke 500ms ease-out;
+  }
+  .group:hover .icon-gradient-hover {
+    stroke: url(#pinkBlue) !important;
   }
 
   /* Active state — underline is permanently visible (used by Navbar) */

@@ -28,7 +28,7 @@ export default function Philosophy() {
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-12 h-px bg-pink/50" />
+            <div className="w-12 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
             <span className="text-pink text-xs tracking-[0.3em] uppercase font-semibold">Our Philosophy</span>
           </motion.div>
 

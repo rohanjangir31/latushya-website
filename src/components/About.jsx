@@ -77,7 +77,7 @@ export default function About() {
                   <p className="font-display text-2xl text-white tracking-wide">The Founders</p>
                   <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Latushya Interiors</p>
                 </div>
-                <div className="w-16 h-px bg-pink/50" />
+                <div className="w-16 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
               </div>
             </AnimatedSection>
           </div>
