@@ -71,7 +71,7 @@
   }
 
   ::selection {
-    background: rgba(201, 75, 115, 0.3);
+    background: rgba(223, 76, 115, 0.3);
     color: #DF4C73;
   }
 
@@ -106,7 +106,7 @@
   /* 300ms ease-out lift — consistent across the whole site  */
   .btn-pink {
     @apply relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold
-           bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_20px_rgba(201,75,115,0.3)]
+           bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_20px_rgba(223,76,115,0.3)]
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink focus-visible:outline-offset-2;
@@ -163,7 +163,7 @@
     background: rgba(13, 22, 38, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(201, 75, 115, 0.1);
+    border: 1px solid rgba(223, 76, 115, 0.1);
   }
 
   /* ─── Section divider ─────────────────────────────────── */
@@ -171,7 +171,7 @@
      Use as <div className="section-divider" /> */
   .section-divider {
     @apply relative h-px w-full overflow-visible;
-    background: linear-gradient(to right, transparent 0%, rgba(201, 75, 115,0.2) 30%, rgba(201, 75, 115,0.2) 70%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, rgba(223, 76, 115,0.2) 30%, rgba(223, 76, 115,0.2) 70%, transparent 100%);
   }
   .section-divider::after {
     content: '◆';

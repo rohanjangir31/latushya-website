@@ -78,8 +78,8 @@ function CapabilityRow({ item, index, totalInView }) {
         style={{
           height: '1px',
           background: hovered
-            ? 'rgba(201, 75, 115,0.25)'
-            : 'rgba(201, 75, 115,0.11)',
+            ? 'rgba(223, 76, 115,0.25)'
+            : 'rgba(223, 76, 115,0.11)',
           transition: 'background 350ms ease',
         }}
       />
@@ -104,7 +104,7 @@ function CapabilityRow({ item, index, totalInView }) {
               fontWeight: 300,
               lineHeight: 1,
               letterSpacing: '-0.02em',
-              color: hovered ? 'rgba(201, 75, 115,0.55)' : 'rgba(201, 75, 115,0.20)',
+              color: hovered ? 'rgba(223, 76, 115,0.55)' : 'rgba(223, 76, 115,0.20)',
               transition: 'color 350ms ease',
               userSelect: 'none',
               display: 'block',
@@ -198,7 +198,7 @@ export default function WhyChoose() {
                 fontWeight: 500,
                 letterSpacing: '0.38em',
                 textTransform: 'uppercase',
-                color: 'rgba(201, 75, 115,0.65)',
+                color: 'rgba(223, 76, 115,0.65)',
               }}
             >
               Why Latushya
@@ -256,7 +256,7 @@ export default function WhyChoose() {
             transition={{ duration: 1.4, delay: 0.32, ease: EASE }}
             style={{
               height: '1px',
-              background: 'linear-gradient(to right, rgba(90, 185, 234,0.22), rgba(201, 75, 115,0.05) 55%, transparent)',
+              background: 'linear-gradient(to right, rgba(90, 185, 234,0.22), rgba(223, 76, 115,0.05) 55%, transparent)',
               transformOrigin: 'left',
               marginTop: '36px',
             }}

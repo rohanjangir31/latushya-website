@@ -76,7 +76,7 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
           style={{
             left: `${sliderPos}%`,
             width: '1px',
-            backgroundColor: 'rgba(201, 75, 115,0.7)',
+            backgroundColor: 'rgba(223, 76, 115,0.7)',
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
           }}
         >

@@ -155,7 +155,7 @@ export default function Hero() {
                 style={{
                   fontSize: '0.625rem',
                   letterSpacing: '0.32em',
-                  color: 'rgba(201, 75, 115,0.75)',
+                  color: 'rgba(223, 76, 115,0.75)',
                 }}
               >
                 {COMPANY.specialty}
@@ -298,7 +298,7 @@ export default function Hero() {
               <button
                 onClick={handleConsult}
                 id="hero-cta-consult"
-                className="font-sans shadow-[0_4px_25px_rgba(201,75,115,0.4)]"
+                className="font-sans shadow-[0_4px_25px_rgba(223, 76, 115,0.4)]"
                 style={{
                   height: '72px',
                   paddingLeft: '2.75rem',
@@ -320,12 +320,12 @@ export default function Hero() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#5AB9EA';
-                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(90,185,234,0.5)';
+                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(90, 185, 234,0.5)';
                   e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 25px rgba(201,75,115,0.4)';
+                  e.currentTarget.style.boxShadow = '0 4px 25px rgba(223, 76, 115,0.4)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
@@ -364,7 +364,7 @@ export default function Hero() {
                   e.currentTarget.style.background = 'rgba(90, 185, 234, 0.08)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(201, 75, 115,0.45)';
+                  e.currentTarget.style.borderColor = 'rgba(223, 76, 115,0.45)';
                   e.currentTarget.style.color = '#5AB9EA';
                   e.currentTarget.style.background = 'transparent';
                 }}
@@ -397,7 +397,7 @@ export default function Hero() {
           style={{
             width: '1px',
             height: '36px',
-            background: 'linear-gradient(to bottom, rgba(201, 75, 115,0.55), rgba(201, 75, 115,0))',
+            background: 'linear-gradient(to bottom, rgba(223, 76, 115,0.55), rgba(223, 76, 115,0))',
           }}
         />
       </motion.div>

@@ -153,7 +153,7 @@ function Preloader() {
             {/* Subtle vertical architectural lighting on right edge */}
             <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-pink/30 to-transparent opacity-60" />
             {/* Trailing pink trim along the bottom edge as panels rise */}
-            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(201, 75, 115,0.6)]" />
+            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(223, 76, 115,0.6)]" />
           </motion.div>
         ))}
       </div>
@@ -178,7 +178,7 @@ function Preloader() {
           <img
             src="/logo-2d.png"
             alt="Latushya Premium Interior Studio"
-            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(201, 75, 115,0.2)] mb-6"
+            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(223, 76, 115,0.2)] mb-6"
           />
 
           {/* Elegant expanding pink dividing line */}

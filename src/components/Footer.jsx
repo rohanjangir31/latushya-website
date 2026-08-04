@@ -65,20 +65,20 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-black-charcoal border-t border-pink/10 relative">
-        {/* Top CTA band */}
-        <div className="bg-pink py-8">
+        {/* Top CTA band (Ultra Minimalist & Compact) */}
+        <div className="border-b border-gray-luxury/30 py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="font-display text-2xl text-black-deep font-medium">
+              <h3 className="font-display text-xl md:text-2xl text-white font-light tracking-wider">
                 Your perfect space awaits.
               </h3>
-              <p className="text-black-deep/70 text-sm mt-1">
+              <p className="text-gray-light text-xs mt-1.5 font-light">
                 Book a free in-home consultation — no obligations, ever.
               </p>
             </div>
             <button
               onClick={handleConsult}
-              className="flex-shrink-0 bg-black-deep text-pink font-semibold px-8 py-4 rounded-full text-xs tracking-widest uppercase hover:bg-black-charcoal transition-colors duration-300"
+              className="flex-shrink-0 bg-transparent border border-pink text-pink font-medium px-8 py-3.5 rounded-full text-xs tracking-widest uppercase hover:bg-pink hover:text-white transition-all duration-500"
               id="footer-cta"
             >
               Book Free Consultation

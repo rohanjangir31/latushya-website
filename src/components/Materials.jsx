@@ -86,7 +86,7 @@ export default function MaterialsSection() {
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
             <div style={{ width: '18px', height: '1px', background: 'linear-gradient(to right, #DF4C73, #5AB9EA)' }} />
-            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(201, 75, 115,0.65)' }}>
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(223, 76, 115,0.65)' }}>
               The Foundation
             </span>
           </motion.div>

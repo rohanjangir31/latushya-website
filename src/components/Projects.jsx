@@ -73,13 +73,13 @@ function PlaceholderOverlay({ index, imageHeight, hovered }) {
         }}>
           <span style={{
             fontFamily: DISPLAY, fontSize: '1.1rem',
-            fontWeight: 300, color: 'rgba(201, 75, 115,0.4)',
+            fontWeight: 300, color: 'rgba(223, 76, 115,0.4)',
           }}>L</span>
         </div>
         <span style={{
           fontFamily: SANS, fontSize: '0.5rem',
           letterSpacing: '0.45em', textTransform: 'uppercase',
-          color: 'rgba(201, 75, 115,0.35)',
+          color: 'rgba(223, 76, 115,0.35)',
         }}>Photography Pending</span>
       </div>
     </>
@@ -130,10 +130,10 @@ function ViewLink({ onClick }) {
         fontWeight: 500,
         letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        color: h ? '#DF4C73' : 'rgba(201, 75, 115,0.65)',
+        color: h ? '#DF4C73' : 'rgba(223, 76, 115,0.65)',
         textDecoration: 'none',
         paddingBottom: '3px',
-        borderBottom: h ? '1px solid rgba(201, 75, 115,0.6)' : '1px solid transparent',
+        borderBottom: h ? '1px solid rgba(223, 76, 115,0.6)' : '1px solid transparent',
         transition: 'color 0.35s ease, border-color 0.35s ease',
         cursor: 'pointer',
       }}
@@ -167,7 +167,7 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
         fontWeight: 500,
         letterSpacing: '0.28em',
         textTransform: 'uppercase',
-        color: 'rgba(201, 75, 115,0.72)',
+        color: 'rgba(223, 76, 115,0.72)',
         marginBottom: '14px',
       }}>
         {project.location || 'Bangalore'}
@@ -281,7 +281,7 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
           <span style={{
             fontFamily: SANS, fontSize: '0.75rem',
             fontWeight: 500, letterSpacing: '0.28em',
-            textTransform: 'uppercase', color: 'rgba(201, 75, 115,0.72)',
+            textTransform: 'uppercase', color: 'rgba(223, 76, 115,0.72)',
           }}>
             {project.location || 'Bangalore'}
           </span>
@@ -479,7 +479,7 @@ export default function Projects() {
             <span style={{
               fontFamily: SANS, fontSize: '0.5625rem',
               letterSpacing: '0.38em', textTransform: 'uppercase',
-              color: 'rgba(201, 75, 115,0.65)',
+              color: 'rgba(223, 76, 115,0.65)',
             }}>Design Masterpieces</span>
           </motion.div>
 
@@ -523,7 +523,7 @@ export default function Projects() {
             transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
             style={{
               height: '1px',
-              background: 'linear-gradient(to right, rgba(90, 185, 234,0.22), rgba(201, 75, 115,0.05) 55%, transparent)',
+              background: 'linear-gradient(to right, rgba(90, 185, 234,0.22), rgba(223, 76, 115,0.05) 55%, transparent)',
               transformOrigin: 'left',
               marginTop: '36px',
             }}
@@ -607,7 +607,7 @@ export default function Projects() {
             style={{
               marginTop: '96px',
               paddingLeft: '18px',
-              borderLeft: '1px solid rgba(201, 75, 115,0.15)',
+              borderLeft: '1px solid rgba(223, 76, 115,0.15)',
             }}
           >
             <p style={{

@@ -122,7 +122,7 @@ export default function QuoteForm() {
 
               <button 
                 type="submit"
-                className="mt-3 w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white shadow-[0_4px_20px_rgba(201,75,115,0.4)] font-semibold text-[10px] tracking-[0.2em] uppercase rounded-full hover:from-[#5AB9EA] hover:to-[#5AB9EA] hover:shadow-[0_4px_20px_rgba(90,185,234,0.5)] transition-all duration-400"
+                className="mt-3 w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white shadow-[0_4px_20px_rgba(223, 76, 115,0.4)] font-semibold text-[10px] tracking-[0.2em] uppercase rounded-full hover:from-[#5AB9EA] hover:to-[#5AB9EA] hover:shadow-[0_4px_20px_rgba(90, 185, 234,0.5)] transition-all duration-400"
               >
                 Submit Request
               </button>

@@ -15,7 +15,7 @@ export default {
           card: '#0A1220',
         },
         pink: {
-          DEFAULT: '#DF4C73',
+          DEFAULT: '#DF4C73', // Warm Cashmere / Bronze
           light: '#F07595',
           dark: '#C2185B',
           muted: '#D81B60',
@@ -62,8 +62,8 @@ export default {
         'hero-overlay': 'linear-gradient(to right, rgba(5,11,20,0.9) 0%, rgba(5,11,20,0.5) 60%, rgba(5,11,20,0.2) 100%)',
       },
       boxShadow: {
-        'pink': '0 0 30px rgba(233, 30, 99, 0.15)',
-        'pink-lg': '0 0 60px rgba(233, 30, 99, 0.25)',
+        'pink': '0 0 30px rgba(223, 76, 115, 0.15)',
+        'pink-lg': '0 0 60px rgba(223, 76, 115, 0.25)',
         'luxury': '0 25px 80px rgba(0,0,0,0.6)',
         'card': '0 8px 40px rgba(0,0,0,0.4)',
       },
@@ -83,8 +83,8 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulsePink: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(233, 30, 99, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(233, 30, 99, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(223, 76, 115, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(223, 76, 115, 0.6)' },
         },
         scroll: {
           '0%': { transform: 'translateY(0)', opacity: '1' },

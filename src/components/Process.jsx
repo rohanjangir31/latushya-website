@@ -43,7 +43,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
         className="absolute left-0 top-0 w-px bg-pink transition-all duration-1000"
         style={{
           height: isActive ? '100%' : '0%',
-          boxShadow: isActive ? '0 0 10px rgba(201, 75, 115,0.5)' : 'none'
+          boxShadow: isActive ? '0 0 10px rgba(223, 76, 115,0.5)' : 'none'
         }}
       />
 
@@ -53,7 +53,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
         style={{
           width: isActive ? '24px' : '12px',
           height: isActive ? '24px' : '12px',
-          borderColor: isActive ? '#DF4C73' : 'rgba(201, 75, 115,0.2)',
+          borderColor: isActive ? '#DF4C73' : 'rgba(223, 76, 115,0.2)',
         }}
       >
         <div 
@@ -61,7 +61,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
           style={{
             width: isActive ? '6px' : '0px',
             height: isActive ? '6px' : '0px',
-            boxShadow: isActive ? '0 0 8px rgba(201, 75, 115,0.8)' : 'none'
+            boxShadow: isActive ? '0 0 8px rgba(223, 76, 115,0.8)' : 'none'
           }}
         />
       </div>
@@ -77,7 +77,7 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
           fontSize: 'clamp(8rem, 15vw, 14rem)',
           fontWeight: 700,
           color: 'transparent',
-          WebkitTextStroke: isActive ? '1px rgba(201, 75, 115,0.15)' : '1px rgba(255,255,255,0.03)',
+          WebkitTextStroke: isActive ? '1px rgba(223, 76, 115,0.15)' : '1px rgba(255,255,255,0.03)',
           lineHeight: 1,
           zIndex: 0,
           pointerEvents: 'none',
@@ -146,7 +146,7 @@ export default function Process() {
             style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
           >
             <div style={{ width: '18px', height: '1px', background: 'linear-gradient(to right, #DF4C73, #5AB9EA)' }} />
-            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(201, 75, 115,0.65)' }}>
+            <span style={{ fontFamily: SANS, fontSize: '12px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(223, 76, 115,0.65)' }}>
               Methodology
             </span>
           </motion.div>
