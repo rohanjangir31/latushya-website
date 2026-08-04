@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { COMPANY } from '../data/content';
+import QuoteForm from './QuoteForm';
 
 // ─────────────────────────────────────────────────────────────
 // HERO V2  —  Editorial / Magazine-Cover Composition
@@ -131,9 +132,11 @@ export default function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 h-full flex items-end"
       >
-        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-16 pb-16 lg:pb-24">
+        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-16 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
+          
+          {/* Left Text Block */}
           {/* Constrain text to left ~52% on desktop, full width on mobile */}
-          <div className="max-w-[620px]">
+          <div className="max-w-[620px] w-full">
 
             {/* ── EYEBROW LABEL ──────────────────────────────── */}
             <motion.div
@@ -144,14 +147,14 @@ export default function Hero() {
             >
               <div
                 className="h-px w-6"
-                style={{ background: 'rgba(233, 30, 99,0.7)' }}
+                style={{ background: 'linear-gradient(to right, #DF4C73, #5AB9EA)' }}
               />
               <span
                 className="uppercase font-medium"
                 style={{
                   fontSize: '0.625rem',
                   letterSpacing: '0.32em',
-                  color: 'rgba(233, 30, 99,0.75)',
+                  color: 'rgba(201, 75, 115,0.75)',
                 }}
               >
                 {COMPANY.specialty}
@@ -239,7 +242,7 @@ export default function Hero() {
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
-                    color: '#E91E63',
+                    color: '#DF4C73',
                     fontStyle: 'italic',
                   }}
                 >
@@ -256,7 +259,7 @@ export default function Hero() {
               style={{
                 height: '1px',
                 width: '3rem',
-                background: 'rgba(233, 30, 99,0.28)',
+                background: 'linear-gradient(to right, #DF4C73, #5AB9EA)',
                 transformOrigin: 'left',
                 marginBottom: 'clamp(1rem, 2vw, 1.6rem)',
               }}
@@ -294,30 +297,35 @@ export default function Hero() {
               <button
                 onClick={handleConsult}
                 id="hero-cta-consult"
-                className="font-sans"
+                className="font-sans shadow-[0_4px_25px_rgba(201,75,115,0.4)]"
                 style={{
                   height: '72px',
                   paddingLeft: '2.75rem',
                   paddingRight: '2.75rem',
-                  background: '#E91E63',
-                  color: '#03070E',
+                  background: 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)',
+                  color: '#FFFFFF',
                   fontWeight: 600,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   border: 'none',
+                  borderRadius: '9999px',
                   cursor: 'pointer',
                   position: 'relative',
                   overflow: 'hidden',
-                  transition: 'background 0.4s ease, color 0.4s ease',
+                  transition: 'background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
                   whiteSpace: 'nowrap',
                   flexShrink: 0,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#E8CB6A';
+                  e.currentTarget.style.background = '#5AB9EA';
+                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(90,185,234,0.5)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#E91E63';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)';
+                  e.currentTarget.style.boxShadow = '0 4px 25px rgba(201,75,115,0.4)';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 Book Consultation
@@ -334,12 +342,13 @@ export default function Hero() {
                   paddingLeft: '2.25rem',
                   paddingRight: '2.25rem',
                   background: 'transparent',
-                  color: 'rgba(233, 30, 99,0.90)',
+                  color: '#DF4C73',
                   fontWeight: 500,
                   fontSize: '0.6875rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  border: '1px solid rgba(233, 30, 99,0.45)',
+                  border: '1px solid rgba(90, 185, 234, 0.3)',
+                  borderRadius: '9999px',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -350,13 +359,13 @@ export default function Hero() {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(233, 30, 99,0.85)';
-                  e.currentTarget.style.color = '#E91E63';
-                  e.currentTarget.style.background = 'rgba(233, 30, 99,0.06)';
+                  e.currentTarget.style.borderColor = '#5AB9EA';
+                  e.currentTarget.style.color = '#5AB9EA';
+                  e.currentTarget.style.background = 'rgba(90, 185, 234, 0.08)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(233, 30, 99,0.45)';
-                  e.currentTarget.style.color = 'rgba(233, 30, 99,0.90)';
+                  e.currentTarget.style.borderColor = 'rgba(201, 75, 115,0.45)';
+                  e.currentTarget.style.color = '#5AB9EA';
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
@@ -365,6 +374,12 @@ export default function Hero() {
             </motion.div>
 
           </div>
+
+          {/* Right Floating Quote Form */}
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end shrink-0 relative z-20">
+             <QuoteForm />
+          </div>
+
         </div>
       </motion.div>
 
@@ -382,7 +397,7 @@ export default function Hero() {
           style={{
             width: '1px',
             height: '36px',
-            background: 'linear-gradient(to bottom, rgba(233, 30, 99,0.55), rgba(233, 30, 99,0))',
+            background: 'linear-gradient(to bottom, rgba(201, 75, 115,0.55), rgba(201, 75, 115,0))',
           }}
         />
       </motion.div>

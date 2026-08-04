@@ -42,20 +42,67 @@ class ErrorBoundary extends React.Component {
 
 // Scroll to top or specific hash on route change
 function ScrollToTopRoute() {
-  const { pathname, hash } = useLocation();
+  const location = useLocation();
+  const { pathname, hash } = location;
+  
   useEffect(() => {
     if (hash) {
-      setTimeout(() => {
-        const id = hash.replace('#', '');
+      const id = hash.replace('#', '');
+      let attempts = 0;
+      
+      const checkAndScroll = setInterval(() => {
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const y = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          clearInterval(checkAndScroll);
         }
-      }, 500); // Wait for page transition
+        
+        attempts++;
+        if (attempts > 30) {
+          clearInterval(checkAndScroll);
+        }
+      }, 100);
+
+      return () => clearInterval(checkAndScroll);
     } else {
       window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
+
+  // Global click listener for when a user clicks a link to the EXACT same hash they are already on
+  useEffect(() => {
+    const handleSamePageHashClick = (e) => {
+      const a = e.target.closest('a');
+      if (!a || !a.href) return;
+      
+      try {
+        const url = new URL(a.href);
+        // If the link points to the exact same path we are currently on
+        if (url.pathname === location.pathname && url.hash === location.hash) {
+          e.preventDefault(); // Prevent default browser jump
+          
+          if (url.hash) {
+            const id = url.hash.replace('#', '');
+            const element = document.getElementById(id);
+            if (element) {
+              const y = element.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          } else {
+            // No hash, so they clicked a link to the current page (e.g. Quick Links). Scroll to top.
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
+      } catch (err) {
+        // Ignore invalid URLs
+      }
+    };
+
+    document.addEventListener('click', handleSamePageHashClick);
+    return () => document.removeEventListener('click', handleSamePageHashClick);
+  }, [location]);
+  
   return null;
 }
 
@@ -106,7 +153,7 @@ function Preloader() {
             {/* Subtle vertical architectural lighting on right edge */}
             <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-pink/30 to-transparent opacity-60" />
             {/* Trailing pink trim along the bottom edge as panels rise */}
-            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(233, 30, 99,0.6)]" />
+            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(201, 75, 115,0.6)]" />
           </motion.div>
         ))}
       </div>
@@ -131,7 +178,7 @@ function Preloader() {
           <img
             src="/logo-2d.png"
             alt="Latushya Premium Interior Studio"
-            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(233, 30, 99,0.2)] mb-6"
+            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(201, 75, 115,0.2)] mb-6"
           />
 
           {/* Elegant expanding pink dividing line */}
@@ -248,16 +295,16 @@ function AppContent() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  // Initialize Lenis smooth scroll with luxurious settings
+  // Initialize Lenis smooth scroll with luxurious but snappy settings
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.6, // Slower, heavier scroll
+      duration: 0.8, // Snappier, more responsive scroll
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       smoothTouch: false,
-      touchMultiplier: 2,
+      touchMultiplier: 2.5, // slightly more responsive on trackpads
     });
 
     function raf(time) {

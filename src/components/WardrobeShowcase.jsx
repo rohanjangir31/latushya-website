@@ -37,8 +37,8 @@ export default function WardrobeShowcase() {
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex items-center gap-4 mb-6"
         >
-          <div className="w-12 h-[2px] bg-[#E91E63]" />
-          <span className="text-[#E91E63] text-xs tracking-[0.4em] uppercase font-semibold">
+          <div className="w-12 h-[2px] bg-[#DF4C73]" />
+          <span className="text-[#DF4C73] text-xs tracking-[0.4em] uppercase font-semibold">
             Mastering Storage
           </span>
         </motion.div>
@@ -86,7 +86,7 @@ export default function WardrobeShowcase() {
 
               {/* Text */}
               <div className="px-2">
-                <h3 className="font-display text-2xl lg:text-3xl text-white mb-4 transition-colors duration-500 group-hover:text-[#E91E63]">
+                <h3 className="font-display text-2xl lg:text-3xl text-white mb-4 transition-colors duration-500 group-hover:text-[#DF4C73]">
                   {cat.title}
                 </h3>
                 <p className="text-white/40 text-sm leading-relaxed font-light max-w-[280px]">
@@ -95,7 +95,7 @@ export default function WardrobeShowcase() {
               </div>
 
               {/* Decorative line on hover */}
-              <div className="absolute -bottom-8 left-2 w-0 h-[1px] bg-[#E91E63]/50 transition-all duration-700 group-hover:w-16" />
+              <div className="absolute -bottom-8 left-2 w-0 h-[1px] bg-[#DF4C73]/50 transition-all duration-700 group-hover:w-16" />
             </motion.div>
           ))}
         </div>

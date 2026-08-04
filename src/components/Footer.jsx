@@ -78,7 +78,7 @@ export default function Footer() {
             </div>
             <button
               onClick={handleConsult}
-              className="flex-shrink-0 bg-black-deep text-pink font-semibold px-8 py-4 text-xs tracking-widest uppercase hover:bg-black-charcoal transition-colors duration-300"
+              className="flex-shrink-0 bg-black-deep text-pink font-semibold px-8 py-4 rounded-full text-xs tracking-widest uppercase hover:bg-black-charcoal transition-colors duration-300"
               id="footer-cta"
             >
               Book Free Consultation
@@ -118,7 +118,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="w-10 h-10 border border-gray-luxury/30 hover:border-pink/60 flex items-center justify-center text-gray-subtle hover:text-pink transition-all duration-300 group"
+                    className="w-10 h-10 border border-gray-luxury/30 hover:border-blue/60 flex items-center justify-center text-gray-subtle hover:text-blue transition-all duration-300 group"
                   >
                     <Icon />
                   </a>
@@ -134,8 +134,8 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks['Our Services'].map((item) => (
                   <li key={item.label}>
-                    <Link to={item.href} className="text-gray-light text-sm hover:text-pink transition-colors duration-300 flex items-center gap-2 group">
-                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-pink transition-all duration-300" />
+                    <Link to={item.href} className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group">
+                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>
@@ -153,9 +153,9 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.href}
-                      className="text-gray-light text-sm hover:text-pink transition-colors duration-300 flex items-center gap-2 group"
+                      className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group"
                     >
-                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-pink transition-all duration-300" />
+                      <span className="w-3 h-px bg-pink/30 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
                       {item.label}
                     </Link>
                   </li>
@@ -180,7 +180,7 @@ export default function Footer() {
                 <li className="flex items-center gap-3">
                   <Phone size={14} className="text-pink flex-shrink-0" />
                   {COMPANY.phone ? (
-                    <a href={`tel:${COMPANY.phone}`} className="text-gray-light hover:text-pink transition-colors text-sm">
+                    <a href={`tel:${COMPANY.phone}`} className="text-gray-light hover:text-blue transition-colors text-sm">
                       {COMPANY.phone}
                     </a>
                   ) : (
@@ -190,7 +190,7 @@ export default function Footer() {
                 <li className="flex items-center gap-3">
                   <Mail size={14} className="text-pink flex-shrink-0" />
                   {COMPANY.email ? (
-                    <a href={`mailto:${COMPANY.email}`} className="text-gray-light hover:text-pink transition-colors text-sm">
+                    <a href={`mailto:${COMPANY.email}`} className="text-gray-light hover:text-blue transition-colors text-sm">
                       {COMPANY.email}
                     </a>
                   ) : (
@@ -200,7 +200,7 @@ export default function Footer() {
                 <li className="pt-2">
                   <button
                     onClick={handleConsult}
-                    className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-pink border border-pink/40 hover:bg-pink hover:text-black-deep px-5 py-3 transition-all duration-300"
+                    className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-pink border border-pink/40 hover:bg-pink hover:text-black-deep px-6 py-3 rounded-full transition-all duration-300"
                   >
                     Free Consultation
                   </button>

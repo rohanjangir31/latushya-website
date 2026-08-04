@@ -183,7 +183,7 @@ export default function Services() {
           transition={{ duration: 0.7 }}
           className="flex items-center gap-4 mb-5"
         >
-          <div className="w-12 h-[2px] bg-pink" style={{ boxShadow: '0 0 10px rgba(233, 30, 99,0.4)' }} />
+          <div className="w-12 h-[2px] bg-pink" style={{ boxShadow: '0 0 20px rgba(90, 185, 234, 0.4)' }} />
           <span className="text-pink text-xs tracking-[0.4em] uppercase font-semibold">
             Our Expertise
           </span>

@@ -15,14 +15,14 @@ export default {
           card: '#0A1220',
         },
         pink: {
-          DEFAULT: '#E91E63',
-          light: '#F06292',
+          DEFAULT: '#DF4C73',
+          light: '#F07595',
           dark: '#C2185B',
           muted: '#D81B60',
           pale: '#F8BBD0',
         },
         blue: {
-          DEFAULT: '#67CBE1',
+          DEFAULT: '#5AB9EA',
           light: '#8EDDF0',
           dark: '#4A9CB0',
           muted: '#5CBED4',
@@ -56,7 +56,8 @@ export default {
         ultra: '0.4em',
       },
       backgroundImage: {
-        'pink-gradient': 'linear-gradient(135deg, #E91E63 0%, #F06292 100%)',
+        'pink-gradient': 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)',
+        'dual-gradient': 'linear-gradient(to right, #DF4C73 0%, #5AB9EA 100%)',
         'dark-gradient': 'linear-gradient(180deg, #050B14 0%, #0D1626 100%)',
         'hero-overlay': 'linear-gradient(to right, rgba(5,11,20,0.9) 0%, rgba(5,11,20,0.5) 60%, rgba(5,11,20,0.2) 100%)',
       },

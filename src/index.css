@@ -70,8 +70,8 @@
   }
 
   ::selection {
-    background: rgba(233, 30, 99, 0.3);
-    color: #E91E63;
+    background: rgba(201, 75, 115, 0.3);
+    color: #DF4C73;
   }
 
   /* Pink scrollbar */
@@ -82,7 +82,7 @@
     background: #03070E;
   }
   ::-webkit-scrollbar-thumb {
-    background: #E91E63;
+    background: #DF4C73;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -104,23 +104,18 @@
   /* ─── Buttons ─────────────────────────────────────────── */
   /* 300ms ease-out lift — consistent across the whole site  */
   .btn-pink {
-    @apply relative overflow-hidden inline-flex items-center justify-center bg-pink text-black-deep font-semibold
+    @apply relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold
+           bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_20px_rgba(201,75,115,0.3)]
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink focus-visible:outline-offset-2;
   }
-  .btn-pink::before {
-    content: '';
-    @apply absolute inset-0 bg-pink-light translate-x-full;
-    transition: transform 300ms ease-out;
-  }
   .btn-pink:hover         { transform: translateY(-2px); filter: brightness(1.06); }
-  .btn-pink:hover::before { transform: translateX(0); }
   .btn-pink:active        { transform: translateY(0px); filter: brightness(1.0); }
   .btn-pink span          { @apply relative z-10; }
 
   .btn-outline {
-    @apply relative overflow-hidden inline-flex items-center justify-center border border-pink text-pink font-semibold
+    @apply relative overflow-hidden rounded-full inline-flex items-center justify-center border border-pink text-pink font-semibold
            px-8 py-4 tracking-widest text-xs uppercase
            transition-[transform,filter,color] duration-300
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink focus-visible:outline-offset-2;
@@ -137,7 +132,7 @@
 
   /* ─── Typography ──────────────────────────────────────── */
   .pink-text {
-    background: linear-gradient(135deg, #E91E63 0%, #F06292 50%, #F48FB1 100%);
+    background: linear-gradient(135deg, #DF4C73 0%, #F07595 50%, #F48FB1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -167,7 +162,7 @@
     background: rgba(13, 22, 38, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(233, 30, 99, 0.1);
+    border: 1px solid rgba(201, 75, 115, 0.1);
   }
 
   /* ─── Section divider ─────────────────────────────────── */
@@ -175,7 +170,7 @@
      Use as <div className="section-divider" /> */
   .section-divider {
     @apply relative h-px w-full overflow-visible;
-    background: linear-gradient(to right, transparent 0%, rgba(233, 30, 99,0.2) 30%, rgba(233, 30, 99,0.2) 70%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, rgba(201, 75, 115,0.2) 30%, rgba(201, 75, 115,0.2) 70%, transparent 100%);
   }
   .section-divider::after {
     content: '◆';
@@ -276,11 +271,11 @@
 .shimmer-pink {
   background: linear-gradient(
     90deg,
-    #E91E63 0%,
-    #F06292 25%,
-    #E91E63 50%,
+    #DF4C73 0%,
+    #F07595 25%,
+    #DF4C73 50%,
     #F48FB1 75%,
-    #E91E63 100%
+    #DF4C73 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

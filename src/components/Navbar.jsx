@@ -79,7 +79,7 @@ export default function Navbar() {
                   onMouseEnter={() => setCursorState('hover')}
                   onMouseLeave={() => setCursorState('default')}
                   className={`link-underline-pink text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5
-                    ${isActive ? 'text-pink is-active' : 'text-gray-subtle hover:text-white'}`}
+                    ${isActive ? 'text-pink is-active' : 'text-gray-subtle hover:text-blue'}`}
                 >
                   {link.label}
                 </Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-pink"
+              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-blue"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
@@ -132,7 +132,7 @@ export default function Navbar() {
             />
             <motion.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-pink"
+              className="w-6 h-px bg-white block origin-center transition-colors group-hover:bg-blue"
             />
           </button>
         </div>
@@ -160,7 +160,7 @@ export default function Navbar() {
                     <Link
                       to={link.href}
                       onClick={handleNavClick}
-                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-pink italic' : 'text-white hover:text-pink'}`}
+                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-pink italic' : 'text-white hover:text-blue'}`}
                     >
                       {link.label}
                     </Link>

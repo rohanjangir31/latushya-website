@@ -9,14 +9,15 @@ export default function Cursor() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth springs for the outer ring
-  const springConfig = { damping: 28, stiffness: 500, mass: 0.5 };
+  // Smooth springs for the outer ring (snappy and responsive)
+  const springConfig = { damping: 25, stiffness: 700, mass: 0.15 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Fast springs for the inner dot
-  const dotX = useSpring(mouseX, { damping: 40, stiffness: 1000, mass: 0.1 });
-  const dotY = useSpring(mouseY, { damping: 40, stiffness: 1000, mass: 0.1 });
+  // Fast springs for the inner dot (almost instant tracking)
+  const dotConfig = { damping: 20, stiffness: 1200, mass: 0.05 };
+  const dotX = useSpring(mouseX, dotConfig);
+  const dotY = useSpring(mouseY, dotConfig);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -56,15 +57,15 @@ export default function Cursor() {
     default: {
       width: 32,
       height: 32,
-      backgroundColor: 'rgba(233, 30, 99, 0)',
-      border: '1px solid rgba(233, 30, 99, 0.4)',
+      backgroundColor: 'rgba(201, 75, 115, 0)',
+      border: '1px solid rgba(90, 185, 234, 0.3)',
       mixBlendMode: 'normal',
     },
     hover: {
       width: 64,
       height: 64,
-      backgroundColor: 'rgba(233, 30, 99, 0.1)',
-      border: '1px solid rgba(233, 30, 99, 0.8)',
+      backgroundColor: 'rgba(201, 75, 115, 0.1)',
+      border: '1px solid rgba(90, 185, 234, 0.3)',
       mixBlendMode: 'normal',
     },
     view: {
@@ -97,7 +98,7 @@ export default function Cursor() {
         <motion.div
           variants={ringVariants}
           animate={cursorState}
-          transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
+          transition={{ type: 'spring', stiffness: 700, damping: 25, mass: 0.15 }}
           className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full overflow-hidden"
         >
           {cursorState === 'view' && (
