@@ -44,11 +44,11 @@ export default function QuoteForm() {
       transition={{ duration: 1.2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
       className="w-full max-w-[360px] p-8 rounded-3xl relative overflow-hidden"
       style={{
-        background: 'rgba(255, 255, 255, 0.04)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+        background: 'rgba(0, 0, 0, 0.65)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.15)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)'
       }}
     >
       {/* Decorative top accent line */}
@@ -64,7 +64,7 @@ export default function QuoteForm() {
             transition={{ duration: 0.4 }}
           >
             <h3 className="font-display text-2xl text-white mb-2 tracking-wide">Request a Quote</h3>
-            <p className="text-white/40 text-[11px] mb-6 font-light leading-relaxed">Enter your details and our design team will reach out shortly.</p>
+            <p className="text-white/80 text-xs mb-6 font-light leading-relaxed">Enter your details and our design team will reach out shortly.</p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               
@@ -77,7 +77,7 @@ export default function QuoteForm() {
                   onChange={handleChange}
                   required
                   placeholder="Your Name"
-                  className="w-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#DF4C73] focus:bg-white/10 transition-colors rounded-full"
+                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
                 />
               </div>
 
@@ -90,7 +90,7 @@ export default function QuoteForm() {
                   onChange={handleChange}
                   required
                   placeholder="Your Email"
-                  className="w-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#DF4C73] focus:bg-white/10 transition-colors rounded-full"
+                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
                 />
               </div>
 
@@ -103,7 +103,7 @@ export default function QuoteForm() {
                   onChange={handleChange}
                   required
                   placeholder="Your Mobile"
-                  className="w-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#DF4C73] focus:bg-white/10 transition-colors rounded-full"
+                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
                 />
               </div>
 
@@ -116,7 +116,7 @@ export default function QuoteForm() {
                   required
                   placeholder="Briefly describe your requirements..."
                   rows="2"
-                  className="w-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#DF4C73] focus:bg-white/10 transition-colors resize-none rounded-2xl"
+                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors resize-none rounded-2xl"
                 ></textarea>
               </div>
 
