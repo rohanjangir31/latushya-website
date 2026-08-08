@@ -54,10 +54,10 @@ export default function Philosophy() {
         </div>
 
         {/* Right: Parallax Image */}
-        <div className="w-full lg:w-7/12 h-[600px] lg:h-[800px] overflow-hidden relative group border border-gray-luxury/10">
+        <div className="w-full lg:w-7/12 h-[500px] lg:h-[700px] overflow-hidden relative group rounded-[2rem] border border-white/5 shadow-2xl transition-all duration-700 hover:shadow-[0_0_60px_rgba(223,76,115,0.12)] hover:border-white/10">
           <motion.div 
             style={{ y, scale: 1.15 }}
-            className="absolute inset-0 w-full h-full origin-bottom"
+            className="absolute inset-0 w-full h-full origin-center transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.18]"
           >
             <img 
               src="/projects/media__1784490387517.jpg" 
@@ -65,13 +65,9 @@ export default function Philosophy() {
               className="w-full h-full object-cover"
               loading="lazy"
             />
-            {/* Dark gradient overlay for mood */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black-deep/80 via-black-deep/20 to-transparent" />
+            {/* Elegant dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#03070E] via-[#03070E]/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
           </motion.div>
-
-          {/* Decorative Corner Accents */}
-          <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-pink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         </div>
         
       </div>

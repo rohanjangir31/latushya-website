@@ -22,12 +22,12 @@ export default function CTASection() {
   return (
     <section
       ref={ref}
-      className="relative h-[60vh] min-h-[420px] max-h-[600px] overflow-hidden flex items-center"
+      className="relative py-20 lg:py-28 overflow-hidden flex items-center"
     >
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=85"
+          src="/projects/interior-living-teal.jpg"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
@@ -58,8 +58,8 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-light text-white leading-tight mb-8"
-          style={{ fontSize: 'clamp(2rem, 5.5vw, 5rem)' }}
+          className="font-display font-light text-white leading-tight mb-6"
+          style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
         >
           A lifestyle curated{' '}
           <span className="italic text-pink">for you.</span>
@@ -78,13 +78,13 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
-          whileHover={{ scale: 1.03 }}
+          whileHover={{ scale: 1.03, y: -2 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleCTA}
-          className="btn-pink text-sm"
+          className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-8 py-3.5 tracking-widest text-[0.65rem] uppercase transition-all duration-300"
           id="cta-section-btn"
         >
-          <span>Request a Private Consultation</span>
+          <span className="relative z-10">Request a Private Consultation</span>
         </motion.button>
       </div>
     </section>

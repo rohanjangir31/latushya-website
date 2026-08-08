@@ -12,16 +12,17 @@
 
 import companyInfo from './companyInfo.js';
 import services from './services.js';
-import projects, { recentProjects } from './projects.js';
+import { WARDROBE_PROJECTS, INTERIOR_PROJECTS, recentProjects } from './projects.js';
 import reviews from './reviews.js';
 
 // ─── Re-exports using legacy named exports ─────────────────
 // Existing components import from '../data/content' — this keeps them working
-export const COMPANY        = companyInfo;
-export const SERVICES       = services;
-export const PROJECTS       = projects;
+export const COMPANY         = companyInfo;
+export const SERVICES        = services;
+export const WARDROBE_PROJECTS_DATA = WARDROBE_PROJECTS;
+export const INTERIOR_PROJECTS_DATA = INTERIOR_PROJECTS;
 export const RECENT_PROJECTS = recentProjects;
-export const TESTIMONIALS   = reviews;
+export const TESTIMONIALS    = reviews;
 
 // ─── Why Choose (static, rarely changes) ──────────────────
 export const WHY_CHOOSE = [

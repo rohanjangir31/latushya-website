@@ -50,16 +50,13 @@ export default function Gallery() {
           subtitle="A visual journey through our interior work — every image tells a story of craftsmanship and precision."
         />
 
-        {/* Gallery grid */}
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {/* Gallery Masonry Layout */}
+        <StaggerContainer className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 mt-12">
           {GALLERY_IMAGES.map((image, i) => (
             <motion.div
               key={image.id}
               variants={fadeUpVariant}
-              className={`relative group overflow-hidden cursor-pointer ${
-                i === 0 || i === 4 ? 'col-span-2 row-span-2' : ''
-              }`}
-              style={{ height: (i === 0 || i === 4) ? '400px' : '195px' }}
+              className="relative group overflow-hidden cursor-pointer rounded-2xl break-inside-avoid shadow-lg hover:shadow-2xl transition-shadow duration-500"
               onClick={() => openLightbox(i)}
               data-cursor="view"
               role="button"
@@ -71,26 +68,27 @@ export default function Gallery() {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ease-out"
+                  className="w-full object-cover transition-transform duration-1000 group-hover:scale-110 ease-[0.25,0.46,0.45,0.94]"
                   loading="lazy"
                   decoding="async"
                 />
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black-deep/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-                  <div className="flex flex-col items-center gap-3">
-                    <ZoomIn size={24} className="text-pink" />
-                    <span className="text-white text-xs tracking-widest uppercase">{image.category}</span>
+                {/* Cinematic Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Elegant Typography Reveal */}
+                <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75 pointer-events-none">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-6 h-[1px] bg-[#DF4C73]" />
+                    <span className="text-[#DF4C73] text-[9px] tracking-[0.3em] uppercase">{image.category}</span>
                   </div>
+                  <h4 className="text-white text-lg font-display tracking-wide font-light line-clamp-2">
+                    {image.alt}
+                  </h4>
                 </div>
 
-                {/* Category tag */}
-                <div className="absolute top-3 left-3 bg-black-deep/70 backdrop-blur-sm px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <span className="text-pink text-[10px] tracking-widest uppercase">{image.category}</span>
-                </div>
-
-                {/* Hover border */}
-                <div className="absolute inset-0 border border-pink/0 group-hover:border-pink/20 transition-all duration-500 pointer-events-none z-10" />
+                {/* Subtle border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl border border-white/0 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
               </ImageReveal>
             </motion.div>
           ))}

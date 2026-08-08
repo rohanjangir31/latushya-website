@@ -45,7 +45,7 @@ export default function CredibilityBand() {
       {/* Background — unique image, not repeated from Hero */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1920&q=70"
+          src="/projects/interior-open-kitchen-living.jpg"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"

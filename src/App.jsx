@@ -5,8 +5,6 @@ import Lenis from 'lenis';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Cursor from './components/Cursor';
-import { CursorProvider } from './context/CursorContext';
 import { COMPANY } from './data/content';
 import GrainOverlay from './components/GrainOverlay';
 
@@ -18,6 +16,8 @@ import Portfolio from './pages/Portfolio';
 import Materials from './pages/Materials';
 import Process from './pages/Process';
 import Contact from './pages/Contact';
+import CollectionDetail from './pages/CollectionDetail';
+import WardrobesHub from './pages/WardrobesHub';
 import React from 'react';
 
 class ErrorBoundary extends React.Component {
@@ -108,130 +108,31 @@ function ScrollToTopRoute() {
 
 // Preloader — Editorial 2D Logo & Staggered Architectural Panels Reveal
 function Preloader() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const end = 100;
-    const duration = 1600; // 1.6s smooth count up
-    const startTime = performance.now();
-
-    const updateProgress = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const t = Math.min(1, elapsed / duration);
-      // Ease out cubic for realistic decelerating progress
-      const easeOut = 1 - Math.pow(1 - t, 3);
-      const current = Math.floor(start + (end - start) * easeOut);
-      
-      setProgress(current);
-
-      if (t < 1) {
-        requestAnimationFrame(updateProgress);
-      }
-    };
-
-    const animationFrame = requestAnimationFrame(updateProgress);
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
-
   return (
-    <motion.div className="fixed inset-0 z-[200] pointer-events-auto select-none overflow-hidden">
-      {/* 5 Staggered Architectural Panels (Wardrobe Sliding Partition Concept) */}
-      <div className="absolute inset-0 grid grid-cols-5 pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ y: '0%' }}
-            exit={{ y: '-101%' }}
-            transition={{
-              duration: 0.95,
-              ease: [0.76, 0, 0.24, 1],
-              delay: 0.15 + i * 0.08,
-            }}
-            className="w-full h-full bg-[#03070E] border-r border-pink/10 last:border-r-0 relative overflow-hidden"
-          >
-            {/* Subtle vertical architectural lighting on right edge */}
-            <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-pink/30 to-transparent opacity-60" />
-            {/* Trailing pink trim along the bottom edge as panels rise */}
-            <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-pink/20 via-pink to-pink/20 shadow-[0_0_15px_rgba(223, 76, 115,0.6)]" />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Center Brand Container */}
-      <div className="absolute inset-0 z-[210] flex flex-col items-center justify-center pointer-events-none px-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, filter: 'blur(12px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-          transition={{
-            duration: 1.0,
-            ease: [0.16, 1, 0.3, 1],
-            exit: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
-          }}
-          className="flex flex-col items-center relative"
-        >
-          {/* Ambient luxury pink glow */}
-          <div className="absolute -inset-8 bg-pink/15 rounded-full blur-3xl pointer-events-none animate-pulse-pink opacity-80" />
-
-          {/* Crisp 2D Logo */}
-          <img
-            src="/logo-2d.png"
-            alt="Latushya Premium Interior Studio"
-            className="w-52 md:w-64 h-auto object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(223, 76, 115,0.2)] mb-6"
-          />
-
-          {/* Elegant expanding pink dividing line */}
-          <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: '180px', opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="h-[1px] bg-gradient-to-r from-transparent via-pink/70 to-transparent relative overflow-hidden mb-5"
-          >
-            <motion.div
-              initial={{ x: '-100%' }}
-              animate={{ x: '100%' }}
-              transition={{ duration: 1.5, ease: 'easeInOut', repeat: Infinity }}
-              className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
-            />
-          </motion.div>
-
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-pink/90 font-display text-xs md:text-sm tracking-ultra uppercase text-center font-light"
-          >
-            Premium Interior Studio
-          </motion.span>
-        </motion.div>
-      </div>
-
-      {/* Bottom Architectural Coordinates & Live Loading Counter */}
+    <motion.div 
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black pointer-events-auto select-none"
+    >
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{
-          duration: 0.8,
-          delay: 0.4,
-          exit: { duration: 0.35, ease: [0.76, 0, 0.24, 1] },
-        }}
-        className="absolute bottom-6 md:bottom-10 left-6 md:left-12 right-6 md:right-12 z-[210] flex items-end justify-between pointer-events-none"
+        initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center"
       >
-        {/* Left: Location & Studio Specialty */}
-        <div className="flex flex-col gap-1 text-[10px] md:text-xs text-gray-400 font-sans tracking-[0.25em] uppercase">
-          <span className="text-pink font-medium">Bangalore, India</span>
-          <span className="text-white/60">Bespoke Wardrobes & Turnkey Interiors</span>
-        </div>
-
-        {/* Right: Real-time Loading Percentage */}
-        <div className="flex items-baseline gap-1">
-          <span className="font-display text-4xl md:text-5xl text-pink font-light tracking-tight leading-none">
-            {progress.toString().padStart(2, '0')}
-          </span>
-          <span className="text-pink/70 text-xs md:text-sm font-sans tracking-widest">%</span>
-        </div>
+        <img
+          src="/logo-2d.png"
+          alt="Latushya Premium Interior Studio"
+          className="w-40 md:w-48 h-auto object-contain opacity-90 drop-shadow-[0_4px_20px_rgba(223,76,115,0.15)]"
+        />
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="mt-6 text-pink/80 text-[10px] md:text-xs tracking-[0.3em] uppercase font-light"
+        >
+          Premium Interior Studio
+        </motion.div>
       </motion.div>
     </motion.div>
   );
@@ -328,7 +229,6 @@ function AppContent() {
     <ErrorBoundary>
       <GrainOverlay />
       <ScrollToTopRoute />
-      <Cursor />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" />}
@@ -344,9 +244,11 @@ function AppContent() {
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/wardrobes" element={<WardrobesHub />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/process" element={<Process />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/collections/:id" element={<CollectionDetail />} />
               </Routes>
             </AnimatePresence>
           </main>
@@ -361,10 +263,8 @@ function AppContent() {
 
 export default function App() {
   return (
-    <CursorProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </CursorProvider>
+    <Router>
+      <AppContent />
+    </Router>
   );
 }

@@ -27,7 +27,7 @@ function ServiceRow({ service, index }) {
       ref={ref}
       id={service.id}
       className={`group relative overflow-hidden border-b border-gray-luxury/[0.1] last:border-b-0
-        grid grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-[500px] scroll-mt-[80px]`}
+        grid grid-cols-1 lg:grid-cols-[3fr_2fr] lg:h-[480px] scroll-mt-[80px]`}
     >
       {/* ── IMAGE — takes 60% on desktop ─────────────────── */}
       <div
@@ -222,26 +222,7 @@ export default function Services() {
         ))}
       </div>
 
-      {/* ── Bottom CTA strip ─────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 py-14
-        flex flex-col sm:flex-row items-center justify-between gap-5
-        border-t border-gray-luxury/[0.1]">
-        <p className="text-gray-subtle text-sm font-light">
-          Ready to transform your space?{' '}
-          <span className="text-white">We'll help you decide — for free.</span>
-        </p>
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault();
-            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="btn-outline flex-shrink-0"
-          id="services-cta"
-        >
-          <span>Book Free Consultation</span>
-        </a>
-      </div>
+
     </section>
   );
 }

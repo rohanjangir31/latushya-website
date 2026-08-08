@@ -132,18 +132,18 @@ const BEFORE_AFTER_PROJECTS = [
     beforeLabel: 'Empty Space',
     afterLabel: 'Latushya Wardrobe',
     // These are illustration placeholders — replace with real before/after photos
-    beforeSrc: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-    afterSrc: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    isPlaceholder: true,
+    beforeSrc: '/projects/interior-mint-kitchen.jpg',
+    afterSrc: '/projects/interior-u-shaped-mint-kitchen.jpg',
+    isPlaceholder: false,
   },
   {
     id: 2,
     caption: 'Walk-In Wardrobe Transformation — Bangalore',
     beforeLabel: 'Before',
     afterLabel: 'After',
-    beforeSrc: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-    afterSrc: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-    isPlaceholder: true,
+    beforeSrc: '/projects/interior-bedroom-floral.jpg',
+    afterSrc: '/projects/interior-living-teal.jpg',
+    isPlaceholder: false,
   },
 ];
 

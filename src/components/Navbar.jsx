@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { COMPANY } from '../data/content';
 import Magnetic from './Magnetic';
-import { useCursor } from '../context/CursorContext';
 
 const navLinks = [
   { label: 'Home',      href: '/' },
   { label: 'About',     href: '/about' },
   { label: 'Services',  href: '/services' },
   { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Wardrobes', href: '/wardrobes' },
   { label: 'Materials', href: '/materials' },
   { label: 'Process',   href: '/process' },
   { label: 'Contact',   href: '/contact' },
@@ -19,7 +19,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const { setCursorState } = useCursor();
 
   useEffect(() => {
     // ── Scroll: background blur toggle
@@ -41,44 +40,41 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-[78px] flex items-center ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex items-center ${
           scrolled || menuOpen
-            ? 'bg-black-deep/95 backdrop-blur-xl border-b border-pink/10'
-            : 'bg-transparent'
+            ? 'h-[50px] bg-black-deep/90 backdrop-blur-md border-b border-pink/10'
+            : 'h-[80px] bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex w-full items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex w-full items-center justify-between">
           {/* Logo */}
           <Magnetic strength={0.3}>
             <Link
               to="/"
               onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              onMouseEnter={() => setCursorState('hover')}
-              onMouseLeave={() => setCursorState('default')}
-              className="flex flex-col items-start group"
+              className="flex flex-col items-start group relative z-10"
             >
               <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
                 <img 
                   src="/logo-2d.png" 
                   alt="Latushya Logo" 
-                  className="h-12 w-auto object-contain" 
+                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-9 lg:h-10' : 'h-11 lg:h-[3.25rem]'}`}
                 />
               </motion.div>
             </Link>
           </Magnetic>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.href;
+              const isActive = location.pathname === link.href || 
+                               (link.href === '/wardrobes' && location.pathname.startsWith('/collections/'));
               return (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={handleNavClick}
-                  onMouseEnter={() => setCursorState('hover')}
-                  onMouseLeave={() => setCursorState('default')}
-                  className={`link-underline-pink hover-text-gradient text-[13px] tracking-[4px] uppercase transition-colors duration-250 pb-0.5 text-gray-subtle
+                  className={`link-underline-pink hover-text-gradient text-[12px] xl:text-[13px] tracking-widest uppercase transition-colors duration-250 pb-0.5 text-gray-subtle
                     ${isActive ? 'is-active' : ''}`}
                 >
                   {link.label}
@@ -95,22 +91,18 @@ export default function Navbar() {
                   href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-pink"
+                  className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-6 py-2.5 tracking-widest text-[0.6rem] uppercase transition-[transform,filter] duration-300 hover:-translate-y-0.5 hover:brightness-110"
                   id="nav-cta"
-                  onMouseEnter={() => setCursorState('hover')}
-                  onMouseLeave={() => setCursorState('default')}
                 >
-                  <span>Free Consultation</span>
+                  <span className="relative z-10">Free Consultation</span>
                 </a>
               ) : (
                 <Link
                   to="/contact"
-                  className="btn-pink"
+                  className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-6 py-2.5 tracking-widest text-[0.6rem] uppercase transition-[transform,filter] duration-300 hover:-translate-y-0.5 hover:brightness-110"
                   id="nav-cta"
-                  onMouseEnter={() => setCursorState('hover')}
-                  onMouseLeave={() => setCursorState('default')}
                 >
-                  <span>Free Consultation</span>
+                  <span className="relative z-10">Free Consultation</span>
                 </Link>
               )}
             </Magnetic>
@@ -149,24 +141,29 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-black-deep flex flex-col pt-[78px] border-b border-pink/20"
           >
             <div className="flex-1 flex flex-col justify-center items-center gap-8 px-8">
-              {navLinks.map((link, i) => (
-                <div key={link.href} className="overflow-hidden">
-                  <motion.div
-                    initial={{ y: '100%' }}
-                    animate={{ y: '0%' }}
-                    exit={{ y: '100%' }}
-                    transition={{ duration: 0.7, delay: i * 0.08 + 0.1, ease: [0.76, 0, 0.24, 1] }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={handleNavClick}
-                      className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${location.pathname === link.href ? 'text-pink italic' : 'text-white hover:text-blue'}`}
+              {navLinks.map((link, i) => {
+                const isActive = location.pathname === link.href || 
+                                 (link.href === '/wardrobes' && location.pathname.startsWith('/collections/'));
+                
+                return (
+                  <div key={link.href} className="overflow-hidden">
+                    <motion.div
+                      initial={{ y: '100%' }}
+                      animate={{ y: '0%' }}
+                      exit={{ y: '100%' }}
+                      transition={{ duration: 0.7, delay: i * 0.08 + 0.1, ease: [0.76, 0, 0.24, 1] }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                </div>
-              ))}
+                      <Link
+                        to={link.href}
+                        onClick={handleNavClick}
+                        className={`font-display text-5xl font-light tracking-wide transition-colors duration-300 ${isActive ? 'text-pink italic' : 'text-white hover:text-blue'}`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  </div>
+                );
+              })}
               
               <div className="overflow-hidden mt-6">
                 <motion.div

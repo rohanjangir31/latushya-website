@@ -1,7 +1,6 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { PROJECTS } from '../data/content';
 import ImageReveal from './ImageReveal';
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -26,65 +25,7 @@ const EASE = [0.25, 0.46, 0.45, 0.94];
 const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
 const SANS = "'Inter', system-ui, sans-serif";
 
-// Distinct wardrobe images for each placeholder slot
-const SLOT_IMAGES = [
-  '/projects/media__1784490387524.jpg',
-  '/projects/media__1784490387507.jpg',
-  '/projects/media__1784490387502.jpg',
-  '/projects/media__1784490387517.jpg',
-  '/projects/media__1784490387392.jpg',
-];
 
-// ── PLACEHOLDER OVERLAY ───────────────────────────────────────────────────
-// Renders the image dimly, with a reserved-space marker at center.
-function PlaceholderOverlay({ index, imageHeight, hovered }) {
-  const src = SLOT_IMAGES[index % SLOT_IMAGES.length];
-  return (
-    <>
-      {/* Background image — dimmed but visible */}
-      <img
-        src={src}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          transform: hovered ? 'scale(1.03)' : 'scale(1)',
-          transition: 'transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        }}
-        loading="lazy"
-        decoding="async"
-      />
-      {/* Dark overlay — lightened 12% so wardrobe detail shows */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: hovered
-            ? 'rgba(5, 11, 20,0.64)'
-            : 'rgba(5, 11, 20,0.72)',
-          transition: 'background 0.6s ease',
-        }}
-      />
-      {/* Reserved marker */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <div style={{
-          width: '40px', height: '40px',
-          border: '1px solid rgba(90, 185, 234, 0.3)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <span style={{
-            fontFamily: DISPLAY, fontSize: '1.1rem',
-            fontWeight: 300, color: 'rgba(223, 76, 115,0.4)',
-          }}>L</span>
-        </div>
-        <span style={{
-          fontFamily: SANS, fontSize: '0.5rem',
-          letterSpacing: '0.45em', textTransform: 'uppercase',
-          color: 'rgba(223, 76, 115,0.35)',
-        }}>Photography Pending</span>
-      </div>
-    </>
-  );
-}
 
 // ── LIVE IMAGE ────────────────────────────────────────────────────────────
 function LiveImage({ project, hovered }) {
@@ -259,11 +200,7 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
           onMouseLeave={() => setHovered(false)}
           onClick={() => !project.isPlaceholder && onOpenGallery()}
         >
-          {project.isPlaceholder ? (
-            <PlaceholderOverlay index={0} hovered={hovered} />
-          ) : (
-            <LiveImage project={project} hovered={hovered} />
-          )}
+          <LiveImage project={project} hovered={hovered} />
         </div>
       </ImageReveal>
 
@@ -357,11 +294,7 @@ function SplitProject({ project, index, inView, delay, imageLeft = true, onOpenG
           onMouseLeave={() => setHovered(false)}
           onClick={() => !project.isPlaceholder && onOpenGallery()}
         >
-          {project.isPlaceholder ? (
-            <PlaceholderOverlay index={index} hovered={hovered} />
-          ) : (
-            <LiveImage project={project} hovered={hovered} />
-          )}
+          <LiveImage project={project} hovered={hovered} />
         </div>
       </ImageReveal>
     </div>
@@ -407,12 +340,18 @@ function SplitProject({ project, index, inView, delay, imageLeft = true, onOpenG
 // ─────────────────────────────────────────────────────────────────────────
 // MAIN SECTION
 // ─────────────────────────────────────────────────────────────────────────
-export default function Projects() {
+export default function Projects({ 
+  projectsData = [], 
+  title = <>Spaces We've <em style={{ fontStyle: 'italic', color: '#DF4C73' }}>Transformed</em></>, 
+  eyebrow = 'Design Masterpieces',
+  description = 'Real photography added as each installation is completed.',
+  paddingTop = '130px',
+  paddingBottom = '150px',
+}) {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: '-50px' });
 
-  const allPlaceholder = PROJECTS.every(p => p.isPlaceholder);
-  const [p0, p1, p2, p3, p4] = PROJECTS;
+  const allPlaceholder = projectsData.every(p => p.isPlaceholder);
 
   // Gallery state
   const [activeProject, setActiveProject] = useState(null);
@@ -457,8 +396,8 @@ export default function Projects() {
       id="portfolio"
       style={{
         background: '#050B14',
-        paddingTop: '130px',
-        paddingBottom: '150px',
+        paddingTop,
+        paddingBottom,
       }}
     >
       <div
@@ -480,7 +419,7 @@ export default function Projects() {
               fontFamily: SANS, fontSize: '0.5625rem',
               letterSpacing: '0.38em', textTransform: 'uppercase',
               color: 'rgba(223, 76, 115,0.65)',
-            }}>Design Masterpieces</span>
+            }}>{eyebrow}</span>
           </motion.div>
 
           {/* Headline */}
@@ -498,8 +437,7 @@ export default function Projects() {
                 color: '#ffffff',
               }}
             >
-              Spaces We've{' '}
-              <em style={{ fontStyle: 'italic', color: '#DF4C73' }}>Transformed</em>
+              {title}
             </motion.h2>
 
             <motion.p
@@ -512,7 +450,7 @@ export default function Projects() {
                 maxWidth: '220px', flexShrink: 0,
               }}
             >
-              Real photography added as each installation is completed.
+              {description}
             </motion.p>
           </div>
 
@@ -530,97 +468,38 @@ export default function Projects() {
           />
         </div>
 
-        {/* ── PROJECT 1 — FEATURED LEAD (full width) ─────────────────────
-            The single most prominent piece. Full container width.
-            Caption lives below, left-aligned, maximum 520px.
+        {/* ── DYNAMIC PROJECT MAPPING ─────────────────────────
+            Project 0 is Featured Lead (full width).
+            Subsequent projects alternate Split Left and Split Right.
         ────────────────────────────────────────────────────────────────── */}
-        {p0 && <FeaturedProject project={p0} inView={inView} onOpenGallery={() => openGallery(p0)} />}
+        {projectsData.map((project, index) => {
+          if (index === 0) {
+            return (
+              <FeaturedProject 
+                key={project.id || index} 
+                project={project} 
+                inView={inView} 
+                onOpenGallery={() => openGallery(project)} 
+              />
+            );
+          }
+          
+          const isImageLeft = index % 2 !== 0; // 1 -> true, 2 -> false, 3 -> true...
+          
+          return (
+            <div key={project.id || index} style={{ marginTop: '188px' }}>
+              <SplitProject
+                project={project}
+                index={index}
+                inView={inView}
+                delay={0.10}
+                imageLeft={isImageLeft}
+                onOpenGallery={() => openGallery(project)}
+              />
+            </div>
+          );
+        })}
 
-        {/* ── PROJECT 2 — SPLIT LEFT (image 62% | text 38%) ──────────────
-            First split entry. Image dominates left two-thirds.
-        ────────────────────────────────────────────────────────────────── */}
-        {p1 && (
-          <div style={{ marginTop: '188px' }}>
-            <SplitProject
-              project={p1}
-              index={1}
-              inView={inView}
-              delay={0.12}
-              imageLeft={true}
-              onOpenGallery={() => openGallery(p1)}
-            />
-          </div>
-        )}
-
-        {/* ── PROJECT 3 — SPLIT RIGHT (text 38% | image 62%) ─────────────
-            Mirror. Text on left, image on right.
-        ────────────────────────────────────────────────────────────────── */}
-        {p2 && (
-          <div style={{ marginTop: '188px' }}>
-            <SplitProject
-              project={p2}
-              index={2}
-              inView={inView}
-              delay={0.10}
-              imageLeft={false}
-              onOpenGallery={() => openGallery(p2)}
-            />
-          </div>
-        )}
-
-        {/* ── PROJECT 4 — SPLIT LEFT ──────────────────────────────────────
-        ────────────────────────────────────────────────────────────────── */}
-        {p3 && (
-          <div style={{ marginTop: '188px' }}>
-            <SplitProject
-              project={p3}
-              index={3}
-              inView={inView}
-              delay={0.10}
-              imageLeft={true}
-              onOpenGallery={() => openGallery(p3)}
-            />
-          </div>
-        )}
-
-        {/* ── PROJECT 5 — SPLIT RIGHT ─────────────────────────────────────
-        ────────────────────────────────────────────────────────────────── */}
-        {p4 && (
-          <div style={{ marginTop: '188px' }}>
-            <SplitProject
-              project={p4}
-              index={4}
-              inView={inView}
-              delay={0.10}
-              imageLeft={false}
-              onOpenGallery={() => openGallery(p4)}
-            />
-          </div>
-        )}
-
-        {/* ── PLACEHOLDER NOTICE ───────────────────────────────────────── */}
-        {allPlaceholder && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            style={{
-              marginTop: '96px',
-              paddingLeft: '18px',
-              borderLeft: '1px solid rgba(223, 76, 115,0.15)',
-            }}
-          >
-            <p style={{
-              fontFamily: SANS, fontSize: '0.8125rem',
-              lineHeight: 1.85, color: 'rgba(255,255,255,0.28)',
-            }}>
-              Our completed installations are being professionally photographed.{' '}
-              <span style={{ color: 'rgba(255,255,255,0.45)' }}>
-                Project images arriving soon.
-              </span>
-            </p>
-          </motion.div>
-        )}
 
       </div>
 

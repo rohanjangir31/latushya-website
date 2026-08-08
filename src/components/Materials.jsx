@@ -18,7 +18,7 @@ function MaterialCard({ mat, index, isPink }) {
       className="group relative p-6 md:p-8 bg-white/[0.02] border border-white/5 hover:border-pink/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden"
     >
       {/* Subtle background glow effect on hover */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-pink/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       <div className="flex justify-between items-start mb-4 relative z-10">
         <div>

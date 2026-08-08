@@ -102,6 +102,15 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
           {step.title}
         </h3>
 
+        {/* Elegant pink-to-blue gradient line */}
+        <div 
+          className="h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 transition-all duration-700 ease-[0.25,0.46,0.45,0.94]"
+          style={{
+            width: isActive ? '3.5rem' : '0px',
+            marginBottom: '24px'
+          }}
+        />
+
         <p
           style={{
             fontFamily: SANS,
@@ -110,7 +119,6 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
             lineHeight: 1.85,
             color: 'rgba(255,255,255,0.6)',
             maxWidth: '420px',
-            marginTop: '24px'
           }}
         >
           {step.description}
@@ -184,7 +192,7 @@ export default function Process() {
 
           {/* Right Col: Sticky Image */}
           <div className="hidden lg:block relative">
-            <div className="sticky top-32 w-full h-[70vh] overflow-hidden rounded-sm" style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            <div className="sticky top-32 w-full h-[70vh] overflow-hidden rounded-3xl" style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
               {PROCESS_IMAGES.map((src, index) => (
                 <motion.img
                   key={src}

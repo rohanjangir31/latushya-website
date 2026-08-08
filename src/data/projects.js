@@ -9,146 +9,256 @@
 // 5. Save — the website updates automatically
 // ============================================================
 
-const projects = [
+export const WARDROBE_PROJECTS = [
   {
     id: 1,
-    category: 'Turnkey Interiors',
-    title: 'The Prestige Villa',
-    location: 'Whitefield, Bangalore',
-    projectType: 'Full Home Interior',
-    materials: 'Italian Marble, Teak Wood, German Hardware',
-    duration: '45 Days',
-    description: 'A complete end-to-end luxury transformation of a 4BHK villa, featuring custom wood panelling and bespoke furniture.',
-    image: '/projects/media__1784490387524.jpg',
+    category: 'Walk-in Wardrobes',
+    title: 'The Elite Walk-In',
+    location: 'Bangalore',
+    projectType: 'Walk-in Wardrobe',
+    materials: 'Warm Timber, Integrated LED Lighting',
+    duration: '21 Days',
+    description: 'A luxurious walk-in closet featuring warm timber paneling, open shelving for immediate access, and elegant ambient lighting that turns the space into a personal boutique.',
+    image: '/assets/wardrobes/walkin-closet-wood.jpg',
     isPlaceholder: false,
     size: 'large',
     gallery: [
-      { id: '1-1', src: '/projects/media__1784490387524.jpg', caption: 'Living Area Transformation' },
-      { id: '1-2', src: '/projects/media__1784490387502.jpg', caption: 'Master Bedroom Suite' },
-      { id: '1-3', src: '/projects/media__1784490387507.jpg', caption: 'Custom Modular Kitchen' }
+      { id: 'w1-1', src: '/assets/wardrobes/walkin-closet-wood.jpg', caption: 'Elegant walk-in with ambient lighting.' }
     ]
   },
   {
     id: 2,
-    category: 'Modular Kitchens',
-    title: 'Minimalist Chef Kitchen',
-    location: 'Indiranagar, Bangalore',
-    projectType: 'Premium Kitchen',
-    materials: 'Acrylic Finish, Quartz Countertop',
-    duration: '21 Days',
-    description: 'Sleek, handle-less acrylic modular kitchen with built-in appliances and a striking quartz island.',
-    image: '/projects/media__1784490387507.jpg',
+    category: 'Sliding Wardrobes',
+    title: 'Dual-Tone Masterpiece',
+    location: 'Bangalore',
+    projectType: 'Geometric Wardrobe',
+    materials: 'Beige & Black Lacquered Glass',
+    duration: '18 Days',
+    description: 'A striking architectural statement piece. This sliding wardrobe utilizes bold geometric divisions of beige and black glass, set within ultra-slim matte black aluminium profiles.',
+    image: '/assets/wardrobes/sliding-beige-black.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
-      { id: '2-1', src: '/projects/media__1784490387507.jpg', caption: 'Seamless Acrylic Finish' },
-      { id: '2-2', src: '/projects/media__1784490387502.jpg', caption: 'Built-in Appliances' }
+      { id: 'w2-1', src: '/assets/wardrobes/sliding-beige-black.jpg', caption: 'Bold geometric glass divisions.' }
     ]
   },
   {
     id: 3,
-    category: 'Turnkey Interiors',
-    title: 'Modern Bedroom Suite',
-    location: 'Koramangala, Bangalore',
-    projectType: 'Bedroom Interior',
-    materials: 'White Finish, Teak Wood Details',
-    duration: '14 Days',
-    description: 'A serene bedroom interior with built-in wardrobes and an elegant circular mirror vanity.',
-    image: '/projects/media__1784490387502.jpg',
+    category: 'Turnkey Storage',
+    title: 'Vanity & Storage Suite',
+    location: 'Bangalore',
+    projectType: 'Hinged Wardrobe & Vanity',
+    materials: 'Matte White Finish, Custom Mirrors',
+    duration: '28 Days',
+    description: 'A timeless approach to bedroom storage. Featuring classic matte white panels elegantly framing an integrated vanity with a circular mirror, maximizing both style and utility.',
+    image: '/assets/wardrobes/wardrobe-vanity-combo.jpg',
     isPlaceholder: false,
-    size: 'medium',
+    size: 'large',
     gallery: [
-      { id: '3-1', src: '/projects/media__1784490387502.jpg', caption: 'Serene Bedroom Interior' },
-      { id: '3-2', src: '/projects/media__1784490387517.jpg', caption: 'Custom Wardrobe Details' }
+      { id: 'w3-1', src: '/assets/wardrobes/wardrobe-vanity-combo.jpg', caption: 'Integrated vanity and classic hinged wardrobe.' }
     ]
   },
   {
     id: 4,
-    category: 'Bespoke Wardrobes',
-    title: 'Geometric Sliding Wardrobe',
-    location: 'Jayanagar, Bangalore',
-    projectType: 'Sliding Wardrobe',
-    materials: 'Cream and Black Lacquered Glass',
-    duration: '18 Days',
-    description: 'A luxurious sliding wardrobe featuring a striking geometric cream and black glass design.',
-    image: '/projects/media__1784490387517.jpg',
+    category: 'Sliding Wardrobes',
+    title: 'Blush & White Symphony',
+    location: 'Bangalore',
+    projectType: 'Lacquered Sliding Wardrobe',
+    materials: 'Pastel Pink & Pure White Glass',
+    duration: '20 Days',
+    description: 'A serene master bedroom installation featuring a seamless floor-to-ceiling sliding wardrobe. The soft blush and pristine white glass panels create a calming, contemporary aesthetic.',
+    image: '/assets/wardrobes/sliding-pink-white.jpg',
     isPlaceholder: false,
     size: 'large',
     gallery: [
-      { id: '4-1', src: '/projects/media__1784490387517.jpg', caption: 'Geometric Glass Design' },
-      { id: '4-2', src: '/projects/media__1784490387524.jpg', caption: 'Premium Hardware Action' }
+      { id: 'w4-1', src: '/assets/wardrobes/sliding-pink-white.jpg', caption: 'Floor-to-ceiling blush and white sliding system.' }
     ]
   },
   {
     id: 5,
-    category: 'Bespoke Furniture',
-    title: 'Traditional Wooden Console',
-    location: 'HSR Layout, Bangalore',
-    projectType: 'Custom Furniture',
-    materials: 'Solid Wood, Traditional Carvings',
-    duration: '35 Days',
-    description: 'A beautiful handcrafted traditional wooden mirror console with intricate Indian carvings.',
-    image: '/projects/media__1784490387392.jpg',
+    category: 'Glass Wardrobes',
+    title: 'Tinted Reflection',
+    location: 'Bangalore',
+    projectType: 'Glass Sliding Wardrobe',
+    materials: 'Tinted Glass, Bronze Profiling',
+    duration: '24 Days',
+    description: 'An elegant glass wardrobe offering a semi-transparent view of the impeccably organized interior. The dark tinted glass and bronze profiles exude a moody, high-end Italian aesthetic.',
+    image: '/assets/wardrobes/sliding-glass-brown.jpg',
     isPlaceholder: false,
-    size: 'medium',
+    size: 'small',
     gallery: [
-      { id: '5-1', src: '/projects/media__1784490387392.jpg', caption: 'Handcrafted Console' },
-      { id: '5-2', src: '/projects/media__1784490387507.jpg', caption: 'Intricate Carvings Detail' }
+      { id: 'w5-1', src: '/assets/wardrobes/sliding-glass-brown.jpg', caption: 'Moody tinted glass with bronze profiles.' }
     ]
   },
   {
     id: 6,
-    category: 'Walk-in Closets',
-    title: 'Luxury Walk-in Closet',
-    location: 'Sadashivanagar, Bangalore',
-    projectType: 'Bespoke Wardrobes',
-    materials: 'Walnut Veneer, Fluted Glass',
-    duration: '20 Days',
-    description: 'A spacious and luxurious walk-in closet featuring warm walnut veneers, integrated island storage, and dedicated shoe displays.',
-    image: '/projects/media__1784490387502.jpg',
+    category: 'Architectural Storage',
+    title: 'The Wide Profile Slider',
+    location: 'Bangalore',
+    projectType: 'Expansive Sliding System',
+    materials: 'White Glass, Grey Accent Stripes',
+    duration: '18 Days',
+    description: 'A sprawling wall-to-wall storage solution utilizing crisp white glass panels interrupted by a sophisticated grey horizontal accent band.',
+    image: '/assets/wardrobes/sliding-white-grey-stripe-wide.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
-      { id: '6-1', src: '/projects/media__1784490387502.jpg', caption: 'Integrated Island Storage' }
+      { id: 'w6-1', src: '/assets/wardrobes/sliding-white-grey-stripe-wide.jpg', caption: 'Expansive white and grey glass sliding system.' }
+    ]
+  }
+];
+
+export const INTERIOR_PROJECTS = [
+  {
+    id: 7,
+    category: 'Turnkey Interiors',
+    title: 'Cosmopolitan Living Space',
+    location: 'Bangalore',
+    projectType: 'Living Area Design',
+    materials: 'Marble, Velvet, Custom Woodwork',
+    duration: '45 Days',
+    description: 'A vibrant yet sophisticated living area featuring striking teal seating, an elegant false ceiling with warm ambient lighting, and a custom marble-backed entertainment unit.',
+    image: '/projects/interior-living-teal.jpg',
+    isPlaceholder: false,
+    size: 'large',
+    gallery: [
+      { id: 'i1-1', src: '/projects/interior-living-teal.jpg', caption: 'Luxurious living space with custom marble and lighting.' }
     ]
   },
-];
-
-// ── RECENT PROJECTS ──────────────────────────────────────────
-export const recentProjects = [
   {
-    id: 1,
-    name: 'The Prestige Villa',
-    location: 'Whitefield, Bangalore',
-    projectType: 'Full Home Interior',
-    duration: '45 Days',
-    materials: 'Italian Marble, Teak Wood',
-    description: 'A complete luxury transformation of a 4BHK villa.',
-    image: '/projects/media__1784490387524.jpg',
-    isPlaceholder: false,
-  },
-  {
-    id: 2,
-    name: 'Minimalist Chef Kitchen',
-    location: 'Indiranagar, Bangalore',
+    id: 8,
+    category: 'Modular Kitchens',
+    title: 'Pastel Modular Kitchen',
+    location: 'Bangalore',
     projectType: 'Premium Kitchen',
+    materials: 'Mint & Black Glass, White Quartz',
     duration: '21 Days',
-    materials: 'Acrylic Finish, Quartz',
-    description: 'Sleek, handle-less acrylic modular kitchen.',
-    image: '/projects/media__1784490387507.jpg',
+    description: 'A fresh and contemporary modular kitchen balancing soft mint cabinetry with sleek black glass upper units, finished with pristine white quartz countertops.',
+    image: '/projects/interior-mint-kitchen.jpg',
     isPlaceholder: false,
+    size: 'medium',
+    gallery: [
+      { id: 'i2-1', src: '/projects/interior-mint-kitchen.jpg', caption: 'Sleek mint and black glass cabinetry.' }
+    ]
   },
   {
-    id: 3,
-    name: 'Geometric Sliding Wardrobe',
-    location: 'Jayanagar, Bangalore',
-    projectType: 'Sliding Wardrobe',
-    duration: '18 Days',
-    materials: 'Cream and Black Lacquered Glass',
-    description: 'A luxurious sliding wardrobe featuring a striking geometric cream and black glass design.',
-    image: '/projects/media__1784490387517.jpg',
+    id: 9,
+    category: 'Bedrooms',
+    title: 'Tranquil Bedroom Suite',
+    location: 'Bangalore',
+    projectType: 'Bedroom Makeover',
+    materials: 'White Laminate, Walnut Accents',
+    duration: '28 Days',
+    description: 'A serene bedroom environment maximizing space with a custom white-and-timber wardrobe, integrated window seating, and a dedicated vanity with a minimalist circular mirror.',
+    image: '/projects/interior-bedroom-floral.jpg',
     isPlaceholder: false,
+    size: 'medium',
+    gallery: [
+      { id: 'i3-1', src: '/projects/interior-bedroom-floral.jpg', caption: 'Integrated storage and vanity.' }
+    ]
   },
+  {
+    id: 10,
+    category: 'Heritage Pieces',
+    title: 'Heritage Focal Unit',
+    location: 'Bangalore',
+    projectType: 'Custom Woodwork',
+    materials: 'Carved Solid Wood, Mirror',
+    duration: '14 Days',
+    description: 'An exquisite custom-carved wooden console featuring intricate detailing and integrated mirrors, serving as a stunning traditional statement piece in a modern home.',
+    image: '/projects/interior-carved-mirror.jpg',
+    isPlaceholder: false,
+    size: 'small',
+    gallery: [
+      { id: 'i4-1', src: '/projects/interior-carved-mirror.jpg', caption: 'Intricate traditional woodwork.' }
+    ]
+  },
+  {
+    id: 11,
+    category: 'Living Spaces',
+    title: 'Geometric Accent Space',
+    location: 'Bangalore',
+    projectType: 'Corridor & Storage',
+    materials: 'Beige & Black Glass',
+    duration: '18 Days',
+    description: 'A bold sliding storage design utilizing striking geometric panels of beige and black glass, seamlessly integrated to elevate a warmly lit transition space.',
+    image: '/projects/interior-geometric-wardrobe.jpg',
+    isPlaceholder: false,
+    size: 'medium',
+    gallery: [
+      { id: 'i5-1', src: '/projects/interior-geometric-wardrobe.jpg', caption: 'Bold geometric sliding panels.' }
+    ]
+  },
+  {
+    id: 12,
+    category: 'Turnkey Interiors',
+    title: 'Seamless Open Plan Architecture',
+    location: 'Bangalore',
+    projectType: 'Kitchen & Living Integration',
+    materials: 'Quartz, Fluted Wood, Glass',
+    duration: '55 Days',
+    description: 'A beautifully integrated kitchen and living space. Suspended ceiling planters and a wooden slatted media wall connect the contemporary monochromatic kitchen with the warm, inviting living area.',
+    image: '/projects/interior-open-kitchen-living.jpg',
+    isPlaceholder: false,
+    size: 'large',
+    gallery: [
+      { id: 'i6-1', src: '/projects/interior-open-kitchen-living.jpg', caption: 'Seamless integration of culinary and living spaces.' }
+    ]
+  },
+  {
+    id: 13,
+    category: 'Living Spaces',
+    title: 'Architectural Ceiling Details',
+    location: 'Bangalore',
+    projectType: 'Custom False Ceiling',
+    materials: 'Gypsum, Hidden LED Profiling',
+    duration: '12 Days',
+    description: 'A masterful application of false ceiling design, featuring a multi-tiered circular recess with soft cove lighting that elevates the spatial dynamics and ambiance of the room.',
+    image: '/projects/interior-circular-ceiling.jpg',
+    isPlaceholder: false,
+    size: 'small',
+    gallery: [
+      { id: 'i7-1', src: '/projects/interior-circular-ceiling.jpg', caption: 'Tiered circular false ceiling with soft cove lighting.' }
+    ]
+  },
+  {
+    id: 14,
+    category: 'Modular Kitchens',
+    title: 'Expansive U-Shaped Kitchen',
+    location: 'Bangalore',
+    projectType: 'Premium Kitchen',
+    materials: 'Mint & White Acrylic, Quartz',
+    duration: '28 Days',
+    description: 'A vast, highly functional U-shaped layout maximizing counter space. Finished in soft mint green with contrasting white upper cabinets and subtle under-cabinet illumination.',
+    image: '/projects/interior-u-shaped-mint-kitchen.jpg',
+    isPlaceholder: false,
+    size: 'large',
+    gallery: [
+      { id: 'i8-1', src: '/projects/interior-u-shaped-mint-kitchen.jpg', caption: 'U-shaped layout providing maximum counter space.' }
+    ]
+  },
+  {
+    id: 15,
+    category: 'Custom Woodwork',
+    title: 'Contemporary Mandir',
+    location: 'Bangalore',
+    projectType: 'Pooja Unit',
+    materials: 'Carved Wood, Etched Glass, Marble Finish',
+    duration: '21 Days',
+    description: 'A tranquil and elegantly carved traditional Pooja unit. Featuring pristine white finishes, intricately etched glass folding doors, and a stunning backlit Sanskrit mantra panel.',
+    image: '/projects/interior-pooja-mandir.jpg',
+    isPlaceholder: false,
+    size: 'medium',
+    gallery: [
+      { id: 'i9-1', src: '/projects/interior-pooja-mandir.jpg', caption: 'Intricately carved mandir with backlit detailing.' }
+    ]
+  }
 ];
 
-export default projects;
+// ── RECENT PROJECTS (Used on Home Page) ──────────────────────
+export const recentProjects = [
+  WARDROBE_PROJECTS[0],
+  INTERIOR_PROJECTS[0],
+  WARDROBE_PROJECTS[1],
+  WARDROBE_PROJECTS[3],
+];

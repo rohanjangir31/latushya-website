@@ -133,11 +133,10 @@ export default function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 h-full flex items-end"
       >
-        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-16 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
+        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
           
           {/* Left Text Block */}
-          {/* Constrain text to left ~52% on desktop, full width on mobile */}
-          <div className="max-w-[620px] w-full">
+          <div className="max-w-[560px] w-full">
 
             {/* ── EYEBROW LABEL ──────────────────────────────── */}
             <motion.div
@@ -162,15 +161,10 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* ── HEADLINE ─────────────────────────────────────────
-                Four lines. Clear editorial cascade.
-                Line 1: "Luxury" — entry, restrained weight
-                Line 2: "Wardrobes" — VISUAL ANCHOR, largest type
-                Lines 3–4: italic subtitle, tightly coupled gap
-                All display / serif. Weight + size do the work. ── */}
+            {/* ── HEADLINE ───────────────────────────────────────── */}
             <div className="mb-7 lg:mb-9">
 
-              {/* Line 1: Bespoke — entry word, slightly smaller */}
+              {/* Line 1: Bespoke */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -190,7 +184,7 @@ export default function Hero() {
                 </motion.h1>
               </div>
 
-              {/* Line 2: Wardrobes — THE VISUAL ANCHOR, biggest type */}
+              {/* Line 2: Wardrobes */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -210,7 +204,6 @@ export default function Hero() {
                 </motion.h1>
               </div>
 
-              {/* Lines 3–4: italic subtitle — tightly coupled, 16px gap from Wardrobes */}
               {/* Line 3: & Premium Interiors */}
               <div className="overflow-hidden">
                 <motion.h1
@@ -231,7 +224,7 @@ export default function Hero() {
                 </motion.h1>
               </div>
 
-              {/* Line 4: Your Lifestyle — single pink accent */}
+              {/* Line 4: Your Lifestyle */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -284,29 +277,26 @@ export default function Hero() {
               {COMPANY.subTagline}
             </motion.p>
 
-            {/* ── CTA BUTTONS ──────────────────────────────────
-                Height: 64px. Gap: 24px. Desktop side-by-side.
-                Mobile: stacked. ── */}
+            {/* ── CTA BUTTONS ────────────────────────────────── */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 1.22, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col sm:flex-row items-start"
-              style={{ gap: '24px' }}
+              className="flex flex-col sm:flex-row items-center sm:items-start"
+              style={{ gap: '16px' }}
             >
-              {/* Primary — Solid Pink */}
               <button
                 onClick={handleConsult}
                 id="hero-cta-consult"
-                className="font-sans shadow-[0_4px_25px_rgba(223, 76, 115,0.4)]"
+                className="font-sans shadow-[0_4px_20px_rgba(223, 76, 115,0.3)]"
                 style={{
-                  height: '72px',
-                  paddingLeft: '2.75rem',
-                  paddingRight: '2.75rem',
+                  height: '48px',
+                  paddingLeft: '2rem',
+                  paddingRight: '2rem',
                   background: 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)',
                   color: '#FFFFFF',
                   fontWeight: 600,
-                  fontSize: '0.6875rem',
+                  fontSize: '0.65rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   border: 'none',
@@ -320,34 +310,33 @@ export default function Hero() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#5AB9EA';
-                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(90, 185, 234,0.5)';
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(90, 185, 234,0.4)';
                   e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 25px rgba(223, 76, 115,0.4)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(223, 76, 115,0.3)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 Book Consultation
               </button>
 
-              {/* Secondary — Ghost/Outline */}
               <Link
                 to="/portfolio"
                 id="hero-cta-portfolio"
                 className="font-sans"
                 style={{
-                  height: '64px',
-                  paddingLeft: '2.25rem',
-                  paddingRight: '2.25rem',
+                  height: '48px',
+                  paddingLeft: '1.75rem',
+                  paddingRight: '1.75rem',
                   background: 'transparent',
                   color: '#DF4C73',
                   fontWeight: 500,
-                  fontSize: '0.6875rem',
+                  fontSize: '0.65rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  border: '1px solid rgba(90, 185, 234, 0.3)',
+                  border: '1px solid rgba(90, 185, 234, 0.4)',
                   borderRadius: '9999px',
                   cursor: 'pointer',
                   display: 'flex',
@@ -376,7 +365,7 @@ export default function Hero() {
           </div>
 
           {/* Right Floating Quote Form */}
-          <div className="w-full lg:w-auto flex justify-center lg:justify-end shrink-0 relative z-20">
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end shrink-0 relative z-20 lg:-translate-y-16">
              <QuoteForm />
           </div>
 

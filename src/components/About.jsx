@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section id="about" className="relative py-32 lg:py-48 bg-black-deep overflow-hidden">
       {/* Absolute minimal background element */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-pink/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-pink/5 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">

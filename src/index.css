@@ -31,15 +31,7 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Custom Cursor Rules */
-  @media (pointer: fine) {
-    /* Hide the default cursor completely across the entire app */
-    *,
-    *::before,
-    *::after {
-      cursor: none !important;
-    }
-  }
+
 
   /* Lenis smooth scrolling base styles */
   html.lenis, html.lenis body {
@@ -316,13 +308,23 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ─── Noise texture overlay (subtle luxury effect) ─────── */
+/* ─── Hardware-Accelerated Noise Texture ─────── */
+/* Removes heavy SVG DOM elements and blend modes which cause extreme scrolling lag */
+.noise-overlay,
 .noise-texture::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAElBMVEUAAAD8/vwEBAP///8AAAAFBQVYVu9QAAAAAXRSTlMAQObYZgAAAI9JREFUOMu1VtsNwzAIQ2G/LNAZOsL+O82Q+hB1VR5B8RkbcEziq2aYmN88hIQ/x0b7b1b3bY05X+0bZ3P5e+v8k2/e+uG680+bV2b7N/m65f+0Z/u25u/O5r35f7V5y6+b/872bc3fnc178/9q85ZfN/+d7duavzub9+b/1eYtv27+O9u3NX93Nu/N/6vNW37d/B+D5Y4C8L6Q1AAAAABJRU5ErkJggg==");
+  background-repeat: repeat;
+  background-size: 100px 100px; /* Small tile size for high performance */
   pointer-events: none;
   opacity: 0.04;
-  mix-blend-mode: overlay;
+  /* Removed mix-blend-mode: overlay as it forces compositing on every scroll frame */
+}
+
+/* For the global grain overlay which uses fixed positioning */
+.noise-overlay {
+  position: fixed;
+  z-index: 9998;
 }

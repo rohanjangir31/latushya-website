@@ -17,42 +17,35 @@ export default function QuoteForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Simulate sending email/form submission
-    // Here you could integrate Web3Forms, EmailJS, or a direct mailto link
-    // For now, we trigger a direct mailto as requested by the user's intent.
     const subject = encodeURIComponent(`New Quote Request from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nMobile: ${formData.mobile}\n\nMessage:\n${formData.message}`);
-    
-    // Open default mail client
     window.location.href = `mailto:contact@latushya.com?subject=${subject}&body=${body}`;
-
-    // Show beautiful success state
     setIsSubmitted(true);
-    
-    // Reset after 5 seconds
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({ name: '', email: '', mobile: '', message: '' });
     }, 5000);
   };
 
+  // High-contrast translucent capsule inputs
+  const inputClasses = "w-full bg-black/40 border border-white/20 px-4 py-3 text-xs text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-black/60 transition-all duration-300 rounded-xl shadow-inner";
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1.2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full max-w-[360px] p-8 rounded-3xl relative overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.0, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full max-w-[320px] p-7 rounded-[2rem] relative overflow-hidden group"
       style={{
-        background: 'rgba(0, 0, 0, 0.65)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background: 'rgba(10, 15, 25, 0.55)', // Darker tint for contrast
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
         border: '1px solid rgba(255, 255, 255, 0.15)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)'
+        boxShadow: '0 30px 60px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
       }}
     >
-      {/* Decorative top accent line */}
-      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#DF4C73] to-transparent opacity-60" />
+      {/* Subtle ambient glow behind form to lift it from background */}
+      <div className="absolute top-0 right-0 w-[150%] h-[150%] bg-gradient-to-bl from-white/5 to-transparent pointer-events-none rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
 
       <AnimatePresence mode="wait">
         {!isSubmitted ? (
@@ -60,69 +53,26 @@ export default function QuoteForm() {
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
+            className="relative z-10"
           >
-            <h3 className="font-display text-2xl text-white mb-2 tracking-wide">Request a Quote</h3>
-            <p className="text-white/80 text-xs mb-6 font-light leading-relaxed">Enter your details and our design team will reach out shortly.</p>
+            <h3 className="font-display text-[26px] text-white mb-1 tracking-wide leading-tight drop-shadow-lg">
+              Request a <em className="not-italic text-[#DF4C73] font-medium drop-shadow-md">Quote</em>
+            </h3>
+            <p className="text-white/90 text-[11px] mb-6 font-medium leading-relaxed drop-shadow-md">
+              Our design team will reach out shortly.
+            </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              
-              {/* Name */}
-              <div className="relative">
-                <input 
-                  type="text" 
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your Name"
-                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
-                />
-              </div>
-
-              {/* Email */}
-              <div className="relative">
-                <input 
-                  type="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your Email"
-                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
-                />
-              </div>
-
-              {/* Mobile */}
-              <div className="relative">
-                <input 
-                  type="tel" 
-                  name="mobile"
-                  value={formData.mobile}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your Mobile"
-                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors rounded-full"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="relative mt-2">
-                <textarea 
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  placeholder="Briefly describe your requirements..."
-                  rows="2"
-                  className="w-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-white/20 transition-colors resize-none rounded-2xl"
-                ></textarea>
-              </div>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email Address" className={inputClasses} />
+              <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
+              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Briefly describe your space..." rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <button 
                 type="submit"
-                className="mt-3 w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white shadow-[0_4px_20px_rgba(223, 76, 115,0.4)] font-semibold text-[10px] tracking-[0.2em] uppercase rounded-full hover:from-[#5AB9EA] hover:to-[#5AB9EA] hover:shadow-[0_4px_20px_rgba(90, 185, 234,0.5)] transition-all duration-400"
+                className="mt-4 w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400"
               >
                 Submit Request
               </button>
@@ -134,16 +84,23 @@ export default function QuoteForm() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center justify-center text-center py-10"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center justify-center text-center py-8 relative z-10"
           >
-            <div className="w-16 h-16 rounded-full border border-[#DF4C73] flex items-center justify-center mb-6">
-              <svg className="w-6 h-6 text-[#DF4C73]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <motion.div 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
+              className="w-14 h-14 rounded-full bg-white/10 border border-white/30 flex items-center justify-center mb-4 backdrop-blur-md"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
               </svg>
-            </div>
-            <h3 className="font-display text-2xl text-white mb-2">Thank You</h3>
-            <p className="text-white/50 text-sm font-light">Your request has been prepared. We look forward to connecting with you.</p>
+            </motion.div>
+            <h3 className="font-display text-2xl text-white mb-2 drop-shadow-lg">Thank You</h3>
+            <p className="text-white/90 text-xs font-medium leading-relaxed drop-shadow-md">
+              We will contact you shortly.
+            </p>
           </motion.div>
         )}
       </AnimatePresence>

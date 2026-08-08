@@ -66,7 +66,7 @@ export default function Footer() {
     <>
       <footer className="bg-black-charcoal border-t border-pink/10 relative">
         {/* Top CTA band (Ultra Minimalist & Compact) */}
-        <div className="border-b border-gray-luxury/30 py-8">
+        <div className="border-b border-gray-luxury/30 py-5">
           <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-display text-xl md:text-2xl text-white font-light tracking-wider">
