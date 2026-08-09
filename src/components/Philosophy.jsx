@@ -76,14 +76,14 @@ export default function Philosophy() {
             
             {/* Big Staggered Words */}
             <div className="flex flex-col justify-center h-full gap-8 lg:gap-12 mt-4">
-              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-start ml-[15%] lg:ml-[20%] drop-shadow-xl">MORE</span>
-              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-end mr-[15%] lg:mr-[20%] drop-shadow-xl">THAN</span>
-              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-start ml-[10%] lg:ml-[15%] drop-shadow-xl">JUST</span>
-              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-end mr-[5%] lg:mr-[10%] drop-shadow-xl">AESTHETICS.</span>
+              <span className="text-[#F9F9F9]/90 font-sans text-3xl lg:text-[2.75rem] font-normal tracking-wide self-start ml-[15%] lg:ml-[20%]">MORE</span>
+              <span className="text-[#F9F9F9]/90 font-sans text-3xl lg:text-[2.75rem] font-normal tracking-wide self-end mr-[15%] lg:mr-[20%]">THAN</span>
+              <span className="text-[#F9F9F9]/90 font-sans text-3xl lg:text-[2.75rem] font-normal tracking-wide self-start ml-[10%] lg:ml-[15%]">JUST</span>
+              <span className="text-[#F9F9F9]/90 font-sans text-3xl lg:text-[2.75rem] font-normal tracking-wide self-end mr-[5%] lg:mr-[10%]">AESTHETICS.</span>
             </div>
             
             {/* Bottom Caption */}
-            <p className="text-white/90 font-sans text-[8px] lg:text-[10px] tracking-[0.15em] lg:tracking-[0.2em] uppercase text-center font-medium drop-shadow-md pb-2">
+            <p className="text-white/70 font-sans text-[8px] lg:text-[10px] tracking-[0.15em] lg:tracking-[0.2em] uppercase text-center font-normal pb-2">
               What you're really paying for when you invest in bespoke interiors
             </p>
           </div>
