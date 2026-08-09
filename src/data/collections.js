@@ -1,34 +1,5 @@
 export const WARDROBE_COLLECTIONS = [
   {
-    id: 'walk-in-wardrobes',
-    name: 'Walk-in Wardrobes',
-    desc: 'The ultimate expression of spatial luxury and organization.',
-    intro: 'A true walk-in wardrobe is more than storage; it is a personal sanctuary designed with the precision of a high-end boutique.',
-    image: '/assets/wardrobes/bedroom-wardrobe-combo.jpg',
-    designs: [
-      {
-        id: 'wi-1',
-        name: 'The Boutique Island',
-        description: 'Featuring a central glass-topped island for accessories, surrounded by open hanging spaces and ambient backlighting.',
-        image: '/assets/wardrobes/bedroom-wardrobe-combo.jpg',
-        projectId: 1
-      },
-      {
-        id: 'wi-2',
-        name: 'Walnut & Leather Suite',
-        description: 'Rich dark walnut veneers contrasted with stitched leather drawer fronts and integrated warm LED profiles.',
-        image: '/assets/wardrobes/sliding-cross-accent-2.jpg',
-        projectId: 7
-      },
-      {
-        id: 'wi-3',
-        name: 'Minimalist White Room',
-        description: 'A pure, calm space utilizing matte white finishes and completely handle-less push-to-open mechanics.',
-        image: '/assets/wardrobes/sliding-full-mirror-wood.jpg'
-      }
-    ]
-  },
-  {
     id: 'sliding-wardrobes',
     name: 'Sliding Wardrobes',
     desc: 'Seamless floor-to-ceiling systems that maximize space and style.',
@@ -96,6 +67,30 @@ export const WARDROBE_COLLECTIONS = [
         name: 'Cross-Mullion Variant',
         description: 'Another stunning application of the bronze cross-mullion system, demonstrating its versatility in contemporary spaces.',
         image: '/assets/wardrobes/sliding-cross-accent-2.jpg'
+      },
+      {
+        id: 'sl-11',
+        name: 'Beige Glass Slider',
+        description: 'Reflective beige glass panels set within subtle bronze aluminum frames, creating a warm, expansive feel.',
+        image: '/assets/wardrobes/sliding-beige-mirror.jpg'
+      },
+      {
+        id: 'sl-12',
+        name: 'Frosted Horizontal Panels',
+        description: 'Opaque horizontal glass panels that allow soft light to pass through while keeping contents concealed, separated by sleek metal tracking.',
+        image: '/assets/wardrobes/sliding-horizontal-frosted.jpg'
+      },
+      {
+        id: 'sl-13',
+        name: 'Tinted Glass Display System',
+        description: 'A continuous run of floor-to-ceiling tinted glass doors that subtly reflect their surroundings while providing a semi-transparent view of the bespoke storage within.',
+        image: '/assets/wardrobes/sliding-tinted-glass-jungle.jpg'
+      },
+      {
+        id: 'sl-14',
+        name: 'Full Mirror & Walnut',
+        description: 'Floor-to-ceiling mirrored sliding doors framed in rich dark walnut, dramatically expanding the visual footprint of the bedroom.',
+        image: '/assets/wardrobes/sliding-full-mirror-wood.jpg'
       }
     ]
   },
@@ -118,39 +113,6 @@ export const WARDROBE_COLLECTIONS = [
         name: 'White & Walnut Profile',
         description: 'A closer view showing the elegant dark wood vertical profiles functioning as handle-less pulls for the pristine white doors.',
         image: '/assets/wardrobes/hinged-white-wood-2.jpg'
-      }
-    ]
-  },
-  {
-    id: 'glass-wardrobes',
-    name: 'Glass Wardrobes',
-    desc: 'Contemporary transparency meeting sophisticated aluminum profiles.',
-    intro: 'Turning storage into a display feature, this collection brings an unmistakable Italian flair and lightness to modern master suites.',
-    image: '/assets/wardrobes/sliding-beige-mirror.jpg',
-    designs: [
-      {
-        id: 'gl-1',
-        name: 'Beige Glass Slider',
-        description: 'Reflective beige glass panels set within subtle bronze aluminum frames, creating a warm, expansive feel.',
-        image: '/assets/wardrobes/sliding-beige-mirror.jpg'
-      },
-      {
-        id: 'gl-2',
-        name: 'Frosted Horizontal Panels',
-        description: 'Opaque horizontal glass panels that allow soft light to pass through while keeping contents concealed, separated by sleek metal tracking.',
-        image: '/assets/wardrobes/sliding-horizontal-frosted.jpg'
-      },
-      {
-        id: 'gl-3',
-        name: 'Tinted Glass Display System',
-        description: 'A continuous run of floor-to-ceiling tinted glass doors that subtly reflect their surroundings while providing a semi-transparent view of the bespoke storage within.',
-        image: '/assets/wardrobes/sliding-tinted-glass-jungle.jpg'
-      },
-      {
-        id: 'gl-4',
-        name: 'Full Mirror & Walnut',
-        description: 'Floor-to-ceiling mirrored sliding doors framed in rich dark walnut, dramatically expanding the visual footprint of the bedroom.',
-        image: '/assets/wardrobes/sliding-full-mirror-wood.jpg'
       }
     ]
   }
