@@ -220,7 +220,7 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  & Premium Interiors
+                  & Interiors Crafted For
                 </motion.h1>
               </div>
 
