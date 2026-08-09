@@ -55,19 +55,39 @@ export default function Philosophy() {
 
         {/* Right: Parallax Image */}
         <div className="w-full lg:w-7/12 h-[500px] lg:h-[700px] overflow-hidden relative group rounded-[2rem] border border-white/5 shadow-2xl transition-all duration-700 hover:shadow-[0_0_60px_rgba(223,76,115,0.12)] hover:border-white/10">
+          
+          {/* Background Image with Parallax */}
           <motion.div 
             style={{ y, scale: 1.15 }}
             className="absolute inset-0 w-full h-full origin-center transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.18]"
           >
             <img 
-              src="/projects/media__1784490387517.jpg" 
-              alt="Bespoke Wardrobe Design"
+              src="/projects/moody_luxury_interior.jpg" 
+              alt="Bespoke Wardrobe Design and Enduring Comfort"
               className="w-full h-full object-cover"
               loading="lazy"
             />
-            {/* Elegant dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#03070E] via-[#03070E]/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-700" />
+            {/* Elegant dark gradient overlay to make text pop */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#03070E] via-[#03070E]/30 to-[#03070E]/10 opacity-90 transition-opacity duration-700" />
           </motion.div>
+
+          {/* Staggered Text Overlay */}
+          <div className="absolute inset-0 z-20 flex flex-col justify-between p-8 lg:p-12 pointer-events-none">
+            
+            {/* Big Staggered Words */}
+            <div className="flex flex-col justify-center h-full gap-8 lg:gap-12 mt-4">
+              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-start ml-[15%] lg:ml-[20%] drop-shadow-xl">MORE</span>
+              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-end mr-[15%] lg:mr-[20%] drop-shadow-xl">THAN</span>
+              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-start ml-[10%] lg:ml-[15%] drop-shadow-xl">JUST</span>
+              <span className="text-white font-sans text-3xl lg:text-[2.75rem] font-medium tracking-[0.05em] self-end mr-[5%] lg:mr-[10%] drop-shadow-xl">AESTHETICS.</span>
+            </div>
+            
+            {/* Bottom Caption */}
+            <p className="text-white/90 font-sans text-[8px] lg:text-[10px] tracking-[0.15em] lg:tracking-[0.2em] uppercase text-center font-medium drop-shadow-md pb-2">
+              What you're really paying for when you invest in bespoke interiors
+            </p>
+          </div>
+          
         </div>
         
       </div>
