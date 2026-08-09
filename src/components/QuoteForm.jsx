@@ -65,7 +65,7 @@ export default function QuoteForm() {
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email Address" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
-              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Describe your space & approximate dimensions..." rows="2" className={`${inputClasses} resize-none`}></textarea>
+              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Briefly describe your requirements..." rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <div className="mt-2">
                 <p className="text-[10px] text-white/90 text-center italic mb-3">
