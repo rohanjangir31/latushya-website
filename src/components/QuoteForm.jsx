@@ -57,25 +57,27 @@ export default function QuoteForm() {
             transition={{ duration: 0.4 }}
             className="relative z-10"
           >
-            <h3 className="font-display text-[26px] text-white mb-1 tracking-wide leading-tight drop-shadow-lg">
+            <h3 className="font-display text-[26px] text-white mb-6 tracking-wide leading-tight drop-shadow-lg">
               Request a <em className="not-italic text-[#DF4C73] font-medium drop-shadow-md">Quote</em>
             </h3>
-            <p className="text-white/90 text-[11px] mb-6 font-medium leading-relaxed drop-shadow-md">
-              Our design team will reach out shortly.
-            </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email Address" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
-              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Briefly describe your space..." rows="2" className={`${inputClasses} resize-none`}></textarea>
+              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Describe your space & approximate dimensions..." rows="2" className={`${inputClasses} resize-none`}></textarea>
 
-              <button 
-                type="submit"
-                className="mt-4 w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400"
-              >
-                Submit Request
-              </button>
+              <div className="mt-2">
+                <p className="text-[10px] text-white/90 text-center italic mb-3">
+                  *Please include approximate measurements for a more accurate estimate.
+                </p>
+                <button 
+                  type="submit"
+                  className="w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400"
+                >
+                  Submit Request
+                </button>
+              </div>
             </form>
           </motion.div>
         ) : (
