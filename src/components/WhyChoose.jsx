@@ -245,7 +245,7 @@ export default function WhyChoose() {
                 flexShrink: 0,
               }}
             >
-              The principles behind every wardrobe we design and build for Bangalore homes.
+              The principles behind every wardrobe we design and build for your home.
             </motion.p>
           </div>
 
