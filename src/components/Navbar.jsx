@@ -74,8 +74,8 @@ export default function Navbar() {
                   key={link.href}
                   to={link.href}
                   onClick={handleNavClick}
-                  className={`link-underline-pink hover-text-gradient text-[12px] xl:text-[13px] tracking-widest uppercase transition-colors duration-250 pb-0.5 text-gray-subtle
-                    ${isActive ? 'is-active' : ''}`}
+                  className={`link-underline-pink hover:text-white text-[12px] xl:text-[13px] tracking-widest uppercase transition-colors duration-250 pb-0.5
+                    ${isActive ? 'is-active text-white' : 'text-gray-subtle'}`}
                 >
                   {link.label}
                 </Link>
