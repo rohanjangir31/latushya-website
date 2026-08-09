@@ -220,16 +220,35 @@ export default function Hero() {
                     fontStyle: 'italic',
                   }}
                 >
-                  & Interiors Crafted For
+                  & Premium Interiors
                 </motion.h1>
               </div>
 
-              {/* Line 4: Your Lifestyle */}
+              {/* Line 4: crafted for */}
+              <div className="overflow-hidden mt-2 lg:mt-3 mb-1">
+                <motion.p
+                  initial={{ y: '110%' }}
+                  animate={{ y: '0%' }}
+                  transition={{ duration: 1.1, delay: 0.68, ease: EASE_OUT_EXPO }}
+                  className="font-sans"
+                  style={{
+                    fontSize: 'clamp(0.65rem, 1.2vw, 0.85rem)',
+                    fontWeight: 500,
+                    letterSpacing: '0.25em',
+                    textTransform: 'lowercase',
+                    color: 'rgba(255,255,255,0.45)',
+                  }}
+                >
+                  crafted for
+                </motion.p>
+              </div>
+
+              {/* Line 5: Your Lifestyle */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
-                  transition={{ duration: 1.1, delay: 0.72, ease: EASE_OUT_EXPO }}
+                  transition={{ duration: 1.1, delay: 0.74, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
                     fontSize: 'clamp(1.5rem, 4vw, 3.4rem)',
