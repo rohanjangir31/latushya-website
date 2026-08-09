@@ -23,7 +23,7 @@ const CAPABILITIES = [
     num: '01',
     title: 'Bespoke Design',
     description:
-      'Every space is conceived from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
+      'Every space is crafted from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
   },
   {
     num: '02',
