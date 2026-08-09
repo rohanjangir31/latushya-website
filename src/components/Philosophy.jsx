@@ -49,7 +49,7 @@ export default function Philosophy() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="text-gray-subtle text-sm lg:text-base leading-loose max-w-md"
           >
-            We believe that true luxury is functional. It is found in the silent glide of a wardrobe shutter, the tactile warmth of premium laminates, and the seamless integration of intelligent storage. At Latushya, every bespoke interior we engineer is an homage to uncompromising quality, tailored exclusively to your daily routine.
+            At Latushya, our philosophy extends far beyond visual aesthetics. While we craft breathtakingly beautiful interiors, our ultimate aim is to engineer spaces that provide profound, enduring comfort for decades to come. We believe your home should radiate a peaceful, welcoming energy. By blending premium materials with intelligent design, we create sanctuaries that don't just look spectacular—they feel effortlessly right.
           </motion.p>
         </div>
 
