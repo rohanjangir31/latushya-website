@@ -37,7 +37,7 @@ export default function QuoteForm() {
       transition={{ duration: 1.0, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
       className="w-full max-w-[320px] p-7 rounded-[2rem] relative overflow-hidden group"
       style={{
-        background: 'rgba(10, 15, 25, 0.55)', // Darker tint for contrast
+        background: 'rgba(10, 15, 25, 0.25)', // More translucent tint
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         border: '1px solid rgba(255, 255, 255, 0.15)',

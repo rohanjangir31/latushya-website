@@ -365,7 +365,7 @@ export default function Hero() {
           </div>
 
           {/* Right Floating Quote Form */}
-          <div className="w-full lg:w-auto flex justify-center lg:justify-end shrink-0 relative z-20 lg:-translate-y-16">
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end shrink-0 relative z-20 lg:-translate-y-32">
              <QuoteForm />
           </div>
 
