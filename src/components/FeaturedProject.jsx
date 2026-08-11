@@ -26,7 +26,7 @@ export default function FeaturedProject() {
         className="absolute inset-0 w-full h-full origin-bottom"
       >
         <img 
-          src="/projects/media__1784490387524.jpg" 
+          src="/projects/master_suite_hd.jpg" 
           alt="Featured luxury wardrobe interior"
           className="w-full h-full object-cover"
           loading="lazy"
