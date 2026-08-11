@@ -26,8 +26,8 @@ export default function FeaturedProject() {
         className="absolute inset-0 w-full h-full origin-bottom"
       >
         <img 
-          src="/projects/master_suite_hd.jpg" 
-          alt="Featured luxury wardrobe interior"
+          src="/projects/featured_dining.jpg" 
+          alt="Featured luxury dining interior"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -50,11 +50,11 @@ export default function FeaturedProject() {
           </span>
           
           <h3 className="font-display font-light text-white text-3xl lg:text-4xl mb-4 leading-tight">
-            The Master Suite <br/><i className="text-gray-light/60">Wardrobe</i>
+            The Dining Room <br/><i className="text-gray-light/60">Signature Space</i>
           </h3>
           
           <p className="text-gray-subtle text-sm leading-loose mb-8">
-            A masterclass in modern storage. We designed and executed a fully bespoke wardrobe utilizing rich veneers, fluted glass, and invisible German hardware to create a seamless organizational experience.
+            A masterful blend of warmth and elegance. We designed this inviting dining space with deep atmospheric tones, ambient statement lighting, and rich wood textures to create the perfect setting for everyday living and entertaining.
           </p>
           
           <Link 
