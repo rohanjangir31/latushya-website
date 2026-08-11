@@ -132,7 +132,7 @@ export default function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 h-full flex items-end"
       >
-        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-24 lg:pb-36 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
+        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
           
           {/* Left Text Block */}
           <div className="max-w-[560px] w-full">
@@ -288,7 +288,7 @@ export default function Hero() {
                 fontWeight: 300,
                 lineHeight: 1.95,
                 color: 'rgba(255,255,255,0.58)',
-                maxWidth: '540px',
+                maxWidth: '460px',
                 marginBottom: 'clamp(1.8rem, 3vw, 2.6rem)',
               }}
             >
