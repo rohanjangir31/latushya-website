@@ -288,7 +288,7 @@ export default function Hero() {
                 fontWeight: 300,
                 lineHeight: 1.95,
                 color: 'rgba(255,255,255,0.58)',
-                maxWidth: '460px',
+                maxWidth: '540px',
                 marginBottom: 'clamp(1.8rem, 3vw, 2.6rem)',
               }}
             >
@@ -300,12 +300,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 1.22, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col items-start"
+              className="flex flex-col sm:flex-row items-center sm:items-start"
               style={{ gap: '16px' }}
             >
-              <button
-                onClick={handleConsult}
-                id="hero-cta-consult"
+              <Link
+                to="/portfolio"
+                id="hero-cta-portfolio"
                 className="font-sans shadow-[0_4px_20px_rgba(223, 76, 115,0.3)]"
                 style={{
                   height: '48px',
@@ -320,11 +320,15 @@ export default function Hero() {
                   border: 'none',
                   borderRadius: '9999px',
                   cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
                   whiteSpace: 'nowrap',
                   flexShrink: 0,
+                  textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#5AB9EA';
@@ -335,45 +339,6 @@ export default function Hero() {
                   e.currentTarget.style.background = 'linear-gradient(135deg, #DF4C73 0%, #F07595 100%)';
                   e.currentTarget.style.boxShadow = '0 4px 20px rgba(223, 76, 115,0.3)';
                   e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                Book Consultation
-              </button>
-
-              <Link
-                to="/portfolio"
-                id="hero-cta-portfolio"
-                className="font-sans"
-                style={{
-                  height: '48px',
-                  paddingLeft: '1.75rem',
-                  paddingRight: '1.75rem',
-                  background: 'transparent',
-                  color: '#DF4C73',
-                  fontWeight: 500,
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  border: '1px solid rgba(90, 185, 234, 0.4)',
-                  borderRadius: '9999px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'border-color 0.4s ease, color 0.4s ease, background 0.4s ease',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                  textDecoration: 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#5AB9EA';
-                  e.currentTarget.style.color = '#5AB9EA';
-                  e.currentTarget.style.background = 'rgba(90, 185, 234, 0.08)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(223, 76, 115,0.45)';
-                  e.currentTarget.style.color = '#5AB9EA';
-                  e.currentTarget.style.background = 'transparent';
                 }}
               >
                 View Portfolio
