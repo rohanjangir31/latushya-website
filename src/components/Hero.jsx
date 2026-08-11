@@ -96,17 +96,7 @@ export default function Hero() {
           style={{ background: 'rgba(0,0,0,0.18)' }}
         />
 
-        {/* ── DESKTOP PRIMARY TEXT GRADIENT ────────────────────
-            Radial/linear gradient anchored at the LEFT that fades to
-            transparent by 55% width. Only the text zone is dark.
-            Hidden on mobile so it doesn't black out the video. ── */}
-        <div
-          className="absolute inset-0 hidden lg:block pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(to right, rgba(4,2,1,0.97) 0%, rgba(4,2,1,0.88) 22%, rgba(4,2,1,0.64) 38%, rgba(0,0,0,0.14) 56%, transparent 70%)',
-          }}
-        />
+
 
         {/* ── MOBILE SEAMLESS BACKGROUND BLEND ────────────────────
             Gently transitions the upper video area into the lower dark canvas where text sits ── */}

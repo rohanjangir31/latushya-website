@@ -84,7 +84,7 @@ export default function Philosophy() {
             
             {/* Bottom Caption */}
             <p className="text-white/70 font-sans text-[8px] lg:text-[10px] tracking-[0.15em] lg:tracking-[0.2em] uppercase text-center font-normal pb-2">
-              What you're really paying for when you invest in bespoke interiors
+              What you're really paying for when you choose Latushya
             </p>
           </div>
           
