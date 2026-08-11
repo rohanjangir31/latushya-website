@@ -14,7 +14,7 @@ const CREDIBILITY_ITEMS = [
     Icon: Award,
     value: '20+',
     label: 'Years Experience',
-    sub: 'In bespoke interiors',
+    sub: 'In interiors',
   },
   {
     Icon: Wrench,
