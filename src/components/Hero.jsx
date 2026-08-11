@@ -300,7 +300,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 1.22, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col sm:flex-row items-center sm:items-start"
+              className="flex flex-col items-start"
               style={{ gap: '16px' }}
             >
               <button
