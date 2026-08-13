@@ -98,7 +98,7 @@ export default function CollectionDetail() {
               
               {/* Main Image (Left) */}
               <motion.div 
-                className="w-full lg:w-[75%] relative aspect-[4/3] lg:aspect-[16/10] overflow-hidden bg-black-deep rounded-2xl group shrink-0 border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700 cursor-grab active:cursor-grabbing touch-pan-y"
+                className="w-full lg:w-[45%] relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-black-deep rounded-2xl group shrink-0 border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700 cursor-grab active:cursor-grabbing touch-pan-y"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -150,7 +150,7 @@ export default function CollectionDetail() {
               </motion.div>
 
               {/* Design Info (Right) */}
-              <div className="w-full lg:w-[25%] flex flex-col items-start text-left">
+              <div className="w-full lg:w-[50%] flex flex-col items-start text-left">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
