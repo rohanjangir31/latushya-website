@@ -93,12 +93,12 @@ export default function CollectionDetail() {
               {String(currentIndex + 1).padStart(2, '0')} <span className="text-pink mx-2">/</span> {String(designs.length).padStart(2, '0')}
             </div>
 
-            {/* Gallery Editorial Overlay Layout */}
-            <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center pb-12">
+            {/* Gallery Pro Split Layout */}
+            <div className="relative w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16 pb-12">
               
-              {/* Main Image */}
+              {/* Main Image (Left) */}
               <motion.div 
-                className="w-full relative overflow-hidden rounded-xl shadow-2xl shadow-black/50 group border border-white/5 cursor-grab active:cursor-grabbing touch-pan-y"
+                className="w-full lg:flex-1 relative flex justify-center cursor-grab active:cursor-grabbing touch-pan-y group"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -108,54 +108,56 @@ export default function CollectionDetail() {
                   }
                 }}
               >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentDesign.id}
-                    initial={{ opacity: 0, scale: 1.02 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    src={currentDesign.image}
-                    alt={currentDesign.name}
-                    className="w-full h-auto object-cover block rounded-xl opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    draggable={false}
-                  />
-                </AnimatePresence>
+                <div className="relative inline-block">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentDesign.id}
+                      initial={{ opacity: 0, scale: 1.02 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      src={currentDesign.image}
+                      alt={currentDesign.name}
+                      className="max-w-full max-h-[75vh] w-auto h-auto object-contain block rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                      draggable={false}
+                    />
+                  </AnimatePresence>
 
-                {/* Prev Overlay Area */}
-                {designs.length > 1 && (
-                  <button
-                    onClick={handlePrev}
-                    className="absolute inset-y-0 left-0 w-1/2 cursor-pointer z-10 group/left"
-                    aria-label="Previous image"
-                  >
-                    <div className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/left:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black">
-                      <ArrowLeft size={18} />
-                    </div>
-                  </button>
-                )}
+                  {/* Prev Overlay Area */}
+                  {designs.length > 1 && (
+                    <button
+                      onClick={handlePrev}
+                      className="absolute inset-y-0 left-0 w-1/3 cursor-pointer z-10 group/left"
+                      aria-label="Previous image"
+                    >
+                      <div className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/left:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black shadow-lg">
+                        <ArrowLeft size={18} />
+                      </div>
+                    </button>
+                  )}
 
-                {/* Next Overlay Area */}
-                {designs.length > 1 && (
-                  <button
-                    onClick={handleNext}
-                    className="absolute inset-y-0 right-0 w-1/2 cursor-pointer z-10 group/right"
-                    aria-label="Next image"
-                  >
-                    <div className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/right:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white">
-                      <ArrowRight size={18} />
-                    </div>
-                  </button>
-                )}
+                  {/* Next Overlay Area */}
+                  {designs.length > 1 && (
+                    <button
+                      onClick={handleNext}
+                      className="absolute inset-y-0 right-0 w-1/3 cursor-pointer z-10 group/right"
+                      aria-label="Next image"
+                    >
+                      <div className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/right:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white shadow-lg">
+                        <ArrowRight size={18} />
+                      </div>
+                    </button>
+                  )}
+                </div>
               </motion.div>
 
-              {/* Design Info (Shifted Glass Card) */}
-              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/40 border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 mt-8 md:mt-12 md:self-end md:mr-8 lg:mr-12 shadow-2xl transition-all duration-700 flex flex-col items-start text-left">
+              {/* Design Info (Right, Sticky) */}
+              <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-transparent lg:border-l border-white/10 lg:pl-12 flex flex-col items-start text-left lg:sticky lg:top-32">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6 }}
                     className="w-full"
