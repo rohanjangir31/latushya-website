@@ -94,11 +94,11 @@ export default function CollectionDetail() {
             </div>
 
             {/* Gallery Pro Split Layout */}
-            <div className="relative w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16 pb-12">
+            <div className="relative w-full max-w-[1500px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16 pb-12">
               
-              {/* Main Image (Left) */}
+              {/* Main Image Display Frame (Left) */}
               <motion.div 
-                className="w-full lg:flex-1 relative flex justify-center cursor-grab active:cursor-grabbing touch-pan-y group"
+                className="w-full lg:flex-1 relative flex justify-center items-center cursor-grab active:cursor-grabbing touch-pan-y group bg-gradient-to-br from-white/[0.03] to-transparent rounded-3xl border border-white/5 p-4 md:p-8 lg:p-12 min-h-[50vh] lg:min-h-[75vh] shadow-[inset_0_0_100px_rgba(0,0,0,0.5)]"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -108,17 +108,17 @@ export default function CollectionDetail() {
                   }
                 }}
               >
-                <div className="relative flex justify-center items-center w-full">
+                <div className="relative flex justify-center items-center w-full h-full">
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={currentDesign.id}
-                      initial={{ opacity: 0, scale: 1.02 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      initial={{ opacity: 0, scale: 1.02, filter: 'blur(4px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 0.98, filter: 'blur(4px)' }}
+                      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                       src={currentDesign.image}
                       alt={currentDesign.name}
-                      className="max-w-full max-h-[75vh] w-auto h-auto object-contain block rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                      className="max-w-full max-h-[65vh] lg:max-h-[70vh] w-auto h-auto object-contain block rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/10 opacity-95 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                       draggable={false}
                     />
                   </AnimatePresence>
@@ -128,11 +128,11 @@ export default function CollectionDetail() {
                 {designs.length > 1 && (
                   <button
                     onClick={handlePrev}
-                    className="absolute inset-y-0 left-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-start pl-2 md:pl-6 group/left"
+                    className="absolute inset-y-0 left-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-start pl-4 md:pl-8 group/left"
                     aria-label="Previous image"
                   >
-                    <div className="w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black shadow-lg">
-                      <ArrowLeft size={18} />
+                    <div className="w-12 h-12 rounded-full border border-white/10 bg-black-deep/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black hover:scale-110 shadow-2xl">
+                      <ArrowLeft size={20} />
                     </div>
                   </button>
                 )}
@@ -141,11 +141,11 @@ export default function CollectionDetail() {
                 {designs.length > 1 && (
                   <button
                     onClick={handleNext}
-                    className="absolute inset-y-0 right-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-end pr-2 md:pr-6 group/right"
+                    className="absolute inset-y-0 right-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-end pr-4 md:pr-8 group/right"
                     aria-label="Next image"
                   >
-                    <div className="w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white shadow-lg">
-                      <ArrowRight size={18} />
+                    <div className="w-12 h-12 rounded-full border border-white/10 bg-black-deep/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white hover:scale-110 shadow-2xl">
+                      <ArrowRight size={20} />
                     </div>
                   </button>
                 )}
