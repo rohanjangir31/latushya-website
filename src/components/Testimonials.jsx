@@ -49,28 +49,28 @@ function TestimonialCard({ testimonial }) {
   const secondaryQuote = parts.slice(1).join(' ');
 
   return (
-    <div className="relative group overflow-hidden bg-gradient-to-br from-white/[0.03] to-transparent border border-white/5 p-10 md:p-16 lg:p-20 rounded-3xl hover:border-white/10 transition-colors duration-700 w-full">
+    <div className="relative group overflow-hidden bg-black/40 backdrop-blur-sm border border-white/5 p-8 md:p-12 rounded-3xl hover:border-pink/20 transition-colors duration-700 w-full max-w-5xl mx-auto">
       {/* Glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-tr from-pink/5 to-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       {/* Decorative large quote */}
-      <div className="absolute -top-6 -right-6 font-display text-[150px] md:text-[250px] text-white/[0.03] font-bold leading-none select-none pointer-events-none transform -rotate-12 group-hover:rotate-0 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+      <div className="absolute -top-4 -right-4 font-display text-[100px] md:text-[180px] text-white/[0.02] font-bold leading-none select-none pointer-events-none transform -rotate-6 group-hover:rotate-0 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
         &ldquo;
       </div>
 
-      <div className="relative z-10 flex flex-col md:flex-row gap-12 lg:gap-20 items-start">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-start">
         {/* Left column: Quote */}
         <div className="flex-1">
-          <div className="flex items-center gap-1.5 mb-8">
+          <div className="flex items-center gap-1.5 mb-6">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <Star key={i} size={16} className="text-[#FFD700] fill-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]" />
+              <Star key={i} size={14} className="text-pink fill-pink/80 drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]" />
             ))}
           </div>
 
-          <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl text-white font-light leading-[1.4] tracking-tight mb-8 relative">
+          <blockquote className="font-display text-xl md:text-2xl text-white/90 font-light leading-[1.6] tracking-wide mb-6 relative">
             "{mainQuote}"
             {secondaryQuote && (
-              <span className="block mt-6 text-base md:text-lg text-white/50 font-sans italic leading-[1.8] font-light">
+              <span className="block mt-4 text-sm md:text-base text-white/60 font-sans italic leading-[1.8] font-light">
                 {secondaryQuote}
               </span>
             )}
@@ -78,29 +78,29 @@ function TestimonialCard({ testimonial }) {
         </div>
 
         {/* Right column: Author info */}
-        <div className="w-full md:w-64 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 flex flex-col items-start">
-          <div className="relative mb-6">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink to-blue blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 rounded-full" />
+        <div className="w-full md:w-56 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-10 flex flex-col items-start">
+          <div className="relative mb-5">
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink to-blue blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-700 rounded-full" />
             {testimonial.avatar && testimonial.avatar.length > 1 ? (
               <img
                 src={testimonial.avatar}
                 alt={testimonial.name}
-                className="relative w-20 h-20 rounded-full object-cover border border-white/20 z-10"
+                className="relative w-16 h-16 rounded-full object-cover border border-pink/30 z-10"
               />
             ) : (
-              <div className="relative w-20 h-20 rounded-full bg-black border border-white/20 flex items-center justify-center z-10">
-                <span className="font-display text-transparent bg-clip-text bg-gradient-to-tr from-pink to-blue text-4xl font-light">
+              <div className="relative w-16 h-16 rounded-full bg-black border border-pink/30 flex items-center justify-center z-10">
+                <span className="font-display text-transparent bg-clip-text bg-gradient-to-tr from-pink to-blue text-2xl font-light">
                   {testimonial.avatar || testimonial.name.charAt(0)}
                 </span>
               </div>
             )}
           </div>
           
-          <div className="font-sans text-white text-lg tracking-wide mb-1 font-medium">{testimonial.name}</div>
-          <div className="text-white/40 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{testimonial.date}</div>
+          <div className="font-sans text-white/90 text-base tracking-wide mb-1 font-medium">{testimonial.name}</div>
+          <div className="text-white/40 text-[0.6rem] tracking-[0.2em] uppercase mb-4">{testimonial.date}</div>
           
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-pink/20 bg-pink/5">
-            <span className="text-pink text-[0.6rem] tracking-[0.15em] uppercase font-medium">{testimonial.project}</span>
+            <span className="text-pink text-[0.55rem] tracking-[0.15em] uppercase font-medium">{testimonial.project}</span>
           </div>
         </div>
       </div>
