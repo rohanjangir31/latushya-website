@@ -17,7 +17,7 @@ function MinimalCard({ item, index }) {
       className={`group flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 lg:gap-24 pb-16 lg:pb-32 border-b border-white/5 last:border-0 last:pb-0`}
     >
       {/* Image */}
-      <Link to={`/collections/${item.id}`} className="w-full md:w-1/2 lg:w-7/12 aspect-[4/3] lg:aspect-[16/9] overflow-hidden relative block rounded-2xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
+      <Link to={`/collections/${item.id}`} className="w-full md:w-[45%] lg:w-[42%] aspect-[4/5] lg:aspect-[3/4] overflow-hidden relative block rounded-2xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
         <img 
           src={item.image} 
           alt={item.name}
@@ -28,7 +28,7 @@ function MinimalCard({ item, index }) {
       </Link>
       
       {/* Content */}
-      <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col items-start max-w-md">
+      <div className="w-full md:w-[50%] flex flex-col items-start max-w-md">
         <span className="text-pink text-[0.55rem] tracking-[0.4em] uppercase font-medium block mb-3 lg:mb-4">
           Selected Design
         </span>
