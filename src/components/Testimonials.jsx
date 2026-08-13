@@ -44,45 +44,66 @@ function TestimonialPlaceholder() {
 
 // Real testimonial card
 function TestimonialCard({ testimonial }) {
+  const parts = testimonial.text.split('\\n\\n');
+  const mainQuote = parts[0];
+  const secondaryQuote = parts.slice(1).join(' ');
+
   return (
-    <div className="relative bg-black-card border border-gray-luxury/20 p-10 md:p-14">
-      <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-pink to-transparent" />
+    <div className="relative group overflow-hidden bg-gradient-to-br from-white/[0.03] to-transparent border border-white/5 p-10 md:p-16 lg:p-20 rounded-3xl hover:border-white/10 transition-colors duration-700 w-full">
+      {/* Glow on hover */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-pink/5 to-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      <div className="flex items-center gap-1 mb-6">
-        {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <Star key={i} size={14} className="text-pink fill-pink" />
-        ))}
+      {/* Decorative large quote */}
+      <div className="absolute -top-6 -right-6 font-display text-[150px] md:text-[250px] text-white/[0.03] font-bold leading-none select-none pointer-events-none transform -rotate-12 group-hover:rotate-0 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+        &ldquo;
       </div>
 
-      <blockquote className="font-display text-xl md:text-2xl text-white/90 font-light leading-relaxed italic mb-8">
-        "{testimonial.text}"
-      </blockquote>
+      <div className="relative z-10 flex flex-col md:flex-row gap-12 lg:gap-20 items-start">
+        {/* Left column: Quote */}
+        <div className="flex-1">
+          <div className="flex items-center gap-1.5 mb-8">
+            {Array.from({ length: testimonial.rating }).map((_, i) => (
+              <Star key={i} size={16} className="text-[#FFD700] fill-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]" />
+            ))}
+          </div>
 
-      <div className="flex items-center gap-5">
-        <div className="relative">
-          {testimonial.avatar ? (
-            <img
-              src={testimonial.avatar}
-              alt={testimonial.name}
-              className="w-14 h-14 rounded-full object-cover border-2 border-pink/30"
-            />
-          ) : (
-            <div className="w-14 h-14 rounded-full bg-gray-luxury/40 border-2 border-pink/30 flex items-center justify-center">
-              <span className="font-display text-pink text-xl font-medium">
-                {testimonial.name.charAt(0)}
+          <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl text-white font-light leading-[1.4] tracking-tight mb-8 relative">
+            "{mainQuote}"
+            {secondaryQuote && (
+              <span className="block mt-6 text-base md:text-lg text-white/50 font-sans italic leading-[1.8] font-light">
+                {secondaryQuote}
               </span>
-            </div>
-          )}
-          <div className="absolute -inset-1 rounded-full border border-pink/20" />
+            )}
+          </blockquote>
         </div>
-        <div>
-          <div className="font-medium text-white text-base">{testimonial.name}</div>
-          <div className="text-gray-light text-xs tracking-widest mt-0.5">{testimonial.location}</div>
-          <div className="text-pink text-xs tracking-widest mt-1 uppercase">{testimonial.project}</div>
+
+        {/* Right column: Author info */}
+        <div className="w-full md:w-64 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 flex flex-col items-start">
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink to-blue blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 rounded-full" />
+            {testimonial.avatar && testimonial.avatar.length > 1 ? (
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="relative w-20 h-20 rounded-full object-cover border border-white/20 z-10"
+              />
+            ) : (
+              <div className="relative w-20 h-20 rounded-full bg-black border border-white/20 flex items-center justify-center z-10">
+                <span className="font-display text-transparent bg-clip-text bg-gradient-to-tr from-pink to-blue text-4xl font-light">
+                  {testimonial.avatar || testimonial.name.charAt(0)}
+                </span>
+              </div>
+            )}
+          </div>
+          
+          <div className="font-sans text-white text-lg tracking-wide mb-1 font-medium">{testimonial.name}</div>
+          <div className="text-white/40 text-[0.65rem] tracking-[0.2em] uppercase mb-4">{testimonial.date}</div>
+          
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-pink/20 bg-pink/5">
+            <span className="text-pink text-[0.6rem] tracking-[0.15em] uppercase font-medium">{testimonial.project}</span>
+          </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-pink/30 to-transparent" />
     </div>
   );
 }
