@@ -149,8 +149,8 @@ export default function CollectionDetail() {
                 )}
               </motion.div>
 
-              {/* Design Info (Overlapping Glass Card) */}
-              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/60 backdrop-blur-xl border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 -mt-16 md:-mt-24 lg:-mt-32 md:ml-auto md:mr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] transition-all duration-700 flex flex-col items-start text-left">
+              {/* Design Info (Shifted Glass Card) */}
+              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/40 border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 mt-8 md:mt-12 md:ml-auto md:mr-8 lg:mr-16 shadow-2xl transition-all duration-700 flex flex-col items-start text-left">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
