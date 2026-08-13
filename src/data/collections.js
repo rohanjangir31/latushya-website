@@ -4,7 +4,7 @@ export const WARDROBE_COLLECTIONS = [
     name: 'Sliding Wardrobes',
     desc: 'Seamless floor-to-ceiling systems that maximize space and style.',
     intro: 'Engineered to disappear into the architecture of the room, our sliding systems utilize ultra-smooth tracks for effortless operation of monolithic doors.',
-    image: '/assets/wardrobes/sliding-cross-accent.jpg',
+    image: '/assets/wardrobes/sliding-wardrobe-hd.png',
     designs: [
       {
         id: 'sl-1',
