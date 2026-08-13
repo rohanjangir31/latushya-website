@@ -98,7 +98,7 @@ export default function CollectionDetail() {
               
               {/* Main Image Display Frame (Left) */}
               <motion.div 
-                className="w-full lg:flex-1 relative flex justify-center items-center cursor-grab active:cursor-grabbing touch-pan-y group bg-gradient-to-br from-white/[0.03] to-transparent rounded-3xl border border-white/5 p-4 md:p-8 lg:p-12 h-[60vh] lg:h-[75vh] shadow-[inset_0_0_100px_rgba(0,0,0,0.5)]"
+                className="w-full lg:flex-1 relative flex justify-center items-center cursor-grab active:cursor-grabbing touch-pan-y group rounded-[2rem] border border-white/10 h-[60vh] lg:h-[75vh] shadow-[0_0_80px_rgba(0,0,0,0.6)] overflow-hidden bg-black"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -108,7 +108,24 @@ export default function CollectionDetail() {
                   }
                 }}
               >
-                <div className="relative flex justify-center items-center w-full h-full">
+                {/* Dynamic Ambient Background */}
+                <div className="absolute inset-0 z-0">
+                  <AnimatePresence>
+                    <motion.img
+                      key={`bg-${currentDesign.id}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.6 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1.2 }}
+                      src={currentDesign.image}
+                      className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-125 opacity-50 saturate-150"
+                    />
+                  </AnimatePresence>
+                  <div className="absolute inset-0 bg-black/40" />
+                </div>
+
+                {/* Actual Image */}
+                <div className="relative z-10 flex justify-center items-center w-full h-full">
                   <AnimatePresence>
                     <motion.img
                       key={currentDesign.id}
@@ -118,7 +135,7 @@ export default function CollectionDetail() {
                       transition={{ duration: 0.8, ease: "easeInOut" }}
                       src={currentDesign.image}
                       alt={currentDesign.name}
-                      className="absolute inset-0 m-auto max-w-full max-h-full w-auto h-auto object-contain block rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/10 pointer-events-none"
+                      className="absolute inset-0 m-auto max-w-[calc(100%-2rem)] md:max-w-[calc(100%-4rem)] lg:max-w-[calc(100%-8rem)] max-h-[calc(100%-2rem)] md:max-h-[calc(100%-4rem)] lg:max-h-[calc(100%-8rem)] w-auto h-auto object-contain block rounded-xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] border border-white/10 pointer-events-none"
                       draggable={false}
                     />
                   </AnimatePresence>
@@ -128,10 +145,10 @@ export default function CollectionDetail() {
                 {designs.length > 1 && (
                   <button
                     onClick={handlePrev}
-                    className="absolute inset-y-0 left-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-start pl-4 md:pl-8"
+                    className="absolute inset-y-0 left-0 w-20 md:w-28 lg:w-32 cursor-pointer z-20 flex items-center justify-start pl-4 md:pl-8"
                     aria-label="Previous image"
                   >
-                    <div className="w-12 h-12 rounded-full border border-white/10 bg-black-deep/60 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 shadow-2xl">
+                    <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                       <ArrowLeft size={20} />
                     </div>
                   </button>
@@ -141,10 +158,10 @@ export default function CollectionDetail() {
                 {designs.length > 1 && (
                   <button
                     onClick={handleNext}
-                    className="absolute inset-y-0 right-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-end pr-4 md:pr-8"
+                    className="absolute inset-y-0 right-0 w-20 md:w-28 lg:w-32 cursor-pointer z-20 flex items-center justify-end pr-4 md:pr-8"
                     aria-label="Next image"
                   >
-                    <div className="w-12 h-12 rounded-full border border-white/10 bg-black-deep/60 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 hover:bg-pink hover:border-pink hover:text-white hover:scale-110 shadow-2xl">
+                    <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white transition-all duration-300 hover:bg-pink hover:border-pink hover:text-white hover:scale-110 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                       <ArrowRight size={20} />
                     </div>
                   </button>
@@ -152,7 +169,7 @@ export default function CollectionDetail() {
               </motion.div>
 
               {/* Design Info (Right, Sticky) */}
-              <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-transparent lg:border-l border-white/10 lg:pl-12 flex flex-col items-start text-left lg:sticky lg:top-32">
+              <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-transparent flex flex-col items-start text-left lg:sticky lg:top-32 lg:pl-8 mt-8 lg:mt-12">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
