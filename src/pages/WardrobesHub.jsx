@@ -20,8 +20,8 @@ function EditorialHubCard({ item, index }) {
       style={{ marginTop: index === 0 ? '0' : '180px' }}
     >
       {/* Image Column */}
-      <div className="w-full lg:w-[62%] relative overflow-hidden bg-black-deep rounded-2xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
-        <Link to={`/collections/${item.id}`} className="block w-full aspect-[4/3] lg:aspect-[16/10] overflow-hidden relative">
+      <div className="w-full lg:w-[45%] relative overflow-hidden bg-black-deep rounded-2xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
+        <Link to={`/collections/${item.id}`} className="block w-full aspect-[4/5] lg:aspect-[3/4] overflow-hidden relative">
           <img 
             src={item.image}
             alt={item.name}
@@ -33,7 +33,7 @@ function EditorialHubCard({ item, index }) {
       </div>
       
       {/* Text Column */}
-      <div className="w-full lg:w-[38%] flex flex-col items-start text-left">
+      <div className="w-full lg:w-[50%] flex flex-col items-start text-left">
         <Link to={`/collections/${item.id}`} className="contents">
           {/* Index Counter with integrated line */}
           <div className="flex items-center gap-[12px] mb-6">
