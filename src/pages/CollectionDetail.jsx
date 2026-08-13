@@ -150,7 +150,7 @@ export default function CollectionDetail() {
               </motion.div>
 
               {/* Design Info (Shifted Glass Card) */}
-              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/40 border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 mt-8 md:mt-12 md:ml-auto md:mr-8 lg:mr-16 shadow-2xl transition-all duration-700 flex flex-col items-start text-left">
+              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/40 border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 mt-8 md:mt-12 md:mr-auto md:ml-8 lg:ml-16 shadow-2xl transition-all duration-700 flex flex-col items-start text-left">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
