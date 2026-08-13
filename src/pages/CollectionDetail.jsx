@@ -93,12 +93,12 @@ export default function CollectionDetail() {
               {String(currentIndex + 1).padStart(2, '0')} <span className="text-pink mx-2">/</span> {String(designs.length).padStart(2, '0')}
             </div>
 
-            {/* Gallery Split Layout */}
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            {/* Gallery Editorial Overlay Layout */}
+            <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center pb-12">
               
-              {/* Main Image (Left) */}
+              {/* Main Image */}
               <motion.div 
-                className="w-full lg:w-[40%] relative overflow-hidden rounded-xl group shrink-0 border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700 cursor-grab active:cursor-grabbing touch-pan-y"
+                className="w-full relative overflow-hidden rounded-xl shadow-2xl shadow-black/50 group border border-white/5 cursor-grab active:cursor-grabbing touch-pan-y"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -149,13 +149,13 @@ export default function CollectionDetail() {
                 )}
               </motion.div>
 
-              {/* Design Info (Right) */}
-              <div className="w-full lg:w-[50%] flex flex-col items-start text-left">
+              {/* Design Info (Overlapping Glass Card) */}
+              <div className="w-[95%] md:w-[85%] lg:w-[75%] bg-black/60 backdrop-blur-xl border border-white/10 p-8 lg:p-12 rounded-2xl relative z-20 -mt-16 md:-mt-24 lg:-mt-32 md:ml-auto md:mr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] transition-all duration-700 flex flex-col items-start text-left">
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`info-${currentDesign.id}`}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6 }}
                     className="w-full"
@@ -167,7 +167,7 @@ export default function CollectionDetail() {
                       {currentDesign.name}
                     </h3>
                     <div className="w-12 h-px bg-gradient-to-r from-pink to-blue/40 mb-4 lg:mb-6" />
-                    <p className="font-sans text-[0.85rem] lg:text-[0.9rem] font-light leading-[2.1] text-white/50 pr-2">
+                    <p className="font-sans text-[0.85rem] lg:text-[0.95rem] font-light leading-[2.1] text-white/60 pr-2">
                       {currentDesign.description}
                     </p>
                   </motion.div>
