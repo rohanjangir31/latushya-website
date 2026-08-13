@@ -98,7 +98,7 @@ export default function CollectionDetail() {
               
               {/* Main Image (Left) */}
               <motion.div 
-                className="w-full lg:w-[45%] relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-black-deep rounded-2xl group shrink-0 border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700 cursor-grab active:cursor-grabbing touch-pan-y"
+                className="w-full lg:w-[45%] relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-[#0a0a0c] rounded-2xl group shrink-0 border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700 cursor-grab active:cursor-grabbing touch-pan-y"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
@@ -111,13 +111,13 @@ export default function CollectionDetail() {
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={currentDesign.id}
-                    initial={{ opacity: 0, scale: 1.05 }}
+                    initial={{ opacity: 0, scale: 1.02 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                     src={currentDesign.image}
                     alt={currentDesign.name}
-                    className="absolute inset-0 w-full h-full object-cover origin-center opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    className="absolute inset-0 w-full h-full object-contain p-4 opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     draggable={false}
                   />
                 </AnimatePresence>
