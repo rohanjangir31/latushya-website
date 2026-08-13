@@ -17,11 +17,11 @@ function MinimalCard({ item, index }) {
       className={`group flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 lg:gap-24 pb-16 lg:pb-32 border-b border-white/5 last:border-0 last:pb-0`}
     >
       {/* Image */}
-      <Link to={`/collections/${item.id}`} className="w-full md:w-[45%] lg:w-[42%] aspect-[4/5] lg:aspect-[3/4] overflow-hidden relative block rounded-2xl border border-white/5 bg-[#0a0a0c] shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
+      <Link to={`/collections/${item.id}`} className="w-full md:w-[40%] lg:w-[35%] overflow-hidden relative block rounded-xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
         <img 
           src={item.image} 
           alt={item.name}
-          className="w-full h-full object-contain p-4 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.02]"
+          className="w-full h-auto object-cover rounded-xl transition-transform duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.02]"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-700" />

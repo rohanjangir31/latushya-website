@@ -20,12 +20,12 @@ function EditorialHubCard({ item, index }) {
       style={{ marginTop: index === 0 ? '0' : '180px' }}
     >
       {/* Image Column */}
-      <div className="w-full lg:w-[45%] relative overflow-hidden bg-[#0a0a0c] rounded-2xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
-        <Link to={`/collections/${item.id}`} className="block w-full aspect-[4/5] lg:aspect-[3/4] overflow-hidden relative">
+      <div className="w-full lg:w-[38%] relative overflow-hidden rounded-xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
+        <Link to={`/collections/${item.id}`} className="block w-full overflow-hidden relative">
           <img 
             src={item.image}
             alt={item.name}
-            className="absolute inset-0 w-full h-full object-contain p-4 opacity-80 group-hover:opacity-100 transition-transform duration-1000 group-hover:scale-[1.02]"
+            className="w-full h-auto object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-transform duration-1000 group-hover:scale-[1.02]"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-700" />
