@@ -43,16 +43,6 @@ const reviews = [
     isPlaceholder: false,
   },
   {
-    id: 4,
-    name: 'Muskan Muskan',
-    date: '10 months ago',
-    rating: 5,
-    text: "We went We went to them to get for getting only our wardrobes done but ended up getting the entire house interior done. We were doubtful at first honestly. but the took care of their project like their own. Very happy with the work they have delivered.",
-    avatar: 'M',
-    project: 'Wardrobes & Interiors',
-    isPlaceholder: false,
-  },
-  {
     id: 5,
     name: 'rishab sharma',
     date: '1 year ago',
