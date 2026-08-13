@@ -51,6 +51,16 @@ const reviews = [
     avatar: 'r',
     project: 'Complete Interiors',
     isPlaceholder: false,
+  },
+  {
+    id: 6,
+    name: 'Roopika cs',
+    date: '2 months ago',
+    rating: 5,
+    text: 'I recently got the interiors of my bedroom wardrobe done and had a great experience overall. The design was fully customized to my preferences and executed really well. It was a smooth and pleasant experience from start to finish.',
+    avatar: 'R',
+    project: 'Bedroom Wardrobe',
+    isPlaceholder: false,
   }
 ];
 
