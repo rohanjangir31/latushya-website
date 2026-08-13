@@ -108,7 +108,7 @@ export default function CollectionDetail() {
                   }
                 }}
               >
-                <div className="relative inline-block">
+                <div className="relative flex justify-center items-center w-full">
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={currentDesign.id}
@@ -122,33 +122,33 @@ export default function CollectionDetail() {
                       draggable={false}
                     />
                   </AnimatePresence>
-
-                  {/* Prev Overlay Area */}
-                  {designs.length > 1 && (
-                    <button
-                      onClick={handlePrev}
-                      className="absolute inset-y-0 left-0 w-1/3 cursor-pointer z-10 group/left"
-                      aria-label="Previous image"
-                    >
-                      <div className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/left:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black shadow-lg">
-                        <ArrowLeft size={18} />
-                      </div>
-                    </button>
-                  )}
-
-                  {/* Next Overlay Area */}
-                  {designs.length > 1 && (
-                    <button
-                      onClick={handleNext}
-                      className="absolute inset-y-0 right-0 w-1/3 cursor-pointer z-10 group/right"
-                      aria-label="Next image"
-                    >
-                      <div className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/right:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white shadow-lg">
-                        <ArrowRight size={18} />
-                      </div>
-                    </button>
-                  )}
                 </div>
+
+                {/* Prev Overlay Area */}
+                {designs.length > 1 && (
+                  <button
+                    onClick={handlePrev}
+                    className="absolute inset-y-0 left-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-start pl-2 md:pl-6 group/left"
+                    aria-label="Previous image"
+                  >
+                    <div className="w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all duration-500 hover:bg-white hover:text-black shadow-lg">
+                      <ArrowLeft size={18} />
+                    </div>
+                  </button>
+                )}
+
+                {/* Next Overlay Area */}
+                {designs.length > 1 && (
+                  <button
+                    onClick={handleNext}
+                    className="absolute inset-y-0 right-0 w-24 md:w-32 cursor-pointer z-10 flex items-center justify-end pr-2 md:pr-6 group/right"
+                    aria-label="Next image"
+                  >
+                    <div className="w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all duration-500 hover:bg-pink hover:border-pink hover:text-white shadow-lg">
+                      <ArrowRight size={18} />
+                    </div>
+                  </button>
+                )}
               </motion.div>
 
               {/* Design Info (Right, Sticky) */}
