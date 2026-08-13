@@ -123,7 +123,7 @@ export default function MaterialsSection() {
         {/* MATERIAL CATEGORY 1: HARDWARE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32 items-center">
           <motion.div 
-            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden"
+            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden rounded-2xl shadow-2xl"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
@@ -178,7 +178,7 @@ export default function MaterialsSection() {
           </div>
 
           <motion.div 
-            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden order-1 lg:order-2"
+            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden order-1 lg:order-2 rounded-2xl shadow-2xl"
             initial={{ opacity: 0, scale: 1.05 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-50px' }}
