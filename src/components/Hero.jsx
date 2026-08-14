@@ -197,6 +197,7 @@ export default function Hero() {
                     lineHeight: 0.92,
                     color: '#ffffff',
                     marginBottom: '16px',
+                    textShadow: '0 0 80px rgba(223,76,115,0.18)',
                   }}
                 >
                   Wardrobes

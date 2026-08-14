@@ -1,6 +1,37 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, useSpring, useTransform } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import { Shield, Wrench, MapPin, CheckCircle2, Award } from 'lucide-react';
+
+function CountUpNumber({ value, inView }) {
+  if (!/\\d/.test(value)) return <>{value}</>;
+
+  const numMatch = value.match(/\\d+/);
+  const num = parseInt(numMatch[0], 10);
+  const prefix = value.substring(0, numMatch.index);
+  const suffix = value.substring(numMatch.index + numMatch[0].length);
+
+  const spring = useSpring(0, {
+    stiffness: 50,
+    damping: 20,
+    duration: 2000
+  });
+
+  const display = useTransform(spring, (current) => Math.floor(current));
+
+  useEffect(() => {
+    if (inView) {
+      spring.set(num);
+    }
+  }, [inView, num, spring]);
+
+  return (
+    <>
+      {prefix}
+      <motion.span>{display}</motion.span>
+      {suffix}
+    </>
+  );
+}
 
 // Credibility band — real, honest value signals.
 const CREDIBILITY_ITEMS = [
@@ -77,7 +108,7 @@ export default function CredibilityBand() {
               </div>
 
               <div className="font-display text-xl md:text-2xl text-white font-light mb-1">
-                {value}
+                <CountUpNumber value={value} inView={isInView} />
               </div>
               <div className="text-pink text-[10px] tracking-widest uppercase font-medium mb-1">
                 {label}

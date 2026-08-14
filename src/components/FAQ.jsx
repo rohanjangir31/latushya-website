@@ -17,7 +17,7 @@ export default function FAQ() {
         <SectionHeader
           label="FAQ"
           title={<>Common <span className="italic text-pink">Questions</span></>}
-          subtitle="Everything you need to know about ordering a custom wardrobe from Latushya."
+          subtitle="Everything you need to know about working with Latushya."
         />
 
         <div className="space-y-3">

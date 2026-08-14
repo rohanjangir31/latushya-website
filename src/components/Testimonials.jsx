@@ -68,7 +68,7 @@ function TestimonialCard({ testimonial }) {
           </div>
 
           <blockquote className="font-display text-xl md:text-2xl text-white/90 font-light leading-[1.6] tracking-wide mb-6 relative">
-            "{mainQuote}"
+            {'“'}{mainQuote}{'”'}
             {secondaryQuote && (
               <span className="block mt-4 text-sm md:text-base text-white/60 font-sans italic leading-[1.8] font-light">
                 {secondaryQuote}

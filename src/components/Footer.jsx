@@ -111,7 +111,7 @@ export default function Footer() {
 
               {/* Social links */}
               <div className="flex gap-3">
-                {socialLinks.map(({ Icon, href, label }) => (
+                {socialLinks.map(({ Icon, href, label }) => href ? (
                   <a
                     key={label}
                     href={href}
@@ -122,7 +122,7 @@ export default function Footer() {
                   >
                     <Icon />
                   </a>
-                ))}
+                ) : null)}
               </div>
             </div>
 

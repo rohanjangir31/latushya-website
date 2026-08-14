@@ -84,7 +84,7 @@ function HomeScreen({ onCategorySelect, onQuestionSelect }) {
           How can we help<br />you today?
         </p>
         <p style={{ fontFamily: SANS, fontSize: '12.5px', color: 'rgba(255,255,255,0.4)', marginTop: '6px' }}>
-          Choose a topic or type anything — our AI will answer.
+          Ask me anything — I'm powered by Gemini AI.
         </p>
       </div>
 

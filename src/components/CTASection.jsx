@@ -35,7 +35,7 @@ export default function CTASection() {
           decoding="async"
         />
         {/* Dark overlays */}
-        <div className="absolute inset-0 bg-black-deep/80" />
+        <div className="absolute inset-0 bg-black-deep/55" />
         <div className="absolute inset-0 bg-gradient-to-r from-black-deep/70 via-transparent to-black-deep/70" />
       </div>
 

@@ -182,7 +182,7 @@ function ScrollToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-24 left-6 lg:bottom-8 lg:left-8 z-50 w-10 h-10 border border-pink/40 hover:border-pink hover:bg-pink/10 flex items-center justify-center text-pink transition-all duration-300 group"
+          className="fixed bottom-24 left-6 lg:bottom-8 lg:left-8 z-50 w-10 h-10 rounded-full border border-pink/40 hover:border-pink hover:bg-pink/10 flex items-center justify-center text-pink transition-all duration-300 group"
           aria-label="Scroll to top"
           id="scroll-to-top"
         >
@@ -200,22 +200,24 @@ function AppContent() {
   // Initialize Lenis smooth scroll with luxurious but snappy settings
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8, // Snappier, more responsive scroll
+      duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       smoothTouch: false,
-      touchMultiplier: 2.5, // slightly more responsive on trackpads
+      touchMultiplier: 2.5,
     });
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);

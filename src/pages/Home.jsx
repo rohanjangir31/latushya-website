@@ -13,10 +13,15 @@ export default function Home() {
     <PageTransition>
       <Hero />
       <Philosophy />
+      <div className="section-divider" />
       <WhyChoose />
+      <div className="section-divider" />
       <CredibilityBand />
+      <div className="section-divider" />
       <FeaturedProject />
+      <div className="section-divider" />
       <SignatureCollections />
+      <div className="section-divider" />
       <Testimonials />
       <CTASection />
     </PageTransition>
