@@ -88,7 +88,7 @@ export async function sendMessage(userMessage) {
   // Initialise a new chat session if one doesn't exist
   if (!chat) {
     const model = client.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-3.5-flash',
       systemInstruction: SYSTEM_PROMPT,
       generationConfig: {
         maxOutputTokens: 300,
