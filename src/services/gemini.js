@@ -91,7 +91,6 @@ export async function sendMessage(userMessage) {
       model: 'gemini-3.5-flash',
       systemInstruction: SYSTEM_PROMPT,
       generationConfig: {
-        maxOutputTokens: 300,
         temperature: 0.7,
       },
     });
