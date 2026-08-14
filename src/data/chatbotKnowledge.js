@@ -1,170 +1,205 @@
 // ============================================================
 // LATUSHYA — AI Concierge Knowledge Base
-// Comprehensive FAQ + keyword triggers for smart matching
+// All answers sourced directly from real website content.
 // ============================================================
 
 export const CATEGORIES = [
-  { id: 'designs',     label: 'Our Designs',      icon: '✦' },
-  { id: 'pricing',     label: 'Pricing',           icon: '₹' },
-  { id: 'process',     label: 'How It Works',      icon: '⊕' },
-  { id: 'materials',   label: 'Materials',         icon: '◈' },
-  { id: 'warranty',    label: 'Warranty',          icon: '◉' },
-  { id: 'location',    label: 'Location & Areas',  icon: '⊛' },
+  { id: 'services',   label: 'Our Services',     icon: '✦' },
+  { id: 'pricing',    label: 'Pricing',           icon: '₹' },
+  { id: 'process',    label: 'How It Works',      icon: '⊕' },
+  { id: 'materials',  label: 'Materials',         icon: '◈' },
+  { id: 'warranty',   label: 'Warranty & Support', icon: '◉' },
+  { id: 'location',   label: 'Location & Areas',  icon: '⊛' },
 ];
 
 export const KNOWLEDGE = [
-  // ── DESIGNS ──
+
+  // ═══════════════════════════════════════════════
+  // SERVICES
+  // ═══════════════════════════════════════════════
   {
-    id: 'wardrobe-types',
-    category: 'designs',
+    id: 'services-overview',
+    category: 'services',
+    question: 'What services does Latushya offer?',
+    answer: 'We offer five core services: Bespoke Wardrobes, Modular Kitchens, Turnkey Home Interiors, Living Room Design (TV units, wall panels, custom furniture), and Space Planning & Consultation. Every project is 100% custom — we never use off-the-shelf templates.',
+    keywords: ['services', 'offer', 'what do you do', 'work', 'provide'],
+  },
+  {
+    id: 'wardrobes',
+    category: 'services',
     question: 'What types of wardrobes do you design?',
-    answer: 'We specialise exclusively in bespoke wardrobes — Sliding, Hinged, Walk-In, and modular systems. Every wardrobe is designed from scratch for your exact space. We do not use catalogue templates.',
-    keywords: ['wardrobe', 'types', 'sliding', 'hinged', 'walk-in', 'modular', 'designs', 'kind'],
+    answer: 'We specialise exclusively in bespoke wardrobes — Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
+    keywords: ['wardrobe', 'sliding', 'hinged', 'walk-in', 'closet', 'types', 'kind', 'storage'],
   },
   {
-    id: 'custom-design',
-    category: 'designs',
-    question: 'Are your designs fully custom?',
-    answer: 'Absolutely. From the dimensions to the internal layout, material finish, shutter profile, and hardware — every element is engineered for your unique space and lifestyle. Nothing is off-the-shelf.',
-    keywords: ['custom', 'bespoke', 'unique', 'personalised', 'specific', 'tailored'],
-  },
-  {
-    id: 'kitchens',
-    category: 'designs',
+    id: 'modular-kitchen',
+    category: 'services',
     question: 'Do you design modular kitchens?',
-    answer: 'Yes! We bring the same precision and premium material expertise to modular kitchens — with custom layouts, imported laminates and acrylic finishes, and Blum/Häfele mechanisms throughout.',
-    keywords: ['kitchen', 'modular kitchen', 'cooking', 'cabinets'],
+    answer: 'Yes! We design fully custom modular kitchens featuring moisture-resistant CenturyPly/Greenply cores, premium laminate and acrylic finishes, and world-class German hardware (Häfele, Hettich, Blum) — the same quality standard we apply to our wardrobes.',
+    keywords: ['kitchen', 'modular kitchen', 'cooking', 'cabinets', 'kitchen design'],
   },
   {
-    id: 'interiors',
-    category: 'designs',
-    question: 'Do you do full home interiors?',
-    answer: 'While our core expertise is bespoke wardrobes and storage, we do offer turnkey interior solutions including TV units, study furniture, and modular kitchens. Please share your requirements for a tailored proposal.',
-    keywords: ['interior', 'full home', 'turnkey', 'furniture', 'tv unit', 'study'],
-  },
-
-  // ── PRICING ──
-  {
-    id: 'pricing-wardrobes',
-    category: 'pricing',
-    question: 'What does a wardrobe cost?',
-    answer: 'Pricing is 100% custom — it depends on your dimensions, shutter type, material finish, and internal fittings. A well-appointed sliding wardrobe typically starts around ₹80,000. We provide a detailed, transparent quote after our free home visit.',
-    keywords: ['price', 'cost', 'pricing', 'budget', 'expensive', 'rate', 'quote', 'charges', 'fees', 'rupees', 'how much'],
+    id: 'turnkey',
+    category: 'services',
+    question: 'Do you do complete home interiors?',
+    answer: 'Yes — we offer Turnkey Interior solutions covering everything from bare-shell civil work to final styling and handover. This includes living rooms, bedrooms, kitchens, wardrobes, TV units, wall panelling, and study furniture — all under one roof.',
+    keywords: ['turnkey', 'full home', 'complete interior', 'home interior', 'whole house', 'living room', 'bedroom', 'tv unit'],
   },
   {
-    id: 'pricing-kitchen',
-    category: 'pricing',
-    question: 'How much does a kitchen cost?',
-    answer: 'Modular kitchen pricing starts from approximately ₹1,20,000 and varies by layout size, finish (acrylic vs. laminate), and hardware tier. We will present a detailed scope and quote after measuring your kitchen.',
-    keywords: ['kitchen cost', 'kitchen price', 'kitchen budget', 'kitchen charges'],
+    id: 'living-room',
+    category: 'services',
+    question: 'Can you design my living room?',
+    answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, bespoke furniture arrangements, and full living room layouts — tailored to make your space perfect for both hosting and relaxing.',
+    keywords: ['living room', 'tv unit', 'wall panel', 'sofa', 'hall', 'drawing room'],
   },
   {
-    id: 'emi',
-    category: 'pricing',
-    question: 'Do you offer EMI or payment plans?',
-    answer: 'We offer a structured payment schedule tied to project milestones — typically a booking advance, production start payment, and a final balance on installation day. Please ask our team for specific terms.',
-    keywords: ['emi', 'payment', 'installment', 'pay later', 'advance'],
+    id: 'space-planning',
+    category: 'services',
+    question: 'Do you offer space planning or consultation?',
+    answer: 'Yes. Our Space Planning service covers expert consultation on layout optimisation, material selection, and lighting design — ensuring your space flows naturally and looks spectacular before any production begins.',
+    keywords: ['space planning', 'layout', 'design consultation', 'expert advice', 'planning'],
   },
 
-  // ── PROCESS ──
+  // ═══════════════════════════════════════════════
+  // PRICING
+  // ═══════════════════════════════════════════════
   {
-    id: 'consultation',
+    id: 'pricing-general',
+    category: 'pricing',
+    question: 'How much does it cost?',
+    answer: "Our pricing is always custom — it depends on your room dimensions, chosen design, material finish, hardware tier, and internal fittings. We don't publish fixed rates because every project is unique. The best way to get an accurate number is through our free home consultation, where we measure your space and give you a fully detailed, transparent quote with no obligations.",
+    keywords: ['price', 'cost', 'pricing', 'budget', 'expensive', 'rate', 'charges', 'fees', 'rupees', 'how much', 'quote', 'estimate'],
+  },
+  {
+    id: 'free-quote',
+    category: 'pricing',
+    question: 'Can I get a quote without commitment?',
+    answer: 'Yes, absolutely. After our free home visit, we prepare a complete, itemised quote covering materials, hardware, production, and installation — with zero obligation to proceed. You are under no pressure at any stage.',
+    keywords: ['free quote', 'no commitment', 'estimate', 'proposal', 'quotation'],
+  },
+  {
+    id: 'payment',
+    category: 'pricing',
+    question: 'How does payment work?',
+    answer: 'We follow a milestone-based payment schedule: a booking advance to confirm the project, a production payment when manufacturing begins, and the final balance due on installation day. This keeps things transparent and fair for both parties.',
+    keywords: ['payment', 'advance', 'installment', 'emi', 'pay', 'deposit', 'how to pay'],
+  },
+
+  // ═══════════════════════════════════════════════
+  // PROCESS
+  // ═══════════════════════════════════════════════
+  {
+    id: 'consultation-free',
     category: 'process',
-    question: 'Is the consultation free?',
-    answer: 'Yes — the first consultation, including a home visit, space measurement, and preliminary design discussion, is completely free with absolutely no obligation.',
-    keywords: ['free', 'consultation', 'visit', 'meeting', 'appointment', 'book'],
+    question: 'Is the first consultation free?',
+    answer: 'Yes — our first consultation is completely free with no strings attached. Our designer visits your home, measures the space, and discusses your requirements, lifestyle, and style preferences. There is absolutely no obligation to proceed afterwards.',
+    keywords: ['consultation', 'free', 'home visit', 'site visit', 'appointment', 'visit', 'meeting', 'book', 'schedule'],
   },
   {
     id: 'timeline',
     category: 'process',
     question: 'How long does a project take?',
-    answer: 'Most wardrobe projects are completed within 3–4 weeks from design approval. This covers precision production in our workshop and a 2–4 day on-site installation with minimal disruption.',
-    keywords: ['timeline', 'time', 'how long', 'days', 'weeks', 'duration', 'when'],
+    answer: 'Most wardrobe and kitchen projects are completed within 3–4 weeks from design approval. This covers precision production in our workshop and a 2–4 day on-site installation by our trained carpentry team — with minimal disruption to your home.',
+    keywords: ['timeline', 'how long', 'time', 'days', 'weeks', 'duration', 'when ready', 'delivery'],
   },
   {
     id: 'process-steps',
     category: 'process',
-    question: 'What is your process like?',
-    answer: 'We follow a clear 6-step process: Free Consultation → 3D Design → Material Selection → Workshop Production → On-Site Installation → Quality Handover. At every stage, you are fully informed and in control.',
-    keywords: ['process', 'steps', 'how do you', 'procedure', 'workflow'],
+    question: 'What is your step-by-step process?',
+    answer: "We follow a clear 6-step process:\n\n1. Free Home Consultation — we visit, measure, listen.\n2. 3D Design Concept — a personalised layout you can visualise.\n3. Material Selection — choose your finishes and hardware from our curated library.\n4. Workshop Production — precision-cut and pre-assembled in our facility.\n5. On-site Installation — clean, efficient, on-time.\n6. Quality Handover — thorough check of every drawer, shutter, and fitting before sign-off.",
+    keywords: ['process', 'steps', 'how do you work', 'procedure', 'workflow', 'how it works'],
   },
   {
-    id: 'site-visit',
+    id: 'design',
     category: 'process',
-    question: 'Can you come to my home to measure?',
-    answer: 'Absolutely — our designer visits your home, takes precise measurements, assesses the space, and only then creates a concept tailored to your room. It\'s a free service with no strings attached.',
-    keywords: ['home visit', 'site visit', 'come', 'measure', 'measurement'],
+    question: 'Do you provide a 3D design before starting?',
+    answer: 'Yes. After the consultation, our designer creates a detailed 3D spatial layout showing your interior — including zones, material finishes, and the overall look — so you can visualise and approve it before any production begins.',
+    keywords: ['3d', 'design', 'visualise', 'render', 'preview', 'sketch', 'drawing'],
   },
 
-  // ── MATERIALS ──
+  // ═══════════════════════════════════════════════
+  // MATERIALS & HARDWARE
+  // ═══════════════════════════════════════════════
   {
-    id: 'hardware',
+    id: 'hardware-brands',
     category: 'materials',
     question: 'What hardware brands do you use?',
-    answer: 'We exclusively use German and Austrian hardware — Häfele, Hettich, and Blum. These are industry gold standards used in the most premium furniture worldwide, ensuring silent, flawless operation for a lifetime.',
-    keywords: ['hardware', 'hafele', 'hettich', 'blum', 'fittings', 'hinges', 'slides', 'brand'],
+    answer: 'We exclusively use three world-class brands:\n\n• Häfele (Germany) — sliding systems, hinges, and soft-close mechanisms.\n• Hettich (Germany) — silent drawer systems and smooth-glide runners.\n• Blum (Austria) — Aventos lift systems and Legrabox drawers for a feather-light opening experience.\n\nAll three are industry gold standards that guarantee lifetime performance.',
+    keywords: ['hardware', 'hafele', 'hettich', 'blum', 'fittings', 'hinges', 'brand', 'german', 'austrian'],
   },
   {
-    id: 'ply',
+    id: 'plywood',
     category: 'materials',
-    question: 'What plywood or substrate do you use?',
-    answer: 'We use CenturyPly or Greenply as our core structural substrate — BWP marine-grade options are available for moisture-prone areas. The carcasses are then finished with premium imported laminates or high-gloss acrylics.',
-    keywords: ['plywood', 'ply', 'substrate', 'wood', 'century', 'greenply', 'material', 'board'],
+    question: 'What plywood and substrate do you use?',
+    answer: "We use CenturyPly or Greenply as our structural core substrate — both are ISI-certified, termite-resistant, and available in BWP marine-grade for moisture-prone areas like kitchens. The carcasses are then finished with your chosen premium laminate or acrylic.",
+    keywords: ['plywood', 'ply', 'substrate', 'wood', 'centuryply', 'greenply', 'board', 'core'],
   },
   {
-    id: 'finish',
+    id: 'finishes',
     category: 'materials',
-    question: 'What finish options are available?',
-    answer: 'We offer a wide curated library of finishes — matte laminates, high-gloss acrylics, woodgrain textures, and fabric-textured PVC membranes. Our designer brings physical samples to your home so you can see the exact finish in your lighting.',
-    keywords: ['finish', 'laminate', 'acrylic', 'colour', 'texture', 'look', 'style', 'shade'],
+    question: 'What finish and colour options are available?',
+    answer: 'We offer an extensive, curated library of finishes — matte laminates, high-gloss acrylics, woodgrain textures, fabric-textured PVC membranes, and glass shutters (frosted, tinted, lacquered, or clear). Our designer brings physical samples to your home so you can see each finish in your own lighting before deciding.',
+    keywords: ['finish', 'colour', 'laminate', 'acrylic', 'texture', 'look', 'matte', 'glossy', 'glass', 'material options'],
   },
   {
-    id: 'glass',
+    id: 'glass-shutters',
     category: 'materials',
-    question: 'Can I have glass shutters on my wardrobe?',
-    answer: 'Yes — we offer tinted glass, frosted glass, lacquered glass, and clear glass shutter options, typically framed with aluminium profiles for a sleek contemporary look.',
-    keywords: ['glass', 'mirror', 'frosted', 'tinted', 'transparent'],
+    question: 'Can I get glass or mirror shutters on my wardrobe?',
+    answer: 'Absolutely. We offer frosted glass, tinted glass, lacquered glass, clear glass, and full-length mirror shutters — typically framed with sleek aluminium profiles. Mirror shutters are a particularly popular choice for bedrooms.',
+    keywords: ['glass', 'mirror', 'frosted', 'tinted', 'reflective', 'shutter', 'door'],
   },
 
-  // ── WARRANTY ──
+  // ═══════════════════════════════════════════════
+  // WARRANTY & SUPPORT
+  // ═══════════════════════════════════════════════
   {
     id: 'warranty',
     category: 'warranty',
-    question: 'What warranty do you offer?',
-    answer: 'We provide up to a 10-year warranty on manufacturing and structural integrity. Our German hardware (Blum, Häfele, Hettich) carries an independent lifetime performance guarantee from the brand itself.',
-    keywords: ['warranty', 'guarantee', 'after-service', 'support', 'repair', 'defect'],
+    question: 'What warranty do you provide?',
+    answer: "We are finalising our official warranty terms and will share the exact details shortly. What we can confirm: we stand fully behind our craftsmanship, and our German/Austrian hardware (Häfele, Hettich, Blum) carries independent lifetime performance guarantees from the brands themselves. Reach out to us for current warranty specifics.",
+    keywords: ['warranty', 'guarantee', 'how long', 'years', 'assurance'],
   },
   {
     id: 'after-sales',
     category: 'warranty',
-    question: 'What if something breaks after installation?',
-    answer: 'Our after-sales support team is available to assist with any issue post-installation. During the warranty period, structural repairs and hardware adjustments are covered at no cost to you.',
-    keywords: ['break', 'fix', 'repair', 'broken', 'not working', 'issue', 'problem', 'damage', 'service'],
+    question: 'What if something needs fixing after installation?',
+    answer: 'Our after-sales support team is fully reachable after handover. If any drawer, shutter, or fitting needs adjustment, our team will visit and resolve it promptly. Customer satisfaction does not end at the handover — it is an ongoing commitment.',
+    keywords: ['repair', 'fix', 'broken', 'issue', 'problem', 'after', 'service', 'support', 'post-installation'],
   },
 
-  // ── LOCATION ──
+  // ═══════════════════════════════════════════════
+  // LOCATION
+  // ═══════════════════════════════════════════════
   {
     id: 'areas',
     category: 'location',
     question: 'Which areas in Bangalore do you serve?',
-    answer: 'We serve clients across the entire Bangalore metropolitan area — including Whitefield, Koramangala, Indiranagar, HSR Layout, Yelahanka, Jayanagar, Hebbal, Electronic City, and beyond.',
-    keywords: ['area', 'location', 'serve', 'bangalore', 'koramangala', 'whitefield', 'indiranagar', 'hsr', 'yelahanka'],
+    answer: 'We serve clients across all areas of Bangalore — including Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
+    keywords: ['area', 'location', 'where', 'serve', 'bangalore', 'indiranagar', 'koramangala', 'whitefield', 'hsr', 'yelahanka', 'jayanagar', 'hebbal'],
   },
   {
     id: 'outside-bangalore',
     category: 'location',
     question: 'Do you work outside Bangalore?',
-    answer: 'Currently our core operations are focused on Bangalore. For projects in Mysore or other nearby cities, please contact us directly and we will assess feasibility based on project scope.',
-    keywords: ['mysore', 'outside', 'other city', 'chennai', 'hyderabad', 'outstation'],
+    answer: 'Our primary operations are focused on Bangalore at the moment. For projects in nearby cities like Mysore or Tumkur, please contact us directly with your project details, and we will assess feasibility based on the scope.',
+    keywords: ['outside', 'mysore', 'other city', 'outstation', 'travel', 'different city'],
+  },
+  {
+    id: 'contact',
+    category: 'location',
+    question: 'How can I contact Latushya?',
+    answer: 'You can reach us on WhatsApp or phone at +91 63763 12638, or email us at contact@latushya.com. You can also click the "Free Consultation" button at the top of any page to book a home visit directly.',
+    keywords: ['contact', 'call', 'phone', 'whatsapp', 'email', 'reach', 'number', 'how to contact'],
   },
 ];
 
 export const FALLBACK = {
-  text: "That\'s a great question! For highly specific design or pricing queries, our expert team will give you the most accurate answer.",
+  text: "That's a great question — and one best answered by our design team directly! Every project is unique, and our experts can give you the most accurate, personalised answer.",
   showWhatsApp: true,
 };
 
-// Smart keyword matcher — returns best matching entry
+// ─── Smart keyword matcher ───────────────────────────────
+// Returns the best-matching knowledge entry or null
 export function findAnswer(userInput) {
   const lower = userInput.toLowerCase().trim();
   if (!lower) return null;
@@ -174,18 +209,16 @@ export function findAnswer(userInput) {
 
   for (const entry of KNOWLEDGE) {
     let score = 0;
-    // Check keywords
     for (const kw of entry.keywords) {
-      if (lower.includes(kw)) score += kw.length; // longer keyword = stronger signal
+      if (lower.includes(kw.toLowerCase())) {
+        score += kw.length; // longer keyword = stronger signal
+      }
     }
-    // Also fuzzy-check against the question itself
-    if (lower.includes(entry.question.toLowerCase().slice(0, 10))) score += 5;
-
     if (score > bestScore) {
       bestScore = score;
       bestMatch = entry;
     }
   }
 
-  return bestScore > 2 ? bestMatch : null;
+  return bestScore >= 3 ? bestMatch : null;
 }

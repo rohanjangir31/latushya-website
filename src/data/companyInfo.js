@@ -11,8 +11,8 @@ const companyInfo = {
 
   // ─── CONTACT ──────────────────────────────────────────────
   // Replace with final values when owners provide them
-  phone: '+91 98765 43210',
-  whatsapp: '919876543210',
+  phone: '+91 63763 12638',
+  whatsapp: '916376312638',
   email: 'contact@latushya.com',
   address: 'No. 12, 100ft Road, Indiranagar, Bangalore - 560038',
   city: 'Bangalore, Karnataka',
