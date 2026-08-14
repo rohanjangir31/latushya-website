@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, ChevronLeft, ArrowUpRight, Phone } from 'lucide-react';
-import { CATEGORIES, KNOWLEDGE, FALLBACK, findAnswer } from '../data/chatbotKnowledge';
+import { X, Send, ChevronLeft, ArrowUpRight, Phone, AlertCircle } from 'lucide-react';
+import { CATEGORIES, KNOWLEDGE } from '../data/chatbotKnowledge';
+import { sendMessage as geminiSend, startNewChat } from '../services/gemini';
 
 const SANS    = "'Inter', system-ui, sans-serif";
 const DISPLAY = "'Cormorant Garamond', Georgia, serif";
@@ -25,6 +26,7 @@ function TypingDots() {
 // ─── Single chat bubble ──────────────────────────────────
 function Bubble({ msg }) {
   const isBot = msg.type === 'bot';
+  const isError = msg.isError;
 
   return (
     <motion.div
@@ -34,13 +36,16 @@ function Bubble({ msg }) {
       className={`flex flex-col gap-2 ${isBot ? 'items-start' : 'items-end'} max-w-[88%] ${isBot ? 'self-start' : 'self-end'}`}
     >
       <div
-        style={{ fontFamily: SANS, fontSize: '13.5px', lineHeight: 1.6 }}
+        style={{ fontFamily: SANS, fontSize: '13.5px', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}
         className={`px-4 py-3 ${
-          isBot
-            ? 'bg-white/[0.08] border border-white/[0.07] text-white/90 rounded-2xl rounded-bl-sm'
-            : 'bg-gradient-to-br from-[#DF4C73] to-[#c73d60] text-white rounded-2xl rounded-br-sm shadow-[0_4px_20px_rgba(223,76,115,0.35)]'
+          isError
+            ? 'bg-red-500/10 border border-red-500/20 text-red-300 rounded-2xl rounded-bl-sm'
+            : isBot
+              ? 'bg-white/[0.08] border border-white/[0.07] text-white/90 rounded-2xl rounded-bl-sm'
+              : 'bg-gradient-to-br from-[#DF4C73] to-[#c73d60] text-white rounded-2xl rounded-br-sm shadow-[0_4px_20px_rgba(223,76,115,0.35)]'
         }`}
       >
+        {isError && <AlertCircle size={14} className="inline mr-1.5 -mt-0.5" />}
         {msg.text}
       </div>
 
@@ -56,22 +61,6 @@ function Bubble({ msg }) {
           <Phone size={15} strokeWidth={2.5} />
           Speak to a Design Expert
         </a>
-      )}
-
-      {/* Quick-reply suggestion chips */}
-      {msg.chips && msg.chips.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-1">
-          {msg.chips.map((chip) => (
-            <button
-              key={chip.id}
-              onClick={chip.onClick}
-              style={{ fontFamily: SANS, fontSize: '12px' }}
-              className="px-3 py-1.5 rounded-full border border-white/15 bg-white/[0.04] text-white/70 hover:bg-white/[0.1] hover:text-white hover:border-white/30 transition-all duration-250"
-            >
-              {chip.label}
-            </button>
-          ))}
-        </div>
       )}
     </motion.div>
   );
@@ -95,7 +84,7 @@ function HomeScreen({ onCategorySelect, onQuestionSelect }) {
           How can we help<br />you today?
         </p>
         <p style={{ fontFamily: SANS, fontSize: '12.5px', color: 'rgba(255,255,255,0.4)', marginTop: '6px' }}>
-          Browse topics or type your question below.
+          Choose a topic or type anything — our AI will answer.
         </p>
       </div>
 
@@ -130,7 +119,7 @@ function HomeScreen({ onCategorySelect, onQuestionSelect }) {
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 + i * 0.06 }}
-              onClick={() => onQuestionSelect(qa)}
+              onClick={() => onQuestionSelect(qa.question)}
               style={{ fontFamily: SANS, fontSize: '13px' }}
               className="group flex items-center justify-between gap-3 p-3 rounded-xl bg-transparent border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/20 transition-all duration-250 text-left text-white/70 hover:text-white/95"
             >
@@ -157,7 +146,6 @@ function CategoryScreen({ category, onBack, onQuestionSelect }) {
       transition={{ duration: 0.3 }}
       className="flex flex-col h-full"
     >
-      {/* Category header */}
       <div className="px-5 py-4 border-b border-white/[0.07] flex items-center gap-3 shrink-0">
         <button
           onClick={onBack}
@@ -165,9 +153,7 @@ function CategoryScreen({ category, onBack, onQuestionSelect }) {
         >
           <ChevronLeft size={16} />
         </button>
-        <div>
-          <p style={{ fontFamily: SANS, fontSize: '12px', color: '#DF4C73', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{category.icon} {category.label}</p>
-        </div>
+        <p style={{ fontFamily: SANS, fontSize: '12px', color: '#DF4C73', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{category.icon} {category.label}</p>
       </div>
 
       <div data-lenis-prevent="true" className="flex-1 overflow-y-auto p-5 flex flex-col gap-2.5">
@@ -177,7 +163,7 @@ function CategoryScreen({ category, onBack, onQuestionSelect }) {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
-            onClick={() => onQuestionSelect(qa)}
+            onClick={() => onQuestionSelect(qa.question)}
             style={{ fontFamily: SANS, fontSize: '13.5px' }}
             className="group flex items-center justify-between gap-3 p-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/20 transition-all duration-250 text-left text-white/75 hover:text-white"
           >
@@ -193,10 +179,23 @@ function CategoryScreen({ category, onBack, onQuestionSelect }) {
 // ─── Chat screen ──────────────────────────────────────────
 function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputValue }) {
   const bottomRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
+
+  // Auto-focus input when chat opens
+  useEffect(() => {
+    setTimeout(() => inputRef.current?.focus(), 300);
+  }, []);
+
+  const handleKey = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onSend(e);
+    }
+  };
 
   return (
     <motion.div
@@ -207,7 +206,6 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
       transition={{ duration: 0.3 }}
       className="flex flex-col h-full"
     >
-      {/* Chat header */}
       <div className="px-5 py-3 border-b border-white/[0.07] flex items-center gap-3 shrink-0">
         <button
           onClick={onBack}
@@ -215,7 +213,10 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
         >
           <ChevronLeft size={16} />
         </button>
-        <span style={{ fontFamily: SANS, fontSize: '12px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Conversation</span>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 block animate-pulse" />
+          <span style={{ fontFamily: SANS, fontSize: '12px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>AI Concierge · Online</span>
+        </div>
       </div>
 
       {/* Messages */}
@@ -230,27 +231,34 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
       </div>
 
       {/* Input */}
-      <form
-        onSubmit={onSend}
-        className="p-4 border-t border-white/[0.07] shrink-0 bg-black/30"
-      >
+      <form onSubmit={onSend} className="p-4 border-t border-white/[0.07] shrink-0 bg-black/30">
         <div className="relative flex items-center gap-2">
-          <input
-            type="text"
+          <textarea
+            ref={inputRef}
+            rows={1}
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
-            placeholder="Ask a question…"
-            style={{ fontFamily: SANS, fontSize: '13.5px' }}
-            className="flex-1 bg-white/[0.06] border border-white/[0.1] rounded-full py-2.5 pl-4 pr-12 text-white placeholder-white/25 focus:outline-none focus:border-white/25 transition-colors"
+            onChange={e => {
+              setInputValue(e.target.value);
+              // auto grow
+              e.target.style.height = 'auto';
+              e.target.style.height = Math.min(e.target.scrollHeight, 96) + 'px';
+            }}
+            onKeyDown={handleKey}
+            placeholder="Ask anything about our designs…"
+            style={{ fontFamily: SANS, fontSize: '13.5px', resize: 'none', overflowY: 'auto' }}
+            className="flex-1 bg-white/[0.06] border border-white/[0.1] rounded-2xl py-2.5 pl-4 pr-12 text-white placeholder-white/25 focus:outline-none focus:border-white/25 transition-colors min-h-[44px] max-h-24"
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isTyping}
-            className="w-9 h-9 rounded-full bg-[#DF4C73] flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#c73d60] active:scale-95 transition-all duration-200 shrink-0"
+            className="absolute right-2 bottom-2 w-8 h-8 rounded-xl bg-[#DF4C73] flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#c73d60] active:scale-95 transition-all duration-200 shrink-0"
           >
-            <Send size={15} strokeWidth={2.5} />
+            <Send size={14} strokeWidth={2.5} />
           </button>
         </div>
+        <p style={{ fontFamily: SANS, fontSize: '10.5px', color: 'rgba(255,255,255,0.2)', marginTop: '6px', textAlign: 'center' }}>
+          Powered by Gemini AI · Press Enter to send
+        </p>
       </form>
     </motion.div>
   );
@@ -258,16 +266,16 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
 
 // ─── Main Chatbot component ───────────────────────────────
 export default function AIChatbot() {
-  const [isOpen, setIsOpen]         = useState(false);
-  const [screen, setScreen]         = useState('home');   // 'home' | 'category' | 'chat'
+  const [isOpen, setIsOpen]             = useState(false);
+  const [screen, setScreen]             = useState('home');
   const [activeCategory, setActiveCategory] = useState(null);
-  const [messages, setMessages]     = useState([]);
-  const [isTyping, setIsTyping]     = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [hasUnread, setHasUnread]   = useState(false);
-  const pulseTimerRef               = useRef(null);
+  const [messages, setMessages]         = useState([]);
+  const [isTyping, setIsTyping]         = useState(false);
+  const [inputValue, setInputValue]     = useState('');
+  const [hasUnread, setHasUnread]       = useState(false);
+  const pulseTimerRef                   = useRef(null);
+  const hasApiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
 
-  // Show unread dot after 10 seconds to draw attention
   useEffect(() => {
     pulseTimerRef.current = setTimeout(() => {
       if (!isOpen) setHasUnread(true);
@@ -280,26 +288,47 @@ export default function AIChatbot() {
     setHasUnread(false);
   };
 
-  const botReply = useCallback((text, extra = {}) => {
+  // Core AI reply function
+  const botReply = useCallback(async (userText) => {
     setIsTyping(true);
-    const delay = 700 + Math.min(text.length * 12, 1400); // dynamic delay based on reply length
-    setTimeout(() => {
-      setIsTyping(false);
+    try {
+      let reply;
+      if (hasApiKey) {
+        reply = await geminiSend(userText);
+      } else {
+        // Graceful fallback when no key is configured
+        await new Promise(r => setTimeout(r, 800));
+        reply = "I'm not quite set up yet — please reach out on WhatsApp and our team will answer you right away!";
+      }
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
         type: 'bot',
-        text,
-        ...extra,
+        text: reply,
+        showWhatsApp: !hasApiKey,
       }]);
-    }, delay);
-  }, []);
+    } catch (err) {
+      console.error('Gemini error:', err);
+      setMessages(prev => [...prev, {
+        id: Date.now().toString(),
+        type: 'bot',
+        text: "I couldn't connect right now. Please try again or reach us on WhatsApp.",
+        isError: false,
+        showWhatsApp: true,
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
+  }, [hasApiKey]);
 
-  const handleQuestionSelect = (qa) => {
+  const sendUserMessage = useCallback((text) => {
+    if (!text.trim() || isTyping) return;
+    setMessages(prev => [...prev, { id: Date.now().toString(), type: 'user', text }]);
+    botReply(text);
+  }, [isTyping, botReply]);
+
+  const handleQuestionSelect = (questionText) => {
     setScreen('chat');
-    // Add user's question as a bubble
-    const userMsg = { id: Date.now().toString(), type: 'user', text: qa.question };
-    setMessages(prev => [...prev, userMsg]);
-    botReply(qa.answer);
+    sendUserMessage(questionText);
   };
 
   const handleCategorySelect = (cat) => {
@@ -309,24 +338,16 @@ export default function AIChatbot() {
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!inputValue.trim() || isTyping) return;
     const text = inputValue.trim();
+    if (!text) return;
     setInputValue('');
-
-    // Go to chat screen if not already there
     setScreen('chat');
-    setMessages(prev => [...prev, { id: Date.now().toString(), type: 'user', text }]);
-
-    const match = findAnswer(text);
-    if (match) {
-      botReply(match.answer);
-    } else {
-      botReply(FALLBACK.text, { showWhatsApp: true });
-    }
+    sendUserMessage(text);
   };
 
   const handleBack = () => {
     if (screen === 'chat') {
+      startNewChat(); // reset conversation context
       setMessages([]);
       setInputValue('');
       setScreen(activeCategory ? 'category' : 'home');
@@ -338,11 +359,10 @@ export default function AIChatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex flex-col items-end gap-3">
-      {/* Chat panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20, transformOrigin: 'bottom right' }}
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
@@ -359,7 +379,7 @@ export default function AIChatbot() {
                 </div>
                 <div>
                   <h3 style={{ fontFamily: DISPLAY, fontSize: '18px', color: 'rgba(255,255,255,0.95)', lineHeight: 1 }}>Latushya Concierge</h3>
-                  <p style={{ fontFamily: SANS, fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '2px' }}>Online · Design Assistant</p>
+                  <p style={{ fontFamily: SANS, fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '2px' }}>AI · Design Assistant</p>
                 </div>
               </div>
               <button
@@ -402,10 +422,10 @@ export default function AIChatbot() {
               </AnimatePresence>
             </div>
 
-            {/* Footer — only on home screen */}
+            {/* Footer input — home screen only */}
             {screen === 'home' && (
               <div className="px-5 pb-4 pt-2 border-t border-white/[0.06] shrink-0">
-                <form onSubmit={(e) => { handleSend(e); }} className="relative flex items-center">
+                <form onSubmit={handleSend} className="relative flex items-center">
                   <input
                     type="text"
                     value={inputValue}
@@ -435,9 +455,7 @@ export default function AIChatbot() {
         whileTap={{ scale: 0.94 }}
         className="relative w-14 h-14 md:w-[58px] md:h-[58px] rounded-full bg-[#0e0e14] border border-white/[0.12] flex items-center justify-center text-white shadow-[0_8px_32px_rgba(0,0,0,0.6)] overflow-hidden group"
       >
-        {/* Gradient sweep on hover */}
         <span className="absolute inset-0 bg-gradient-to-br from-[#DF4C73]/80 to-[#9b2d4a]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
-
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.span key="x" initial={{ rotate: -80, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 80, opacity: 0 }} transition={{ duration: 0.2 }} className="relative z-10">
@@ -449,8 +467,6 @@ export default function AIChatbot() {
             </motion.span>
           )}
         </AnimatePresence>
-
-        {/* Unread dot */}
         <AnimatePresence>
           {hasUnread && !isOpen && (
             <motion.span
