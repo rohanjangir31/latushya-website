@@ -86,6 +86,7 @@ function HomeScreen({ onCategorySelect, onQuestionSelect }) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -10 }}
       transition={{ duration: 0.3 }}
+      data-lenis-prevent="true"
       className="flex flex-col h-full overflow-y-auto p-5 gap-4"
     >
       {/* Hero greeting */}
@@ -169,7 +170,7 @@ function CategoryScreen({ category, onBack, onQuestionSelect }) {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-2.5">
+      <div data-lenis-prevent="true" className="flex-1 overflow-y-auto p-5 flex flex-col gap-2.5">
         {items.map((qa, i) => (
           <motion.button
             key={qa.id}
@@ -218,7 +219,7 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3">
+      <div data-lenis-prevent="true" className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3">
         {messages.map(msg => <Bubble key={msg.id} msg={msg} />)}
         {isTyping && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="self-start">
