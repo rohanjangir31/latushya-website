@@ -12,6 +12,7 @@ import GrainOverlay from './components/GrainOverlay';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import AIChatbot from './components/AIChatbot';
 import Portfolio from './pages/Portfolio';
 import Materials from './pages/Materials';
 import Process from './pages/Process';
@@ -152,7 +153,7 @@ function WhatsAppFloat() {
       transition={{ delay: 3, duration: 0.5, type: 'spring' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="hidden lg:flex fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className="hidden lg:flex fixed bottom-8 right-28 z-50 w-14 h-14 bg-[#25D366] rounded-full items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
       aria-label="Chat on WhatsApp"
       id="floating-whatsapp"
     >
@@ -254,6 +255,7 @@ function AppContent() {
           </main>
           <Footer />
           <WhatsAppFloat />
+          <AIChatbot />
           <ScrollToTop />
         </>
       )}
