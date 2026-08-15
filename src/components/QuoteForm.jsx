@@ -19,7 +19,7 @@ export default function QuoteForm() {
     e.preventDefault();
     const subject = encodeURIComponent(`New Quote Request from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nMobile: ${formData.mobile}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:contact@latushya.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@latushya.com?subject=${subject}&body=${body}`;
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);

@@ -52,7 +52,7 @@ function Bubble({ msg }) {
       {/* WhatsApp CTA */}
       {msg.showWhatsApp && (
         <a
-          href="https://wa.me/916376312638?text=Hello%20Latushya!%20I%20have%20a%20design%20query."
+          href="https://wa.me/919741415887?text=Hello%20Latushya!%20I%20have%20a%20design%20query."
           target="_blank"
           rel="noopener noreferrer"
           style={{ fontFamily: SANS, fontSize: '13px' }}

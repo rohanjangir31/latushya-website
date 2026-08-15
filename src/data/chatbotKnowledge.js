@@ -188,7 +188,7 @@ export const KNOWLEDGE = [
     id: 'contact',
     category: 'location',
     question: 'How can I contact Latushya?',
-    answer: 'You can reach us on WhatsApp or phone at +91 63763 12638, or email us at contact@latushya.com. You can also click the "Consultation" button at the top of any page to book a home visit directly.',
+    answer: 'You can reach us on WhatsApp or phone at +91 97414 15887, or email us at info@latushya.com. You can also click the "Consultation" button at the top of any page to book a home visit directly.',
     keywords: ['contact', 'call', 'phone', 'whatsapp', 'email', 'reach', 'number', 'how to contact'],
   },
 ];
