@@ -84,7 +84,7 @@ export default function CTASection() {
           className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-8 py-3.5 tracking-widest text-[0.65rem] uppercase transition-all duration-300"
           id="cta-section-btn"
         >
-          <span className="relative z-10">Request a Private Consultation</span>
+          <span className="relative z-10">Request a Free Private Consultation</span>
         </motion.button>
       </div>
     </section>
