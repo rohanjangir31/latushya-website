@@ -25,7 +25,6 @@ const YoutubeIcon = () => (
 
 const socialLinks = [
   { Icon: InstagramIcon, href: COMPANY.instagram, label: 'Instagram' },
-  { Icon: FacebookIcon, href: COMPANY.facebook, label: 'Facebook' },
   { Icon: YoutubeIcon, href: COMPANY.youtube, label: 'YouTube' },
 ];
 
@@ -118,9 +117,11 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="w-10 h-10 border border-gray-luxury/30 hover:border-blue/60 flex items-center justify-center text-gray-subtle hover:text-blue transition-all duration-300 group"
+                    className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-pink hover:border-pink hover:shadow-[0_0_20px_rgba(223,76,115,0.4)] transition-all duration-300 group hover:-translate-y-1"
                   >
-                    <Icon />
+                    <div className="transition-transform duration-300 group-hover:scale-110 flex items-center justify-center">
+                      <Icon />
+                    </div>
                   </a>
                 ) : null)}
               </div>
