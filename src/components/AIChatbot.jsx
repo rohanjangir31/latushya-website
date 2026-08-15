@@ -464,9 +464,8 @@ export default function AIChatbot() {
         onClick={isOpen ? () => setIsOpen(false) : openChat}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
-        className="relative w-14 h-14 md:w-[58px] md:h-[58px] rounded-full bg-[#0e0e14] border border-white/[0.12] flex items-center justify-center text-white shadow-[0_8px_32px_rgba(0,0,0,0.6)] overflow-hidden group"
+        className="relative w-14 h-14 md:w-[58px] md:h-[58px] rounded-full bg-gradient-to-br from-[#DF4C73] to-[#b33554] flex items-center justify-center text-white shadow-[0_4px_20px_rgba(223,76,115,0.4)] overflow-hidden"
       >
-        <span className="absolute inset-0 bg-gradient-to-br from-[#DF4C73]/80 to-[#9b2d4a]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.span key="x" initial={{ rotate: -80, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 80, opacity: 0 }} transition={{ duration: 0.2 }} className="relative z-10">
