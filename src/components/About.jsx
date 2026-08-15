@@ -26,7 +26,7 @@ export default function About() {
               <img
                 src="/projects/media__1784490387524.jpg"
                 alt="Latushya Studio Aesthetic"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                className="w-full h-full object-cover transition-all duration-1000"
                 loading="lazy"
                 decoding="async"
               />
@@ -60,10 +60,10 @@ export default function About() {
             <AnimatedSection delay={0.3}>
               <div className="space-y-8 text-gray-subtle text-lg font-light leading-relaxed max-w-2xl">
                 <p>
-                  Latushya was founded on a singular belief: a home should be an architectural extension of the people who live within it. We reject the mass-produced and the templated. Every wardrobe, every kitchen, and every interior space we execute in Bangalore is a bespoke commission.
+                  Latushya was founded on a singular belief: a home should be an architectural extension of the people who live within it. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute in Bangalore is a bespoke commission.
                 </p>
                 <p>
-                  Our process begins with silence—listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world-class German hardware and marine-grade substrates.
+                  Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware and marine grade substrates.
                 </p>
                 <p>
                   We are not just designers; we are precision builders. From the first sketch to the final silent close of a cabinet door, our commitment is to absolute, uncompromising quality.
