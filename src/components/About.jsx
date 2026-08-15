@@ -75,7 +75,7 @@ export default function About() {
               <div className="mt-16 pt-12 border-t border-white/10 flex items-center justify-between">
                 <div>
                   <p className="font-display text-2xl text-white tracking-wide">The Founders</p>
-                  <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Latushya Interiors</p>
+                  <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Chandan Kumar • Sarita Kumari • Indiraj Sharma</p>
                 </div>
                 <div className="w-16 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
               </div>
