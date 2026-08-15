@@ -63,10 +63,10 @@ export default function About() {
                   Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is a bespoke commission.
                 </p>
                 <p>
-                  Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware and marine grade substrates.
+                  Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware.
                 </p>
                 <p>
-                  We are not just designers; we are precision builders. From the first sketch to the final silent close of a cabinet door, our commitment is to absolute, uncompromising quality.
+                  We are not just designers, we are masterful builders. We uncover brilliant ideas and craft solutions you didn't even know you needed. From the first sketch to the final soft close of a cabinet door, our commitment is to absolute, uncompromising quality.
                 </p>
               </div>
             </AnimatedSection>
