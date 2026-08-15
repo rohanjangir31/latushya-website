@@ -14,7 +14,7 @@ const companyInfo = {
   phone: '+91 63763 12638',
   whatsapp: '916376312638',
   email: 'contact@latushya.com',
-  address: 'No. 12, 100ft Road, Indiranagar, Bangalore - 560038',
+  address: '314, 2nd floor, 2nd Cross Rd, Lal Bahadur Nagar, East of NGEF Layout, 560016, Kasturi Nagar, Bengaluru',
   city: 'Bangalore, Karnataka',
 
   // ─── SOCIAL ───────────────────────────────────────────────

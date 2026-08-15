@@ -174,7 +174,7 @@ export const KNOWLEDGE = [
     id: 'areas',
     category: 'location',
     question: 'Which areas in Bangalore do you serve?',
-    answer: 'We serve clients across all areas of Bangalore — including Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
+    answer: 'We serve clients across all areas of Bangalore — including Kasturi Nagar, Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
     keywords: ['area', 'location', 'where', 'serve', 'bangalore', 'indiranagar', 'koramangala', 'whitefield', 'hsr', 'yelahanka', 'jayanagar', 'hebbal'],
   },
   {

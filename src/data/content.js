@@ -177,7 +177,7 @@ export const FAQ_ITEMS = [
   {
     id: 4,
     question: 'Do you serve all areas across Bangalore?',
-    answer: "Yes — we serve clients across Bangalore. Whether you're in Whitefield, Koramangala, Indiranagar, Yelahanka, or Jayanagar, our team can visit your home for a consultation.",
+    answer: "Yes — we serve clients across Bangalore. Whether you're in Kasturi Nagar, Whitefield, Koramangala, Indiranagar, Yelahanka, or Jayanagar, our team can visit your home for a consultation.",
   },
   {
     id: 5,

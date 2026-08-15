@@ -46,7 +46,7 @@ Your personality: warm, knowledgeable, and professionally confident — like a l
 - After-sales support is available post-handover for adjustments
 
 ## Coverage
-- They serve ALL areas across Bangalore including: Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and more.
+- They serve ALL areas across Bangalore including: Kasturi Nagar, Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and more.
 - Limited availability outside Bangalore (case by case)
 
 ## Real Customer Reviews
