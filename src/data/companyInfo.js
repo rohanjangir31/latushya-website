@@ -19,9 +19,9 @@ const companyInfo = {
 
   // ─── SOCIAL ───────────────────────────────────────────────
   // Replace with verified social URLs
-  instagram: 'https://instagram.com/latushyainteriors',
+  instagram: 'https://www.instagram.com/latushya_wardrobes',
   facebook:  'https://facebook.com/latushyainteriors',
-  youtube:   'https://youtube.com/@latushyainteriors',
+  youtube:   'https://www.youtube.com/@Latushya',
 
   // ─── SEO ──────────────────────────────────────────────────
   siteUrl: 'https://latushya.com',
