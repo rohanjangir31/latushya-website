@@ -94,7 +94,7 @@ export default function Navbar() {
                   className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-6 py-2.5 tracking-widest text-[0.6rem] uppercase transition-[transform,filter] duration-300 hover:-translate-y-0.5 hover:brightness-110"
                   id="nav-cta"
                 >
-                  <span className="relative z-10">Free Consultation</span>
+                  <span className="relative z-10">Consultation</span>
                 </a>
               ) : (
                 <Link
@@ -102,7 +102,7 @@ export default function Navbar() {
                   className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-6 py-2.5 tracking-widest text-[0.6rem] uppercase transition-[transform,filter] duration-300 hover:-translate-y-0.5 hover:brightness-110"
                   id="nav-cta"
                 >
-                  <span className="relative z-10">Free Consultation</span>
+                  <span className="relative z-10">Consultation</span>
                 </Link>
               )}
             </Magnetic>
@@ -179,7 +179,7 @@ export default function Navbar() {
                       rel="noreferrer"
                       className="btn-pink"
                     >
-                      <span>Book Free Consultation</span>
+                      <span>Book Consultation</span>
                     </a>
                   ) : (
                     <Link
@@ -187,7 +187,7 @@ export default function Navbar() {
                       onClick={handleNavClick}
                       className="btn-pink block"
                     >
-                      <span>Book Free Consultation</span>
+                      <span>Book Consultation</span>
                     </Link>
                   )}
                 </motion.div>

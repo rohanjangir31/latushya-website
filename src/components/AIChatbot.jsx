@@ -275,6 +275,17 @@ export default function AIChatbot() {
   const [hasUnread, setHasUnread]       = useState(false);
   const pulseTimerRef                   = useRef(null);
   const hasApiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (isOpen && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   useEffect(() => {
     pulseTimerRef.current = setTimeout(() => {
@@ -358,7 +369,7 @@ export default function AIChatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex flex-col items-end gap-3">
+    <div ref={wrapperRef} className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <motion.div

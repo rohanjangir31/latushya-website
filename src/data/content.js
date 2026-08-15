@@ -116,7 +116,7 @@ export const MATERIALS = [
 export const PROCESS_STEPS = [
   {
     step: '01',
-    title: 'Free Consultation',
+    title: 'Consultation',
     description: 'We visit your home, assess your space, and listen carefully to your requirements — room dimensions, lifestyle habits, and style preferences.',
   },
   {

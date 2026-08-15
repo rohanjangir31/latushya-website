@@ -73,7 +73,7 @@ export default function Footer() {
                 Your perfect space awaits.
               </h3>
               <p className="text-gray-light text-xs mt-1.5 font-light">
-                Book a free in-home consultation — no obligations, ever.
+                Book an in-home consultation — no obligations, ever.
               </p>
             </div>
             <button
@@ -81,7 +81,7 @@ export default function Footer() {
               className="flex-shrink-0 bg-transparent border border-pink text-pink font-medium px-8 py-3.5 rounded-full text-xs tracking-widest uppercase hover:bg-pink hover:text-white transition-all duration-500"
               id="footer-cta"
             >
-              Book Free Consultation
+              Book Consultation
             </button>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default function Footer() {
                     onClick={handleConsult}
                     className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-pink border border-pink/40 hover:bg-pink hover:text-black-deep px-6 py-3 rounded-full transition-all duration-300"
                   >
-                    Free Consultation
+                    Consultation
                   </button>
                 </li>
               </ul>
@@ -245,7 +245,7 @@ export default function Footer() {
               className="flex items-center justify-center gap-2 bg-pink text-black-deep text-xs font-semibold tracking-widest uppercase py-4"
               id="mobile-sticky-consult"
             >
-              Free Consultation
+              Consultation
             </button>
           )}
 
