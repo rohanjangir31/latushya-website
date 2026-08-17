@@ -187,7 +187,7 @@ export default function MaterialsSection() {
             <img 
               src="/projects/media__1784490387517.jpg" 
               alt="Raw Wood Grain" 
-              className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 mix-blend-luminosity hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
             />
           </motion.div>
         </div>
