@@ -142,7 +142,7 @@ export const PROCESS_STEPS = [
   {
     step: '06',
     title: 'Quality Handover',
-    description: 'We conduct a thorough quality check of every single drawer, shutter, and fitting followed by a final walkthrough and your satisfaction sign off.',
+    description: 'True luxury lies in flawless execution. We invite you to conduct a meticulous walkthrough and compile a final snag list. Our team thoroughly resolves every detail to your absolute standard before we ever ask for your final sign off.',
   },
 ];
 
