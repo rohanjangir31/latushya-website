@@ -127,7 +127,7 @@ export const PROCESS_STEPS = [
   {
     step: '03',
     title: 'Material Selection',
-    description: 'You will choose your laminate finish, hardware brand, shutter type, and internal fittings from our highly curated material library.',
+    description: 'You will handpick your primary finishes including premium laminates, luxurious acrylics, and architectural glass alongside your preferred hardware and internal fittings from our exclusively curated material library.',
   },
   {
     step: '04',
