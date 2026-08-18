@@ -33,22 +33,13 @@ const services = [
     image: '/projects/media__1784490387392.jpg',
   },
   {
-    id: 'bespoke-wardrobes',
+    id: 'ftc-wardrobes',
     icon: 'DoorOpen',
-    title: 'Bespoke Wardrobes',
+    title: 'FTC Wardrobes',
     tagline: 'Precision meets flexibility',
     description:
       'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
     image: '/projects/media__1784490387517.jpg',
-  },
-  {
-    id: 'space-planning',
-    icon: 'PenTool',
-    title: 'Space Planning',
-    tagline: 'Intelligent spatial design',
-    description:
-      'Expert consultation on layout optimization, material selection, and lighting design to ensure your space flows naturally and looks spectacular.',
-    image: '/projects/media__1784490387502.jpg',
   },
 ];
 

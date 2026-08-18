@@ -33,8 +33,7 @@ const footerLinks = {
     { label: 'Turnkey Interiors', href: '/services#turnkey-interiors' },
     { label: 'Modular Kitchens', href: '/services#modular-kitchens' },
     { label: 'Living Room Design', href: '/services#living-room-design' },
-    { label: 'Bespoke Wardrobes', href: '/services#bespoke-wardrobes' },
-    { label: 'Space Planning', href: '/services#space-planning' },
+    { label: 'FTC Wardrobes', href: '/services#ftc-wardrobes' },
   ],
   'Quick Links': [
     { label: 'Home',              href: '/' },

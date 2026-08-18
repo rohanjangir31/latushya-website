@@ -21,14 +21,14 @@ export const KNOWLEDGE = [
     id: 'services-overview',
     category: 'services',
     question: 'What services does Latushya offer?',
-    answer: 'We offer five core services: Bespoke Wardrobes, Modular Kitchens, Turnkey Home Interiors, Living Room Design (TV units, wall panels, custom furniture), and Space Planning & Consultation. Every project is 100% custom — we never use off-the-shelf templates.',
+    answer: 'We offer four core services: FTC Wardrobes, Modular Kitchens, Turnkey Home Interiors, and Living Room Design (TV units, wall panels, custom furniture). Every project is 100% custom — we never use off-the-shelf templates.',
     keywords: ['services', 'offer', 'what do you do', 'work', 'provide'],
   },
   {
     id: 'wardrobes',
     category: 'services',
     question: 'What types of wardrobes do you design?',
-    answer: 'We specialise exclusively in bespoke wardrobes — Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
+    answer: 'We specialise exclusively in FTC wardrobes — Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
     keywords: ['wardrobe', 'sliding', 'hinged', 'walk-in', 'closet', 'types', 'kind', 'storage'],
   },
   {
@@ -51,13 +51,6 @@ export const KNOWLEDGE = [
     question: 'Can you design my living room?',
     answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, bespoke furniture arrangements, and full living room layouts — tailored to make your space perfect for both hosting and relaxing.',
     keywords: ['living room', 'tv unit', 'wall panel', 'sofa', 'hall', 'drawing room'],
-  },
-  {
-    id: 'space-planning',
-    category: 'services',
-    question: 'Do you offer space planning or consultation?',
-    answer: 'Yes. Our Space Planning service covers expert consultation on layout optimisation, material selection, and lighting design — ensuring your space flows naturally and looks spectacular before any production begins.',
-    keywords: ['space planning', 'layout', 'design consultation', 'expert advice', 'planning'],
   },
 
   // ═══════════════════════════════════════════════
