@@ -122,7 +122,7 @@ export const PROCESS_STEPS = [
   {
     step: '02',
     title: 'Design Concept',
-    description: 'Our designer creates a 3D spatial layout tailored exclusively for your home showing detailed interior zones, material finishes, and comprehensive lighting plans.',
+    description: 'A bespoke home requires deep collaboration. Over a dedicated series of five to six in depth design sessions, we iteratively refine a 3D spatial layout tailored exclusively for your space, perfecting every interior zone, material finish, and lighting plan together.',
   },
   {
     step: '03',
