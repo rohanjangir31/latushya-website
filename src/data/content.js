@@ -116,33 +116,33 @@ export const MATERIALS = [
 export const PROCESS_STEPS = [
   {
     step: '01',
-    title: 'Consultation',
-    description: 'We visit your home, assess your space, and listen carefully to your requirements — room dimensions, lifestyle habits, and style preferences.',
+    title: 'Project Commissioning',
+    description: 'Once you choose to work with Latushya, our dedicated team visits your home to assess the space and listen carefully to your requirements including room dimensions, lifestyle habits, and style preferences.',
   },
   {
     step: '02',
     title: 'Design Concept',
-    description: 'Our designer creates a 3D spatial layout tailored to your home — showing interior zones, material finishes, and lighting plans.',
+    description: 'Our designer creates a 3D spatial layout tailored exclusively for your home showing detailed interior zones, material finishes, and comprehensive lighting plans.',
   },
   {
     step: '03',
     title: 'Material Selection',
-    description: 'Choose your laminate finish, hardware brand, shutter type, and internal fittings from our curated material library.',
+    description: 'You will choose your laminate finish, hardware brand, shutter type, and internal fittings from our highly curated material library.',
   },
   {
     step: '04',
     title: 'Production',
-    description: 'Your woodwork panels are precision-cut and pre-assembled in our workshop — ensuring accuracy before it reaches your home.',
+    description: 'Your woodwork panels are precision cut and pre assembled in our advanced workshop ensuring absolute accuracy before they ever reach your home.',
   },
   {
     step: '05',
     title: 'Installation',
-    description: 'Our trained carpentry team installs your interiors on-site with minimal mess and disruption, working strictly to the approved timelines.',
+    description: 'Our trained carpentry team installs your interiors on site with minimal mess and disruption while working strictly to our approved timelines.',
   },
   {
     step: '06',
     title: 'Quality Handover',
-    description: 'A thorough quality check of every drawer, shutter, and fitting — followed by a walkthrough and satisfaction sign-off.',
+    description: 'We conduct a thorough quality check of every single drawer, shutter, and fitting followed by a final walkthrough and your satisfaction sign off.',
   },
 ];
 

@@ -135,11 +135,11 @@ export default function About() {
             </div>
             <h2 className="text-white font-light mb-6 leading-tight" style={{ fontFamily: DISPLAY, fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.02em' }}>
               Six steps.{' '}
-              <span className="italic text-pink">One obsession.</span>
+              <span className="italic text-pink">One commitment.</span>
               <br />Your home, built right.
             </h2>
             <p className="text-white/40 text-base max-w-lg mx-auto leading-relaxed" style={{ fontFamily: SANS }}>
-              Every Latushya project follows a precise, time-tested sequence. No shortcuts. No surprises.
+              Once you commission us, a precise and time tested sequence begins. No shortcuts. No surprises.
             </p>
           </motion.div>
         </div>
