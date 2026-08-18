@@ -56,7 +56,7 @@ export const KNOWLEDGE = [
     id: 'decor-sourcing',
     category: 'services',
     question: 'Can you come with us to buy furniture or home decor?',
-    answer: 'Yes! For clients seeking a flawlessly styled finish, we offer an exclusive, paid accompaniment service. Our lead designers will personally accompany you to source premium soft furnishings, art, and loose furniture—curating every detail to perfectly complement your new space.',
+    answer: 'Yes! We offer a dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor—ensuring flawless coordination with your new space.',
     keywords: ['shopping', 'buy furniture', 'decor', 'accompaniment', 'sourcing', 'styling', 'come with us', 'decor sourcing'],
   },
 
