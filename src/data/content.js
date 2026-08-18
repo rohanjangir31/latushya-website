@@ -1,5 +1,5 @@
 // ============================================================
-// LATUSHYA — Central Data Index
+// LATUSHYA Central Data Index
 //
 // This file re-exports from individual data modules.
 // Edit the specific file for the data you want to change:
@@ -16,7 +16,7 @@ import { WARDROBE_PROJECTS, INTERIOR_PROJECTS, recentProjects } from './projects
 import reviews from './reviews.js';
 
 // ─── Re-exports using legacy named exports ─────────────────
-// Existing components import from '../data/content' — this keeps them working
+// Existing components import from '../data/content' this keeps them working
 export const COMPANY         = companyInfo;
 export const SERVICES        = services;
 export const WARDROBE_PROJECTS_DATA = WARDROBE_PROJECTS;
@@ -34,12 +34,12 @@ export const WHY_CHOOSE = [
   {
     id: 2,
     title: 'Premium Hardware',
-    description: 'We install only trusted luxury brands — Häfele, Hettich, and Blum — known for their flawless engineering, silent operation, and lifetime performance.',
+    description: 'We install only trusted luxury brands Häfele, Hettich, and Blum known for their flawless engineering, silent operation, and lifetime performance.',
   },
   {
     id: 3,
     title: 'Quality Materials',
-    description: 'Century Ply and Greenply grade plywood, premium laminates, and solid wood options — materials selected for their structural integrity and beautiful finish.',
+    description: 'Century Ply and Greenply grade plywood, premium laminates, and solid wood options materials selected for their structural integrity and beautiful finish.',
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const WHY_CHOOSE = [
   {
     id: 5,
     title: 'Space Optimisation',
-    description: 'We map your spatial usage patterns — daily routines, entertainment needs, storage — and engineer a layout that makes every square foot count.',
+    description: 'We map your spatial usage patterns daily routines, entertainment needs, storage and engineer a layout that makes every square foot count.',
   },
   {
     id: 6,
@@ -96,7 +96,7 @@ export const MATERIALS = [
     category: 'Substrate',
     origin: 'India',
     description:
-      "India's most trusted plywood brand — used as the core substrate in all our woodwork for superior strength, moisture resistance, and longevity.",
+      "India's most trusted plywood brand used as the core substrate in all our woodwork for superior strength, moisture resistance, and longevity.",
     qualities: ['BWP grade available', 'Termite resistant', 'Consistent thickness'],
     logo: null,
   },
@@ -149,12 +149,12 @@ export const PROCESS_STEPS = [
 // ─── Gallery Images ───────────────────────────────────────
 // Replace src values with real project photography when available
 export const GALLERY_IMAGES = [
-  { id: 1, src: '/projects/media__1784490387524.jpg', alt: 'Luxury Living Room Interior — Bangalore', category: 'Living Room Design', isPlaceholder: false },
-  { id: 2, src: '/projects/media__1784490387507.jpg', alt: 'Acrylic Modular Kitchen — Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
-  { id: 3, src: '/projects/media__1784490387502.jpg', alt: 'Modern Bedroom Interior — Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
-  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe — Bangalore', category: 'FTC Wardrobes', isPlaceholder: false },
-  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console — Bangalore', category: 'Custom Furniture', isPlaceholder: false },
-  { id: 6, src: '/projects/media__1784490387524.jpg', alt: 'Classic Living & Dining — Bangalore', category: 'Living Room Design', isPlaceholder: false },
+  { id: 1, src: '/projects/media__1784490387524.jpg', alt: 'Luxury Living Room Interior Bangalore', category: 'Living Room Design', isPlaceholder: false },
+  { id: 2, src: '/projects/media__1784490387507.jpg', alt: 'Acrylic Modular Kitchen Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
+  { id: 3, src: '/projects/media__1784490387502.jpg', alt: 'Modern Bedroom Interior Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
+  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe Bangalore', category: 'FTC Wardrobes', isPlaceholder: false },
+  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console Bangalore', category: 'Custom Furniture', isPlaceholder: false },
+  { id: 6, src: '/projects/media__1784490387524.jpg', alt: 'Classic Living & Dining Bangalore', category: 'Living Room Design', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────
@@ -162,7 +162,7 @@ export const FAQ_ITEMS = [
   {
     id: 1,
     question: 'What is the typical timeline for a wardrobe project?',
-    answer: 'Most wardrobe projects are completed within 2–4 weeks from design approval — including production and installation. We provide a clear schedule upfront before any work begins.',
+    answer: 'Most wardrobe projects are completed within 2 to 4 weeks from design approval including production and installation. We provide a clear schedule upfront before any work begins.',
   },
   {
     id: 2,
@@ -177,16 +177,16 @@ export const FAQ_ITEMS = [
   {
     id: 4,
     question: 'Do you serve all areas across Bangalore?',
-    answer: "Yes — we serve clients across Bangalore. Whether you're in Kasturi Nagar, Whitefield, Koramangala, Indiranagar, Yelahanka, or Jayanagar, our team can visit your home for a consultation.",
+    answer: "Yes we serve clients across Bangalore. Whether you're in Kasturi Nagar, Whitefield, Koramangala, Indiranagar, Yelahanka, or Jayanagar, our team can visit your home for a consultation.",
   },
   {
     id: 5,
     question: 'Is the initial consultation free?',
-    answer: 'Yes. The first consultation — including a home visit, space measurement, and preliminary design discussion — is completely free with no obligations whatsoever.',
+    answer: 'Yes. The first consultation including a home visit, space measurement, and preliminary design discussion is completely free with no obligations whatsoever.',
   },
   {
     id: 6,
     question: 'What types of wardrobes do you make?',
-    answer: 'We specialise in modular wardrobes, sliding wardrobes, walk-in wardrobes, hinged wardrobes, luxury wardrobes, and fully custom storage solutions. We do not do general interior design — wardrobes are our core expertise.',
+    answer: 'We specialise in modular wardrobes, sliding wardrobes, walk-in wardrobes, hinged wardrobes, luxury wardrobes, and fully custom storage solutions. We do not do general interior design wardrobes are our core expertise.',
   },
 ];

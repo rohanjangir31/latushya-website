@@ -71,7 +71,7 @@ export default function Footer() {
                 Your perfect space awaits.
               </h3>
               <p className="text-gray-light text-xs mt-1.5 font-light">
-                Book an in-home consultation — no obligations, ever.
+                Book an in-home consultation with no obligations, ever.
               </p>
             </div>
             <button
@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
 
               <p className="text-gray-light text-sm leading-relaxed mb-6">
-                Bangalore's premium interior design and execution studio. We create custom living spaces — turnkey interiors, modular kitchens, and bespoke furniture — tailored precisely to your lifestyle.
+                Bangalore's premium interior design and execution studio. We create custom living spaces including turnkey interiors, modular kitchens, and custom furniture tailored precisely to your lifestyle.
               </p>
 
               {/* SEO keywords as natural text */}
@@ -214,7 +214,7 @@ export default function Footer() {
         <div className="border-t border-gray-luxury/20">
           <div className="max-w-7xl mx-auto px-6 lg:px-16 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-light/40 text-xs tracking-wide">
-              © {new Date().getFullYear()} {COMPANY.name} — Premium Wardrobes, {COMPANY.city}
+              © {new Date().getFullYear()} {COMPANY.name}. Premium Wardrobes, {COMPANY.city}
             </p>
             <p className="text-gray-light/20 text-xs flex items-center gap-1.5">
               Crafted with <Heart size={9} className="text-pink fill-pink" /> for beautiful living spaces

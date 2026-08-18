@@ -1,6 +1,6 @@
 // ============================================================
-// LATUSHYA — Services Data
-// Each service has a UNIQUE image — no repeated photography.
+// LATUSHYA Services Data
+// Each service has a UNIQUE image no repeated photography.
 // Replace these URLs with real project photos when available.
 // ============================================================
 
@@ -47,7 +47,7 @@ const services = [
     title: 'Curated Decor Sourcing',
     tagline: 'Exclusive styling accompaniment',
     description:
-      'A dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor—ensuring flawless coordination with your new space.',
+      'A dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor ensuring flawless coordination with your new space.',
     image: '/projects/media__1784490387502.jpg',
   },
 ];

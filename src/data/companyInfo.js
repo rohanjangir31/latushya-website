@@ -1,12 +1,12 @@
 // ============================================================
-// LATUSHYA — Company Information
+// LATUSHYA Company Information
 // Edit this file to update all brand/business details
 // ============================================================
 
 const companyInfo = {
   name: 'LATUSHYA',
   tagline: 'Premium Interior Design Studio',
-  subTagline: "Bangalore's most exclusive design studio — crafting complete interior solutions, modular kitchens, and bespoke spaces that elevate\u00A0your\u00A0everyday.",
+  subTagline: "Bangalore's most exclusive design studio crafting complete interior solutions, modular kitchens, and bespoke spaces that elevate\u00A0your\u00A0everyday.",
   specialty: "Premium Interior Design",
 
   // ─── CONTACT ──────────────────────────────────────────────

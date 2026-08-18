@@ -1,5 +1,5 @@
 // ============================================================
-// LATUSHYA — AI Concierge Knowledge Base
+// LATUSHYA AI Concierge Knowledge Base
 // All answers sourced directly from real website content.
 // ============================================================
 
@@ -21,42 +21,42 @@ export const KNOWLEDGE = [
     id: 'services-overview',
     category: 'services',
     question: 'What services does Latushya offer?',
-    answer: 'We offer five core services: FTC Wardrobes, Modular Kitchens, Turnkey Home Interiors, Living Room Design, and a premium Curated Decor Sourcing service (accompanied shopping & styling). Every project is 100% custom — we never use off-the-shelf templates.',
+    answer: 'We offer five core services: FTC Wardrobes, Modular Kitchens, Turnkey Home Interiors, Living Room Design, and a premium Curated Decor Sourcing service (accompanied shopping & styling). Every project is 100% custom we never use off-the-shelf templates.',
     keywords: ['services', 'offer', 'what do you do', 'work', 'provide'],
   },
   {
     id: 'wardrobes',
     category: 'services',
     question: 'What types of wardrobes do you design?',
-    answer: 'We specialise exclusively in FTC wardrobes — Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
+    answer: 'We specialise exclusively in FTC wardrobes Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
     keywords: ['wardrobe', 'sliding', 'hinged', 'walk-in', 'closet', 'types', 'kind', 'storage'],
   },
   {
     id: 'modular-kitchen',
     category: 'services',
     question: 'Do you design modular kitchens?',
-    answer: 'Yes! We design fully custom modular kitchens featuring moisture-resistant CenturyPly/Greenply cores, premium laminate and acrylic finishes, and world-class German hardware (Häfele, Hettich, Blum) — the same quality standard we apply to our wardrobes.',
+    answer: 'Yes! We design fully custom modular kitchens featuring moisture-resistant CenturyPly/Greenply cores, premium laminate and acrylic finishes, and world-class German hardware (Häfele, Hettich, Blum) the same quality standard we apply to our wardrobes.',
     keywords: ['kitchen', 'modular kitchen', 'cooking', 'cabinets', 'kitchen design'],
   },
   {
     id: 'turnkey',
     category: 'services',
     question: 'Do you do complete home interiors?',
-    answer: 'Yes — we offer Turnkey Interior solutions covering everything from bare-shell civil work to final styling and handover. This includes living rooms, bedrooms, kitchens, wardrobes, TV units, wall panelling, and study furniture — all under one roof.',
+    answer: 'Yes we offer Turnkey Interior solutions covering everything from bare-shell civil work to final styling and handover. This includes living rooms, bedrooms, kitchens, wardrobes, TV units, wall panelling, and study furniture all under one roof.',
     keywords: ['turnkey', 'full home', 'complete interior', 'home interior', 'whole house', 'living room', 'bedroom', 'tv unit'],
   },
   {
     id: 'living-room',
     category: 'services',
     question: 'Can you design my living room?',
-    answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, tailored furniture layouts, and full living room designs — meticulously crafted to make your space perfect for both hosting and relaxing.',
+    answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, tailored furniture layouts, and full living room designs meticulously crafted to make your space perfect for both hosting and relaxing.',
     keywords: ['living room', 'tv unit', 'wall panel', 'sofa', 'hall', 'drawing room'],
   },
   {
     id: 'decor-sourcing',
     category: 'services',
     question: 'Can you come with us to buy furniture or home decor?',
-    answer: 'Yes! We offer a dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor—ensuring flawless coordination with your new space.',
+    answer: 'Yes! We offer a dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor ensuring flawless coordination with your new space.',
     keywords: ['shopping', 'buy furniture', 'decor', 'accompaniment', 'sourcing', 'styling', 'come with us', 'decor sourcing'],
   },
 
@@ -67,14 +67,14 @@ export const KNOWLEDGE = [
     id: 'pricing-general',
     category: 'pricing',
     question: 'How much does it cost?',
-    answer: "Our pricing is always custom — it depends on your room dimensions, chosen design, material finish, hardware tier, and internal fittings. We don't publish fixed rates because every project is unique. The best way to get an accurate number is through our free home consultation, where we measure your space and give you a fully detailed, transparent quote with no obligations.",
+    answer: "Our pricing is always custom it depends on your room dimensions, chosen design, material finish, hardware tier, and internal fittings. We don't publish fixed rates because every project is unique. The best way to get an accurate number is through our free home consultation, where we measure your space and give you a fully detailed, transparent quote with no obligations.",
     keywords: ['price', 'cost', 'pricing', 'budget', 'expensive', 'rate', 'charges', 'fees', 'rupees', 'how much', 'quote', 'estimate'],
   },
   {
     id: 'free-quote',
     category: 'pricing',
     question: 'Can I get a quote without commitment?',
-    answer: 'Yes, absolutely. After our free home visit, we prepare a complete, itemised quote covering materials, hardware, production, and installation — with zero obligation to proceed. You are under no pressure at any stage.',
+    answer: 'Yes, absolutely. After our free home visit, we prepare a complete, itemised quote covering materials, hardware, production, and installation with zero obligation to proceed. You are under no pressure at any stage.',
     keywords: ['free quote', 'no commitment', 'estimate', 'proposal', 'quotation'],
   },
   {
@@ -92,28 +92,28 @@ export const KNOWLEDGE = [
     id: 'consultation-free',
     category: 'process',
     question: 'Is the first consultation free?',
-    answer: 'Yes — our first consultation is completely free with no strings attached. Our designer visits your home, measures the space, and discusses your requirements, lifestyle, and style preferences. There is absolutely no obligation to proceed afterwards.',
+    answer: 'Yes our first consultation is completely free with no strings attached. Our designer visits your home, measures the space, and discusses your requirements, lifestyle, and style preferences. There is absolutely no obligation to proceed afterwards.',
     keywords: ['consultation', 'free', 'home visit', 'site visit', 'appointment', 'visit', 'meeting', 'book', 'schedule'],
   },
   {
     id: 'timeline',
     category: 'process',
     question: 'How long does a project take?',
-    answer: 'Most wardrobe and kitchen projects are completed within 3–4 weeks from design approval. This covers precision production in our workshop and a 2–4 day on-site installation by our trained carpentry team — with minimal disruption to your home.',
+    answer: 'Most wardrobe and kitchen projects are completed within 3 to 4 weeks from design approval. This covers precision production in our workshop and a 2 to 4 day on-site installation by our trained carpentry team with minimal disruption to your home.',
     keywords: ['timeline', 'how long', 'time', 'days', 'weeks', 'duration', 'when ready', 'delivery'],
   },
   {
     id: 'process-steps',
     category: 'process',
     question: 'What is your step-by-step process?',
-    answer: "We follow a clear 6-step process:\n\n1. Free Home Consultation — we visit, measure, listen.\n2. 3D Design Concept — a personalised layout you can visualise.\n3. Material Selection — choose your finishes and hardware from our curated library.\n4. Workshop Production — precision-cut and pre-assembled in our facility.\n5. On-site Installation — clean, efficient, on-time.\n6. Quality Handover — thorough check of every drawer, shutter, and fitting before sign-off.",
+    answer: "We follow a clear 6-step process:\n\n1. Free Home Consultation we visit, measure, listen.\n2. 3D Design Concept a personalised layout you can visualise.\n3. Material Selection choose your finishes and hardware from our curated library.\n4. Workshop Production precision-cut and pre-assembled in our facility.\n5. On-site Installation clean, efficient, on-time.\n6. Quality Handover thorough check of every drawer, shutter, and fitting before sign-off.",
     keywords: ['process', 'steps', 'how do you work', 'procedure', 'workflow', 'how it works'],
   },
   {
     id: 'design',
     category: 'process',
     question: 'Do you provide a 3D design before starting?',
-    answer: 'Yes. After the consultation, our designer creates a detailed 3D spatial layout showing your interior — including zones, material finishes, and the overall look — so you can visualise and approve it before any production begins.',
+    answer: 'Yes. After the consultation, our designer creates a detailed 3D spatial layout showing your interior including zones, material finishes, and the overall look so you can visualise and approve it before any production begins.',
     keywords: ['3d', 'design', 'visualise', 'render', 'preview', 'sketch', 'drawing'],
   },
 
@@ -124,28 +124,28 @@ export const KNOWLEDGE = [
     id: 'hardware-brands',
     category: 'materials',
     question: 'What hardware brands do you use?',
-    answer: 'We exclusively use three world-class brands:\n\n• Häfele (Germany) — sliding systems, hinges, and soft-close mechanisms.\n• Hettich (Germany) — silent drawer systems and smooth-glide runners.\n• Blum (Austria) — Aventos lift systems and Legrabox drawers for a feather-light opening experience.\n\nAll three are industry gold standards that guarantee lifetime performance.',
+    answer: 'We exclusively use three world-class brands:\n\n• Häfele (Germany) sliding systems, hinges, and soft-close mechanisms.\n• Hettich (Germany) silent drawer systems and smooth-glide runners.\n• Blum (Austria) Aventos lift systems and Legrabox drawers for a feather-light opening experience.\n\nAll three are industry gold standards that guarantee lifetime performance.',
     keywords: ['hardware', 'hafele', 'hettich', 'blum', 'fittings', 'hinges', 'brand', 'german', 'austrian'],
   },
   {
     id: 'plywood',
     category: 'materials',
     question: 'What plywood and substrate do you use?',
-    answer: "We use CenturyPly or Greenply as our structural core substrate — both are ISI-certified, termite-resistant, and available in BWP marine-grade for moisture-prone areas like kitchens. The carcasses are then finished with your chosen premium laminate or acrylic.",
+    answer: "We use CenturyPly or Greenply as our structural core substrate both are ISI-certified, termite-resistant, and available in BWP marine-grade for moisture-prone areas like kitchens. The carcasses are then finished with your chosen premium laminate or acrylic.",
     keywords: ['plywood', 'ply', 'substrate', 'wood', 'centuryply', 'greenply', 'board', 'core'],
   },
   {
     id: 'finishes',
     category: 'materials',
     question: 'What finish and colour options are available?',
-    answer: 'We offer an extensive, curated library of finishes — matte laminates, high-gloss acrylics, woodgrain textures, fabric-textured PVC membranes, and glass shutters (frosted, tinted, lacquered, or clear). Our designer brings physical samples to your home so you can see each finish in your own lighting before deciding.',
+    answer: 'We offer an extensive, curated library of finishes matte laminates, high-gloss acrylics, woodgrain textures, fabric-textured PVC membranes, and glass shutters (frosted, tinted, lacquered, or clear). Our designer brings physical samples to your home so you can see each finish in your own lighting before deciding.',
     keywords: ['finish', 'colour', 'laminate', 'acrylic', 'texture', 'look', 'matte', 'glossy', 'glass', 'material options'],
   },
   {
     id: 'glass-shutters',
     category: 'materials',
     question: 'Can I get glass or mirror shutters on my wardrobe?',
-    answer: 'Absolutely. We offer frosted glass, tinted glass, lacquered glass, clear glass, and full-length mirror shutters — typically framed with sleek aluminium profiles. Mirror shutters are a particularly popular choice for bedrooms.',
+    answer: 'Absolutely. We offer frosted glass, tinted glass, lacquered glass, clear glass, and full-length mirror shutters typically framed with sleek aluminium profiles. Mirror shutters are a particularly popular choice for bedrooms.',
     keywords: ['glass', 'mirror', 'frosted', 'tinted', 'reflective', 'shutter', 'door'],
   },
 
@@ -163,7 +163,7 @@ export const KNOWLEDGE = [
     id: 'after-sales',
     category: 'warranty',
     question: 'What if something needs fixing after installation?',
-    answer: 'Our after-sales support team is fully reachable after handover. If any drawer, shutter, or fitting needs adjustment, our team will visit and resolve it promptly. Customer satisfaction does not end at the handover — it is an ongoing commitment.',
+    answer: 'Our after-sales support team is fully reachable after handover. If any drawer, shutter, or fitting needs adjustment, our team will visit and resolve it promptly. Customer satisfaction does not end at the handover it is an ongoing commitment.',
     keywords: ['repair', 'fix', 'broken', 'issue', 'problem', 'after', 'service', 'support', 'post-installation'],
   },
 
@@ -174,7 +174,7 @@ export const KNOWLEDGE = [
     id: 'areas',
     category: 'location',
     question: 'Which areas in Bangalore do you serve?',
-    answer: 'We serve clients across all areas of Bangalore — including Kasturi Nagar, Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
+    answer: 'We serve clients across all areas of Bangalore including Kasturi Nagar, Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
     keywords: ['area', 'location', 'where', 'serve', 'bangalore', 'indiranagar', 'koramangala', 'whitefield', 'hsr', 'yelahanka', 'jayanagar', 'hebbal'],
   },
   {
@@ -194,7 +194,7 @@ export const KNOWLEDGE = [
 ];
 
 export const FALLBACK = {
-  text: "That's a great question — and one best answered by our design team directly! Every project is unique, and our experts can give you the most accurate, personalised answer.",
+  text: "That's a great question and one best answered by our design team directly! Every project is unique, and our experts can give you the most accurate, personalised answer.",
   showWhatsApp: true,
 };
 

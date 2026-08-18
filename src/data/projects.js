@@ -1,12 +1,12 @@
 // ============================================================
-// LATUSHYA — Portfolio Projects
+// LATUSHYA Portfolio Projects
 //
 // HOW TO ADD A REAL PROJECT:
 // 1. Copy a placeholder entry below
 // 2. Fill in all fields with real project data
 // 3. Set isPlaceholder: false
 // 4. Replace the image URL with a real project photo
-// 5. Save — the website updates automatically
+// 5. Save the website updates automatically
 // ============================================================
 
 export const WARDROBE_PROJECTS = [

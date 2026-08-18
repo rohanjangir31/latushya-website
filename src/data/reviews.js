@@ -1,11 +1,11 @@
 // ============================================================
-// LATUSHYA — Customer Reviews
+// LATUSHYA Customer Reviews
 //
 // HOW TO ADD A REAL REVIEW:
 // 1. Copy the template object below
 // 2. Fill in all fields with real customer data
 // 3. Set isPlaceholder: false
-// 4. Save this file — the website updates automatically
+// 4. Save this file the website updates automatically
 //
 // PHOTO: Use a real customer photo URL, or set avatar to null
 //        for an initial-based avatar
@@ -17,7 +17,7 @@ const reviews = [
     name: 'Anusha Pal',
     date: '3 months ago',
     rating: 5,
-    text: 'We recently worked with Latushya Interiors, and the experience has been excellent. They have successfully completed multiple projects for us, each delivered with great quality and attention to detail. Their pricing is reasonable, and the overall service has been consistently reliable.\\n\\nA special thanks to Chandan Kumar, whose unique design ideas—especially for the kitchen and wardrobes—really stood out. His creativity and practical approach made a big difference in the final outcome.\\n\\nOverall, we had a great experience and would highly recommend Latushya Interiors to anyone looking for quality work and professional service.',
+    text: 'We recently worked with Latushya Interiors, and the experience has been excellent. They have successfully completed multiple projects for us, each delivered with great quality and attention to detail. Their pricing is reasonable, and the overall service has been consistently reliable.\\n\\nA special thanks to Chandan Kumar, whose unique design ideas especially for the kitchen and wardrobes really stood out. His creativity and practical approach made a big difference in the final outcome.\\n\\nOverall, we had a great experience and would highly recommend Latushya Interiors to anyone looking for quality work and professional service.',
     avatar: 'A',
     project: 'Kitchen and Wardrobes',
     isPlaceholder: false,
