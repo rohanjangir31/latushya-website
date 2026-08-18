@@ -15,7 +15,6 @@ import Services from './pages/Services';
 import AIChatbot from './components/AIChatbot';
 import Portfolio from './pages/Portfolio';
 import Materials from './pages/Materials';
-import Process from './pages/Process';
 import Contact from './pages/Contact';
 import CollectionDetail from './pages/CollectionDetail';
 import WardrobesHub from './pages/WardrobesHub';
@@ -249,7 +248,6 @@ function AppContent() {
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/wardrobes" element={<WardrobesHub />} />
                 <Route path="/materials" element={<Materials />} />
-                <Route path="/process" element={<Process />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/collections/:id" element={<CollectionDetail />} />
               </Routes>

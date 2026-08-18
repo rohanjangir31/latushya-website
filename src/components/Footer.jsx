@@ -42,7 +42,6 @@ const footerLinks = {
     { label: 'Our Services',      href: '/services' },
     { label: 'Portfolio',         href: '/portfolio' },
     { label: 'Materials We Use',  href: '/materials' },
-    { label: 'Our Process',       href: '/process' },
     { label: 'Contact',           href: '/contact' },
   ],
 };
