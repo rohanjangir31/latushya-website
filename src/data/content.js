@@ -152,8 +152,8 @@ export const GALLERY_IMAGES = [
   { id: 1, src: '/projects/media__1784490387524.jpg', alt: 'Luxury Living Room Interior — Bangalore', category: 'Living Room Design', isPlaceholder: false },
   { id: 2, src: '/projects/media__1784490387507.jpg', alt: 'Acrylic Modular Kitchen — Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
   { id: 3, src: '/projects/media__1784490387502.jpg', alt: 'Modern Bedroom Interior — Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
-  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe — Bangalore', category: 'Bespoke Wardrobes', isPlaceholder: false },
-  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console — Bangalore', category: 'Bespoke Furniture', isPlaceholder: false },
+  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe — Bangalore', category: 'FTC Wardrobes', isPlaceholder: false },
+  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console — Bangalore', category: 'Custom Furniture', isPlaceholder: false },
   { id: 6, src: '/projects/media__1784490387524.jpg', alt: 'Classic Living & Dining — Bangalore', category: 'Living Room Design', isPlaceholder: false },
 ];
 

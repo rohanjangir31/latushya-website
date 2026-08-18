@@ -130,7 +130,7 @@ export default function SignatureCollections() {
           </h2>
           <div className="w-12 h-px bg-gradient-to-r from-pink to-blue/40 mb-6 lg:mb-8" />
           <p className="font-sans text-[0.95rem] lg:text-[1.05rem] font-light leading-[2.1] text-gray-subtle">
-            Explore our range of bespoke wardrobes, designed for different spaces, styles and lifestyles.
+            Explore our range of FTC wardrobes, designed for different spaces, styles and lifestyles.
           </p>
         </motion.div>
 

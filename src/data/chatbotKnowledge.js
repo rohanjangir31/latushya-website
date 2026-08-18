@@ -49,7 +49,7 @@ export const KNOWLEDGE = [
     id: 'living-room',
     category: 'services',
     question: 'Can you design my living room?',
-    answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, bespoke furniture arrangements, and full living room layouts — tailored to make your space perfect for both hosting and relaxing.',
+    answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, tailored furniture layouts, and full living room designs — meticulously crafted to make your space perfect for both hosting and relaxing.',
     keywords: ['living room', 'tv unit', 'wall panel', 'sofa', 'hall', 'drawing room'],
   },
   {

@@ -29,7 +29,7 @@ const services = [
     title: 'Living Room Design',
     tagline: 'Curated entertainment spaces',
     description:
-      'Custom TV units, sophisticated wall panelling, and bespoke furniture arrangements designed to make your living area the perfect setting for hosting and relaxing.',
+      'Custom TV units, sophisticated wall panelling, and exclusive furniture layouts meticulously designed to make your living area the ultimate setting for hosting and relaxing.',
     image: '/projects/media__1784490387392.jpg',
   },
   {
