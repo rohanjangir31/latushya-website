@@ -122,7 +122,7 @@ export const PROCESS_STEPS = [
   {
     step: '02',
     title: 'Design Concept',
-    description: 'A bespoke home requires deep collaboration. Over a dedicated series of five to six in depth design sessions, we iteratively refine a 3D spatial layout tailored exclusively for your space, perfecting every interior zone, material finish, and lighting plan together.',
+    description: 'Your house is designed through deep collaboration. Over a dedicated series of five to six in depth design sessions, we iteratively refine a 3D spatial layout tailored exclusively for your space, perfecting every interior zone, material finish, and lighting plan together.',
   },
   {
     step: '03',
