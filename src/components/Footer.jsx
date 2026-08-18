@@ -34,6 +34,7 @@ const footerLinks = {
     { label: 'Modular Kitchens', href: '/services#modular-kitchens' },
     { label: 'Living Room Design', href: '/services#living-room-design' },
     { label: 'FTC Wardrobes', href: '/services#ftc-wardrobes' },
+    { label: 'Decor Sourcing', href: '/services#decor-sourcing' },
   ],
   'Quick Links': [
     { label: 'Home',              href: '/' },

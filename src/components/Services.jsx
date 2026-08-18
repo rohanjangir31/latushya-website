@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Layout, UtensilsCrossed, Sofa, PenTool } from 'lucide-react';
+import { Layout, UtensilsCrossed, Sofa, PenTool, ShoppingBag } from 'lucide-react';
 import { SERVICES, COMPANY } from '../data/content';
 import { TextReveal } from '../utils/animations';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ const DoorOpenIcon = () => (
   </svg>
 );
 
-const iconMap = { Layout, UtensilsCrossed, Sofa, PenTool, DoorOpen: DoorOpenIcon };
+const iconMap = { Layout, UtensilsCrossed, Sofa, PenTool, ShoppingBag, DoorOpen: DoorOpenIcon };
 
 function ServiceRow({ service, index }) {
   const ref = useRef(null);

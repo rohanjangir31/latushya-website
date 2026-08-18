@@ -21,7 +21,7 @@ export const KNOWLEDGE = [
     id: 'services-overview',
     category: 'services',
     question: 'What services does Latushya offer?',
-    answer: 'We offer four core services: FTC Wardrobes, Modular Kitchens, Turnkey Home Interiors, and Living Room Design (TV units, wall panels, custom furniture). Every project is 100% custom — we never use off-the-shelf templates.',
+    answer: 'We offer five core services: FTC Wardrobes, Modular Kitchens, Turnkey Home Interiors, Living Room Design, and a premium Curated Decor Sourcing service (accompanied shopping & styling). Every project is 100% custom — we never use off-the-shelf templates.',
     keywords: ['services', 'offer', 'what do you do', 'work', 'provide'],
   },
   {
@@ -51,6 +51,13 @@ export const KNOWLEDGE = [
     question: 'Can you design my living room?',
     answer: 'Absolutely. We design custom TV units, sophisticated wall panelling, bespoke furniture arrangements, and full living room layouts — tailored to make your space perfect for both hosting and relaxing.',
     keywords: ['living room', 'tv unit', 'wall panel', 'sofa', 'hall', 'drawing room'],
+  },
+  {
+    id: 'decor-sourcing',
+    category: 'services',
+    question: 'Can you come with us to buy furniture or home decor?',
+    answer: 'Yes! For clients seeking a flawlessly styled finish, we offer an exclusive, paid accompaniment service. Our lead designers will personally accompany you to source premium soft furnishings, art, and loose furniture—curating every detail to perfectly complement your new space.',
+    keywords: ['shopping', 'buy furniture', 'decor', 'accompaniment', 'sourcing', 'styling', 'come with us', 'decor sourcing'],
   },
 
   // ═══════════════════════════════════════════════

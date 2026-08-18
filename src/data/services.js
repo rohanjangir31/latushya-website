@@ -41,6 +41,15 @@ const services = [
       'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
     image: '/projects/media__1784490387517.jpg',
   },
+  {
+    id: 'decor-sourcing',
+    icon: 'ShoppingBag',
+    title: 'Curated Decor Sourcing',
+    tagline: 'Exclusive styling accompaniment',
+    description:
+      'For clients seeking a flawlessly styled finish, we offer an exclusive, paid accompaniment service. Our lead designers will personally guide you in sourcing premium soft furnishings, art, and loose furniture—curating every detail to perfectly complement your new space.',
+    image: '/projects/media__1784490387502.jpg',
+  },
 ];
 
 export default services;
