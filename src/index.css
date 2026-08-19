@@ -328,3 +328,9 @@
   position: fixed;
   z-index: 9998;
 }
+
+@layer base {
+  img[src*="/projects/"] {
+    filter: brightness(1.15) contrast(1.1) saturate(1.2);
+  }
+}
