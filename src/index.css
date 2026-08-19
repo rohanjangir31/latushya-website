@@ -331,6 +331,6 @@
 
 @layer base {
   img[src*="/projects/"] {
-    filter: brightness(1.15) contrast(1.1) saturate(1.2);
+    filter: brightness(1.06) contrast(1.04) saturate(1.1);
   }
 }

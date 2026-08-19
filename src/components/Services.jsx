@@ -44,15 +44,8 @@ function ServiceRow({ service, index }) {
           animate={inView ? { scale: 1 } : { scale: 1.1 }}
           transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
-        {/* Directional gradient — fades toward the text panel */}
-        <div
-          className={`absolute inset-0 ${
-            isEven
-              ? 'bg-gradient-to-r from-transparent to-black-deep/60'
-              : 'bg-gradient-to-l from-transparent to-black-deep/60'
-          }`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black-deep/50 to-transparent" />
+        {/* Subdued bottom gradient for caption legibility only */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black-deep/30 via-transparent to-transparent opacity-80" />
 
         {/* Photo caption — editorial style, bottom of image */}
         <motion.div
