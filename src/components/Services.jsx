@@ -34,17 +34,42 @@ function ServiceRow({ service, index }) {
         className={`relative overflow-hidden h-[300px] lg:h-auto
           ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
       >
-        <motion.img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover"
-          style={{ objectPosition: service.objectPosition || 'center center' }}
-          loading="lazy"
-          decoding="async"
-          initial={{ scale: 1.1 }}
-          animate={inView ? { scale: 1 } : { scale: 1.1 }}
-          transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
+        {service.isPortrait ? (
+          <div className="absolute inset-0 w-full h-full overflow-hidden bg-black-deep flex items-center justify-center">
+            {/* Blurred background layer */}
+            <motion.img
+              src={service.image}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-40 blur-xl scale-110"
+              initial={{ scale: 1.2 }}
+              animate={inView ? { scale: 1.1 } : { scale: 1.2 }}
+              transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+            {/* Crisp, contained portrait image on top */}
+            <motion.img
+              src={service.image}
+              alt={service.title}
+              className="relative h-[90%] w-auto max-w-full object-contain z-10 shadow-2xl rounded-sm"
+              loading="lazy"
+              decoding="async"
+              initial={{ scale: 1.05 }}
+              animate={inView ? { scale: 1 } : { scale: 1.05 }}
+              transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+          </div>
+        ) : (
+          <motion.img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: service.objectPosition || 'center center' }}
+            loading="lazy"
+            decoding="async"
+            initial={{ scale: 1.1 }}
+            animate={inView ? { scale: 1 } : { scale: 1.1 }}
+            transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          />
+        )}
         {/* Subdued bottom gradient for caption legibility only */}
         <div className="absolute inset-0 bg-gradient-to-t from-black-deep/30 via-transparent to-transparent opacity-80" />
 
