@@ -39,7 +39,7 @@ const services = [
     tagline: 'Precision meets flexibility',
     description:
       'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
-    image: '/projects/media__1784490387517.jpg',
+    image: '/projects/real-ftc-wardrobe.png',
   },
   {
     id: 'decor-sourcing',
