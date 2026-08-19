@@ -30,7 +30,7 @@ const services = [
     tagline: 'Curated entertainment spaces',
     description:
       'Custom TV units, sophisticated wall panelling, and exclusive furniture layouts meticulously designed to make your living area the ultimate setting for hosting and relaxing.',
-    image: '/projects/indian-living-room.jpg',
+    image: '/projects/indian-living-room-v2.jpg',
   },
   {
     id: 'ftc-wardrobes',
