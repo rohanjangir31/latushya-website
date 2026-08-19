@@ -38,6 +38,7 @@ function ServiceRow({ service, index }) {
           src={service.image}
           alt={service.title}
           className="w-full h-full object-cover"
+          style={{ objectPosition: service.objectPosition || 'center center' }}
           loading="lazy"
           decoding="async"
           initial={{ scale: 1.1 }}
