@@ -544,7 +544,6 @@ export default function Projects({
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="absolute flex flex-col items-center justify-center w-[90vw] h-[80vh]"
-                onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative inline-flex flex-col items-center">
                   {/* Close Button Attached to Photo Corner */}

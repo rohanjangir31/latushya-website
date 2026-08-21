@@ -112,8 +112,8 @@ export const INTERIOR_PROJECTS = [
   {
     id: 7,
     category: 'Turnkey Interiors',
-    title: 'Assetz Mark',
-    location: 'Bangalore',
+    title: 'Cosmopolitan Living Space',
+    location: 'Assetz Marq, Bangalore',
     projectType: 'Living Area Design',
     materials: 'Marble, Velvet, Custom Woodwork',
     duration: '45 Days',
