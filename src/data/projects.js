@@ -118,7 +118,7 @@ export const INTERIOR_PROJECTS = [
     materials: 'Marble, Velvet, Custom Woodwork',
     duration: '45 Days',
     description: 'A vibrant yet sophisticated living area featuring striking teal seating, an elegant false ceiling with warm ambient lighting, and a custom marble-backed entertainment unit.',
-    image: '/projects/whatsapp/living-space-1.jpg',
+    image: '/projects/interior-living-teal.jpg',
     isPlaceholder: false,
     size: 'large',
     gallery: [
