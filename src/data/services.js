@@ -48,7 +48,7 @@ const services = [
     tagline: 'Exclusive styling accompaniment',
     description:
       'A dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor ensuring flawless coordination with your new space.',
-    image: '/projects/media__1784490387502.jpg',
+    image: '/projects/decor-sourcing-landscape.jpg',
   },
 ];
 
