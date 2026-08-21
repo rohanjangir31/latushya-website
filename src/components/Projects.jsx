@@ -542,37 +542,48 @@ export default function Projects({
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="relative flex flex-col items-center max-w-[90vw] max-h-[80vh]"
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="absolute flex flex-col items-center justify-center w-[90vw] h-[80vh]"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Close Button Attached to Photo Corner */}
-                <button
-                  onClick={closeGallery}
-                  aria-label="Close lightbox"
-                  className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
-                >
-                  <X size={24} strokeWidth={3} />
-                </button>
+                <div className="relative inline-flex flex-col items-center">
+                  {/* Close Button Attached to Photo Corner */}
+                  <button
+                    onClick={closeGallery}
+                    aria-label="Close lightbox"
+                    className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
+                  >
+                    <X size={24} strokeWidth={3} />
+                  </button>
 
-                <img
-                  src={activeProject.gallery[galleryIndex].src}
-                  alt={activeProject.gallery[galleryIndex].caption}
-                  className="max-w-full max-h-[80vh] object-contain drop-shadow-2xl rounded-sm"
-                  loading="eager"
-                />
-
-                {/* Minimal Caption */}
-                <div className="absolute -bottom-16 left-0 right-0 text-center pointer-events-none">
-                  <span className="text-pink/90 text-[10px] tracking-[0.3em] uppercase block mb-2">{activeProject.title}</span>
-                  <p className="text-white/80 text-sm font-light max-w-xl mx-auto">{activeProject.gallery[galleryIndex].caption}</p>
+                  <img
+                    src={activeProject.gallery[galleryIndex].src}
+                    alt={activeProject.gallery[galleryIndex].caption || activeProject.title}
+                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-sm"
+                    loading="eager"
+                  />
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-gray-subtle text-xs tracking-widest">
-              {String(galleryIndex + 1).padStart(2, '0')} / {String(activeProject.gallery.length).padStart(2, '0')}
+            {/* Cinematic Caption & Counter (Fixed at bottom) */}
+            <div className="absolute bottom-4 lg:bottom-8 left-0 right-0 flex flex-col items-center justify-center pointer-events-none px-4 z-50">
+              <span className="text-pink text-[11px] lg:text-[12px] tracking-[0.3em] uppercase mb-1.5 font-medium drop-shadow-lg">
+                {activeProject.title}
+              </span>
+              <div className="flex items-center gap-3 text-white/90">
+                <span className="text-[10px] tracking-[0.2em] text-white/60 font-mono">
+                  {String(galleryIndex + 1).padStart(2, '0')} / {String(activeProject.gallery.length).padStart(2, '0')}
+                </span>
+                {activeProject.gallery[galleryIndex].caption && (
+                  <>
+                    <span className="w-6 h-[1px] bg-white/30"></span>
+                    <p className="text-sm font-light tracking-wide text-white/90 drop-shadow-md">
+                      {activeProject.gallery[galleryIndex].caption}
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
