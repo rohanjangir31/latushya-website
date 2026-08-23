@@ -83,7 +83,7 @@ export const WARDROBE_COLLECTIONS = [
       {
         id: 'sl-13',
         name: 'Tinted Glass Display System',
-        description: 'A continuous run of floor-to-ceiling tinted glass doors that subtly reflect their surroundings while providing a semi-transparent view of the bespoke storage within.',
+        description: 'A continuous run of floor-to-ceiling tinted glass doors that subtly reflect their surroundings while providing a semi-transparent view of the custom storage within.',
         image: '/assets/wardrobes/sliding-tinted-glass-jungle.jpg'
       },
       {

@@ -29,8 +29,8 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
     <div
       ref={stepRef}
       style={{
-        paddingTop: '15vh',
-        paddingBottom: '15vh',
+        paddingTop: '10vh',
+        paddingBottom: '10vh',
         position: 'relative',
         opacity: isActive ? 1 : 0.25,
         transform: isActive ? 'translateX(0)' : 'translateX(-10px)',
@@ -48,15 +48,15 @@ function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
       >
         <div className="rounded-full bg-pink transition-all duration-700" style={{ width: isActive ? '6px' : '0px', height: isActive ? '6px' : '0px', boxShadow: isActive ? '0 0 8px rgba(223,76,115,0.8)' : 'none' }} />
       </div>
-      <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '20px', fontFamily: DISPLAY, fontSize: 'clamp(8rem, 15vw, 14rem)', fontWeight: 700, color: 'transparent', WebkitTextStroke: isActive ? '1px rgba(223,76,115,0.15)' : '1px rgba(255,255,255,0.03)', lineHeight: 1, zIndex: 0, pointerEvents: 'none', transition: 'all 0.8s ease' }}>
+      <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '20px', fontFamily: DISPLAY, fontSize: 'clamp(5rem, 15vw, 14rem)', fontWeight: 700, color: 'transparent', WebkitTextStroke: isActive ? '1px rgba(223,76,115,0.15)' : '1px rgba(255,255,255,0.03)', lineHeight: 1, zIndex: 0, pointerEvents: 'none', transition: 'all 0.8s ease' }}>
         {step.step}
       </div>
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <h3 style={{ fontFamily: DISPLAY, fontSize: '44px', fontWeight: 300, letterSpacing: '-0.015em', color: isActive ? '#DF4C73' : 'rgba(255,255,255,0.8)', marginBottom: '20px', transition: 'color 0.8s ease' }}>
+        <h3 style={{ fontFamily: DISPLAY, fontSize: 'clamp(1.8rem, 4vw, 44px)', fontWeight: 300, letterSpacing: '-0.015em', color: isActive ? '#DF4C73' : 'rgba(255,255,255,0.8)', marginBottom: '16px', transition: 'color 0.8s ease' }}>
           {step.title}
         </h3>
-        <div className="h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 transition-all duration-700" style={{ width: isActive ? '3.5rem' : '0px', marginBottom: '24px' }} />
-        <p style={{ fontFamily: SANS, fontSize: '18px', fontWeight: 300, lineHeight: 1.85, color: 'rgba(255,255,255,0.6)', maxWidth: '420px' }}>
+        <div className="h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 transition-all duration-700" style={{ width: isActive ? '3.5rem' : '0px', marginBottom: '20px' }} />
+        <p style={{ fontFamily: SANS, fontSize: 'clamp(0.9rem, 2vw, 18px)', fontWeight: 300, lineHeight: 1.85, color: 'rgba(255,255,255,0.6)', maxWidth: '420px' }}>
           {step.description}
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function About() {
   return (
     <>
       {/* ── PART 1: WHO WE ARE ──────────────────────────────────────────── */}
-      <section id="about" className="relative py-32 lg:py-48 bg-black-deep overflow-hidden">
+      <section id="about" className="relative py-20 lg:py-48 bg-black-deep overflow-hidden">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-pink/5 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 lg:px-16">
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
@@ -99,13 +99,13 @@ export default function About() {
               </div>
               <AnimatedSection delay={0.3}>
                 <div className="space-y-8 text-gray-subtle text-lg font-light leading-relaxed max-w-2xl">
-                  <p>Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is a bespoke commission.</p>
+                  <p>Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is an exclusive commission.</p>
                   <p>Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware.</p>
                   <p>We are not just designers, we are masterful builders. We uncover brilliant ideas and craft solutions you didn't even know you needed. From the first sketch to the final soft close of a cabinet door, our commitment is to absolute, uncompromising quality.</p>
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={0.5}>
-                <div className="mt-16 pt-12 border-t border-white/10 flex items-center justify-between">
+                <div className="mt-12 pt-10 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
                     <p className="font-display text-2xl text-white tracking-wide">The Founders</p>
                     <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Chandan Kumar • Indraj Sharma • Sarita Kumari</p>
@@ -146,7 +146,7 @@ export default function About() {
       </section>
 
       {/* ── PART 2: THE PROCESS ─────────────────────────────────────────── */}
-      <section id="process" style={{ background: '#03070E', paddingTop: '80px', paddingBottom: '160px', position: 'relative' }}>
+      <section id="process" className="py-20 lg:pt-[80px] lg:pb-[160px] relative" style={{ background: '#03070E' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative">
 

@@ -91,7 +91,7 @@ export default function CredibilityBand() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/40 to-transparent" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 divide-y-2 lg:divide-y-0 divide-pink/10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0">
           {CREDIBILITY_ITEMS.map(({ Icon, value, label, sub }, i) => (
             <motion.div
               key={label}

@@ -239,7 +239,7 @@ function AppContent() {
       {!loading && (
         <>
           <Navbar />
-          <main>
+          <main className="pb-[72px] lg:pb-0 pb-safe">
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<Home />} />

@@ -21,7 +21,7 @@ const SANS    = "'Inter', system-ui, sans-serif";
 const CAPABILITIES = [
   {
     num: '01',
-    title: 'Bespoke Design',
+    title: 'Custom Design',
     description:
       'Every space is crafted from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
   },
@@ -88,19 +88,19 @@ function CapabilityRow({ item, index, totalInView }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '120px 1fr',
+          gridTemplateColumns: 'var(--row-cols, 120px 1fr)',
           alignItems: 'center',
-          paddingTop: '48px',
-          paddingBottom: '48px',
+          paddingTop: '32px',
+          paddingBottom: '32px',
           gap: '0',
         }}
+        className="[--row-cols:80px_1fr] md:[--row-cols:120px_1fr]"
       >
         {/* ── Left: ordinal number ─────────────────────────────────────── */}
         <div style={{ alignSelf: 'flex-start', paddingTop: '6px' }}>
           <span
             style={{
               fontFamily: DISPLAY,
-              fontSize: '72px',
               fontWeight: 300,
               lineHeight: 1,
               letterSpacing: '-0.02em',
@@ -109,6 +109,7 @@ function CapabilityRow({ item, index, totalInView }) {
               userSelect: 'none',
               display: 'block',
             }}
+            className="text-5xl md:text-[72px]"
           >
             {item.num}
           </span>
@@ -121,14 +122,14 @@ function CapabilityRow({ item, index, totalInView }) {
             transition={{ duration: 0.35, ease: [0.0, 0.0, 0.2, 1] }}
             style={{
               fontFamily: DISPLAY,
-              fontSize: '32px',
               fontWeight: 400,
               letterSpacing: '-0.015em',
               lineHeight: 1.1,
               color: hovered ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.88)',
-              marginBottom: '14px',
+              marginBottom: '10px',
               transition: 'color 350ms ease',
             }}
+            className="text-2xl md:text-[32px]"
           >
             {item.title}
           </motion.h3>
@@ -136,12 +137,12 @@ function CapabilityRow({ item, index, totalInView }) {
           <p
             style={{
               fontFamily: SANS,
-              fontSize: '18px',
               fontWeight: 300,
               lineHeight: 1.75,
               color: 'rgba(255,255,255,0.62)',
               maxWidth: '500px',
             }}
+            className="text-sm md:text-lg"
           >
             {item.description}
           </p>
@@ -161,9 +162,8 @@ export default function WhyChoose() {
       id="why-choose"
       style={{
         background: '#050B14',
-        paddingTop: '160px',
-        paddingBottom: '160px',
       }}
+      className="py-20 lg:py-[160px]"
     >
       <div
         style={{

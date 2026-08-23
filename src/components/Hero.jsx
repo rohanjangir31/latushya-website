@@ -163,7 +163,7 @@ export default function Hero() {
             {/* ── HEADLINE ───────────────────────────────────────── */}
             <div className="mb-7 lg:mb-9">
 
-              {/* Line 1: Bespoke */}
+              {/* Line 1: Custom */}
               <div className="overflow-hidden">
                 <motion.h1
                   initial={{ y: '110%' }}
@@ -179,7 +179,7 @@ export default function Hero() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Bespoke
+                  Custom
                 </motion.h1>
               </div>
 

@@ -100,7 +100,7 @@ export default function WardrobesHub() {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="font-sans text-[0.75rem] leading-[1.8] text-white/30 max-w-[220px] shrink-0 lg:text-left"
             >
-              Discover our bespoke approach to storage. From architectural sliding systems to expansive master walk-ins, every collection is tailored to elevate your personal sanctuary.
+              Discover our custom approach to storage. From architectural sliding systems to expansive master walk-ins, every collection is tailored to elevate your personal sanctuary.
             </motion.p>
           </div>
 

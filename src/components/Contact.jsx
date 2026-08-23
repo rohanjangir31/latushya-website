@@ -30,7 +30,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-32 lg:py-48 overflow-hidden bg-black-deep"
+      className="relative py-16 lg:py-48 overflow-hidden bg-black-deep"
     >
       {/* ── Background Aesthetics ─────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none noise-texture" />
@@ -57,7 +57,7 @@ export default function Contact() {
 
         <motion.p
           {...fadeUp(0.2)}
-          className="text-white/50 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-20"
+          className="text-white/50 text-base lg:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-12 lg:mb-20"
         >
           We accept a limited number of commissions per month to ensure absolute dedication to every project. Submit your details below, and our design director will contact you.
         </motion.p>

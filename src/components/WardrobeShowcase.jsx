@@ -51,7 +51,7 @@ export default function WardrobeShowcase() {
           className="font-display font-light text-white leading-[1.05]"
           style={{ fontSize: 'clamp(2.5rem, 4vw, 4.5rem)' }}
         >
-          Bespoke Wardrobe <br className="hidden sm:block" />
+          Custom Wardrobe <br className="hidden sm:block" />
           <span className="italic text-white/50">Collections</span>
         </motion.h2>
       </div>

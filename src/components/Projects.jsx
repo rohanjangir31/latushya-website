@@ -92,7 +92,7 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
   // Short description — kept to 2–3 lines max
   const description = isPlaceholder
     ? "Installation photography will be added as each wardrobe project is completed and signed off."
-    : (project.description || "A bespoke wardrobe installation designed and built for this client's home in Bangalore.");
+    : (project.description || "A custom wardrobe installation designed and built for this client's home in Bangalore.");
 
   return (
     <motion.div
@@ -266,7 +266,7 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
         >
           {project.isPlaceholder
             ? 'Installation photography will be added as each interior project is completed and handed over to our clients.'
-            : (project.description || 'A bespoke interior installation, designed around the client\'s lifestyle and aesthetic vision.')}
+            : (project.description || 'A custom interior installation, designed around the client\'s lifestyle and aesthetic vision.')}
         </motion.p>
 
         {!project.isPlaceholder && <ViewLink onClick={onOpenGallery} />}
@@ -519,20 +519,20 @@ export default function Projects({
           >
             {/* Prev */}
             <button
-              onClick={prevImage}
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
               aria-label="Previous image"
-              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
-              <ChevronLeft size={32} strokeWidth={2} />
+              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2} />
             </button>
 
             {/* Next */}
             <button
-              onClick={nextImage}
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
               aria-label="Next image"
-              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
-              <ChevronRight size={32} strokeWidth={2} />
+              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2} />
             </button>
 
             {/* Image Wrapper */}
@@ -543,16 +543,16 @@ export default function Projects({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="absolute flex flex-col items-center justify-center w-[90vw] h-[80vh]"
+                className="absolute flex flex-col items-center justify-center w-[100vw] lg:w-[90vw] h-[80vh] px-8 lg:px-0"
               >
-                <div className="relative inline-flex flex-col items-center">
+                <div className="relative inline-flex flex-col items-center max-w-full">
                   {/* Close Button Attached to Photo Corner */}
                   <button
-                    onClick={closeGallery}
+                    onClick={(e) => { e.stopPropagation(); closeGallery(); }}
                     aria-label="Close lightbox"
-                    className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
+                    className="absolute -top-3 -right-3 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2 lg:p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
                   >
-                    <X size={24} strokeWidth={3} />
+                    <X className="w-4 h-4 lg:w-6 lg:h-6" strokeWidth={3} />
                   </button>
 
                   <img

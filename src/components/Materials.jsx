@@ -67,18 +67,15 @@ export default function MaterialsSection() {
     <section 
       id="materials" 
       ref={sectionRef}
+      className="py-20 lg:py-[160px] relative overflow-hidden"
       style={{
         background: '#03070E',
-        paddingTop: '160px',
-        paddingBottom: '160px',
-        position: 'relative',
-        overflow: 'hidden'
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         
         {/* SECTION HEADER */}
-        <div style={{ marginBottom: '100px' }}>
+        <div className="mb-12 lg:mb-[100px]">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -121,9 +118,9 @@ export default function MaterialsSection() {
         </div>
 
         {/* MATERIAL CATEGORY 1: HARDWARE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 mb-16 lg:mb-32 items-center">
           <motion.div 
-            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden rounded-2xl shadow-2xl"
+            className="lg:col-span-7 h-[50vw] min-h-[260px] lg:h-[75vh] relative overflow-hidden rounded-2xl shadow-2xl"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
@@ -141,8 +138,8 @@ export default function MaterialsSection() {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
             >
-              <h3 style={{ fontFamily: DISPLAY, fontSize: '40px', color: '#fff', marginBottom: '16px' }}>Precision Engineering</h3>
-              <p style={{ fontFamily: SANS, fontSize: '18px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
+              <h3 style={{ fontFamily: DISPLAY, fontSize: 'clamp(1.8rem, 4vw, 40px)', color: '#fff', marginBottom: '16px' }}>Precision Engineering</h3>
+              <p style={{ fontFamily: SANS, fontSize: 'clamp(0.9rem, 2vw, 18px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
                 Every hinge, track, and handle is engineered for silent, flawless operation. We utilize Austrian and German-engineered mechanisms to guarantee a lifetime of effortless movement.
               </p>
               
@@ -156,7 +153,7 @@ export default function MaterialsSection() {
         </div>
 
         {/* MATERIAL CATEGORY 2: SUBSTRATE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -164,8 +161,8 @@ export default function MaterialsSection() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.8, ease: EASE }}
             >
-              <h3 style={{ fontFamily: DISPLAY, fontSize: '40px', color: '#fff', marginBottom: '16px' }}>Structural Cores</h3>
-              <p style={{ fontFamily: SANS, fontSize: '18px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
+              <h3 style={{ fontFamily: DISPLAY, fontSize: 'clamp(1.8rem, 4vw, 40px)', color: '#fff', marginBottom: '16px' }}>Structural Cores</h3>
+              <p style={{ fontFamily: SANS, fontSize: 'clamp(0.9rem, 2vw, 18px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '40px' }}>
                 The hidden layers dictate the lifespan of your interiors. We exclusively use marine-grade, high-density substrates that resist moisture, impact, and time.
               </p>
               
@@ -178,7 +175,7 @@ export default function MaterialsSection() {
           </div>
 
           <motion.div 
-            className="lg:col-span-7 h-[60vh] lg:h-[75vh] relative overflow-hidden order-1 lg:order-2 rounded-2xl shadow-2xl"
+            className="lg:col-span-7 h-[50vw] min-h-[260px] lg:h-[75vh] relative overflow-hidden order-1 lg:order-2 rounded-2xl shadow-2xl"
             initial={{ opacity: 0, scale: 1.05 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-50px' }}
