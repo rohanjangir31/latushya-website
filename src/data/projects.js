@@ -148,7 +148,7 @@ export const INTERIOR_PROJECTS = [
     id: 8,
     category: 'Modular Kitchens',
     title: 'Pastel Modular Kitchen',
-    location: 'Kingfisher Towers, Ashok Nagar',
+    location: 'Prestige Jindal City, Bangalore',
     projectType: 'Premium Kitchen',
     materials: 'Mint & Black Glass, White Quartz',
     duration: '21 Days',
