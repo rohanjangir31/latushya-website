@@ -521,27 +521,18 @@ export default function Projects({
             <button
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
+              className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/40 transition-all duration-300 z-[110] shadow-2xl"
             >
-              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2} />
+              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2.5} />
             </button>
 
             {/* Next */}
             <button
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
+              className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/40 transition-all duration-300 z-[110] shadow-2xl"
             >
-              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2} />
-            </button>
-
-            {/* Close Button Fixed to Top Right Viewport */}
-            <button
-              onClick={(e) => { e.stopPropagation(); closeGallery(); }}
-              aria-label="Close lightbox"
-              className="absolute top-4 right-4 lg:top-8 lg:right-8 bg-white/10 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 z-[110] shadow-2xl"
-            >
-              <X className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
+              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2.5} />
             </button>
 
             {/* Image Wrapper */}

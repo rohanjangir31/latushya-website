@@ -124,25 +124,14 @@ export const INTERIOR_PROJECTS = [
     gallery: [
       { id: 'ws-1', src: '/projects/whatsapp/living-space-1.jpg', caption: '' },
       { id: 'ws-2', src: '/projects/whatsapp/living-space-2.jpg', caption: '' },
-      { id: 'ws-3', src: '/projects/whatsapp/living-space-3.jpg', caption: '' },
-      { id: 'ws-4', src: '/projects/whatsapp/living-space-4.jpg', caption: '' },
-      { id: 'ws-5', src: '/projects/whatsapp/living-space-5.jpg', caption: '' },
-      { id: 'ws-6', src: '/projects/whatsapp/living-space-6.jpg', caption: '' },
-      { id: 'ws-7', src: '/projects/whatsapp/living-space-7.jpg', caption: '' },
-      { id: 'ws-8', src: '/projects/whatsapp/living-space-8.jpg', caption: '' },
-      { id: 'ws-9', src: '/projects/whatsapp/living-space-9.jpg', caption: '' },
-      { id: 'ws-10', src: '/projects/whatsapp/living-space-10.jpg', caption: '' },
-      { id: 'ws-11', src: '/projects/whatsapp/living-space-11.jpg', caption: '' },
-      { id: 'ws-12', src: '/projects/whatsapp/living-space-12.jpg', caption: '' },
-      { id: 'ws-13', src: '/projects/whatsapp/living-space-13.jpg', caption: '' },
-      { id: 'ws-14', src: '/projects/whatsapp/living-space-14.jpg', caption: '' },
-      { id: 'ws-15', src: '/projects/whatsapp/living-space-15.jpg', caption: '' },
-      { id: 'ws-16', src: '/projects/whatsapp/living-space-16.jpg', caption: '' },
-      { id: 'ws-17', src: '/projects/whatsapp/living-space-17.jpg', caption: '' },
-      { id: 'ws-18', src: '/projects/whatsapp/living-space-18.jpg', caption: '' },
-      { id: 'ws-19', src: '/projects/whatsapp/living-space-19.jpg', caption: '' },
-      { id: 'ws-20', src: '/projects/whatsapp/living-space-20.jpg', caption: '' },
-      { id: 'ws-21', src: '/projects/whatsapp/living-space-21.jpg', caption: '' }
+      { id: 'ws-3', src: '/projects/whatsapp/living-space-5.jpg', caption: '' },
+      { id: 'ws-4', src: '/projects/whatsapp/living-space-8.jpg', caption: '' },
+      { id: 'ws-5', src: '/projects/whatsapp/living-space-10.jpg', caption: '' },
+      { id: 'ws-6', src: '/projects/whatsapp/living-space-12.jpg', caption: '' },
+      { id: 'ws-7', src: '/projects/whatsapp/living-space-14.jpg', caption: '' },
+      { id: 'ws-8', src: '/projects/whatsapp/living-space-16.jpg', caption: '' },
+      { id: 'ws-9', src: '/projects/whatsapp/living-space-18.jpg', caption: '' },
+      { id: 'ws-10', src: '/projects/whatsapp/living-space-20.jpg', caption: '' }
     ]
   },
   {
