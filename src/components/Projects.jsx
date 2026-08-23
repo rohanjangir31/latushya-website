@@ -511,7 +511,7 @@ export default function Projects({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black-deep/97 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl flex items-center justify-center p-4"
             onClick={closeGallery}
             role="dialog"
             aria-modal="true"
@@ -519,7 +519,7 @@ export default function Projects({
           >
             {/* Prev */}
             <button
-              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              onClick={prevImage}
               aria-label="Previous image"
               className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
@@ -528,7 +528,7 @@ export default function Projects({
 
             {/* Next */}
             <button
-              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              onClick={nextImage}
               aria-label="Next image"
               className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-pink text-white p-2 lg:p-3 rounded-full backdrop-blur-md border border-white/10 transition-all duration-300 z-50 shadow-2xl"
             >
@@ -545,7 +545,10 @@ export default function Projects({
                 transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="absolute flex flex-col items-center justify-center w-[100vw] lg:w-[90vw] h-[80vh] px-8 lg:px-0"
               >
-                <div className="relative inline-flex flex-col items-center max-w-full">
+                <div 
+                  className="relative inline-flex flex-col items-center max-w-full"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {/* Close Button Attached to Photo Corner */}
                   <button
                     onClick={(e) => { e.stopPropagation(); closeGallery(); }}
