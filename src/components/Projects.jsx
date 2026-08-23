@@ -543,7 +543,7 @@ export default function Projects({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="absolute flex flex-col items-center justify-center w-[100vw] lg:w-[90vw] h-[80vh] px-8 lg:px-0"
+                className="absolute flex flex-col items-center justify-center w-[100vw] lg:w-[90vw] h-[80vh] px-8 lg:px-0 pb-12 lg:pb-16"
               >
                 <div 
                   className="relative inline-flex flex-col items-center justify-center max-w-full min-h-[200px] min-w-[200px]"
@@ -557,7 +557,7 @@ export default function Projects({
                   <img
                     src={activeProject.gallery[galleryIndex].src}
                     alt={activeProject.gallery[galleryIndex].caption || activeProject.title}
-                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-2xl z-10"
+                    className="max-w-[90vw] max-h-[70vh] object-contain drop-shadow-2xl rounded-2xl z-10"
                     loading="eager"
                   />
                 </div>
