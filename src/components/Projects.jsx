@@ -535,6 +535,15 @@ export default function Projects({
               <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={2} />
             </button>
 
+            {/* Close Button Fixed to Top Right Viewport */}
+            <button
+              onClick={(e) => { e.stopPropagation(); closeGallery(); }}
+              aria-label="Close lightbox"
+              className="absolute top-4 right-4 lg:top-8 lg:right-8 bg-white/10 hover:bg-pink text-white p-3 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 z-[110] shadow-2xl"
+            >
+              <X className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
+            </button>
+
             {/* Image Wrapper */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -546,22 +555,18 @@ export default function Projects({
                 className="absolute flex flex-col items-center justify-center w-[100vw] lg:w-[90vw] h-[80vh] px-8 lg:px-0"
               >
                 <div 
-                  className="relative inline-flex flex-col items-center max-w-full"
+                  className="relative inline-flex flex-col items-center justify-center max-w-full min-h-[200px] min-w-[200px]"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Close Button Attached to Photo Corner */}
-                  <button
-                    onClick={(e) => { e.stopPropagation(); closeGallery(); }}
-                    aria-label="Close lightbox"
-                    className="absolute -top-3 -right-3 lg:-top-6 lg:-right-6 bg-white hover:bg-pink text-black hover:text-white p-2 lg:p-2.5 rounded-full shadow-2xl transition-all duration-300 z-50"
-                  >
-                    <X className="w-4 h-4 lg:w-6 lg:h-6" strokeWidth={3} />
-                  </button>
+                  {/* Loading Spinner */}
+                  <div className="absolute inset-0 flex items-center justify-center -z-10">
+                    <div className="w-10 h-10 border-2 border-white/10 border-t-pink rounded-full animate-spin"></div>
+                  </div>
 
                   <img
                     src={activeProject.gallery[galleryIndex].src}
                     alt={activeProject.gallery[galleryIndex].caption || activeProject.title}
-                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-sm"
+                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-sm z-10"
                     loading="eager"
                   />
                 </div>
