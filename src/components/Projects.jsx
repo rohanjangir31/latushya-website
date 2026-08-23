@@ -566,7 +566,7 @@ export default function Projects({
                   <img
                     src={activeProject.gallery[galleryIndex].src}
                     alt={activeProject.gallery[galleryIndex].caption || activeProject.title}
-                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-sm z-10"
+                    className="max-w-[90vw] max-h-[80vh] object-contain drop-shadow-2xl rounded-2xl z-10"
                     loading="eager"
                   />
                 </div>
