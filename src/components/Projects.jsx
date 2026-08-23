@@ -567,8 +567,8 @@ export default function Projects({
 
             {/* Cinematic Caption & Counter (Fixed at bottom) */}
             <div className="absolute bottom-4 lg:bottom-8 left-0 right-0 flex flex-col items-center justify-center pointer-events-none px-4 z-50">
-              <span className="text-pink text-[11px] lg:text-[12px] tracking-[0.3em] uppercase mb-1.5 font-medium drop-shadow-lg">
-                {activeProject.title}
+              <span className="text-pink text-[11px] lg:text-[12px] tracking-[0.3em] uppercase mb-1.5 font-medium drop-shadow-lg text-center">
+                {activeProject.location || activeProject.title}
               </span>
               <div className="flex items-center gap-3 text-white/90">
                 <span className="text-[10px] tracking-[0.2em] text-white/60 font-mono">
