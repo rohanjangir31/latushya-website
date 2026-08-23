@@ -73,38 +73,6 @@ export const WARDROBE_PROJECTS = [
     gallery: [
       { id: 'w4-1', src: '/assets/wardrobes/sliding-pink-white.jpg', caption: 'Floor-to-ceiling blush and white sliding system.' }
     ]
-  },
-  {
-    id: 5,
-    category: 'Glass Wardrobes',
-    title: 'Tinted Reflection',
-    location: 'RMZ Latitude, Hebbal',
-    projectType: 'Glass Sliding Wardrobe',
-    materials: 'Tinted Glass, Bronze Profiling',
-    duration: '24 Days',
-    description: 'An elegant glass wardrobe offering a semi-transparent view of the impeccably organized interior. The dark tinted glass and bronze profiles exude a moody, high-end Italian aesthetic.',
-    image: '/assets/wardrobes/sliding-glass-brown.jpg',
-    isPlaceholder: false,
-    size: 'small',
-    gallery: [
-      { id: 'w5-1', src: '/assets/wardrobes/sliding-glass-brown.jpg', caption: 'Moody tinted glass with bronze profiles.' }
-    ]
-  },
-  {
-    id: 6,
-    category: 'Architectural Storage',
-    title: 'The Wide Profile Slider',
-    location: 'Purva Whitehall, Sarjapur',
-    projectType: 'Expansive Sliding System',
-    materials: 'White Glass, Grey Accent Stripes',
-    duration: '18 Days',
-    description: 'A sprawling wall-to-wall storage solution utilizing crisp white glass panels interrupted by a sophisticated grey horizontal accent band.',
-    image: '/assets/wardrobes/sliding-white-grey-stripe-wide.jpg',
-    isPlaceholder: false,
-    size: 'medium',
-    gallery: [
-      { id: 'w6-1', src: '/assets/wardrobes/sliding-white-grey-stripe-wide.jpg', caption: 'Expansive white and grey glass sliding system.' }
-    ]
   }
 ];
 
@@ -190,86 +158,6 @@ export const INTERIOR_PROJECTS = [
     size: 'small',
     gallery: [
       { id: 'i4-1', src: '/projects/interior-carved-mirror.jpg', caption: 'Intricate traditional woodwork.' }
-    ]
-  },
-  {
-    id: 11,
-    category: 'Living Spaces',
-    title: 'Geometric Accent Space',
-    location: 'Salarpuria Sattva, Indiranagar',
-    projectType: 'Corridor & Storage',
-    materials: 'Beige & Black Glass',
-    duration: '18 Days',
-    description: 'A bold sliding storage design utilizing striking geometric panels of beige and black glass, seamlessly integrated to elevate a warmly lit transition space.',
-    image: '/projects/interior-geometric-wardrobe.jpg',
-    isPlaceholder: false,
-    size: 'medium',
-    gallery: [
-      { id: 'i5-1', src: '/projects/interior-geometric-wardrobe.jpg', caption: 'Bold geometric sliding panels.' }
-    ]
-  },
-  {
-    id: 12,
-    category: 'Turnkey Interiors',
-    title: 'Seamless Open Plan Architecture',
-    location: 'Prestige Shantiniketan, Whitefield',
-    projectType: 'Kitchen & Living Integration',
-    materials: 'Quartz, Fluted Wood, Glass',
-    duration: '55 Days',
-    description: 'A beautifully integrated kitchen and living space. Suspended ceiling planters and a wooden slatted media wall connect the contemporary monochromatic kitchen with the warm, inviting living area.',
-    image: '/projects/interior-open-kitchen-living.jpg',
-    isPlaceholder: false,
-    size: 'large',
-    gallery: [
-      { id: 'i6-1', src: '/projects/interior-open-kitchen-living.jpg', caption: 'Seamless integration of culinary and living spaces.' }
-    ]
-  },
-  {
-    id: 13,
-    category: 'Living Spaces',
-    title: 'Architectural Ceiling Details',
-    location: 'Godrej Gold County, Tumkur Road',
-    projectType: 'Custom False Ceiling',
-    materials: 'Gypsum, Hidden LED Profiling',
-    duration: '12 Days',
-    description: 'A masterful application of false ceiling design, featuring a multi-tiered circular recess with soft cove lighting that elevates the spatial dynamics and ambiance of the room.',
-    image: '/projects/interior-circular-ceiling.jpg',
-    isPlaceholder: false,
-    size: 'small',
-    gallery: [
-      { id: 'i7-1', src: '/projects/interior-circular-ceiling.jpg', caption: 'Tiered circular false ceiling with soft cove lighting.' }
-    ]
-  },
-  {
-    id: 14,
-    category: 'Modular Kitchens',
-    title: 'Expansive U-Shaped Kitchen',
-    location: 'Bhartiya City, Thanisandra',
-    projectType: 'Premium Kitchen',
-    materials: 'Mint & White Acrylic, Quartz',
-    duration: '28 Days',
-    description: 'A vast, highly functional U-shaped layout maximizing counter space. Finished in soft mint green with contrasting white upper cabinets and subtle under-cabinet illumination.',
-    image: '/projects/interior-u-shaped-mint-kitchen.jpg',
-    isPlaceholder: false,
-    size: 'large',
-    gallery: [
-      { id: 'i8-1', src: '/projects/interior-u-shaped-mint-kitchen.jpg', caption: 'U-shaped layout providing maximum counter space.' }
-    ]
-  },
-  {
-    id: 15,
-    category: 'Custom Woodwork',
-    title: 'Contemporary Mandir',
-    location: 'Divyasree 77 East, Yemalur',
-    projectType: 'Pooja Unit',
-    materials: 'Carved Wood, Etched Glass, Marble Finish',
-    duration: '21 Days',
-    description: 'A tranquil and elegantly carved traditional Pooja unit. Featuring pristine white finishes, intricately etched glass folding doors, and a stunning backlit Sanskrit mantra panel.',
-    image: '/projects/interior-pooja-mandir.jpg',
-    isPlaceholder: false,
-    size: 'medium',
-    gallery: [
-      { id: 'i9-1', src: '/projects/interior-pooja-mandir.jpg', caption: 'Intricately carved mandir with backlit detailing.' }
     ]
   }
 ];
