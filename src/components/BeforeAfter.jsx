@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { SectionHeader, AnimatedSection } from '../utils/animations';
 
 // Before/After comparison slider component
-function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLabel = 'After', caption }) {
+function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Concept', afterLabel = 'Reality', caption }) {
   const [sliderPos, setSliderPos] = useState(50);
   const containerRef = useRef(null);
   const isDragging = useRef(false);
@@ -25,12 +25,14 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
     updatePosition(e.touches[0].clientX);
   }, [updatePosition]);
 
+  const [title, location] = caption ? caption.split('—') : ['', ''];
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col group">
       <div
         ref={containerRef}
-        className="relative select-none overflow-hidden cursor-ew-resize"
-        style={{ height: '420px' }}
+        className="relative select-none overflow-hidden rounded-2xl cursor-ew-resize shadow-2xl transition-transform duration-500 group-hover:-translate-y-1"
+        style={{ height: '460px' }}
         onMouseDown={() => { isDragging.current = true; }}
         onMouseUp={() => { isDragging.current = false; }}
         onMouseLeave={() => { isDragging.current = false; }}
@@ -48,7 +50,7 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
         />
 
         {/* After label */}
-        <div className="absolute top-4 right-4 bg-pink/90 text-black-deep text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 z-10">
+        <div className="absolute top-5 right-5 bg-pink/90 backdrop-blur-md text-white text-[10px] tracking-[0.2em] uppercase font-bold px-4 py-2 rounded-full shadow-lg z-10">
           {afterLabel}
         </div>
 
@@ -61,41 +63,48 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
             src={beforeSrc}
             alt={`Before — ${caption}`}
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ width: `${10000 / sliderPos}%`, maxWidth: 'none' }}
+            style={{ 
+              width: `${10000 / sliderPos}%`, 
+              maxWidth: 'none',
+              filter: 'grayscale(100%) contrast(110%) opacity(0.8)'
+            }}
             draggable={false}
           />
           {/* Before label */}
-          <div className="absolute top-4 left-4 bg-black-charcoal/90 text-white/80 text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 z-10 whitespace-nowrap">
+          <div className="absolute top-5 left-5 bg-black/60 backdrop-blur-md text-white text-[10px] tracking-[0.2em] uppercase font-bold px-4 py-2 rounded-full border border-white/10 shadow-lg z-10 whitespace-nowrap">
             {beforeLabel}
           </div>
         </div>
 
-        {/* Ultra-thin pink divider line */}
+        {/* Crisp white divider line */}
         <div
           className="absolute top-0 bottom-0 z-20 pointer-events-none"
           style={{
             left: `${sliderPos}%`,
-            width: '1px',
-            backgroundColor: 'rgba(223, 76, 115,0.7)',
-            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+            width: '2px',
+            backgroundColor: '#ffffff',
+            boxShadow: '0 0 15px rgba(0,0,0,0.4)',
           }}
         >
-          {/* Subtle minimal grab indicator */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1 w-6 h-12 bg-black-deep/40 backdrop-blur-md border border-pink/30 rounded-full">
-            <div className="w-px h-3 bg-pink/50" />
-            <div className="w-px h-3 bg-pink/50" />
+          {/* Elegant circular handle */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] text-black">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l6-6-6-6" />
+              <path d="M9 18l-6-6 6-6" />
+            </svg>
           </div>
         </div>
 
         {/* Overlay gradient on edges */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 border border-pink/10" />
-        </div>
+        <div className="absolute inset-0 pointer-events-none rounded-2xl border border-white/10" />
       </div>
 
       {caption && (
-        <div className="mt-4 text-center">
-          <p className="text-gray-subtle text-sm">{caption}</p>
+        <div className="mt-6 text-center">
+          <h4 className="font-display text-2xl text-white/90 mb-1">{title.trim()}</h4>
+          {location && (
+            <p className="text-pink text-xs tracking-widest uppercase font-medium">{location.trim()}</p>
+          )}
         </div>
       )}
     </div>
@@ -105,7 +114,7 @@ function ComparisonSlider({ beforeSrc, afterSrc, beforeLabel = 'Before', afterLa
 // Placeholder version when real photos aren't available
 function PlaceholderComparison() {
   return (
-    <div className="relative border border-dashed border-pink/20 bg-black-card/30 h-[420px] flex flex-col items-center justify-center">
+    <div className="relative border border-dashed border-pink/20 bg-black-card/30 h-[460px] flex flex-col items-center justify-center rounded-2xl">
         <div className="text-center px-8">
           <div className="w-16 h-16 border border-pink/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DF4C73" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -123,26 +132,24 @@ function PlaceholderComparison() {
   );
 }
 
-// This data will be replaced with real before/after project photos.
-// Set isPlaceholder: false and add real image URLs to activate the slider.
+// Data using wardrobe images and a conceptual filter for "before"
 const BEFORE_AFTER_PROJECTS = [
   {
     id: 1,
-    caption: 'Custom Wardrobe Transformation — Bangalore',
-    beforeLabel: 'Empty Space',
-    afterLabel: 'Latushya Wardrobe',
-    // These are illustration placeholders — replace with real before/after photos
-    beforeSrc: '/projects/interior-mint-kitchen.jpg',
-    afterSrc: '/projects/interior-u-shaped-mint-kitchen.jpg',
+    caption: 'Master Walk-In Transformation — Bangalore',
+    beforeLabel: '3D Concept',
+    afterLabel: 'Final Reality',
+    beforeSrc: '/assets/wardrobes/walkin-closet-wood.jpg',
+    afterSrc: '/assets/wardrobes/walkin-closet-wood.jpg',
     isPlaceholder: false,
   },
   {
     id: 2,
-    caption: 'Walk-In Wardrobe Transformation — Bangalore',
-    beforeLabel: 'Before',
-    afterLabel: 'After',
-    beforeSrc: '/projects/interior-bedroom-floral.jpg',
-    afterSrc: '/projects/interior-living-teal.jpg',
+    caption: 'Geometric Sliding Wardrobe — Bangalore',
+    beforeLabel: '3D Concept',
+    afterLabel: 'Final Reality',
+    beforeSrc: '/assets/wardrobes/sliding-beige-black.jpg',
+    afterSrc: '/assets/wardrobes/sliding-beige-black.jpg',
     isPlaceholder: false,
   },
 ];
@@ -157,17 +164,17 @@ export default function BeforeAfter() {
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <SectionHeader
           label="Transformations"
-          title={<>Before <span className="italic text-pink">&</span> After</>}
-          subtitle="Drag the slider to see how Latushya transforms an ordinary space into a precision-crafted wardrobe."
+          title={<>Concept <span className="italic text-pink">&</span> Reality</>}
+          subtitle="Drag the slider to see how Latushya bridges the gap between digital design and precision-crafted reality."
         />
 
         {allPlaceholders ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             <PlaceholderComparison />
             <PlaceholderComparison />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {BEFORE_AFTER_PROJECTS.map((project) =>
               project.isPlaceholder ? (
                 <PlaceholderComparison key={project.id} />
@@ -187,7 +194,7 @@ export default function BeforeAfter() {
 
         {allPlaceholders && (
           <AnimatedSection className="text-center mt-8">
-            <div className="inline-block border border-pink/20 bg-black-card px-8 py-4">
+            <div className="inline-block border border-pink/20 bg-black-card px-8 py-4 rounded-full">
               <p className="text-gray-subtle text-sm">
                 Our completed project photography is currently in production. Every transformation will be documented in full detail.
               </p>
