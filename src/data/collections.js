@@ -44,26 +44,6 @@ export const WARDROBE_COLLECTIONS = [
         ],
       },
       {
-        id: 'frosted',
-        name: 'Frosted',
-        description: 'A signature acid-etched frost finish that diffuses light with a soft, luminous glow and total privacy.',
-        images: [
-          '/assets/wardrobes/sliding-beige-horizontal-bands.jpg',
-          '/assets/wardrobes/sliding-white-grey-stripe.jpg',
-        ],
-      },
-      {
-        id: 'crystal-glass',
-        name: 'Crystal / Trivial Glass',
-        description: 'Premium crystal-clear glass with brilliant optical clarity — a jewel-like finish that elevates any bedroom.',
-        images: [
-          '/assets/wardrobes/sliding-white-bronze-center.jpg',
-          '/assets/wardrobes/sliding-white-bronze-center-2.jpg',
-          '/assets/wardrobes/sliding-cross-accent.jpg',
-          '/assets/wardrobes/sliding-cross-accent-2.jpg',
-        ],
-      },
-      {
         id: 'membrane',
         name: 'Membrane',
         description: 'PVC membrane-wrapped doors in a seamless, skin-like finish — high-gloss, matte, or soft-touch texture.',
