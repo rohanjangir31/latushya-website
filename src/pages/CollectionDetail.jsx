@@ -85,117 +85,126 @@ export default function CollectionDetail() {
           </motion.p>
         </section>
 
-        {/* Carousel Showcase */}
+        {/* ── Immersive Cinematic Catalogue Showcase ── */}
         {designs.length > 0 && (
-          <section className="max-w-[1600px] mx-auto px-6 lg:px-12">
+          <section className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 mb-32">
             
-            {/* Counter */}
-            <div className="font-sans text-[0.6rem] tracking-[0.4em] uppercase text-white/30 text-center mb-8">
-              {String(currentIndex + 1).padStart(2, '0')} <span className="text-pink mx-2">/</span> {String(designs.length).padStart(2, '0')}
-            </div>
-
-            {/* Gallery Pro Split Layout */}
-            <div className="relative w-full max-w-[1500px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16 pb-12">
+            <div className="relative w-full h-[75vh] lg:h-[85vh] rounded-[2rem] overflow-hidden bg-black border border-white/10 flex flex-col group shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
               
-              {/* Main Image Display Frame (Left) */}
-              <motion.div 
-                className="w-full lg:flex-1 relative flex justify-center items-center cursor-grab active:cursor-grabbing touch-pan-y group rounded-[2rem] border border-white/10 h-[60vh] lg:h-[75vh] shadow-[0_0_80px_rgba(0,0,0,0.6)] overflow-hidden bg-black"
-                onPanEnd={(e, { offset, velocity }) => {
-                  const swipe = swipePower(offset.x, velocity.x);
-                  if (swipe < -swipeConfidenceThreshold) {
-                    handleNext();
-                  } else if (swipe > swipeConfidenceThreshold) {
-                    handlePrev();
-                  }
-                }}
-              >
-                {/* Dynamic Ambient Background */}
-                <div className="absolute inset-0 z-0">
-                  <AnimatePresence>
-                    <motion.img
-                      key={`bg-${currentDesign.id}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.6 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1.2 }}
-                      src={currentDesign.image}
-                      className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-125 opacity-50 saturate-150"
-                    />
-                  </AnimatePresence>
-                  <div className="absolute inset-0 bg-black/40" />
-                </div>
-
-                {/* Actual Image */}
-                <div className="relative z-10 flex justify-center items-center w-full h-full">
-                  <AnimatePresence>
-                    <motion.img
-                      key={currentDesign.id}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
-                      transition={{ duration: 0.8, ease: "easeInOut" }}
-                      src={currentDesign.image}
-                      alt={currentDesign.name}
-                      className="absolute inset-0 m-auto max-w-[calc(100%-2rem)] md:max-w-[calc(100%-4rem)] lg:max-w-[calc(100%-8rem)] max-h-[calc(100%-2rem)] md:max-h-[calc(100%-4rem)] lg:max-h-[calc(100%-8rem)] w-auto h-auto object-contain block rounded-xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] border border-white/10 pointer-events-none"
-                      draggable={false}
-                    />
-                  </AnimatePresence>
-                </div>
-
-                {/* Prev Overlay Area */}
-                {designs.length > 1 && (
-                  <button
-                    onClick={handlePrev}
-                    className="absolute inset-y-0 left-0 w-20 md:w-28 lg:w-32 cursor-pointer z-20 flex items-center justify-start pl-4 md:pl-8"
-                    aria-label="Previous image"
-                  >
-                    <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                      <ArrowLeft size={20} />
-                    </div>
-                  </button>
-                )}
-
-                {/* Next Overlay Area */}
-                {designs.length > 1 && (
-                  <button
-                    onClick={handleNext}
-                    className="absolute inset-y-0 right-0 w-20 md:w-28 lg:w-32 cursor-pointer z-20 flex items-center justify-end pr-4 md:pr-8"
-                    aria-label="Next image"
-                  >
-                    <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white transition-all duration-300 hover:bg-pink hover:border-pink hover:text-white hover:scale-110 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                      <ArrowRight size={20} />
-                    </div>
-                  </button>
-                )}
-              </motion.div>
-
-              {/* Design Info (Right, Sticky) */}
-              <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-transparent flex flex-col items-start text-left lg:sticky lg:top-32 lg:pl-8 mt-8 lg:mt-12">
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={`info-${currentDesign.id}`}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
+              {/* Dynamic Ambient Background */}
+              <div className="absolute inset-0 z-0">
+                <AnimatePresence>
+                  <motion.img
+                    key={`bg-${currentDesign.id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.35 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full"
-                  >
-                    <span className="text-pink text-[0.6rem] tracking-[0.4em] uppercase font-medium block mb-4 lg:mb-6">
-                      Selected Design
-                    </span>
-                    <h3 className="text-2xl lg:text-3xl xl:text-4xl font-display font-light mb-4 lg:mb-6 text-white leading-tight">
-                      {currentDesign.name}
-                    </h3>
-                    <div className="w-12 h-px bg-gradient-to-r from-pink to-blue/40 mb-4 lg:mb-6" />
-                    <p className="font-sans text-[0.85rem] lg:text-[0.95rem] font-light leading-[2.1] text-white/60 pr-2">
-                      {currentDesign.description}
-                    </p>
-                  </motion.div>
+                    transition={{ duration: 1.2 }}
+                    src={currentDesign.image}
+                    className="absolute inset-0 w-full h-full object-cover blur-[80px] scale-125 saturate-[1.5]"
+                  />
                 </AnimatePresence>
+                {/* Additional gradient overlays for depth */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
               </div>
 
-            </div>
+              {/* Main Image Stage (Top Portion) */}
+              <div 
+                className="relative z-10 flex-1 flex items-center justify-center p-8 lg:p-16 overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+                onPanEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+                  if (swipe < -swipeConfidenceThreshold) handleNext();
+                  else if (swipe > swipeConfidenceThreshold) handlePrev();
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentDesign.id}
+                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    src={currentDesign.image}
+                    alt={currentDesign.name}
+                    className="max-w-full max-h-full w-auto h-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.8)] select-none pointer-events-none"
+                    style={{ imageRendering: 'high-quality' }}
+                  />
+                </AnimatePresence>
 
+                {/* Navigation Arrows */}
+                {designs.length > 1 && (
+                  <>
+                    <button
+                      onClick={handlePrev}
+                      className="absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-pink/80 hover:border-pink hover:scale-110 transition-all duration-400 z-20 shadow-2xl"
+                    >
+                      <ArrowLeft size={24} />
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-pink/80 hover:border-pink hover:scale-110 transition-all duration-400 z-20 shadow-2xl"
+                    >
+                      <ArrowRight size={24} />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Info Panel (Bottom Glassmorphism Area) */}
+              <div className="relative z-20 w-full bg-black/50 backdrop-blur-2xl border-t border-white/10 p-6 lg:px-12 lg:py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shrink-0">
+                
+                <div className="flex-1 max-w-4xl">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`text-${currentDesign.id}`}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {/* Meta info */}
+                      <div className="flex items-center gap-4 mb-3">
+                        <span className="text-pink text-[0.65rem] tracking-[0.3em] uppercase font-bold">
+                          {String(currentIndex + 1).padStart(2, '0')} / {String(designs.length).padStart(2, '0')}
+                        </span>
+                        <div className="w-8 h-[1px] bg-white/20" />
+                        <span className="text-white/40 text-[0.6rem] tracking-[0.25em] uppercase">
+                          Signature Collection
+                        </span>
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="font-display font-light text-2xl md:text-3xl lg:text-4xl text-white mb-3 leading-tight">
+                        {currentDesign.name}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="font-sans text-[0.9rem] lg:text-[1rem] font-light text-white/60 leading-relaxed line-clamp-2 md:line-clamp-none">
+                        {currentDesign.description}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Progress Indicators (Dots) */}
+                <div className="flex items-center gap-2 shrink-0 pt-4 md:pt-0">
+                  {designs.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`transition-all duration-500 rounded-full cursor-pointer ${
+                        idx === currentIndex 
+                          ? 'w-10 h-1.5 bg-pink shadow-[0_0_12px_rgba(223,76,115,0.6)]' 
+                          : 'w-2 h-1.5 bg-white/20 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+              </div>
+              
+            </div>
           </section>
         )}
 
