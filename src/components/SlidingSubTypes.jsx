@@ -3,127 +3,67 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-function SubTypeRow({ type, index }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const isEven = index % 2 === 0;
-
+function EditorialSubTypeCard({ type, index }) {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const isImageLeft = index % 2 === 0;
+  
   return (
-    <div
-      ref={ref}
+    <motion.div
+      ref={cardRef}
       id={type.id}
-      className={`group relative overflow-hidden border-b border-gray-luxury/[0.08] last:border-b-0
-        grid grid-cols-1 lg:grid-cols-[3fr_2fr] lg:h-[500px] scroll-mt-[80px] bg-black`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`group flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}
+      style={{ marginTop: index === 0 ? '0' : '180px' }}
     >
-      {/* ── IMAGE — takes 60% on desktop ─────────────────── */}
-      <div
-        className={`relative overflow-hidden h-[350px] lg:h-auto
-          ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
-      >
-        <motion.img
-          src={type.image}
-          alt={type.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-          initial={{ scale: 1.1 }}
-          animate={inView ? { scale: 1 } : { scale: 1.1 }}
-          transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
-        {/* Subdued bottom gradient for caption legibility only */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-
-        {/* Decorative corner accent */}
-        <div className={`absolute bottom-0 w-24 h-[1px] bg-pink/40 z-10 ${isEven ? 'left-0' : 'right-0'}`} />
+      {/* Image Column */}
+      <div className="w-full lg:w-[45%] relative overflow-hidden rounded-xl border border-white/5 shadow-[0_0_0_rgba(223,76,115,0)] group-hover:shadow-[0_0_40px_rgba(223,76,115,0.15)] transition-all duration-700">
+        <div className="block w-full overflow-hidden relative">
+          {/* We link directly to the image file so users can view it in high-res, 
+              or we could just make it open a modal. A simple link to the image is requested by "want to access the photo" */}
+          <a href={type.image} target="_blank" rel="noopener noreferrer">
+            <img 
+              src={type.image}
+              alt={type.name}
+              className="w-full h-auto object-cover rounded-xl opacity-80 group-hover:opacity-100 transition-transform duration-1000 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-700 pointer-events-none" />
+          </a>
+        </div>
       </div>
+      
+      {/* Text Column */}
+      <div className="w-full lg:w-[45%] flex flex-col items-start text-left">
+        {/* Index Counter with integrated line */}
+        <div className="flex items-center gap-[12px] mb-6">
+          <div className="w-[18px] h-[1px] bg-gradient-to-r from-pink to-blue/40" />
+          <span className="font-sans text-[0.6rem] tracking-[0.4em] uppercase text-white/30">
+            Finish {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
 
-      {/* ── TEXT — takes 40% on desktop ──────────────────── */}
-      <div
-        className={`relative flex flex-col justify-center px-8 py-14 lg:px-16 lg:py-16
-          bg-black-charcoal overflow-hidden
-          ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
-      >
-        {/* OVERSIZED DECORATIVE NUMERAL */}
-        <div
-          className={`absolute top-1/2 -translate-y-1/2 font-display font-bold
-            text-white/[0.02] leading-none select-none pointer-events-none
-            transition-all duration-700 group-hover:text-white/[0.04]
-            ${isEven ? '-right-6' : '-left-6'}`}
-          style={{ fontSize: 'clamp(8rem, 15vw, 14rem)' }}
-          aria-hidden="true"
+        <h3 className="font-display font-light text-4xl lg:text-5xl text-white mb-6 group-hover:text-pink transition-colors duration-500 leading-tight">
+          {type.name}
+        </h3>
+
+        <p className="font-sans text-[0.9375rem] font-light leading-[1.95] text-white/50 mb-8 max-w-sm">
+          {type.description}
+        </p>
+
+        <a 
+          href={type.image} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-4 px-8 py-4 rounded-full border border-white/20 text-white text-[0.65rem] font-medium tracking-[0.2em] uppercase group-hover:bg-pink group-hover:border-pink group-hover:text-white transition-all duration-500"
         >
-          {String(index + 1).padStart(2, '0')}
-        </div>
-
-        {/* Hover top-line accent */}
-        <div className={`absolute top-0 w-0 h-[2px] bg-gradient-to-r from-pink to-blue transition-all duration-700 group-hover:w-full
-          ${isEven ? 'left-0' : 'right-0'}`}
-        />
-
-        <div className="relative z-10">
-          {/* Index pill */}
-          <motion.div
-            initial={{ opacity: 0, x: isEven ? -16 : 16 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.18 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="text-pink/70 text-[9px] tracking-[0.4em] uppercase font-medium">
-              Finish {String(index + 1).padStart(2, '0')}
-            </span>
-            <div className="flex-1 h-[1px] bg-pink/10" />
-          </motion.div>
-
-          {/* Title */}
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.85, delay: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-display font-light text-white group-hover:text-white/90
-              transition-colors duration-400 leading-[1.1] mb-6"
-            style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)' }}
-          >
-            {type.name}
-          </motion.h3>
-
-          {/* Animated pink rule */}
-          <motion.div
-            initial={{ width: 0 }}
-            animate={inView ? { width: '2.5rem' } : {}}
-            transition={{ duration: 0.55, delay: 0.4 }}
-            className="h-[2px] bg-pink/70 mb-7"
-          />
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.44 }}
-            className="text-white/50 text-[0.95rem] leading-[1.9] max-w-[340px] mb-10 font-light"
-          >
-            {type.description}
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.58 }}
-          >
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-4 border-b border-pink/30 pb-1.5 group/link
-                hover:border-pink/80 transition-colors duration-300 w-max cursor-pointer"
-            >
-              <span className="text-pink/80 text-[9px] tracking-[0.32em] uppercase font-medium group-hover/link:text-pink transition-colors">
-                Request This Finish
-              </span>
-              <ArrowRight size={14} className="text-pink/80 group-hover/link:translate-x-1 group-hover/link:text-pink transition-all duration-300" />
-            </Link>
-          </motion.div>
-        </div>
+          View High-Res Photo
+          <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform duration-500" />
+        </a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -134,9 +74,9 @@ export default function SlidingSubTypes({ subTypes }) {
   if (!subTypes || subTypes.length === 0) return null;
 
   return (
-    <div className="w-full bg-black pt-16 lg:pt-24">
+    <div className="w-full bg-black pt-16 lg:pt-32 pb-32">
       {/* ── Section header ──────────────────────────────── */}
-      <div ref={headerRef} className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16">
+      <div ref={headerRef} className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-24">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -145,7 +85,7 @@ export default function SlidingSubTypes({ subTypes }) {
         >
           <div className="w-12 h-[2px] bg-pink/70" />
           <span className="text-pink/70 text-[10px] tracking-[0.4em] uppercase font-medium">
-            Door Finishes
+            Glazing Options
           </span>
         </motion.div>
 
@@ -157,17 +97,17 @@ export default function SlidingSubTypes({ subTypes }) {
             className="font-display font-light text-white leading-[1.1]"
             style={{ fontSize: 'clamp(2.5rem, 4vw, 3.8rem)' }}
           >
-            Sliding System <span className="text-pink italic">Subtypes</span>
+            Door <span className="text-pink italic">Finishes</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.28 }}
-            className="text-white/40 text-[0.95rem] max-w-[350px] leading-[1.8] lg:text-right font-light"
+            className="text-white/40 text-[0.95rem] max-w-[400px] leading-[1.8] lg:text-right font-light"
           >
             Explore our curated selection of premium wardrobe door finishes. 
-            Each material is precision-engineered for durability and effortless aesthetic appeal.
+            Click on any finish to view the high-resolution photo in detail.
           </motion.p>
         </div>
 
@@ -179,10 +119,10 @@ export default function SlidingSubTypes({ subTypes }) {
         />
       </div>
 
-      {/* ── Full Bleed Alternating Rows ─────────────────── */}
-      <div className="border-t border-b border-gray-luxury/[0.08]">
+      {/* ── Editorial Style Rows ─────────────────── */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col">
         {subTypes.map((type, i) => (
-          <SubTypeRow key={type.id || i} type={type} index={i} />
+          <EditorialSubTypeCard key={type.id || i} type={type} index={i} />
         ))}
       </div>
     </div>
