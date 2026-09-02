@@ -97,20 +97,20 @@ export default function CollectionDetail() {
                   <motion.img
                     key={`bg-${currentDesign.id}`}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.35 }}
+                    animate={{ opacity: 0.55 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.2 }}
                     src={currentDesign.image}
-                    className="absolute inset-0 w-full h-full object-cover blur-[80px] scale-125 saturate-[1.5]"
+                    className="absolute inset-0 w-full h-full object-cover blur-[60px] scale-110 saturate-[1.2]"
                   />
                 </AnimatePresence>
                 {/* Additional gradient overlays for depth */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/90" />
               </div>
 
               {/* Main Image Stage (Top Portion) */}
               <div 
-                className="relative z-10 flex-1 flex items-center justify-center p-8 lg:p-16 overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+                className="relative z-10 flex-1 flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) handleNext();
@@ -126,7 +126,7 @@ export default function CollectionDetail() {
                     transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                     src={currentDesign.image}
                     alt={currentDesign.name}
-                    className="max-w-full max-h-full w-auto h-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.8)] select-none pointer-events-none"
+                    className="max-w-full max-h-full w-auto h-auto object-contain rounded-[1.5rem] border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.8)] select-none pointer-events-none"
                     style={{ imageRendering: 'high-quality' }}
                   />
                 </AnimatePresence>
