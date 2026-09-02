@@ -8,57 +8,37 @@ const CATEGORY_LABELS = {
   Substrate: { num: '02', title: 'Structural Cores', description: 'The hidden layers dictate the lifespan of your interiors. We use marine-grade, high-density substrates that resist moisture, impact, and time.' },
 };
 
-function BrandCard({ mat, index }) {
+function MinimalistRibbon({ mat }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, delay: index * 0.12, ease: EASE }}
-      className="group relative flex flex-col border border-white/8 rounded-2xl p-8 lg:p-10
-                 bg-white/[0.02] hover:bg-white/[0.05] hover:border-pink/30
-                 transition-all duration-700 overflow-hidden cursor-default"
+    <motion.div 
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className="group relative flex flex-col justify-center py-5 pl-6 border-l-2 border-white/10 hover:border-pink transition-colors duration-500"
     >
-      {/* Ambient glow on hover */}
-      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-pink/10 blur-3xl
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-      {/* Index */}
-      <span className="text-[0.55rem] tracking-[0.4em] uppercase text-white/20 font-bold mb-8 block">
-        {String(index + 1).padStart(2, '0')}
-      </span>
-
-      {/* Brand name */}
-      <h4 className="font-display font-light text-4xl lg:text-5xl text-white mb-2
-                     group-hover:text-pink transition-colors duration-500 leading-none">
-        {mat.name}
-      </h4>
-
-      {/* Origin */}
-      <span className="text-[0.6rem] tracking-[0.3em] uppercase text-white/30 font-medium mb-6 block">
-        {mat.origin}
-      </span>
-
-      {/* Divider */}
-      <div className="w-8 h-px bg-gradient-to-r from-pink/50 to-transparent mb-6 group-hover:w-16 transition-all duration-700" />
-
-      {/* Description */}
-      <p className="font-sans text-[0.88rem] text-white/45 leading-relaxed flex-1 group-hover:text-white/65 transition-colors duration-500">
+      <div className="flex items-center gap-4 mb-2">
+        <h4 className="font-display font-light text-2xl lg:text-3xl text-white group-hover:text-pink transition-colors duration-500">
+          {mat.name}
+        </h4>
+        <div className="h-[1px] w-4 bg-white/20 group-hover:bg-pink/50 transition-colors duration-500" />
+        <span className="text-[0.55rem] tracking-[0.3em] uppercase text-white/30 font-medium">
+          {mat.origin}
+        </span>
+      </div>
+      
+      <p className="font-sans text-[0.85rem] text-white/50 leading-relaxed max-w-lg group-hover:text-white/70 transition-colors duration-500">
         {mat.description}
       </p>
 
-      {/* Quality Tags */}
       {mat.qualities?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-8">
+        <div className="flex flex-wrap gap-2 mt-4">
           {mat.qualities.map((quality, i) => (
             <span
               key={i}
-              className="px-3 py-1 text-[0.55rem] uppercase tracking-[0.2em]
-                         border border-white/10 text-white/40 rounded-full
-                         group-hover:border-pink/25 group-hover:text-white/70
-                         transition-all duration-500"
+              className="text-[0.55rem] uppercase tracking-[0.2em] text-white/30 group-hover:text-white/50 transition-colors duration-500"
             >
-              {quality}
+              • {quality}
             </span>
           ))}
         </div>
@@ -67,38 +47,62 @@ function BrandCard({ mat, index }) {
   );
 }
 
-function CategorySection({ category, materials }) {
+function CategorySection({ category, materials, image, reverse }) {
   const meta = CATEGORY_LABELS[category];
+  
   return (
-    <div className="mb-28 lg:mb-36">
-      {/* Category Header */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 lg:mb-16 pb-8 border-b border-white/8"
-      >
-        <div>
+    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24 mb-32 lg:mb-40`}>
+      
+      {/* ── Photo (Brings Life) ── */}
+      <div className="w-full lg:w-1/2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: EASE }}
+          className="relative h-[60vh] lg:h-[75vh] w-full rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.6)] border border-white/5 group"
+        >
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000 z-10" />
+          <img 
+            src={image} 
+            alt={meta.title}
+            className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
+          />
+        </motion.div>
+      </div>
+
+      {/* ── Content & Ribbons ── */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center">
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="mb-12"
+        >
           <div className="flex items-center gap-4 mb-4">
             <span className="text-pink text-[0.6rem] tracking-[0.4em] uppercase font-bold">{meta.num}</span>
-            <div className="w-8 h-px bg-pink/40" />
+            <div className="w-12 h-[1px] bg-pink/40" />
           </div>
-          <h3 className="font-display font-light text-4xl lg:text-5xl xl:text-6xl text-white leading-tight">
+          <h3 className="font-display font-light text-4xl lg:text-5xl xl:text-6xl text-white mb-6 leading-tight">
             {meta.title}
           </h3>
-        </div>
-        <p className="font-sans text-[0.9rem] text-white/40 leading-relaxed max-w-md lg:text-right font-light">
-          {meta.description}
-        </p>
-      </motion.div>
+          <p className="font-sans text-[0.95rem] text-white/40 leading-relaxed max-w-md font-light">
+            {meta.description}
+          </p>
+        </motion.div>
 
-      {/* Brand Cards Grid */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 ${materials.length >= 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-5`}>
-        {materials.map((mat, i) => (
-          <BrandCard key={mat.id} mat={mat} index={i} />
-        ))}
+        {/* Brand Ribbons */}
+        <div className="flex flex-col gap-8">
+          {materials.map((mat) => (
+            <MinimalistRibbon key={mat.id} mat={mat} />
+          ))}
+        </div>
+
       </div>
+
     </div>
   );
 }
@@ -108,17 +112,15 @@ export default function MaterialsSection() {
   const substrate = MATERIALS.filter(m => m.category === 'Substrate');
 
   return (
-    <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#03070E]">
+    <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#030407]">
 
-      {/* Ambient top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px]
-                      bg-[radial-gradient(ellipse_at_top,_rgba(223,76,115,0.07),transparent_70%)]
-                      pointer-events-none" />
+      {/* Ambient background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,76,115,0.05),transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-[1360px] mx-auto px-6 lg:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
 
         {/* ── SECTION HEADER ── */}
-        <div className="mb-24 lg:mb-32 text-center flex flex-col items-center">
+        <div className="mb-24 lg:mb-40 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -148,15 +150,25 @@ export default function MaterialsSection() {
             transition={{ duration: 0.8, delay: 0.22 }}
             className="font-sans text-[1rem] lg:text-[1.05rem] text-white/40 leading-relaxed max-w-xl font-light"
           >
-            An architectural space is only as timeless as the materials that construct it. We partner exclusively with industry-leading manufacturers.
+            An architectural space is only as timeless as the materials that construct it. We partner exclusively with industry-leading manufacturers to ensure absolute precision and longevity.
           </motion.p>
         </div>
 
-        {/* ── HARDWARE BRANDS ── */}
-        <CategorySection category="Hardware" materials={hardware} />
+        {/* ── HARDWARE CATEGORY ── */}
+        <CategorySection 
+          category="Hardware" 
+          materials={hardware} 
+          image="/projects/media__1784490387392.jpg" 
+          reverse={false} 
+        />
 
-        {/* ── SUBSTRATE BRANDS ── */}
-        <CategorySection category="Substrate" materials={substrate} />
+        {/* ── SUBSTRATE CATEGORY ── */}
+        <CategorySection 
+          category="Substrate" 
+          materials={substrate} 
+          image="/projects/media__1784490387517.jpg" 
+          reverse={true} 
+        />
 
       </div>
     </section>
