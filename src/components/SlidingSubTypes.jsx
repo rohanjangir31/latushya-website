@@ -318,7 +318,7 @@ export default function SlidingSubTypes({ subTypes }) {
         >
           <div className="w-12 h-[2px] bg-pink/70" />
           <span className="text-pink/70 text-[10px] tracking-[0.4em] uppercase font-medium">
-            Glazing Options
+            Sliding Wardrobe Options
           </span>
         </motion.div>
 
@@ -330,7 +330,7 @@ export default function SlidingSubTypes({ subTypes }) {
             className="font-display font-light text-white leading-[1.1]"
             style={{ fontSize: 'clamp(2.5rem, 4vw, 3.8rem)' }}
           >
-            Door <span className="text-pink italic">Finishes</span>
+            Sliding Door <span className="text-pink italic">Finishes</span>
           </motion.h2>
 
           <motion.p
@@ -339,7 +339,7 @@ export default function SlidingSubTypes({ subTypes }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-white/40 text-[0.95rem] max-w-[420px] leading-[1.8] lg:text-right font-light"
           >
-            Explore our curated selection of premium wardrobe door finishes.
+            Explore our curated selection of premium sliding wardrobe finishes.
             Click any finish to open its photo gallery.
           </motion.p>
         </div>

@@ -7,9 +7,9 @@ export const WARDROBE_COLLECTIONS = [
     image: '/assets/wardrobes/sliding-wardrobe-hd.png',
     slidingSubTypes: [
       {
-        id: 'transparent',
-        name: 'Transparent',
-        description: 'Crystal-clear panels that let your curated wardrobe interior become part of the room — a bold, open statement.',
+        id: 'lacquered-glass',
+        name: 'Lacquered Glass',
+        description: 'Premium painted glass that provides a sleek, high-gloss opaque finish, perfect for reflecting light and adding a bold pop of color.',
         images: [
           '/assets/wardrobes/sliding-tinted-glass-jungle.jpg',
         ],
