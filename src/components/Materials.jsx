@@ -15,30 +15,41 @@ function MinimalistRibbon({ mat }) {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.6, ease: EASE }}
-      className="group relative flex flex-col justify-center py-5 pl-6 border-l-2 border-white/10 hover:border-pink transition-colors duration-500"
+      className="group relative flex flex-col justify-center py-6 pl-8 cursor-default"
     >
-      <div className="flex items-center gap-4 mb-2">
-        <h4 className="font-display font-light text-2xl lg:text-3xl text-white group-hover:text-pink transition-colors duration-500">
+      {/* ── Ribbon Lines ── */}
+      {/* Base subtle line */}
+      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-white/10 group-hover:bg-transparent transition-colors duration-500 rounded-full" />
+      {/* Glowing active ribbon */}
+      <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-pink via-pink/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 shadow-[0_0_12px_rgba(223,76,115,0.6)] rounded-full" />
+      
+      {/* ── Ambient Background Hover Wash ── */}
+      <div className="absolute inset-0 bg-gradient-to-r from-pink/5 via-pink/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+      {/* ── Content ── */}
+      <div className="flex items-center gap-4 mb-3 relative z-10">
+        <h4 className="font-display font-light text-3xl lg:text-4xl text-white/90 group-hover:text-pink transition-colors duration-500 tracking-wide">
           {mat.name}
         </h4>
-        <div className="h-[1px] w-4 bg-white/20 group-hover:bg-pink/50 transition-colors duration-500" />
-        <span className="text-[0.55rem] tracking-[0.3em] uppercase text-white/30 font-medium">
+        <div className="h-[1px] w-6 bg-white/10 group-hover:bg-pink/40 transition-colors duration-500" />
+        <span className="text-[0.6rem] tracking-[0.35em] uppercase text-white/40 font-medium group-hover:text-pink/70 transition-colors duration-500">
           {mat.origin}
         </span>
       </div>
       
-      <p className="font-sans text-[0.85rem] text-white/50 leading-relaxed max-w-lg group-hover:text-white/70 transition-colors duration-500">
+      <p className="font-sans text-[0.9rem] text-white/40 leading-relaxed max-w-lg group-hover:text-white/70 transition-colors duration-500 relative z-10 font-light">
         {mat.description}
       </p>
 
       {mat.qualities?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5 relative z-10">
           {mat.qualities.map((quality, i) => (
             <span
               key={i}
-              className="text-[0.55rem] uppercase tracking-[0.2em] text-white/30 group-hover:text-white/50 transition-colors duration-500"
+              className="flex items-center gap-2 text-[0.55rem] uppercase tracking-[0.25em] text-white/30 group-hover:text-white/60 transition-colors duration-500"
             >
-              • {quality}
+              <span className="w-1 h-1 rounded-full bg-white/10 group-hover:bg-pink group-hover:shadow-[0_0_6px_rgba(223,76,115,0.8)] transition-all duration-500" />
+              {quality}
             </span>
           ))}
         </div>
