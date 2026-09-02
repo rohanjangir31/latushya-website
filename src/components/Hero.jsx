@@ -26,10 +26,10 @@ export default function Hero() {
   });
 
   // Subtle parallax: image drifts slightly slower than scroll
-  const imageY  = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const imageY  = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
   // Content fades and lifts gently as user scrolls away
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '6%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '3%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const handleConsult = () => {
     if (COMPANY.whatsapp) {

@@ -29,6 +29,8 @@
     overflow-x: hidden;
     /* Improve text rendering */
     text-rendering: optimizeLegibility;
+    /* Prevent compositing surprise on scroll */
+    -webkit-overflow-scrolling: touch;
   }
 
 

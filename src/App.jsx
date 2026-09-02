@@ -199,13 +199,13 @@ function AppContent() {
   // Initialize Lenis smooth scroll with luxurious but snappy settings
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       smoothTouch: false,
-      touchMultiplier: 2.5,
+      touchMultiplier: 2,
     });
 
     let rafId;
