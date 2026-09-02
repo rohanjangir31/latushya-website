@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { WARDROBE_COLLECTIONS } from '../data/collections';
 import PageTransition from '../components/PageTransition';
+import SlidingSubTypes from '../components/SlidingSubTypes';
 
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset, velocity) => {
@@ -195,6 +196,13 @@ export default function CollectionDetail() {
 
             </div>
 
+          </section>
+        )}
+
+        {/* Sliding Door Finishes Section (Specific to Sliding Wardrobes) */}
+        {collection.id === 'sliding-wardrobes' && collection.slidingSubTypes && (
+          <section className="mb-8">
+            <SlidingSubTypes subTypes={collection.slidingSubTypes} />
           </section>
         )}
 

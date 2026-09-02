@@ -4,6 +4,7 @@ import { Layout, UtensilsCrossed, Sofa, PenTool, ShoppingBag } from 'lucide-reac
 import { SERVICES, COMPANY } from '../data/content';
 import { TextReveal } from '../utils/animations';
 import { Link } from 'react-router-dom';
+import SlidingSubTypes from './SlidingSubTypes';
 
 const DoorOpenIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -213,7 +214,12 @@ export default function Services() {
       {/* Full-bleed — no max-w container so rows touch viewport edges */}
       <div className="border-t border-b border-gray-luxury/[0.08]">
         {SERVICES.map((service, i) => (
-          <ServiceRow key={service.id} service={service} index={i} />
+          <div key={service.id}>
+            <ServiceRow service={service} index={i} />
+            {service.slidingSubTypes && (
+              <SlidingSubTypes subTypes={service.slidingSubTypes} />
+            )}
+          </div>
         ))}
       </div>
 
