@@ -86,8 +86,8 @@ export const MATERIALS = [
     category: 'Hardware',
     origin: 'Austria',
     description:
-      "The pinnacle of Austrian motion technology. We use Blum's Aventos lift systems and Legrabox drawers for an unparalleled, weightless opening experience.",
-    qualities: ['Austrian engineering', 'Aventos lift systems', 'Feather-light glide'],
+      "The pinnacle of Austrian motion technology. We use Blum's Aventos lift systems and Tandem drawer systems for an unparalleled, weightless opening experience.",
+    qualities: ['Austrian engineering', 'Aventos lift systems', 'Tandem runner glide'],
     logo: null,
   },
   {
