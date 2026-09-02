@@ -40,43 +40,6 @@ const services = [
     description:
       'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
     image: '/projects/real-ftc-wardrobe.jpg',
-    slidingSubTypes: [
-      {
-        id: 'transparent',
-        name: 'Transparent',
-        description: 'Crystal-clear panels that let your curated wardrobe interior become part of the room — a bold, open statement.',
-      },
-      {
-        id: 'semi-transparent',
-        name: 'Semi-Transparent',
-        description: 'Frosted or obscured glass that softens visibility while keeping the space feeling light and airy.',
-      },
-      {
-        id: 'glass-mirror',
-        name: 'Glass / Mirror',
-        description: 'Full-length mirrored panels that visually expand your room and add a layer of refined, functional elegance.',
-      },
-      {
-        id: 'laminate',
-        name: 'Laminate',
-        description: 'High-pressure laminate in any colour or texture — scratch-resistant, durable, and available in hundreds of finishes.',
-      },
-      {
-        id: 'frosted',
-        name: 'Frosted',
-        description: 'A signature acid-etched frost finish that diffuses light with a soft, luminous glow and total privacy.',
-      },
-      {
-        id: 'crystal-glass',
-        name: 'Crystal / Trivial Glass',
-        description: 'Premium crystal-clear glass with brilliant optical clarity — a jewel-like finish that elevates any bedroom.',
-      },
-      {
-        id: 'membrane',
-        name: 'Membrane',
-        description: 'PVC membrane-wrapped doors in a seamless, skin-like finish — high-gloss, matte, or soft-touch texture.',
-      },
-    ],
   },
   {
     id: 'decor-sourcing',
