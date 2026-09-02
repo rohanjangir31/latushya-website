@@ -176,8 +176,8 @@ export const FAQ_ITEMS = [
   },
   {
     id: 4,
-    question: 'Do you serve all areas across Bangalore?',
-    answer: "Yes we serve clients across Bangalore. Whether you're in Kasturi Nagar, Whitefield, Koramangala, Indiranagar, Yelahanka, or Jayanagar, our team can visit your home for a consultation.",
+    question: 'Which cities and locations do you serve?',
+    answer: "We serve clients across Bangalore, as well as other locations including Mysore, Hyderabad, and Kadapa. Our team can visit your home for a consultation.",
   },
   {
     id: 5,
