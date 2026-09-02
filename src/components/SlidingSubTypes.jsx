@@ -177,10 +177,9 @@ function GalleryLightbox({ images, title, startIndex, onClose }) {
     >
       {/* ── Top bar ── */}
       <div
-        className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 py-5 z-10"
-        onClick={(e) => e.stopPropagation()}
+        className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 py-5 z-20 pointer-events-none"
       >
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 pointer-events-auto">
           <div className="w-[14px] h-[1px] bg-pink/60" />
           <div>
             <span className="text-white font-display font-light text-lg leading-none">
@@ -194,18 +193,18 @@ function GalleryLightbox({ images, title, startIndex, onClose }) {
 
         <button
           onClick={onClose}
-          className="w-10 h-10 rounded-full border border-white/20 bg-white/5
-            hover:bg-white/15 hover:border-white/40 flex items-center justify-center
-            transition-[background-color,border-color] duration-200 cursor-pointer"
+          className="w-12 h-12 rounded-full border border-pink/40 bg-pink/10 backdrop-blur-md
+            hover:bg-pink hover:border-pink hover:scale-105 flex items-center justify-center
+            transition-all duration-300 shadow-[0_0_20px_rgba(223,76,115,0.3)] hover:shadow-[0_0_30px_rgba(223,76,115,0.6)]
+            group cursor-pointer pointer-events-auto"
         >
-          <X size={16} className="text-white/70" />
+          <X size={24} className="text-pink group-hover:text-white transition-colors duration-300" />
         </button>
       </div>
 
       {/* ── Main image ── */}
       <div
-        className="relative w-full h-full flex items-center justify-center px-20 py-24"
-        onClick={(e) => e.stopPropagation()}
+        className="relative w-full h-full flex items-center justify-center px-12 md:px-24 py-24"
       >
         <AnimatePresence mode="wait" custom={direction}>
           <motion.img
@@ -219,9 +218,10 @@ function GalleryLightbox({ images, title, startIndex, onClose }) {
             src={images[current]}
             alt={`${title} — ${current + 1}`}
             className="max-w-full max-h-full w-auto h-auto object-contain
-              rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/10 select-none"
+              rounded-xl shadow-[0_30px_80px_rgba(0,0,0,0.9)] border border-white/20 select-none cursor-default"
             draggable={false}
-            style={{ willChange: 'transform, opacity' }}
+            onClick={(e) => e.stopPropagation()}
+            style={{ imageRendering: 'high-quality' }}
           />
         </AnimatePresence>
 
@@ -229,22 +229,22 @@ function GalleryLightbox({ images, title, startIndex, onClose }) {
         {images.length > 1 && (
           <>
             <button
-              onClick={goPrev}
+              onClick={(e) => { e.stopPropagation(); goPrev(); }}
               className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2
-                w-12 h-12 rounded-full border border-white/20 bg-black/40
+                w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md
                 flex items-center justify-center text-white
-                hover:bg-pink hover:border-pink hover:scale-105
-                transition-[background-color,border-color,transform] duration-200 cursor-pointer"
+                hover:bg-pink hover:border-pink hover:scale-110
+                transition-[background-color,border-color,transform] duration-200 cursor-pointer z-10"
             >
               <ChevronLeft size={22} />
             </button>
             <button
-              onClick={goNext}
+              onClick={(e) => { e.stopPropagation(); goNext(); }}
               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2
-                w-12 h-12 rounded-full border border-white/20 bg-black/40
+                w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md
                 flex items-center justify-center text-white
-                hover:bg-pink hover:border-pink hover:scale-105
-                transition-[background-color,border-color,transform] duration-200 cursor-pointer"
+                hover:bg-pink hover:border-pink hover:scale-110
+                transition-[background-color,border-color,transform] duration-200 cursor-pointer z-10"
             >
               <ChevronRight size={22} />
             </button>
