@@ -5,7 +5,7 @@ const EASE = [0.25, 0.46, 0.45, 0.94];
 
 const CATEGORY_LABELS = {
   Hardware: { num: '01', title: 'Precision Hardware', description: 'Every hinge, track, and handle is engineered for silent, flawless operation. We utilize Austrian and German-engineered mechanisms to guarantee a lifetime of effortless movement.' },
-  Substrate: { num: '02', title: 'Structural Cores', description: 'The hidden layers dictate the lifespan of your interiors. We use boiling-water-proof (BWP), moisture-resistant (MR), and architectural-grade substrates engineered to withstand impact and the test of time.' },
+  Substrate: { num: '02', title: 'Structural Cores', description: 'The hidden layers dictate the lifespan of your interiors. We use Boiling-Water-Proof (BWP), Moisture-Resistant (MR), and Architectural-Grade substrates engineered to withstand impact and the test of time.' },
 };
 
 function MinimalistRibbon({ mat }) {
