@@ -1,127 +1,102 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { MATERIALS } from '../data/content';
-import { Plus, Minus } from 'lucide-react';
 
 const EASE = [0.25, 0.46, 0.45, 0.94];
 
-function MaterialAccordionRow({ mat, index, isOpen, onToggle }) {
+const CATEGORY_LABELS = {
+  Hardware: { num: '01', title: 'Precision Hardware', description: 'Every hinge, track, and handle is engineered for silent, flawless operation. We utilize Austrian and German-engineered mechanisms to guarantee a lifetime of effortless movement.' },
+  Substrate: { num: '02', title: 'Structural Cores', description: 'The hidden layers dictate the lifespan of your interiors. We use marine-grade, high-density substrates that resist moisture, impact, and time.' },
+};
+
+function BrandCard({ mat, index }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
-      className={`group border-b border-white/8 transition-colors duration-500 ${isOpen ? 'border-pink/20' : 'hover:border-white/20'}`}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.7, delay: index * 0.12, ease: EASE }}
+      className="group relative flex flex-col border border-white/8 rounded-2xl p-8 lg:p-10
+                 bg-white/[0.02] hover:bg-white/[0.05] hover:border-pink/30
+                 transition-all duration-700 overflow-hidden cursor-default"
     >
-      {/* Row Header - Always Visible */}
-      <button
-        className="w-full flex items-center justify-between py-6 lg:py-7 gap-6 cursor-pointer text-left"
-        onClick={onToggle}
-      >
-        <div className="flex items-center gap-6 lg:gap-10 flex-1 min-w-0">
-          {/* Index Number */}
-          <span className={`text-[0.6rem] tracking-[0.3em] font-bold shrink-0 transition-colors duration-400 ${isOpen ? 'text-pink' : 'text-white/20'}`}>
-            {String(index + 1).padStart(2, '0')}
-          </span>
+      {/* Ambient glow on hover */}
+      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-pink/10 blur-3xl
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
-          {/* Brand Name */}
-          <span className={`font-display font-light text-2xl lg:text-3xl xl:text-4xl transition-colors duration-400 ${isOpen ? 'text-pink' : 'text-white group-hover:text-white/80'}`}>
-            {mat.name}
-          </span>
+      {/* Index */}
+      <span className="text-[0.55rem] tracking-[0.4em] uppercase text-white/20 font-bold mb-8 block">
+        {String(index + 1).padStart(2, '0')}
+      </span>
 
-          {/* Origin Tag */}
-          <span className="hidden md:block text-[0.6rem] tracking-[0.25em] uppercase text-white/30 font-medium shrink-0">
-            {mat.origin}
-          </span>
-        </div>
+      {/* Brand name */}
+      <h4 className="font-display font-light text-4xl lg:text-5xl text-white mb-2
+                     group-hover:text-pink transition-colors duration-500 leading-none">
+        {mat.name}
+      </h4>
 
-        {/* Qualities Pills (visible when closed, on large screens) */}
-        <div className={`hidden lg:flex items-center gap-2 flex-1 justify-end transition-opacity duration-400 ${isOpen ? 'opacity-0' : 'opacity-60'}`}>
-          {mat.qualities.slice(0, 2).map((q, i) => (
-            <span key={i} className="text-[0.55rem] tracking-[0.15em] uppercase text-white/40 border border-white/10 rounded-full px-3 py-1 shrink-0">
-              {q}
+      {/* Origin */}
+      <span className="text-[0.6rem] tracking-[0.3em] uppercase text-white/30 font-medium mb-6 block">
+        {mat.origin}
+      </span>
+
+      {/* Divider */}
+      <div className="w-8 h-px bg-gradient-to-r from-pink/50 to-transparent mb-6 group-hover:w-16 transition-all duration-700" />
+
+      {/* Description */}
+      <p className="font-sans text-[0.88rem] text-white/45 leading-relaxed flex-1 group-hover:text-white/65 transition-colors duration-500">
+        {mat.description}
+      </p>
+
+      {/* Quality Tags */}
+      {mat.qualities?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-8">
+          {mat.qualities.map((quality, i) => (
+            <span
+              key={i}
+              className="px-3 py-1 text-[0.55rem] uppercase tracking-[0.2em]
+                         border border-white/10 text-white/40 rounded-full
+                         group-hover:border-pink/25 group-hover:text-white/70
+                         transition-all duration-500"
+            >
+              {quality}
             </span>
           ))}
         </div>
-
-        {/* Toggle Icon */}
-        <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-400 ${isOpen ? 'border-pink/40 bg-pink/10 text-pink' : 'border-white/15 text-white/40 group-hover:border-white/30'}`}>
-          {isOpen ? <Minus size={14} /> : <Plus size={14} />}
-        </div>
-      </button>
-
-      {/* Expanded Content */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="overflow-hidden"
-          >
-            <div className="pb-8 lg:pb-10 pl-12 lg:pl-24 pr-16 flex flex-col md:flex-row items-start gap-8 md:gap-16">
-              <p className="font-sans text-[0.95rem] text-white/55 leading-relaxed flex-1 max-w-2xl">
-                {mat.description}
-              </p>
-              <div className="flex flex-wrap gap-2 shrink-0">
-                {mat.qualities.map((quality, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-1.5 text-[0.6rem] uppercase tracking-[0.2em] bg-pink/5 border border-pink/20 text-pink/80 rounded-full"
-                  >
-                    {quality}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      )}
     </motion.div>
   );
 }
 
-function MaterialCategory({ title, subtitle, categoryNum, image, materials, imageOnRight }) {
-  const [openId, setOpenId] = useState(materials[0]?.id ?? null);
-
+function CategorySection({ category, materials }) {
+  const meta = CATEGORY_LABELS[category];
   return (
-    <div className={`flex flex-col ${imageOnRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-0 lg:gap-24 items-stretch`}>
-      
-      {/* Image Panel - Sticky */}
-      <div className="w-full lg:w-[38%] shrink-0">
-        <div className="lg:sticky lg:top-32 h-[55vw] lg:h-[70vh] rounded-2xl overflow-hidden border border-white/8 shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.85)' }}
-          />
-          {/* Overlay with category info */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-6 lg:p-8">
-            <span className="text-[0.6rem] tracking-[0.3em] uppercase text-white/40 font-medium block mb-2">
-              Category {categoryNum}
-            </span>
-            <h3 className="font-display font-light text-2xl lg:text-3xl text-white">{title}</h3>
-            <p className="font-sans text-[0.85rem] text-white/50 mt-2 leading-relaxed max-w-xs">{subtitle}</p>
+    <div className="mb-28 lg:mb-36">
+      {/* Category Header */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: EASE }}
+        className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 lg:mb-16 pb-8 border-b border-white/8"
+      >
+        <div>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-pink text-[0.6rem] tracking-[0.4em] uppercase font-bold">{meta.num}</span>
+            <div className="w-8 h-px bg-pink/40" />
           </div>
+          <h3 className="font-display font-light text-4xl lg:text-5xl xl:text-6xl text-white leading-tight">
+            {meta.title}
+          </h3>
         </div>
-      </div>
+        <p className="font-sans text-[0.9rem] text-white/40 leading-relaxed max-w-md lg:text-right font-light">
+          {meta.description}
+        </p>
+      </motion.div>
 
-      {/* Accordion Content */}
-      <div className="flex-1 py-4 lg:py-8">
-        {/* Top divider */}
-        <div className="h-px bg-white/8 mb-0" />
+      {/* Brand Cards Grid */}
+      <div className={`grid grid-cols-1 md:grid-cols-2 ${materials.length >= 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-5`}>
         {materials.map((mat, i) => (
-          <MaterialAccordionRow
-            key={mat.id}
-            mat={mat}
-            index={i}
-            isOpen={openId === mat.id}
-            onToggle={() => setOpenId(openId === mat.id ? null : mat.id)}
-          />
+          <BrandCard key={mat.id} mat={mat} index={i} />
         ))}
       </div>
     </div>
@@ -133,11 +108,17 @@ export default function MaterialsSection() {
   const substrate = MATERIALS.filter(m => m.category === 'Substrate');
 
   return (
-    <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#030407]">
-      <div className="max-w-[1360px] mx-auto px-6 lg:px-12">
+    <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#03070E]">
 
-        {/* SECTION HEADER */}
-        <div className="mb-24 lg:mb-32 flex flex-col items-center text-center">
+      {/* Ambient top glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px]
+                      bg-[radial-gradient(ellipse_at_top,_rgba(223,76,115,0.07),transparent_70%)]
+                      pointer-events-none" />
+
+      <div className="max-w-[1360px] mx-auto px-6 lg:px-12 relative z-10">
+
+        {/* ── SECTION HEADER ── */}
+        <div className="mb-24 lg:mb-32 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -145,56 +126,37 @@ export default function MaterialsSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-10 h-px bg-pink/50" />
+            <div className="w-12 h-px bg-pink/40" />
             <span className="text-pink/70 text-[0.6rem] tracking-[0.45em] uppercase font-bold">The Foundation</span>
-            <div className="w-10 h-px bg-pink/50" />
+            <div className="w-12 h-px bg-pink/40" />
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display font-light text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6"
+            transition={{ duration: 0.85, delay: 0.1 }}
+            className="font-display font-light text-5xl md:text-6xl lg:text-[5.5rem] text-white leading-[1.05] mb-6 tracking-[-0.02em]"
           >
             Material <em className="italic text-pink">Integrity</em>
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-sans text-[1rem] text-white/45 leading-relaxed max-w-xl font-light"
+            transition={{ duration: 0.8, delay: 0.22 }}
+            className="font-sans text-[1rem] lg:text-[1.05rem] text-white/40 leading-relaxed max-w-xl font-light"
           >
-            We partner exclusively with industry-leading manufacturers to ensure absolute precision, silence, and longevity in every piece we build.
+            An architectural space is only as timeless as the materials that construct it. We partner exclusively with industry-leading manufacturers.
           </motion.p>
         </div>
 
-        {/* HARDWARE */}
-        <div className="mb-24 lg:mb-36">
-          <MaterialCategory
-            title="Precision Engineering"
-            subtitle="Austrian and German-engineered mechanisms for silent, flawless, lifetime operation."
-            categoryNum="01"
-            image="/projects/media__1784490387392.jpg"
-            materials={hardware}
-            imageOnRight={false}
-          />
-        </div>
+        {/* ── HARDWARE BRANDS ── */}
+        <CategorySection category="Hardware" materials={hardware} />
 
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-24 lg:mb-36" />
-
-        {/* SUBSTRATE */}
-        <MaterialCategory
-          title="Structural Cores"
-          subtitle="Marine-grade, high-density substrates that resist moisture, impact, and time."
-          categoryNum="02"
-          image="/projects/media__1784490387517.jpg"
-          materials={substrate}
-          imageOnRight={true}
-        />
+        {/* ── SUBSTRATE BRANDS ── */}
+        <CategorySection category="Substrate" materials={substrate} />
 
       </div>
     </section>
