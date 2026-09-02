@@ -162,7 +162,7 @@ export const FAQ_ITEMS = [
   {
     id: 1,
     question: 'What is the typical timeline for a wardrobe project?',
-    answer: 'Most wardrobe projects are completed within 2 to 4 weeks from design approval including production and installation. We provide a clear schedule upfront before any work begins.',
+    answer: 'Most wardrobe projects production and installation is completed within 2 to 3 weeks post project confirmation and design approval. We provide a clear schedule upfront before any work begins.',
   },
   {
     id: 2,
