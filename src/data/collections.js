@@ -10,43 +10,67 @@ export const WARDROBE_COLLECTIONS = [
         id: 'transparent',
         name: 'Transparent',
         description: 'Crystal-clear panels that let your curated wardrobe interior become part of the room — a bold, open statement.',
-        image: '/assets/wardrobes/sliding-tinted-glass-jungle.jpg',
+        images: [
+          '/assets/wardrobes/sliding-tinted-glass-jungle.jpg',
+        ],
       },
       {
         id: 'semi-transparent',
         name: 'Semi-Transparent',
         description: 'Frosted or obscured glass that softens visibility while keeping the space feeling light and airy.',
-        image: '/assets/wardrobes/sliding-horizontal-frosted.jpg',
+        images: [
+          '/assets/wardrobes/sliding-horizontal-frosted.jpg',
+          '/assets/wardrobes/sliding-beige-horizontal-bands.jpg',
+        ],
       },
       {
         id: 'glass-mirror',
         name: 'Glass / Mirror',
         description: 'Full-length mirrored panels that visually expand your room and add a layer of refined, functional elegance.',
-        image: '/assets/wardrobes/sliding-full-mirror-wood.jpg',
+        images: [
+          '/assets/wardrobes/sliding-full-mirror-wood.jpg',
+          '/assets/wardrobes/sliding-beige-mirror.jpg',
+          '/assets/wardrobes/sliding-bronze-mirror.jpg',
+        ],
       },
       {
         id: 'laminate',
         name: 'Laminate',
         description: 'High-pressure laminate in any colour or texture — scratch-resistant, durable, and available in hundreds of finishes.',
-        image: '/assets/wardrobes/sliding-beige-black.jpg',
+        images: [
+          '/assets/wardrobes/sliding-beige-black.jpg',
+          '/assets/wardrobes/sliding-white-dark-band.jpg',
+          '/assets/wardrobes/sliding-pink-white.jpg',
+        ],
       },
       {
         id: 'frosted',
         name: 'Frosted',
         description: 'A signature acid-etched frost finish that diffuses light with a soft, luminous glow and total privacy.',
-        image: '/assets/wardrobes/sliding-beige-horizontal-bands.jpg',
+        images: [
+          '/assets/wardrobes/sliding-beige-horizontal-bands.jpg',
+          '/assets/wardrobes/sliding-white-grey-stripe.jpg',
+        ],
       },
       {
         id: 'crystal-glass',
         name: 'Crystal / Trivial Glass',
         description: 'Premium crystal-clear glass with brilliant optical clarity — a jewel-like finish that elevates any bedroom.',
-        image: '/assets/wardrobes/sliding-white-bronze-center.jpg',
+        images: [
+          '/assets/wardrobes/sliding-white-bronze-center.jpg',
+          '/assets/wardrobes/sliding-white-bronze-center-2.jpg',
+          '/assets/wardrobes/sliding-cross-accent.jpg',
+          '/assets/wardrobes/sliding-cross-accent-2.jpg',
+        ],
       },
       {
         id: 'membrane',
         name: 'Membrane',
         description: 'PVC membrane-wrapped doors in a seamless, skin-like finish — high-gloss, matte, or soft-touch texture.',
-        image: '/assets/wardrobes/sliding-pink-white.jpg',
+        images: [
+          '/assets/wardrobes/bedroom-wardrobe-combo.jpg',
+          '/assets/wardrobes/sliding-white-grey-stripe-wide.jpg',
+        ],
       },
     ],
     designs: [
