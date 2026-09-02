@@ -108,9 +108,9 @@ export default function CollectionDetail() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/90" />
               </div>
 
-              {/* Main Image Stage (Top Portion) */}
+              {/* Main Image Stage (Full Height) */}
               <div 
-                className="relative z-10 flex-1 flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+                className="relative z-10 w-full h-full flex items-center justify-center px-4 pt-4 pb-28 md:px-8 md:pt-8 md:pb-32 lg:px-12 lg:pt-12 lg:pb-40 overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
                 onPanEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) handleNext();
@@ -150,10 +150,10 @@ export default function CollectionDetail() {
                 )}
               </div>
 
-              {/* Info Panel (Bottom Glassmorphism Area) */}
-              <div className="relative z-20 w-full bg-black/50 backdrop-blur-2xl border-t border-white/10 p-6 lg:px-12 lg:py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shrink-0">
+              {/* Info Panel (Sleek Floating Overlay) */}
+              <div className="absolute bottom-0 left-0 w-full z-20 px-6 py-6 lg:px-12 lg:py-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 pointer-events-none">
                 
-                <div className="flex-1 max-w-4xl">
+                <div className="flex-1 max-w-4xl pointer-events-auto">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`text-${currentDesign.id}`}
@@ -187,7 +187,7 @@ export default function CollectionDetail() {
                 </div>
 
                 {/* Progress Indicators (Dots) */}
-                <div className="flex items-center gap-2 shrink-0 pt-4 md:pt-0">
+                <div className="flex items-center gap-2 shrink-0 pt-4 md:pt-0 pointer-events-auto">
                   {designs.map((_, idx) => (
                     <button
                       key={idx}
