@@ -61,16 +61,6 @@ export const WHY_CHOOSE = [
 // ─── Materials & Hardware ─────────────────────────────────
 export const MATERIALS = [
   {
-    id: 1,
-    name: 'Häfele',
-    category: 'Hardware',
-    origin: 'Germany',
-    description:
-      'World-class German hardware renowned for precision engineering. Häfele fittings are used in our sliding systems, hinges, and soft-close mechanisms.',
-    qualities: ['Soft-close mechanisms', 'Lifetime durability', 'German engineering'],
-    logo: null,
-  },
-  {
     id: 2,
     name: 'Hettich',
     category: 'Hardware',
@@ -78,6 +68,16 @@ export const MATERIALS = [
     description:
       'Trusted by premium furniture makers globally, Hettich drawer systems and hinges deliver silent, smooth operation for years on end.',
     qualities: ['Smooth drawer systems', 'Silent operation', 'Load-bearing tested'],
+    logo: null,
+  },
+  {
+    id: 1,
+    name: 'Häfele',
+    category: 'Hardware',
+    origin: 'Germany',
+    description:
+      'World-class German hardware renowned for precision engineering. Häfele fittings are used in our sliding systems, hinges, and soft-close mechanisms.',
+    qualities: ['Soft-close mechanisms', 'Lifetime durability', 'German engineering'],
     logo: null,
   },
   {
