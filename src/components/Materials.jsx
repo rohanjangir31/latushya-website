@@ -95,12 +95,12 @@ function CategorySection({ category, materials, image, reverse }) {
         >
           <div className="flex items-center gap-4 mb-4">
             <span className="text-pink text-[0.6rem] tracking-[0.4em] uppercase font-bold">{meta.num}</span>
-            <div className="w-12 h-[1px] bg-pink/40" />
+            <div className="w-12 h-[1px] bg-gradient-to-r from-pink/80 to-transparent" />
           </div>
-          <h3 className="font-display font-light text-4xl lg:text-5xl xl:text-6xl text-white mb-6 leading-tight">
+          <h3 className="font-display font-light text-4xl lg:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-white via-[#fff0f4] to-white/60 mb-6 leading-tight tracking-tight drop-shadow-sm">
             {meta.title}
           </h3>
-          <p className="font-sans text-[0.95rem] text-white/40 leading-relaxed max-w-md font-light">
+          <p className="font-sans text-[0.95rem] text-[#b8b8b8] leading-relaxed max-w-md font-light">
             {meta.description}
           </p>
         </motion.div>
@@ -126,7 +126,7 @@ export default function MaterialsSection() {
     <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#030407]">
 
       {/* Ambient background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,76,115,0.05),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,76,115,0.08),transparent_70%)] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
 
@@ -139,9 +139,9 @@ export default function MaterialsSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-12 h-px bg-pink/40" />
-            <span className="text-pink/70 text-[0.6rem] tracking-[0.45em] uppercase font-bold">The Foundation</span>
-            <div className="w-12 h-px bg-pink/40" />
+            <div className="w-12 h-[2px] bg-gradient-to-l from-pink/50 to-transparent" />
+            <span className="text-pink/90 text-[0.65rem] tracking-[0.45em] uppercase font-bold drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]">The Foundation</span>
+            <div className="w-12 h-[2px] bg-gradient-to-r from-pink/50 to-transparent" />
           </motion.div>
 
           <motion.h2
@@ -149,9 +149,9 @@ export default function MaterialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.85, delay: 0.1 }}
-            className="font-display font-light text-5xl md:text-6xl lg:text-[5.5rem] text-white leading-[1.05] mb-6 tracking-[-0.02em]"
+            className="font-display font-light text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] mb-6 tracking-[-0.02em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/70"
           >
-            Material <em className="italic text-pink">Integrity</em>
+            Material <em className="italic text-transparent bg-clip-text bg-gradient-to-r from-pink to-[#ff9eb8]">Integrity</em>
           </motion.h2>
 
           <motion.p
@@ -159,7 +159,7 @@ export default function MaterialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.22 }}
-            className="font-sans text-[1rem] lg:text-[1.05rem] text-white/40 leading-relaxed max-w-xl font-light"
+            className="font-sans text-[1rem] lg:text-[1.05rem] text-[#a0a0a0] leading-relaxed max-w-xl font-light"
           >
             An architectural space is only as timeless as the materials that construct it. We partner exclusively with industry-leading manufacturers to ensure absolute precision and longevity.
           </motion.p>
