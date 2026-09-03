@@ -37,6 +37,18 @@ function MinimalistRibbon({ mat }) {
           {mat.origin}
         </span>
       </div>
+
+      {mat.brands?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4 relative z-10">
+          {mat.brands.map((brand, i) => (
+            <div key={i} className="px-2.5 py-1 rounded-[4px] bg-white/[0.03] border border-white/5 group-hover:border-pink/30 group-hover:bg-pink/[0.08] transition-all duration-500">
+              <span className="text-[0.55rem] tracking-[0.25em] uppercase text-white/50 group-hover:text-pink font-bold transition-colors duration-500 drop-shadow-sm">
+                {brand}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       
       <p className="font-sans text-[0.9rem] text-white/40 leading-relaxed max-w-lg group-hover:text-white/70 transition-colors duration-500 relative z-10 font-light">
         {mat.description}

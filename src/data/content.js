@@ -114,8 +114,9 @@ export const MATERIALS = [
     name: 'Acrylic',
     category: 'Finishes',
     origin: 'Ultra-Gloss',
+    brands: ['Rehau'],
     description:
-      'Offers a flawless, mirror-like high-gloss finish that brings a luxurious, modern aesthetic to any space. We utilize premium acrylics from global leaders like Rehau for unmatched scratch-resistance and longevity.',
+      'Offers a flawless, mirror-like high-gloss finish that brings a luxurious, modern aesthetic to any space. Highly scratch-resistant and exceptionally easy to maintain for longevity.',
     qualities: ['Mirror-like gloss', 'Scratch-resistant', 'Vibrant color retention'],
     logo: null,
   },
@@ -124,8 +125,9 @@ export const MATERIALS = [
     name: 'Laminate',
     category: 'Finishes',
     origin: 'High-Pressure',
+    brands: ['Merino', 'Greenlam'],
     description:
-      'Engineered for robust durability, offering an extensive range of striking textures from natural wood grains to solid mattes. We source from trusted manufacturers like Merino, perfect for stunning, low-maintenance areas.',
+      'Engineered for robust durability, offering an extensive range of striking textures from natural wood grains to solid mattes. Perfect for stunning, low-maintenance areas.',
     qualities: ['Heat & impact resistant', 'Extensive textures', 'Low maintenance'],
     logo: null,
   },
@@ -154,8 +156,9 @@ export const MATERIALS = [
     name: 'Lacquered Glass',
     category: 'Finishes',
     origin: 'Architectural',
+    brands: ['Saint-Gobain'],
     description:
-      'Provides unmatched clarity and a sleek, contemporary vibe. We incorporate architectural-grade lacquered glass from Saint-Gobain into our sliding profiles for a truly sophisticated, reflective aesthetic.',
+      'Provides unmatched clarity and a sleek, contemporary vibe. We incorporate architectural-grade lacquered glass into our sliding profiles for a truly sophisticated, reflective aesthetic.',
     qualities: ['Unmatched clarity', 'Highly reflective', 'Contemporary appeal'],
     logo: null,
   },
