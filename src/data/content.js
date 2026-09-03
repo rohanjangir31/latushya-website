@@ -110,6 +110,36 @@ export const MATERIALS = [
     qualities: ['High density core', 'ISI certified', 'Superior screw hold'],
     logo: null,
   },
+  {
+    id: 6,
+    name: 'Rehau',
+    category: 'Finishes',
+    origin: 'Germany',
+    description:
+      'Global leaders in polymer solutions. We use Rehau RAUVISIO acrylics and edge bands for a flawless, high-gloss, and scratch-resistant exterior finish.',
+    qualities: ['High-gloss acrylics', 'Zero-joint edge banding', 'Scratch resistant'],
+    logo: null,
+  },
+  {
+    id: 7,
+    name: 'Merino',
+    category: 'Finishes',
+    origin: 'India',
+    description:
+      'Premium high-pressure laminates known for striking textures, robust durability, and anti-bacterial properties. Perfect for stunning, low-maintenance wardrobes.',
+    qualities: ['Anti-bacterial surface', 'Vibrant textures', 'Heat & moisture resistant'],
+    logo: null,
+  },
+  {
+    id: 8,
+    name: 'Saint-Gobain',
+    category: 'Finishes',
+    origin: 'France',
+    description:
+      'The world standard in architectural glass. We incorporate Saint-Gobain lacquered and fluted glass for our premium sliding wardrobe profiles and bespoke display units.',
+    qualities: ['Lacquered glass', 'Fluted & tinted options', 'Unmatched clarity'],
+    logo: null,
+  },
 ];
 
 // ─── Process Steps ────────────────────────────────────────

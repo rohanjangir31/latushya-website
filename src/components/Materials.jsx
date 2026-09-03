@@ -6,6 +6,7 @@ const EASE = [0.25, 0.46, 0.45, 0.94];
 const CATEGORY_LABELS = {
   Hardware: { num: '01', title: 'Precision Hardware', description: 'Every hinge, track, and handle is engineered for silent, flawless operation. We utilize Austrian and German-engineered mechanisms to guarantee a lifetime of effortless movement.' },
   Substrate: { num: '02', title: 'Structural Cores', description: 'The hidden layers dictate the lifespan of your interiors. We use Boiling-Water-Proof (BWP), Moisture-Resistant (MR), and Architectural-Grade substrates engineered to withstand impact and the test of time.' },
+  Finishes: { num: '03', title: 'Premium Finishes', description: 'The exterior defines the character of your space. We wrap our cores in luxurious, globally sourced finishes that are visually stunning and remarkably resilient.' },
 };
 
 function MinimalistRibbon({ mat }) {
@@ -121,6 +122,7 @@ function CategorySection({ category, materials, image, reverse }) {
 export default function MaterialsSection() {
   const hardware = MATERIALS.filter(m => m.category === 'Hardware');
   const substrate = MATERIALS.filter(m => m.category === 'Substrate');
+  const finishes = MATERIALS.filter(m => m.category === 'Finishes');
 
   return (
     <section id="materials" className="py-24 lg:py-36 relative overflow-hidden bg-[#030407]">
@@ -179,6 +181,14 @@ export default function MaterialsSection() {
           materials={substrate} 
           image="/projects/media__1784490387517.jpg" 
           reverse={true} 
+        />
+
+        {/* ── FINISHES CATEGORY ── */}
+        <CategorySection 
+          category="Finishes" 
+          materials={finishes} 
+          image="/projects/media__1784490387507.jpg" 
+          reverse={false} 
         />
 
       </div>
