@@ -145,11 +145,14 @@ export default function Hero() {
               className="flex items-center gap-3 mb-6 lg:mb-7"
             >
               <div
-                className="h-px w-6 translate-y-[3px]"
-                style={{ background: 'linear-gradient(to right, #DF4C73, #5AB9EA)' }}
+                className="h-px w-6"
+                style={{ 
+                  background: 'linear-gradient(to right, #DF4C73, #5AB9EA)',
+                  transform: 'translateY(1px)'
+                }}
               />
               <span
-                className="uppercase font-medium"
+                className="uppercase font-medium leading-none"
                 style={{
                   fontSize: '0.625rem',
                   letterSpacing: '0.32em',
