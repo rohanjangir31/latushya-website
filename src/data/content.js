@@ -239,6 +239,6 @@ export const FAQ_ITEMS = [
   {
     id: 6,
     question: 'What types of wardrobes do you make?',
-    answer: 'We specialise in modular wardrobes, sliding wardrobes, walk-in wardrobes, hinged wardrobes, luxury wardrobes, and fully custom storage solutions. We do not do general interior design wardrobes are our core expertise.',
+    answer: 'We specialise in modular wardrobes, sliding wardrobes, walk-in wardrobes, hinged wardrobes, luxury wardrobes, and fully custom storage solutions. Wardrobes are our core expertise.',
   },
 ];
