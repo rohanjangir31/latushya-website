@@ -234,7 +234,7 @@ export const FAQ_ITEMS = [
   {
     id: 5,
     question: 'Is the initial consultation free?',
-    answer: 'Yes. The first consultation including a home visit, space measurement, and preliminary design discussion is completely free with no obligations whatsoever.',
+    answer: 'Yes. The first on call consultation is completely free with no obligations whatsoever.',
   },
   {
     id: 6,
