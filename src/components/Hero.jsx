@@ -145,7 +145,7 @@ export default function Hero() {
               className="flex items-center gap-3 mb-6 lg:mb-7"
             >
               <div
-                className="h-px w-6 mt-[2px]"
+                className="h-px w-6 translate-y-[3px]"
                 style={{ background: 'linear-gradient(to right, #DF4C73, #5AB9EA)' }}
               />
               <span
