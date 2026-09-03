@@ -114,7 +114,7 @@ export const MATERIALS = [
     name: 'Acrylic',
     category: 'Finishes',
     origin: 'Ultra-Gloss',
-    brands: ['Rehau'],
+    brands: ['Rehau', 'Advance'],
     description:
       'Offers a flawless, mirror-like high-gloss finish that brings a luxurious, modern aesthetic to any space. Highly scratch-resistant and exceptionally easy to maintain for longevity.',
     qualities: ['Mirror-like gloss', 'Scratch-resistant', 'Vibrant color retention'],
