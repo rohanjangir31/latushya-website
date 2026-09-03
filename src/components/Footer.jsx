@@ -33,15 +33,18 @@ const footerLinks = {
     { label: 'Turnkey Interiors', href: '/services#turnkey-interiors' },
     { label: 'Modular Kitchens', href: '/services#modular-kitchens' },
     { label: 'Living Room Design', href: '/services#living-room-design' },
-    { label: 'FTC Wardrobes', href: '/services#ftc-wardrobes' },
     { label: 'Decor Sourcing', href: '/services#decor-sourcing' },
+  ],
+  'Wardrobes': [
+    { label: 'FTC Wardrobes', href: '/wardrobes' },
+    { label: 'Sliding Wardrobes', href: '/wardrobes#sliding-wardrobes' },
+    { label: 'Hinged Wardrobes', href: '/wardrobes#hinged-wardrobes' },
+    { label: 'Materials We Use', href: '/materials' },
   ],
   'Quick Links': [
     { label: 'Home',              href: '/' },
     { label: 'About Us',          href: '/about' },
-    { label: 'Our Services',      href: '/services' },
     { label: 'Portfolio',         href: '/portfolio' },
-    { label: 'Materials We Use',  href: '/materials' },
     { label: 'Contact',           href: '/contact' },
   ],
 };
@@ -86,9 +89,9 @@ export default function Footer() {
 
         {/* Main footer */}
         <div className="max-w-7xl mx-auto px-6 lg:px-16 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand column */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-2 md:col-span-3">
               <div className="mb-6">
                 <span className="font-display text-2xl tracking-ultra text-white font-light">
                   {COMPANY.name}
@@ -126,45 +129,27 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Services column */}
-            <div>
-              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
-                Our Services
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks['Our Services'].map((item) => (
-                  <li key={item.label}>
-                    <Link to={item.href} className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group">
-                      <span className="w-3 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
-                Quick Links
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks['Quick Links'].map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      to={item.href}
-                      className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group"
-                    >
-                      <span className="w-3 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Link Groups */}
+            {['Our Services', 'Wardrobes', 'Quick Links'].map((group) => (
+              <div key={group} className="lg:col-span-1 md:col-span-1">
+                <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
+                  {group}
+                </h4>
+                <ul className="space-y-3">
+                  {footerLinks[group].map((item) => (
+                    <li key={item.label}>
+                      <Link to={item.href} className="text-gray-light text-sm hover:text-blue transition-colors duration-300 flex items-center gap-2 group">
+                        <span className="w-3 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 group-hover:w-5 group-hover:bg-blue transition-all duration-300" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
 
             {/* Contact column */}
-            <div>
+            <div className="lg:col-span-1 md:col-span-2">
               <h4 className="text-white text-xs tracking-widest uppercase font-semibold mb-6 pb-3 border-b border-pink/20">
                 Contact
               </h4>
