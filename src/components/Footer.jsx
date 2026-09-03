@@ -37,9 +37,9 @@ const footerLinks = {
     { label: 'Decor Sourcing', href: '/services#decor-sourcing' },
   ],
   'Wardrobes': [
-    { label: 'FTC Wardrobes', href: '/wardrobes' },
-    { label: 'Sliding Wardrobes', href: '/wardrobes#sliding-wardrobes' },
-    { label: 'Hinged Wardrobes', href: '/wardrobes#hinged-wardrobes' },
+    { label: 'Wardrobes Hub', href: '/wardrobes' },
+    { label: 'Sliding Wardrobes', href: '/collections/sliding-wardrobes' },
+    { label: 'Hinged Wardrobes', href: '/collections/hinged-wardrobes' },
     { label: 'Materials We Use', href: '/materials' },
   ],
   'Quick Links': [
