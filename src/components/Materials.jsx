@@ -183,7 +183,7 @@ export default function MaterialsSection() {
         <CategorySection 
           category="Hardware" 
           materials={hardware} 
-          image="/projects/media__1784490387392.jpg" 
+          image="https://images.unsplash.com/photo-1595514535415-3253b26c79a4?auto=format&fit=crop&q=100&w=2500" 
           reverse={false} 
         />
 
@@ -191,7 +191,7 @@ export default function MaterialsSection() {
         <CategorySection 
           category="Substrate" 
           materials={substrate} 
-          image="/projects/media__1784490387517.jpg" 
+          image="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=100&w=2500" 
           reverse={true} 
         />
 
@@ -199,7 +199,7 @@ export default function MaterialsSection() {
         <CategorySection 
           category="Finishes" 
           materials={finishes} 
-          image="/projects/media__1784490387507.jpg" 
+          image="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=100&w=2500" 
           reverse={false} 
         />
 

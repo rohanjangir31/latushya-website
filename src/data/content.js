@@ -201,12 +201,12 @@ export const PROCESS_STEPS = [
 // ─── Gallery Images ───────────────────────────────────────
 // Replace src values with real project photography when available
 export const GALLERY_IMAGES = [
-  { id: 1, src: '/projects/media__1784490387524.jpg', alt: 'Luxury Living Room Interior Bangalore', category: 'Living Room Design', isPlaceholder: false },
-  { id: 2, src: '/projects/media__1784490387507.jpg', alt: 'Acrylic Modular Kitchen Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
-  { id: 3, src: '/projects/media__1784490387502.jpg', alt: 'Modern Bedroom Interior Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
-  { id: 4, src: '/projects/media__1784490387517.jpg', alt: 'Geometric Sliding Wardrobe Bangalore', category: 'FTC Wardrobes', isPlaceholder: false },
-  { id: 5, src: '/projects/media__1784490387392.jpg', alt: 'Traditional Wooden Console Bangalore', category: 'Custom Furniture', isPlaceholder: false },
-  { id: 6, src: '/projects/media__1784490387524.jpg', alt: 'Classic Living & Dining Bangalore', category: 'Living Room Design', isPlaceholder: false },
+  { id: 1, src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500', alt: 'Luxury Living Room Interior Bangalore', category: 'Living Room Design', isPlaceholder: false },
+  { id: 2, src: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=100&w=2500', alt: 'Acrylic Modular Kitchen Bangalore', category: 'Modular Kitchens', isPlaceholder: false },
+  { id: 3, src: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=100&w=2500', alt: 'Modern Bedroom Interior Bangalore', category: 'Turnkey Interiors', isPlaceholder: false },
+  { id: 4, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=100&w=2500', alt: 'Geometric Sliding Wardrobe Bangalore', category: 'FTC Wardrobes', isPlaceholder: false },
+  { id: 5, src: 'https://images.unsplash.com/photo-1595514535415-3253b26c79a4?auto=format&fit=crop&q=100&w=2500', alt: 'Traditional Wooden Console Bangalore', category: 'Custom Furniture', isPlaceholder: false },
+  { id: 6, src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500', alt: 'Classic Living & Dining Bangalore', category: 'Living Room Design', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────

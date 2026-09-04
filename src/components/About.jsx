@@ -8,12 +8,12 @@ const DISPLAY = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
 const SANS    = "'Inter', system-ui, sans-serif";
 
 const PROCESS_IMAGES = [
-  '/projects/media__1784490387524.jpg',
-  '/projects/media__1784490387507.jpg',
-  '/projects/media__1784490387502.jpg',
-  '/projects/media__1784490387517.jpg',
-  '/projects/media__1784490387392.jpg',
-  '/projects/media__1784490387524.jpg'
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500',
+  'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=100&w=2500',
+  'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=100&w=2500',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=100&w=2500',
+  'https://images.unsplash.com/photo-1595514535415-3253b26c79a4?auto=format&fit=crop&q=100&w=2500',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500'
 ];
 
 function TimelineStep({ step, index, setVisibleImage, activeIndex }) {
@@ -82,7 +82,7 @@ export default function About() {
             {/* Left — Photo */}
             <div ref={photoRef} className="lg:col-span-5 relative">
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={isPhotoInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 1.4, ease: EASE }} className="relative z-10 overflow-hidden" style={{ aspectRatio: '4/5' }}>
-                <img src="/projects/media__1784490387524.jpg" alt="Latushya Studio Aesthetic" className="w-full h-full object-cover transition-all duration-1000" loading="lazy" decoding="async" />
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500" alt="Latushya Studio Aesthetic" className="w-full h-full object-cover transition-all duration-1000" loading="lazy" decoding="async" />
               </motion.div>
               <motion.div initial={{ opacity: 0, x: -20 }} animate={isPhotoInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.6 }} className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-pink to-transparent hidden lg:block" />
             </div>
