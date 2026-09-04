@@ -23,6 +23,18 @@ function TypingDots() {
   );
 }
 
+// Global Event Listener Hook for external triggers
+function useOpenAiChatbot(setIsOpen, setHasUnread) {
+  useEffect(() => {
+    const handleOpen = () => {
+      setIsOpen(true);
+      setHasUnread(false);
+    };
+    document.addEventListener('open-ai-chatbot', handleOpen);
+    return () => document.removeEventListener('open-ai-chatbot', handleOpen);
+  }, [setIsOpen, setHasUnread]);
+}
+
 // ─── Single chat bubble ──────────────────────────────────
 function Bubble({ msg }) {
   const isBot = msg.type === 'bot';
@@ -277,6 +289,8 @@ export default function AIChatbot() {
   const hasApiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
   const wrapperRef = useRef(null);
 
+  useOpenAiChatbot(setIsOpen, setHasUnread);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (isOpen && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -369,7 +383,7 @@ export default function AIChatbot() {
   };
 
   return (
-    <div ref={wrapperRef} className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex flex-col items-end gap-3">
+    <div ref={wrapperRef} className="fixed bottom-[88px] right-4 md:bottom-8 md:right-8 z-[60] flex flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -377,7 +391,7 @@ export default function AIChatbot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-            className="w-[calc(100vw-3rem)] max-w-[370px] h-[580px] max-h-[75vh] bg-[#0a0a0f]/85 backdrop-blur-[40px] border border-white/[0.09] rounded-[24px] shadow-[0_40px_100px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col"
+            className="w-[calc(100vw-2rem)] md:w-[calc(100vw-3rem)] max-w-[370px] h-[580px] max-h-[75vh] bg-[#0a0a0f]/85 backdrop-blur-[40px] border border-white/[0.09] rounded-[24px] shadow-[0_40px_100px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col"
           >
             {/* Persistent header */}
             <div className="px-5 pt-4 pb-3 border-b border-white/[0.07] flex items-center justify-between shrink-0">
@@ -464,7 +478,7 @@ export default function AIChatbot() {
         onClick={isOpen ? () => setIsOpen(false) : openChat}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
-        className="relative w-14 h-14 md:w-[58px] md:h-[58px] rounded-full bg-gradient-to-br from-[#DF4C73] to-[#b33554] flex items-center justify-center text-white shadow-[0_4px_20px_rgba(223,76,115,0.4)] overflow-hidden"
+        className="hidden md:flex relative w-14 h-14 md:w-[58px] md:h-[58px] rounded-full bg-gradient-to-br from-[#DF4C73] to-[#b33554] items-center justify-center text-white shadow-[0_4px_20px_rgba(223,76,115,0.4)] overflow-hidden"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

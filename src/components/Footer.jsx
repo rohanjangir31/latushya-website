@@ -213,42 +213,42 @@ export default function Footer() {
       {/* Mobile Bottom Navigation Bar — Replaces Hamburger for core navigation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-[#03070E]/95 backdrop-blur-xl border-t border-white/5 pb-safe">
         <div className="flex items-center justify-between px-2 h-[68px]">
-          {[
-            { name: 'Home', path: '/', icon: Home },
-            { name: 'Services', path: '/services', icon: LayoutGrid },
-            { name: 'Wardrobes', path: '/wardrobes', icon: Columns },
-            { name: 'Portfolio', path: '/portfolio', icon: ImageIcon },
-          ].map((tab) => {
-            const isActive = location.pathname === tab.path;
-            const Icon = tab.icon;
-            return (
-              <Link
-                key={tab.name}
-                to={tab.path}
-                className={`flex flex-col items-center justify-center w-full h-full gap-1.5 transition-colors duration-300 ${
-                  isActive ? 'text-pink' : 'text-gray-light/50 hover:text-white/90'
-                }`}
-              >
-                <Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} className={isActive ? 'drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]' : ''} />
-                <span className={`text-[9px] uppercase tracking-wider ${isActive ? 'font-semibold' : 'font-medium'}`}>
-                  {tab.name}
-                </span>
-              </Link>
-            );
-          })}
+          {/* Tab 1 */}
+          <Link to="/" className={`flex flex-col items-center justify-center w-full h-full gap-1.5 transition-colors duration-300 ${location.pathname === '/' ? 'text-pink' : 'text-gray-light/50 hover:text-white/90'}`}>
+            <Home size={20} strokeWidth={location.pathname === '/' ? 2.5 : 1.5} className={location.pathname === '/' ? 'drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]' : ''} />
+            <span className={`text-[9px] uppercase tracking-wider ${location.pathname === '/' ? 'font-semibold' : 'font-medium'}`}>Home</span>
+          </Link>
           
-          {/* Action Tab (WhatsApp) */}
-          <a
-            href={COMPANY.whatsapp ? `https://wa.me/${COMPANY.whatsapp}` : '#contact'}
-            target="_blank"
-            rel="noreferrer"
-            className="flex flex-col items-center justify-center w-full h-full gap-1.5 text-gray-light/50 hover:text-[#25D366] transition-colors duration-300"
-          >
-            <MessageCircle size={20} strokeWidth={1.5} />
-            <span className="text-[9px] uppercase tracking-wider font-medium">
-              Chat
+          {/* Tab 2 */}
+          <Link to="/services" className={`flex flex-col items-center justify-center w-full h-full gap-1.5 transition-colors duration-300 ${location.pathname === '/services' ? 'text-pink' : 'text-gray-light/50 hover:text-white/90'}`}>
+            <LayoutGrid size={20} strokeWidth={location.pathname === '/services' ? 2.5 : 1.5} className={location.pathname === '/services' ? 'drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]' : ''} />
+            <span className={`text-[9px] uppercase tracking-wider ${location.pathname === '/services' ? 'font-semibold' : 'font-medium'}`}>Services</span>
+          </Link>
+          
+          {/* Tab 3: Center Elevated Button (AI Chat) */}
+          <div className="relative w-full h-full flex justify-center items-start">
+            <button
+              onClick={() => document.dispatchEvent(new CustomEvent('open-ai-chatbot'))}
+              className="absolute -top-5 w-12 h-12 rounded-full bg-gradient-to-br from-[#DF4C73] to-[#b33554] shadow-[0_4px_20px_rgba(223,76,115,0.4)] flex items-center justify-center text-white transition-transform active:scale-95 border-[3px] border-[#03070E]"
+            >
+              <span style={{ fontSize: '20px', lineHeight: 1 }}>✦</span>
+            </button>
+            <span className="absolute bottom-2 text-[9px] uppercase tracking-wider font-semibold text-pink drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]">
+              AI Chat
             </span>
-          </a>
+          </div>
+
+          {/* Tab 4 */}
+          <Link to="/wardrobes" className={`flex flex-col items-center justify-center w-full h-full gap-1.5 transition-colors duration-300 ${location.pathname === '/wardrobes' ? 'text-pink' : 'text-gray-light/50 hover:text-white/90'}`}>
+            <Columns size={20} strokeWidth={location.pathname === '/wardrobes' ? 2.5 : 1.5} className={location.pathname === '/wardrobes' ? 'drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]' : ''} />
+            <span className={`text-[9px] uppercase tracking-wider ${location.pathname === '/wardrobes' ? 'font-semibold' : 'font-medium'}`}>Wardrobes</span>
+          </Link>
+
+          {/* Tab 5 */}
+          <Link to="/portfolio" className={`flex flex-col items-center justify-center w-full h-full gap-1.5 transition-colors duration-300 ${location.pathname === '/portfolio' ? 'text-pink' : 'text-gray-light/50 hover:text-white/90'}`}>
+            <ImageIcon size={20} strokeWidth={location.pathname === '/portfolio' ? 2.5 : 1.5} className={location.pathname === '/portfolio' ? 'drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]' : ''} />
+            <span className={`text-[9px] uppercase tracking-wider ${location.pathname === '/portfolio' ? 'font-semibold' : 'font-medium'}`}>Portfolio</span>
+          </Link>
         </div>
       </div>
     </>
