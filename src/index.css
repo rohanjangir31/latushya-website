@@ -33,6 +33,22 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Ultra HD Professional Image & Video Optimization */
+  img, video {
+    -webkit-user-drag: none;
+    image-rendering: -webkit-optimize-contrast; /* Sharpens images on Webkit */
+    image-rendering: crisp-edges;
+    /* Apply a professional photography "pop" to all raw images */
+    filter: contrast(1.06) saturate(1.08) brightness(1.02);
+  }
+  
+  /* Fallback for standard browsers if crisp-edges isn't supported */
+  @supports not (image-rendering: crisp-edges) {
+    img, video {
+      image-rendering: high-quality;
+    }
+  }
+
 
 
   /* Lenis smooth scrolling base styles */

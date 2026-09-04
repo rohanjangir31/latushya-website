@@ -85,7 +85,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
+            className="w-full h-full object-cover transition-all duration-700"
             style={{ objectPosition: 'center center' }}
           />
         </div>
