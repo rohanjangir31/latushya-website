@@ -172,14 +172,13 @@ export default function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.42, ease: EASE_OUT_EXPO }}
-                  className="font-display"
+                  className="font-display italic pr-2"
                   style={{
-                    fontSize: 'clamp(1.8rem, 4.8vw, 4.2rem)',
+                    fontSize: 'clamp(2.8rem, 8.5vw, 7rem)',
                     fontWeight: 300,
-                    letterSpacing: '0.04em',
-                    lineHeight: 1.0,
-                    color: 'rgba(255,255,255,0.78)',
-                    textTransform: 'uppercase',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 0.92,
+                    color: '#FFFFFF',
                   }}
                 >
                   Custom
