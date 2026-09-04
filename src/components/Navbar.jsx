@@ -7,9 +7,27 @@ import Magnetic from './Magnetic';
 const navLinks = [
   { label: 'Home',      href: '/' },
   { label: 'About',     href: '/about' },
-  { label: 'Services',  href: '/services' },
+  { 
+    label: 'Services',  
+    href: '/services',
+    subLinks: [
+      { label: 'Turnkey Interiors', href: '/services#turnkey-interiors' },
+      { label: 'Modular Kitchens', href: '/services#modular-kitchens' },
+      { label: 'Living Room Design', href: '/services#living-room-design' },
+      { label: 'FTC Wardrobes', href: '/services#ftc-wardrobes' },
+      { label: 'Decor Sourcing', href: '/services#decor-sourcing' },
+    ]
+  },
   { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Wardrobes', href: '/wardrobes' },
+  { 
+    label: 'Wardrobes', 
+    href: '/wardrobes',
+    subLinks: [
+      { label: 'Wardrobes Hub', href: '/wardrobes' },
+      { label: 'Sliding Wardrobes', href: '/collections/sliding-wardrobes' },
+      { label: 'Hinged Wardrobes', href: '/collections/hinged-wardrobes' },
+    ]
+  },
   { label: 'Materials', href: '/materials' },
   { label: 'Contact',   href: '/contact' },
 ];
@@ -68,6 +86,41 @@ export default function Navbar() {
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href || 
                                (link.href === '/wardrobes' && location.pathname.startsWith('/collections/'));
+              if (link.subLinks) {
+                return (
+                  <div key={link.href} className="relative group">
+                    <Link
+                      to={link.href}
+                      onClick={handleNavClick}
+                      className={`link-underline-pink hover:text-white text-[12px] xl:text-[13px] tracking-widest uppercase transition-colors duration-250 pb-0.5 flex items-center gap-1.5 ${isActive ? 'is-active text-white' : 'text-gray-subtle'}`}
+                    >
+                      {link.label}
+                      <svg width="8" height="5" viewBox="0 0 8 5" fill="none" className="opacity-50 group-hover:opacity-100 transition-transform duration-300 group-hover:-scale-y-100">
+                        <path d="M1 1L4 4L7 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </Link>
+
+                    {/* Dropdown Drawer */}
+                    <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-6 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                      <div className="bg-[#050505]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 min-w-[220px] shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex flex-col gap-0.5 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink/40 to-transparent" />
+                        
+                        {link.subLinks.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            to={sub.href}
+                            onClick={handleNavClick}
+                            className="text-gray-light/60 hover:text-white hover:bg-white/5 text-[10px] tracking-widest uppercase px-4 py-3 rounded-lg transition-all duration-200"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}

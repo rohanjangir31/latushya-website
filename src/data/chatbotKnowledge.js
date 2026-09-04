@@ -28,8 +28,8 @@ export const KNOWLEDGE = [
     id: 'wardrobes',
     category: 'services',
     question: 'What types of wardrobes do you design?',
-    answer: 'We specialise exclusively in FTC wardrobes Sliding wardrobes, Hinged wardrobes, Walk-In closets, and modular storage systems. Every wardrobe is engineered from scratch for your exact dimensions, storage habits, and style preferences.',
-    keywords: ['wardrobe', 'sliding', 'hinged', 'walk-in', 'closet', 'types', 'kind', 'storage'],
+    answer: 'Wardrobes are our core expertise. We specialise in modular wardrobes, sliding wardrobes, walk-in wardrobes, hinged wardrobes, luxury wardrobes, and fully custom storage solutions.',
+    keywords: ['wardrobe', 'sliding', 'hinged', 'walk-in', 'closet', 'types', 'kind', 'storage', 'luxury', 'modular'],
   },
   {
     id: 'modular-kitchen',
@@ -88,25 +88,26 @@ export const KNOWLEDGE = [
   // ═══════════════════════════════════════════════
   // PROCESS
   // ═══════════════════════════════════════════════
+  // ═══════════════════════════════════════════════
   {
     id: 'consultation-free',
     category: 'process',
     question: 'Is the first consultation free?',
-    answer: 'Yes our first consultation is completely free with no strings attached. Our designer visits your home, measures the space, and discusses your requirements, lifestyle, and style preferences. There is absolutely no obligation to proceed afterwards.',
+    answer: 'Yes. The first on call consultation is completely free with no obligations whatsoever. We discuss your requirements, lifestyle, and style preferences. There is absolutely no pressure to proceed afterwards.',
     keywords: ['consultation', 'free', 'home visit', 'site visit', 'appointment', 'visit', 'meeting', 'book', 'schedule'],
   },
   {
     id: 'timeline',
     category: 'process',
     question: 'How long does a project take?',
-    answer: 'Most wardrobe and kitchen projects are completed within 3 to 4 weeks from design approval. This covers precision production in our workshop and a 2 to 4 day on-site installation by our trained carpentry team with minimal disruption to your home.',
+    answer: 'Most wardrobe and kitchen projects are completed within 2 to 3 weeks from design approval. This covers precision production in our workshop and a 2 to 4 day on-site installation by our trained carpentry team with minimal disruption to your home.',
     keywords: ['timeline', 'how long', 'time', 'days', 'weeks', 'duration', 'when ready', 'delivery'],
   },
   {
     id: 'process-steps',
     category: 'process',
     question: 'What is your step-by-step process?',
-    answer: "We follow a clear 6-step process:\n\n1. Free Home Consultation we visit, measure, listen.\n2. 3D Design Concept a personalised layout you can visualise.\n3. Material Selection choose your finishes and hardware from our curated library.\n4. Workshop Production precision-cut and pre-assembled in our facility.\n5. On-site Installation clean, efficient, on-time.\n6. Quality Handover thorough check of every drawer, shutter, and fitting before sign-off.",
+    answer: "We follow a clear 6-step process:\n\n1. Free On-Call Consultation we listen and understand your space.\n2. 3D Design Concept a personalised layout you can visualise.\n3. Material Selection choose your finishes and hardware from our curated library.\n4. Workshop Production precision-cut and pre-assembled in our facility.\n5. On-site Installation clean, efficient, on-time.\n6. Quality Handover thorough check of every drawer, shutter, and fitting before sign-off.",
     keywords: ['process', 'steps', 'how do you work', 'procedure', 'workflow', 'how it works'],
   },
   {
@@ -138,15 +139,15 @@ export const KNOWLEDGE = [
     id: 'finishes',
     category: 'materials',
     question: 'What finish and colour options are available?',
-    answer: 'We offer an extensive, curated library of finishes matte laminates, high-gloss acrylics, woodgrain textures, fabric-textured PVC membranes, and glass shutters (frosted, tinted, lacquered, or clear). Our designer brings physical samples to your home so you can see each finish in your own lighting before deciding.',
-    keywords: ['finish', 'colour', 'laminate', 'acrylic', 'texture', 'look', 'matte', 'glossy', 'glass', 'material options'],
+    answer: 'We offer an extensive, curated library of premium finishes including Acrylic (from brands like Advance and Rehau), Laminate (from Merino), Membrane, Duco/PU, and Lacquered glass (from Saint-Gobain). Our designer brings physical samples so you can see each finish before deciding.',
+    keywords: ['finish', 'colour', 'laminate', 'acrylic', 'texture', 'look', 'membrane', 'duco', 'pu', 'lacquered', 'glass', 'material options', 'brands', 'advance', 'merino', 'rehau', 'saint-gobain'],
   },
   {
     id: 'glass-shutters',
     category: 'materials',
     question: 'Can I get glass or mirror shutters on my wardrobe?',
-    answer: 'Absolutely. We offer frosted glass, tinted glass, lacquered glass, clear glass, and full-length mirror shutters typically framed with sleek aluminium profiles. Mirror shutters are a particularly popular choice for bedrooms.',
-    keywords: ['glass', 'mirror', 'frosted', 'tinted', 'reflective', 'shutter', 'door'],
+    answer: 'Absolutely. We offer frosted glass, tinted glass, lacquered glass (from Saint-Gobain), clear glass, and full-length mirror shutters typically framed with sleek aluminium profiles. Mirror shutters are a particularly popular choice for bedrooms.',
+    keywords: ['glass', 'mirror', 'frosted', 'tinted', 'reflective', 'shutter', 'door', 'saint-gobain'],
   },
 
   // ═══════════════════════════════════════════════
@@ -173,9 +174,9 @@ export const KNOWLEDGE = [
   {
     id: 'areas',
     category: 'location',
-    question: 'Which areas in Bangalore do you serve?',
-    answer: 'We serve clients across all areas of Bangalore including Kasturi Nagar, Indiranagar, Koramangala, Whitefield, HSR Layout, Yelahanka, Jayanagar, Hebbal, JP Nagar, Electronic City, Marathahalli, Bannerghatta Road, and beyond. If you are in Bangalore, we will come to you.',
-    keywords: ['area', 'location', 'where', 'serve', 'bangalore', 'indiranagar', 'koramangala', 'whitefield', 'hsr', 'yelahanka', 'jayanagar', 'hebbal'],
+    question: 'Which areas do you serve?',
+    answer: 'We serve clients across all areas of Bangalore, as well as Mysore, Hyderabad, and Kadapa! Whether you need a full home interior or custom wardrobes, we bring our expertise directly to you.',
+    keywords: ['area', 'location', 'where', 'serve', 'bangalore', 'mysore', 'hyderabad', 'kadapa', 'indiranagar', 'koramangala', 'whitefield', 'hsr', 'yelahanka', 'jayanagar', 'hebbal'],
   },
   {
     id: 'outside-bangalore',
