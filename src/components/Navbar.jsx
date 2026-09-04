@@ -101,18 +101,23 @@ export default function Navbar() {
                     </Link>
 
                     {/* Dropdown Drawer */}
-                    <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-6 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
-                      <div className="bg-[#050505]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 min-w-[220px] shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex flex-col gap-0.5 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink/40 to-transparent" />
+                    <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-5 opacity-0 translate-y-3 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-400 ease-out z-50">
+                      <div className="bg-[#0A0A0F]/90 backdrop-blur-2xl border border-white/10 rounded-2xl p-3 w-[260px] shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex flex-col gap-1 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/[0.03] before:to-transparent before:pointer-events-none">
+                        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-pink/60 to-transparent" />
                         
                         {link.subLinks.map((sub) => (
                           <Link
                             key={sub.href}
                             to={sub.href}
                             onClick={handleNavClick}
-                            className="text-gray-light/60 hover:text-white hover:bg-white/5 text-[10px] tracking-widest uppercase px-4 py-3 rounded-lg transition-all duration-200"
+                            className="group/sub relative flex items-center justify-between px-4 py-3.5 rounded-xl hover:bg-white/[0.06] transition-all duration-300 overflow-hidden"
                           >
-                            {sub.label}
+                            <span className="relative z-10 text-white/70 group-hover/sub:text-white text-[11px] tracking-[0.15em] uppercase font-medium transition-colors">
+                              {sub.label}
+                            </span>
+                            <span className="relative z-10 text-pink opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-300">
+                              →
+                            </span>
                           </Link>
                         ))}
                       </div>
