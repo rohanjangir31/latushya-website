@@ -21,7 +21,7 @@ const services = [
     tagline: 'The heart of the home',
     description:
       'Ergonomically designed, premium modular kitchens featuring state-of-the-art German hardware, moisture-resistant cores, and flawless, easy-to-maintain finishes.',
-    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=100&w=2500',
+    image: '/projects/media__1784490387507.jpg',
   },
   {
     id: 'living-room-design',

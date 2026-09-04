@@ -6,19 +6,19 @@ const CATEGORIES = [
     id: 'walk-in',
     title: 'Walk-in Closets',
     description: 'The pinnacle of luxury storage. Expansive interiors featuring integrated island counters, ambient sensor lighting, and panoramic organization systems for the ultimate dressing experience.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=100&w=2500',
+    image: '/projects/media__1784490387524.jpg',
   },
   {
     id: 'sliding',
     title: 'Sliding Systems',
     description: 'Seamless architectural elegance. Our sliding systems feature ultra-slim profiles, soft-close German mechanisms, and stunning geometric glass divisions that maximize your spatial efficiency.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=100&w=2500',
+    image: '/projects/media__1784490387517.jpg',
   },
   {
     id: 'hinged',
     title: 'Classic Hinged',
     description: 'Timeless sophistication. Beautifully crafted fluted doors and rich timber accents mounted on premium silent hinges, delivering a traditional yet highly refined aesthetic for modern homes.',
-    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=100&w=2500',
+    image: '/projects/media__1784490387507.jpg',
   }
 ];
 
