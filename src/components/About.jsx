@@ -81,7 +81,7 @@ export default function About() {
 
             {/* Left — Photo */}
             <div ref={photoRef} className="lg:col-span-5 relative">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={isPhotoInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 1.4, ease: EASE }} className="relative z-10 overflow-hidden" style={{ aspectRatio: '4/5' }}>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={isPhotoInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 1.4, ease: EASE }} className="relative z-10 overflow-hidden rounded-2xl shadow-2xl" style={{ aspectRatio: '4/5' }}>
                 <img src="/projects/media__1784490387524.jpg" alt="Latushya Studio Aesthetic" className="w-full h-full object-cover transition-all duration-1000" loading="lazy" decoding="async" />
               </motion.div>
               <motion.div initial={{ opacity: 0, x: -20 }} animate={isPhotoInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.6 }} className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-pink to-transparent hidden lg:block" />
