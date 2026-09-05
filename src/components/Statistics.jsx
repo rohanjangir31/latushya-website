@@ -37,7 +37,7 @@ function CountUpNumber({ value, inView }) {
 const CREDIBILITY_ITEMS = [
   {
     Icon: CheckCircle2,
-    value: '50+',
+    value: '500+',
     label: 'Projects Completed',
     sub: 'Bangalore & surroundings',
   },
