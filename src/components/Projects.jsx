@@ -34,8 +34,9 @@ function LiveImage({ project, hovered }) {
       <img
         src={project.image}
         alt={project.projectType || project.category}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full"
         style={{
+          objectFit: project.objectFit || 'cover',
           objectPosition: project.imagePosition || 'center',
           transform: hovered ? 'scale(1.04)' : 'scale(1)',
           transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)',

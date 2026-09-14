@@ -221,9 +221,10 @@ export const INTERIOR_PROJECTS = [
     duration: '45 Days',
     description: 'A bespoke interior design project showcasing premium finishes and modern architectural elements tailored for a luxurious lifestyle.',
     image: '/projects/mr-ish-processed/mr-ish-5.jpg',
-    imagePosition: 'right',
+    imagePosition: 'right top',
+    objectFit: 'cover',
     isPlaceholder: false,
-    size: 'large',
+    size: 'medium',
     gallery: [
       { id: 'mr-ish-1', src: '/projects/mr-ish-processed/mr-ish-1.jpg', caption: '' },
       { id: 'mr-ish-10', src: '/projects/mr-ish-processed/mr-ish-10.jpg', caption: '' },
