@@ -192,10 +192,8 @@ export const INTERIOR_PROJECTS = [
       { id: 'assetz-v2-9', src: '/projects/assetz-marq-v2/assetz-v2-9.jpg', caption: '' },
       { id: 'assetz-v2-raw-1', src: '/projects/assetz-marq-v2/assetz-v2-raw-1.jpg', caption: '' },
       { id: 'assetz-v2-raw-10', src: '/projects/assetz-marq-v2/assetz-v2-raw-10.jpg', caption: '' },
-      { id: 'assetz-v2-raw-11', src: '/projects/assetz-marq-v2/assetz-v2-raw-11.jpg', caption: '' },
       { id: 'assetz-v2-raw-12', src: '/projects/assetz-marq-v2/assetz-v2-raw-12.jpg', caption: '' },
       { id: 'assetz-v2-raw-13', src: '/projects/assetz-marq-v2/assetz-v2-raw-13.jpg', caption: '' },
-      { id: 'assetz-v2-raw-15', src: '/projects/assetz-marq-v2/assetz-v2-raw-15.jpg', caption: '' },
       { id: 'assetz-v2-raw-16', src: '/projects/assetz-marq-v2/assetz-v2-raw-16.jpg', caption: '' },
       { id: 'assetz-v2-raw-18', src: '/projects/assetz-marq-v2/assetz-v2-raw-18.jpg', caption: '' },
       { id: 'assetz-v2-raw-20', src: '/projects/assetz-marq-v2/assetz-v2-raw-20.jpg', caption: '' },
@@ -206,13 +204,11 @@ export const INTERIOR_PROJECTS = [
       { id: 'assetz-v2-raw-27', src: '/projects/assetz-marq-v2/assetz-v2-raw-27.jpg', caption: '' },
       { id: 'assetz-v2-raw-28', src: '/projects/assetz-marq-v2/assetz-v2-raw-28.jpg', caption: '' },
       { id: 'assetz-v2-raw-29', src: '/projects/assetz-marq-v2/assetz-v2-raw-29.jpg', caption: '' },
-      { id: 'assetz-v2-raw-3', src: '/projects/assetz-marq-v2/assetz-v2-raw-3.jpg', caption: '' },
       { id: 'assetz-v2-raw-30', src: '/projects/assetz-marq-v2/assetz-v2-raw-30.jpg', caption: '' },
       { id: 'assetz-v2-raw-32', src: '/projects/assetz-marq-v2/assetz-v2-raw-32.jpg', caption: '' },
       { id: 'assetz-v2-raw-33', src: '/projects/assetz-marq-v2/assetz-v2-raw-33.jpg', caption: '' },
       { id: 'assetz-v2-raw-34', src: '/projects/assetz-marq-v2/assetz-v2-raw-34.jpg', caption: '' },
-      { id: 'assetz-v2-raw-35', src: '/projects/assetz-marq-v2/assetz-v2-raw-35.jpg', caption: '' },
-      { id: 'assetz-v2-raw-8', src: '/projects/assetz-marq-v2/assetz-v2-raw-8.jpg', caption: '' }
+      { id: 'assetz-v2-raw-35', src: '/projects/assetz-marq-v2/assetz-v2-raw-35.jpg', caption: '' }
     ]
   }
 ];
