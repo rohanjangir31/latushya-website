@@ -88,7 +88,7 @@ export const INTERIOR_PROJECTS = [
     description: 'A vibrant yet sophisticated living area featuring striking teal seating, an elegant false ceiling with warm ambient lighting, and a custom marble-backed entertainment unit.',
     image: '/projects/interior-living-teal.jpg',
     isPlaceholder: false,
-    size: 'large',
+    size: 'medium',
     gallery: [
       { id: 'ws-1', src: '/projects/whatsapp/living-space-1.jpg', caption: '' },
       { id: 'ws-2', src: '/projects/whatsapp/living-space-2.jpg', caption: '' },
