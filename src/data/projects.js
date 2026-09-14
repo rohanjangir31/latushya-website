@@ -210,6 +210,39 @@ export const INTERIOR_PROJECTS = [
       { id: 'assetz-v2-raw-34', src: '/projects/assetz-marq-v2/assetz-v2-raw-34.jpg', caption: '' },
       { id: 'assetz-v2-raw-35', src: '/projects/assetz-marq-v2/assetz-v2-raw-35.jpg', caption: '' }
     ]
+  },
+  {
+    id: 10,
+    category: 'Turnkey Interiors',
+    title: 'Mr. Ish Residence',
+    location: 'Bangalore',
+    projectType: 'Interior Makeover',
+    materials: 'Premium Finishes',
+    duration: '45 Days',
+    description: 'A bespoke interior design project showcasing premium finishes and modern architectural elements tailored for a luxurious lifestyle.',
+    image: '/projects/mr-ish-processed/mr-ish-1.jpg',
+    isPlaceholder: false,
+    size: 'medium',
+    gallery: [
+      { id: 'mr-ish-1', src: '/projects/mr-ish-processed/mr-ish-1.jpg', caption: '' },
+      { id: 'mr-ish-10', src: '/projects/mr-ish-processed/mr-ish-10.jpg', caption: '' },
+      { id: 'mr-ish-11', src: '/projects/mr-ish-processed/mr-ish-11.jpg', caption: '' },
+      { id: 'mr-ish-12', src: '/projects/mr-ish-processed/mr-ish-12.jpg', caption: '' },
+      { id: 'mr-ish-13', src: '/projects/mr-ish-processed/mr-ish-13.jpg', caption: '' },
+      { id: 'mr-ish-14', src: '/projects/mr-ish-processed/mr-ish-14.jpg', caption: '' },
+      { id: 'mr-ish-15', src: '/projects/mr-ish-processed/mr-ish-15.jpg', caption: '' },
+      { id: 'mr-ish-16', src: '/projects/mr-ish-processed/mr-ish-16.jpg', caption: '' },
+      { id: 'mr-ish-17', src: '/projects/mr-ish-processed/mr-ish-17.jpg', caption: '' },
+      { id: 'mr-ish-18', src: '/projects/mr-ish-processed/mr-ish-18.jpg', caption: '' },
+      { id: 'mr-ish-2', src: '/projects/mr-ish-processed/mr-ish-2.jpg', caption: '' },
+      { id: 'mr-ish-3', src: '/projects/mr-ish-processed/mr-ish-3.jpg', caption: '' },
+      { id: 'mr-ish-4', src: '/projects/mr-ish-processed/mr-ish-4.jpg', caption: '' },
+      { id: 'mr-ish-5', src: '/projects/mr-ish-processed/mr-ish-5.jpg', caption: '' },
+      { id: 'mr-ish-6', src: '/projects/mr-ish-processed/mr-ish-6.jpg', caption: '' },
+      { id: 'mr-ish-7', src: '/projects/mr-ish-processed/mr-ish-7.jpg', caption: '' },
+      { id: 'mr-ish-8', src: '/projects/mr-ish-processed/mr-ish-8.jpg', caption: '' },
+      { id: 'mr-ish-9', src: '/projects/mr-ish-processed/mr-ish-9.jpg', caption: '' }
+    ]
   }
 ];
 
