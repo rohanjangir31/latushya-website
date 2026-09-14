@@ -167,7 +167,7 @@ export const INTERIOR_PROJECTS = [
     materials: 'White Laminate, Walnut Accents',
     duration: '28 Days',
     description: 'A serene bedroom environment maximizing space with a custom white-and-timber wardrobe, integrated window seating, and a dedicated vanity with a minimalist circular mirror.',
-    image: '/projects/assetz-marq-v2/assetz-v2-1.jpg',
+    image: '/projects/assetz-marq-v2/assetz-v2-7.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
@@ -220,7 +220,7 @@ export const INTERIOR_PROJECTS = [
     materials: 'Premium Finishes',
     duration: '45 Days',
     description: 'A bespoke interior design project showcasing premium finishes and modern architectural elements tailored for a luxurious lifestyle.',
-    image: '/projects/mr-ish-processed/mr-ish-1.jpg',
+    image: '/projects/mr-ish-processed/mr-ish-16.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
