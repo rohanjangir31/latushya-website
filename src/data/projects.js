@@ -220,7 +220,7 @@ export const INTERIOR_PROJECTS = [
     materials: 'Premium Finishes',
     duration: '45 Days',
     description: 'A bespoke interior design project showcasing premium finishes and modern architectural elements tailored for a luxurious lifestyle.',
-    image: '/projects/mr-ish-processed/mr-ish-16.jpg',
+    image: '/projects/mr-ish-processed/mr-ish-5.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
