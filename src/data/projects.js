@@ -137,11 +137,10 @@ export const INTERIOR_PROJECTS = [
     materials: 'White Laminate, Walnut Accents',
     duration: '28 Days',
     description: 'A serene bedroom environment maximizing space with a custom white-and-timber wardrobe, integrated window seating, and a dedicated vanity with a minimalist circular mirror.',
-    image: '/projects/interior-bedroom-floral.jpg',
+    image: '/projects/assetz-marq/assetz-1.jpg',
     isPlaceholder: false,
     size: 'medium',
     gallery: [
-      { id: 'i3-1', src: '/projects/interior-bedroom-floral.jpg', caption: 'Integrated storage and vanity.' },
       { id: 'assetz-1', src: '/projects/assetz-marq/assetz-1.jpg', caption: '' },
       { id: 'assetz-2', src: '/projects/assetz-marq/assetz-2.jpg', caption: '' },
       { id: 'assetz-3', src: '/projects/assetz-marq/assetz-3.jpg', caption: '' },
