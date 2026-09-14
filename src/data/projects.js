@@ -141,7 +141,33 @@ export const INTERIOR_PROJECTS = [
     isPlaceholder: false,
     size: 'medium',
     gallery: [
-      { id: 'i3-1', src: '/projects/interior-bedroom-floral.jpg', caption: 'Integrated storage and vanity.' }
+      { id: 'i3-1', src: '/projects/interior-bedroom-floral.jpg', caption: 'Integrated storage and vanity.' },
+      { id: 'assetz-1', src: '/projects/assetz-marq/assetz-1.jpg', caption: '' },
+      { id: 'assetz-2', src: '/projects/assetz-marq/assetz-2.jpg', caption: '' },
+      { id: 'assetz-3', src: '/projects/assetz-marq/assetz-3.jpg', caption: '' },
+      { id: 'assetz-4', src: '/projects/assetz-marq/assetz-4.jpg', caption: '' },
+      { id: 'assetz-5', src: '/projects/assetz-marq/assetz-5.jpg', caption: '' },
+      { id: 'assetz-6', src: '/projects/assetz-marq/assetz-6.jpg', caption: '' },
+      { id: 'assetz-7', src: '/projects/assetz-marq/assetz-7.jpg', caption: '' },
+      { id: 'assetz-8', src: '/projects/assetz-marq/assetz-8.jpg', caption: '' },
+      { id: 'assetz-9', src: '/projects/assetz-marq/assetz-9.jpg', caption: '' },
+      { id: 'assetz-10', src: '/projects/assetz-marq/assetz-10.jpg', caption: '' },
+      { id: 'assetz-11', src: '/projects/assetz-marq/assetz-11.jpg', caption: '' },
+      { id: 'assetz-12', src: '/projects/assetz-marq/assetz-12.jpg', caption: '' },
+      { id: 'assetz-13', src: '/projects/assetz-marq/assetz-13.jpg', caption: '' },
+      { id: 'assetz-14', src: '/projects/assetz-marq/assetz-14.jpg', caption: '' },
+      { id: 'assetz-15', src: '/projects/assetz-marq/assetz-15.jpg', caption: '' },
+      { id: 'assetz-16', src: '/projects/assetz-marq/assetz-16.jpg', caption: '' },
+      { id: 'assetz-17', src: '/projects/assetz-marq/assetz-17.jpg', caption: '' },
+      { id: 'assetz-18', src: '/projects/assetz-marq/assetz-18.jpg', caption: '' },
+      { id: 'assetz-19', src: '/projects/assetz-marq/assetz-19.jpg', caption: '' },
+      { id: 'assetz-20', src: '/projects/assetz-marq/assetz-20.jpg', caption: '' },
+      { id: 'assetz-21', src: '/projects/assetz-marq/assetz-21.jpg', caption: '' },
+      { id: 'assetz-22', src: '/projects/assetz-marq/assetz-22.jpg', caption: '' },
+      { id: 'assetz-23', src: '/projects/assetz-marq/assetz-23.jpg', caption: '' },
+      { id: 'assetz-24', src: '/projects/assetz-marq/assetz-24.jpg', caption: '' },
+      { id: 'assetz-25', src: '/projects/assetz-marq/assetz-25.jpg', caption: '' },
+      { id: 'assetz-26', src: '/projects/assetz-marq/assetz-26.jpg', caption: '' }
     ]
   }
 ];
