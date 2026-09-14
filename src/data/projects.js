@@ -142,10 +142,6 @@ export const INTERIOR_PROJECTS = [
     size: 'medium',
     gallery: [
       { id: 'assetz-1', src: '/projects/assetz-marq/assetz-1.jpg', caption: '' },
-      { id: 'assetz-3', src: '/projects/assetz-marq/assetz-3.jpg', caption: '' },
-      { id: 'assetz-4', src: '/projects/assetz-marq/assetz-4.jpg', caption: '' },
-      { id: 'assetz-7', src: '/projects/assetz-marq/assetz-7.jpg', caption: '' },
-      { id: 'assetz-9', src: '/projects/assetz-marq/assetz-9.jpg', caption: '' },
       { id: 'assetz-10', src: '/projects/assetz-marq/assetz-10.jpg', caption: '' },
       { id: 'assetz-11', src: '/projects/assetz-marq/assetz-11.jpg', caption: '' },
       { id: 'assetz-13', src: '/projects/assetz-marq/assetz-13.jpg', caption: '' },
@@ -160,7 +156,29 @@ export const INTERIOR_PROJECTS = [
       { id: 'assetz-23', src: '/projects/assetz-marq/assetz-23.jpg', caption: '' },
       { id: 'assetz-24', src: '/projects/assetz-marq/assetz-24.jpg', caption: '' },
       { id: 'assetz-25', src: '/projects/assetz-marq/assetz-25.jpg', caption: '' },
-      { id: 'assetz-26', src: '/projects/assetz-marq/assetz-26.jpg', caption: '' }
+      { id: 'assetz-26', src: '/projects/assetz-marq/assetz-26.jpg', caption: '' },
+      { id: 'assetz-3', src: '/projects/assetz-marq/assetz-3.jpg', caption: '' },
+      { id: 'assetz-4', src: '/projects/assetz-marq/assetz-4.jpg', caption: '' },
+      { id: 'assetz-7', src: '/projects/assetz-marq/assetz-7.jpg', caption: '' },
+      { id: 'assetz-9', src: '/projects/assetz-marq/assetz-9.jpg', caption: '' },
+      { id: 'assetz-raw-10', src: '/projects/assetz-marq/assetz-raw-10.jpg', caption: '' },
+      { id: 'assetz-raw-11', src: '/projects/assetz-marq/assetz-raw-11.jpg', caption: '' },
+      { id: 'assetz-raw-12', src: '/projects/assetz-marq/assetz-raw-12.jpg', caption: '' },
+      { id: 'assetz-raw-13', src: '/projects/assetz-marq/assetz-raw-13.jpg', caption: '' },
+      { id: 'assetz-raw-15', src: '/projects/assetz-marq/assetz-raw-15.jpg', caption: '' },
+      { id: 'assetz-raw-16', src: '/projects/assetz-marq/assetz-raw-16.jpg', caption: '' },
+      { id: 'assetz-raw-17', src: '/projects/assetz-marq/assetz-raw-17.jpg', caption: '' },
+      { id: 'assetz-raw-18', src: '/projects/assetz-marq/assetz-raw-18.jpg', caption: '' },
+      { id: 'assetz-raw-19', src: '/projects/assetz-marq/assetz-raw-19.jpg', caption: '' },
+      { id: 'assetz-raw-2', src: '/projects/assetz-marq/assetz-raw-2.jpg', caption: '' },
+      { id: 'assetz-raw-23', src: '/projects/assetz-marq/assetz-raw-23.jpg', caption: '' },
+      { id: 'assetz-raw-24', src: '/projects/assetz-marq/assetz-raw-24.jpg', caption: '' },
+      { id: 'assetz-raw-27', src: '/projects/assetz-marq/assetz-raw-27.jpg', caption: '' },
+      { id: 'assetz-raw-29', src: '/projects/assetz-marq/assetz-raw-29.jpg', caption: '' },
+      { id: 'assetz-raw-3', src: '/projects/assetz-marq/assetz-raw-3.jpg', caption: '' },
+      { id: 'assetz-raw-5', src: '/projects/assetz-marq/assetz-raw-5.jpg', caption: '' },
+      { id: 'assetz-raw-7', src: '/projects/assetz-marq/assetz-raw-7.jpg', caption: '' },
+      { id: 'assetz-raw-8', src: '/projects/assetz-marq/assetz-raw-8.jpg', caption: '' }
     ]
   }
 ];
