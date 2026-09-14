@@ -473,21 +473,22 @@ export default function Projects({
             Subsequent projects alternate Split Left and Split Right.
         ────────────────────────────────────────────────────────────────── */}
         {projectsData.map((project, index) => {
-          if (index === 0) {
+          if (project.size === 'large') {
             return (
-              <FeaturedProject 
-                key={project.id || index} 
-                project={project} 
-                inView={inView} 
-                onOpenGallery={() => openGallery(project)} 
-              />
+              <div key={project.id || index} style={{ marginTop: index === 0 ? '0' : '188px' }}>
+                <FeaturedProject 
+                  project={project} 
+                  inView={inView} 
+                  onOpenGallery={() => openGallery(project)} 
+                />
+              </div>
             );
           }
           
-          const isImageLeft = index % 2 !== 0; // 1 -> true, 2 -> false, 3 -> true...
+          const isImageLeft = index % 2 === 0; // 0 -> true, 1 -> false, 2 -> true...
           
           return (
-            <div key={project.id || index} style={{ marginTop: '188px' }}>
+            <div key={project.id || index} style={{ marginTop: index === 0 ? '0' : '188px' }}>
               <SplitProject
                 project={project}
                 index={index}
