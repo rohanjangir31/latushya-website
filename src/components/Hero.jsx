@@ -51,7 +51,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="hero"
-      className="relative h-screen min-h-[640px] overflow-hidden bg-[#03070E]"
+      className="relative min-h-[100svh] lg:h-screen lg:overflow-hidden bg-[#03070E]"
     >
       {/* ── FULL-BLEED BACKGROUND IMAGE / VIDEO ──────────────────
           On mobile, we place the video inside an aspect-video container with
@@ -127,12 +127,12 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* ── CONTENT BLOCK — lower-left third ─────────────────── */}
+      {/* ── CONTENT BLOCK ─ lower-left third ───────────────────────── */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 h-full flex items-end"
+        className="relative z-10 min-h-[100svh] lg:h-full flex flex-col justify-end lg:flex-row lg:items-end"
       >
-        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-24 lg:pt-0">
+        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-[45vh] lg:pt-0">
           
           {/* Left Text Block */}
           <div className="max-w-[560px] w-full">
