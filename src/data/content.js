@@ -213,6 +213,13 @@ export const GALLERY_IMAGES = [
   { id: 8, src: '/gallery-new/photo-2.jpg', alt: 'Custom Space Planning', category: 'Recent Projects', isPlaceholder: false },
   { id: 9, src: '/gallery-new/photo-3.jpg', alt: 'Frosted Glass Wardrobe', category: 'Recent Projects', isPlaceholder: false },
   { id: 10, src: '/gallery-new/photo-4.jpg', alt: 'Bespoke TV Unit Design', category: 'Recent Projects', isPlaceholder: false },
+  { id: 11, src: '/gallery-new/photo-11.jpg', alt: 'Luxury Home Details', category: 'Recent Projects', isPlaceholder: false },
+  { id: 12, src: '/gallery-new/photo-12.jpg', alt: 'Modern Living Aesthetics', category: 'Recent Projects', isPlaceholder: false },
+  { id: 13, src: '/gallery-new/photo-13.jpg', alt: 'Refined Turnkey Execution', category: 'Recent Projects', isPlaceholder: false },
+  { id: 14, src: '/gallery-new/photo-14.jpg', alt: 'Bespoke Custom Furniture', category: 'Recent Projects', isPlaceholder: false },
+  { id: 15, src: '/gallery-new/photo-15.jpg', alt: 'Sophisticated Wardrobe System', category: 'Recent Projects', isPlaceholder: false },
+  { id: 16, src: '/gallery-new/photo-16.jpg', alt: 'Tailored Lighting & Ambiance', category: 'Recent Projects', isPlaceholder: false },
+  { id: 17, src: '/gallery-new/photo-17.jpg', alt: 'Signature Latushya Finish', category: 'Recent Projects', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────
