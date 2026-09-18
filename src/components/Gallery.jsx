@@ -135,12 +135,13 @@ export default function Gallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="w-full h-full flex flex-col items-center justify-center p-6 pb-20 lg:p-12 lg:pb-24 relative pointer-events-none gap-4"
+                className="flex flex-col items-center justify-center relative pointer-events-none gap-4 max-w-[95vw] lg:max-w-[85vw] max-h-[85vh] mx-auto"
               >
                 <img
                   src={GALLERY_IMAGES[lightboxIndex].src}
                   alt={GALLERY_IMAGES[lightboxIndex].alt}
-                  className="max-w-full min-h-0 h-full object-contain drop-shadow-2xl rounded-2xl pointer-events-auto"
+                  className="max-w-full min-h-0 object-contain drop-shadow-2xl rounded-2xl pointer-events-auto"
+                  style={{ maxHeight: 'calc(85vh - 100px)' }}
                   onClick={(e) => e.stopPropagation()}
                   loading="eager"
                 />
