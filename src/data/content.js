@@ -209,16 +209,10 @@ export const GALLERY_IMAGES = [
   { id: 6, src: '/projects/mr-ish-processed/mr-ish-5.jpg', alt: 'Modern Dining Space with Glass Partition', category: 'Turnkey Interiors', isPlaceholder: false },
   
   // New Client Uploads
-  { id: 7, src: '/gallery-new/photo-1.jpg', alt: 'Premium Interior Concept', category: 'Recent Projects', isPlaceholder: false },
+  { id: 7, src: '/gallery-new/photo-1.jpg', alt: 'Premium Sliding Wardrobe', category: 'Recent Projects', isPlaceholder: false },
   { id: 8, src: '/gallery-new/photo-2.jpg', alt: 'Custom Space Planning', category: 'Recent Projects', isPlaceholder: false },
-  { id: 9, src: '/gallery-new/photo-3.jpg', alt: 'Elegant Wood & Texture Finishes', category: 'Recent Projects', isPlaceholder: false },
-  { id: 10, src: '/gallery-new/photo-4.jpg', alt: 'Luxury Home Details', category: 'Recent Projects', isPlaceholder: false },
-  { id: 11, src: '/gallery-new/photo-5.jpg', alt: 'Modern Living Aesthetics', category: 'Recent Projects', isPlaceholder: false },
-  { id: 12, src: '/gallery-new/photo-6.jpg', alt: 'Refined Turnkey Execution', category: 'Recent Projects', isPlaceholder: false },
-  { id: 13, src: '/gallery-new/photo-7.jpg', alt: 'Bespoke Custom Furniture', category: 'Recent Projects', isPlaceholder: false },
-  { id: 14, src: '/gallery-new/photo-8.jpg', alt: 'Sophisticated Wardrobe System', category: 'Recent Projects', isPlaceholder: false },
-  { id: 15, src: '/gallery-new/photo-9.jpg', alt: 'Tailored Lighting & Ambiance', category: 'Recent Projects', isPlaceholder: false },
-  { id: 16, src: '/gallery-new/photo-10.jpg', alt: 'Signature Latushya Finish', category: 'Recent Projects', isPlaceholder: false },
+  { id: 9, src: '/gallery-new/photo-3.jpg', alt: 'Frosted Glass Wardrobe', category: 'Recent Projects', isPlaceholder: false },
+  { id: 10, src: '/gallery-new/photo-4.jpg', alt: 'Bespoke TV Unit Design', category: 'Recent Projects', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────
