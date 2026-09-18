@@ -103,21 +103,12 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black-deep/97 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-[#050B14]/80 backdrop-blur-xl flex items-center justify-center p-4"
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
             aria-label="Image lightbox"
           >
-            {/* Close */}
-            <button
-              onClick={closeLightbox}
-              aria-label="Close lightbox"
-              className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-pink hover:scale-110 transition-all duration-300 z-50 mix-blend-difference"
-            >
-              <X size={32} strokeWidth={1} />
-            </button>
-
             {/* Prev */}
             <button
               onClick={prevImage}
@@ -144,13 +135,13 @@ export default function Gallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="w-full h-full flex items-center justify-center p-4 lg:p-12 relative"
-                onClick={(e) => e.stopPropagation()}
+                className="w-full h-full flex items-center justify-center p-4 lg:p-12 relative pointer-events-none"
               >
                 <img
                   src={GALLERY_IMAGES[lightboxIndex].src}
                   alt={GALLERY_IMAGES[lightboxIndex].alt}
-                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-2xl pointer-events-auto"
+                  onClick={(e) => e.stopPropagation()}
                   loading="eager"
                 />
 
