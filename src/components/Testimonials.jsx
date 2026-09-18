@@ -176,12 +176,12 @@ export default function Testimonials() {
                     />
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  <button onClick={prev} aria-label="Previous review" className="w-12 h-12 border border-gray-luxury/30 hover:border-pink/50 flex items-center justify-center text-gray-subtle hover:text-pink transition-all duration-300 group">
-                    <ChevronLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+                <div className="flex gap-4">
+                  <button onClick={prev} aria-label="Previous review" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-pink/50 hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(223,76,115,0.3)] flex items-center justify-center text-white/70 hover:text-pink transition-all duration-300 group">
+                    <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
                   </button>
-                  <button onClick={next} aria-label="Next review" className="w-12 h-12 border border-gray-luxury/30 hover:border-pink/50 flex items-center justify-center text-gray-subtle hover:text-pink transition-all duration-300 group">
-                    <ChevronRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
+                  <button onClick={next} aria-label="Next review" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-pink/50 hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(223,76,115,0.3)] flex items-center justify-center text-white/70 hover:text-pink transition-all duration-300 group">
+                    <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
                 </div>
               </div>
