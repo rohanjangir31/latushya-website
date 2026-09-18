@@ -51,7 +51,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="hero"
-      className="relative min-h-[100svh] lg:h-screen lg:overflow-hidden bg-[#03070E]"
+      className="relative min-h-[100svh] overflow-x-hidden lg:h-screen lg:overflow-hidden bg-[#03070E]"
     >
       {/* ── FULL-BLEED BACKGROUND IMAGE / VIDEO ──────────────────
           On mobile, we place the video inside an aspect-video container with
