@@ -49,7 +49,7 @@ function TestimonialCard({ testimonial }) {
   const secondaryQuote = parts.slice(1).join(' ');
 
   return (
-    <div className="relative group overflow-hidden bg-black/40 backdrop-blur-sm border border-white/5 p-8 md:p-12 rounded-3xl hover:border-pink/20 transition-colors duration-700 w-full max-w-5xl mx-auto h-[600px] md:h-[450px] lg:h-[400px] flex flex-col">
+    <div className="relative group overflow-y-auto styled-scrollbar bg-black/40 backdrop-blur-sm border border-white/5 p-8 md:p-12 rounded-3xl hover:border-pink/20 transition-colors duration-700 w-full max-w-5xl mx-auto h-[600px] md:h-[450px] lg:h-[400px] flex flex-col overscroll-contain">
       {/* Glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-tr from-pink/5 to-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -60,7 +60,7 @@ function TestimonialCard({ testimonial }) {
 
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-start h-full">
         {/* Left column: Quote */}
-        <div className="flex-1 overflow-y-auto h-full pr-4 pb-4 styled-scrollbar">
+        <div className="flex-1 pr-2 pb-4">
           <div className="flex items-center gap-1.5 mb-6">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
               <Star key={i} size={14} className="text-pink fill-pink/80 drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]" />
