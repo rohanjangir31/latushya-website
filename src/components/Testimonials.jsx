@@ -49,7 +49,7 @@ function TestimonialCard({ testimonial }) {
   const secondaryQuote = parts.slice(1).join(' ');
 
   return (
-    <div className="relative group overflow-hidden bg-black/40 backdrop-blur-sm border border-white/5 p-8 md:p-12 rounded-3xl hover:border-pink/20 transition-colors duration-700 w-full max-w-5xl mx-auto">
+    <div className="relative group overflow-hidden bg-black/40 backdrop-blur-sm border border-white/5 p-8 md:p-12 rounded-3xl hover:border-pink/20 transition-colors duration-700 w-full max-w-5xl mx-auto h-[600px] md:h-[450px] lg:h-[400px] flex flex-col">
       {/* Glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-tr from-pink/5 to-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -58,9 +58,9 @@ function TestimonialCard({ testimonial }) {
         &ldquo;
       </div>
 
-      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-start">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-start h-full">
         {/* Left column: Quote */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto h-full pr-4 pb-4 styled-scrollbar">
           <div className="flex items-center gap-1.5 mb-6">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
               <Star key={i} size={14} className="text-pink fill-pink/80 drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]" />
@@ -78,7 +78,7 @@ function TestimonialCard({ testimonial }) {
         </div>
 
         {/* Right column: Author info */}
-        <div className="w-full md:w-56 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-10 flex flex-col items-start">
+        <div className="w-full md:w-56 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-10 flex flex-col items-start mt-auto md:mt-0">
           <div className="relative mb-5">
             <div className="absolute inset-0 bg-gradient-to-tr from-pink to-blue blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-700 rounded-full" />
             {testimonial.avatar && testimonial.avatar.length > 1 ? (
