@@ -79,16 +79,21 @@ export default function Hero() {
               }
             }
           `}</style>
-          <video
-            src="/hero-video.mp4"
-            autoPlay
-            muted
-            defaultMuted
-            loop
-            playsInline
-            controls={false}
-            className="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
-            style={{ objectPosition: 'center center' }}
+          <div
+            className="w-full h-full"
+            dangerouslySetInnerHTML={{
+              __html: `
+                <video
+                  src="/hero-video.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
+                  style="object-position: center center; pointer-events: none;"
+                ></video>
+              `
+            }}
           />
         </div>
 

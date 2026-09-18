@@ -58,9 +58,13 @@ function TestimonialCard({ testimonial }) {
         &ldquo;
       </div>
 
-      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-stretch h-full min-h-0">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-16 items-stretch flex-1 min-h-0 w-full">
         {/* Left column: Quote */}
-        <div className="flex-1 overflow-y-auto min-h-0 pr-6 pb-4 styled-scrollbar overscroll-contain">
+        <div 
+          className="flex-1 overflow-y-auto min-h-0 pr-6 pb-4 styled-scrollbar overscroll-contain"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <div className="flex items-center gap-1.5 mb-6">
             {Array.from({ length: testimonial.rating }).map((_, i) => (
               <Star key={i} size={14} className="text-pink fill-pink/80 drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]" />
