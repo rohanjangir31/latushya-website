@@ -205,7 +205,7 @@ export const GALLERY_IMAGES = [
   { id: 2, src: '/assets/wardrobes/sliding-pink-white.jpg', alt: 'Custom Blush & White Sliding Wardrobe', category: 'FTC Wardrobes', isPlaceholder: false },
   { id: 3, src: '/projects/assetz-marq-v2/assetz-v2-7.jpg', alt: 'Elegant Master Bedroom with Textured Walls', category: 'Bedroom Design', isPlaceholder: false },
   { id: 4, src: '/projects/birla-alokya/birla-1.jpg', alt: 'Contemporary Modular Kitchen in Soft Mint', category: 'Modular Kitchens', isPlaceholder: false },
-  { id: 5, src: '/assets/wardrobes/walkin-closet-wood.jpg', alt: 'Premium Wooden Walk-in Closet', category: 'Custom Wardrobes', isPlaceholder: false },
+  { id: 5, src: '/assets/wardrobes/sliding-beige-black.jpg', alt: 'Bold Geometric Sliding Wardrobe', category: 'Custom Wardrobes', isPlaceholder: false },
   { id: 6, src: '/projects/mr-ish-processed/mr-ish-5.jpg', alt: 'Modern Dining Space with Glass Partition', category: 'Turnkey Interiors', isPlaceholder: false },
 ];
 

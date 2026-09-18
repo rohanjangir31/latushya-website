@@ -19,11 +19,11 @@ export const WARDROBE_PROJECTS = [
     materials: 'Warm Timber, Integrated LED Lighting',
     duration: '21 Days',
     description: 'A luxurious walk-in closet featuring warm timber paneling, open shelving for immediate access, and elegant ambient lighting that turns the space into a personal boutique.',
-    image: '/assets/wardrobes/walkin-closet-wood.jpg',
+    image: '/assets/wardrobes/bedroom-wardrobe-combo.jpg',
     isPlaceholder: false,
     size: 'large',
     gallery: [
-      { id: 'w1-1', src: '/assets/wardrobes/walkin-closet-wood.jpg', caption: 'Elegant walk-in with ambient lighting.' }
+      { id: 'w1-1', src: '/assets/wardrobes/bedroom-wardrobe-combo.jpg', caption: 'Elegant walk-in with ambient lighting.' }
     ]
   },
   {
