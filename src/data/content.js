@@ -220,6 +220,22 @@ export const GALLERY_IMAGES = [
   { id: 15, src: '/gallery-new/photo-15.jpg', alt: 'Sophisticated Wardrobe System', category: 'Recent Projects', isPlaceholder: false },
   { id: 16, src: '/gallery-new/photo-16.jpg', alt: 'Tailored Lighting & Ambiance', category: 'Recent Projects', isPlaceholder: false },
   { id: 17, src: '/gallery-new/photo-17.jpg', alt: 'Signature Latushya Finish', category: 'Recent Projects', isPlaceholder: false },
+  { id: 18, src: '/gallery-new/photo-18.jpg', alt: 'Premium Space Design', category: 'Recent Projects', isPlaceholder: false },
+  { id: 19, src: '/gallery-new/photo-19.jpg', alt: 'Elegant Wood & Texture Finishes', category: 'Recent Projects', isPlaceholder: false },
+  { id: 20, src: '/gallery-new/photo-20.jpg', alt: 'Bespoke Custom Furniture', category: 'Recent Projects', isPlaceholder: false },
+  { id: 21, src: '/gallery-new/photo-21.jpg', alt: 'Luxury Home Details', category: 'Recent Projects', isPlaceholder: false },
+  { id: 22, src: '/gallery-new/photo-22.jpg', alt: 'Modern Living Aesthetics', category: 'Recent Projects', isPlaceholder: false },
+  { id: 23, src: '/gallery-new/photo-23.jpg', alt: 'Refined Turnkey Execution', category: 'Recent Projects', isPlaceholder: false },
+  { id: 24, src: '/gallery-new/photo-24.jpg', alt: 'Signature Latushya Finish', category: 'Recent Projects', isPlaceholder: false },
+  { id: 25, src: '/gallery-new/photo-25.jpg', alt: 'Sophisticated Wardrobe System', category: 'Recent Projects', isPlaceholder: false },
+  { id: 26, src: '/gallery-new/photo-26.jpg', alt: 'Tailored Lighting & Ambiance', category: 'Recent Projects', isPlaceholder: false },
+  { id: 27, src: '/gallery-new/photo-27.jpg', alt: 'Minimalist Modular Aesthetics', category: 'Recent Projects', isPlaceholder: false },
+  { id: 28, src: '/gallery-new/photo-28.jpg', alt: 'Custom Built Storage', category: 'Recent Projects', isPlaceholder: false },
+  { id: 29, src: '/gallery-new/photo-29.jpg', alt: 'Turnkey Design Integration', category: 'Recent Projects', isPlaceholder: false },
+  { id: 30, src: '/gallery-new/photo-30.jpg', alt: 'Seamless Finishes', category: 'Recent Projects', isPlaceholder: false },
+  { id: 31, src: '/gallery-new/photo-31.jpg', alt: 'Premium Residential Interiors', category: 'Recent Projects', isPlaceholder: false },
+  { id: 32, src: '/gallery-new/photo-32.jpg', alt: 'Architectural Details', category: 'Recent Projects', isPlaceholder: false },
+  { id: 33, src: '/gallery-new/photo-33.jpg', alt: 'Elegant Space Planning', category: 'Recent Projects', isPlaceholder: false },
 ];
 
 // ─── FAQ ─────────────────────────────────────────────────
