@@ -82,7 +82,7 @@ export default function Hero() {
         className="absolute inset-0 z-0 will-change-transform bg-[#03070E] flex flex-col justify-start lg:block pt-0 lg:pt-0"
       >
         <div
-          className="w-[140%] -left-[20%] -mt-[6vh] sm:-mt-[4vh] relative lg:w-full lg:left-0 lg:mt-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
+          className="w-[140%] -left-[20%] -mt-[3vh] sm:-mt-[2vh] relative lg:w-full lg:left-0 lg:mt-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
           style={{
             WebkitMaskImage: 'var(--mobile-mask, none)',
             WebkitMaskComposite: 'source-in',
