@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { COMPANY } from '../data/content';
 import QuoteForm from './QuoteForm';
@@ -24,6 +24,24 @@ export default function Hero() {
     target: ref,
     offset: ['start start', 'end start'],
   });
+
+  // Force play on iOS if blocked by low power mode
+  useEffect(() => {
+    const tryPlay = () => {
+      const vid = document.getElementById('hero-video-bg');
+      if (vid && vid.paused) {
+        vid.play().catch(() => {});
+      }
+    };
+    window.addEventListener('touchstart', tryPlay, { once: true });
+    window.addEventListener('click', tryPlay, { once: true });
+    // Also try immediately
+    tryPlay();
+    return () => {
+      window.removeEventListener('touchstart', tryPlay);
+      window.removeEventListener('click', tryPlay);
+    };
+  }, []);
 
   // Subtle parallax: image drifts slightly slower than scroll
   const imageY  = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
@@ -61,7 +79,7 @@ export default function Hero() {
           On desktop, it switches to absolute inset-0 full-bleed object-cover. ── */}
       <motion.div
         style={{ y: imageY }}
-        className="absolute inset-0 z-0 will-change-transform bg-[#03070E] flex flex-col justify-start lg:block pt-14 sm:pt-20 lg:pt-0"
+        className="absolute inset-0 z-0 will-change-transform bg-[#03070E] flex flex-col justify-start lg:block pt-0 lg:pt-0"
       >
         <div
           className="w-[140%] -left-[20%] relative lg:w-full lg:left-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
@@ -84,11 +102,12 @@ export default function Hero() {
             dangerouslySetInnerHTML={{
               __html: `
                 <video
+                  id="hero-video-bg"
                   src="/hero-video.mp4"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
+                  autoplay="autoplay"
+                  loop="loop"
+                  muted="muted"
+                  playsinline="playsinline"
                   class="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
                   style="object-position: center center; pointer-events: none;"
                 ></video>
