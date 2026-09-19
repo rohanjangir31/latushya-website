@@ -41,25 +41,35 @@ function BentoCard({ service, index }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[0.16,1,0.3,1]" />
 
       <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-10 pointer-events-none">
-        <div className="relative z-10 transition-transform duration-700 ease-[0.16,1,0.3,1] transform group-hover:-translate-y-[100px] md:group-hover:-translate-y-[110px]">
-          <span className="text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold block mb-3 drop-shadow-md">
-            {service.tagline}
-          </span>
-          <h3 className="font-display text-3xl lg:text-4xl text-white font-light drop-shadow-lg leading-tight">
-            {service.title}
-          </h3>
-        </div>
-        
-        <div className="absolute bottom-6 lg:bottom-10 left-6 lg:left-10 right-6 lg:right-10 opacity-0 translate-y-8 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[0.16,1,0.3,1] z-20 pointer-events-auto">
-          <p className="text-white/80 text-sm leading-relaxed mb-5 max-w-[90%] font-light line-clamp-3 md:line-clamp-none">
-            {service.description}
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 text-white border-b border-white/30 hover:border-[#DF4C73] hover:text-[#DF4C73] pb-1 text-[10px] tracking-[0.25em] uppercase font-semibold transition-colors duration-300 w-max"
-          >
-            Inquire Now <span className="text-lg leading-none">→</span>
-          </Link>
+        <div className="relative z-10 w-full">
+          
+          {/* Always visible header */}
+          <div className="transform transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:-translate-y-2">
+            <span className="text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold block mb-2 drop-shadow-md">
+              {service.tagline}
+            </span>
+            <h3 className="font-display text-3xl lg:text-4xl text-white font-light drop-shadow-lg leading-tight">
+              {service.title}
+            </h3>
+          </div>
+          
+          {/* Expanding description container */}
+          <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-700 ease-[0.16,1,0.3,1] pointer-events-auto">
+            <div className="overflow-hidden">
+              <div className="pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 flex flex-col">
+                <p className="text-white/80 text-sm leading-relaxed mb-5 max-w-[90%] font-light">
+                  {service.description}
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-3 text-white border-b border-white/30 hover:border-[#DF4C73] hover:text-[#DF4C73] pb-1 text-[10px] tracking-[0.25em] uppercase font-semibold transition-colors duration-300 w-max"
+                >
+                  Inquire Now <span className="text-lg leading-none">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </motion.div>
