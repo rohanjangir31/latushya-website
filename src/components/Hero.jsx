@@ -93,7 +93,7 @@ export default function Hero() {
           <style>{`
             @media (max-width: 1023px) {
               .aspect-video {
-                --mobile-mask: linear-gradient(to bottom, transparent 0%, black 18%, black 75%, transparent 100%);
+                --mobile-mask: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
               }
             }
           `}</style>
