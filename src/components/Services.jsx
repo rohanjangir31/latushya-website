@@ -43,8 +43,8 @@ export default function Services() {
         </div>
 
         {/* ── Main Layout: sidebar + content, same height ── */}
-        {/* On desktop: fixed 440px height box so photo == info panel == sidebar natural height */}
-        <div className="flex flex-col lg:flex-row gap-6 lg:h-[440px]">
+        {/* On desktop: ultra-compact 340px height to perfectly match the 5 topics */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:h-[340px]">
 
           {/* Left — Tab sidebar: full height */}
           <div className="flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:w-[230px] xl:w-[260px] shrink-0 scroll-hidden lg:h-full">
@@ -55,7 +55,7 @@ export default function Services() {
                 <button
                   key={s.id}
                   onClick={() => setActive(i)}
-                  className={`relative group text-left px-4 py-3 lg:py-4 rounded-2xl transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink border overflow-hidden
+                  className={`relative group text-left px-4 py-3 lg:py-3 rounded-2xl transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink border overflow-hidden
                     ${active === i
                       ? 'bg-white/[0.07] border-[#DF4C73]/30 text-white'
                       : 'bg-transparent border-transparent text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
@@ -94,8 +94,8 @@ export default function Services() {
               ))}
             </div>
 
-            {/* Inquire Now — pinned to the bottom of the sidebar on desktop */}
-            <div className="hidden lg:flex flex-1 items-end pl-4 pb-1">
+            {/* Inquire Now — placed naturally below tabs */}
+            <div className="hidden lg:flex mt-5 pl-4 pb-1">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
@@ -139,26 +139,26 @@ export default function Services() {
                 </div>
 
                 {/* Info panel — same height as photo */}
-                <div className="flex flex-col rounded-3xl bg-white/[0.04] border border-white/[0.07] p-8 lg:p-8 h-full">
+                <div className="flex flex-col rounded-3xl bg-white/[0.04] border border-white/[0.07] p-6 lg:p-7 h-full">
 
                   {/* Top: counter + title + rule */}
                   <div>
-                    <span className="text-[#DF4C73]/50 text-[10px] tracking-[0.45em] uppercase font-semibold mb-4 block">
+                    <span className="text-[#DF4C73]/50 text-[10px] tracking-[0.45em] uppercase font-semibold mb-2 block">
                       {String(active + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
                     </span>
 
                     <h3
-                      className="font-display font-light text-white leading-tight mb-4"
-                      style={{ fontSize: 'clamp(1.7rem, 2.5vw, 2.4rem)' }}
+                      className="font-display font-light text-white leading-tight mb-2"
+                      style={{ fontSize: 'clamp(1.5rem, 2.2vw, 2.2rem)' }}
                     >
                       {service.title}
                     </h3>
 
-                    <div className="w-10 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-6 rounded-full" />
+                    <div className="w-10 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-4 rounded-full" />
                   </div>
 
                   {/* Middle: bullet points — flex-1 so they expand to fill space */}
-                  <ul className="flex flex-col gap-4 flex-1">
+                  <ul className="flex flex-col gap-2.5 flex-1">
                     {service.bullets.map((bullet, i) => (
                       <motion.li
                         key={i}
@@ -168,7 +168,7 @@ export default function Services() {
                         className="flex items-start gap-3 group/bullet"
                       >
                         <span className="mt-[6px] w-[5px] h-[5px] rounded-full bg-[#DF4C73] flex-shrink-0 opacity-80 group-hover/bullet:opacity-100 group-hover/bullet:scale-125 transition-all duration-200" />
-                        <span className="text-white/65 text-sm leading-snug font-light group-hover/bullet:text-white/90 transition-colors duration-200">
+                        <span className="text-white/65 text-[13px] leading-snug font-light group-hover/bullet:text-white/90 transition-colors duration-200">
                           {bullet}
                         </span>
                       </motion.li>
@@ -176,7 +176,7 @@ export default function Services() {
                   </ul>
 
                   {/* Bottom: CTA pinned to bottom */}
-                  <div className="mt-6 pt-5 border-t border-white/[0.06] flex items-center justify-between">
+                  <div className="mt-4 pt-4 border-t border-white/[0.06] flex items-center justify-between">
                     <Link
                       to="/contact"
                       className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
@@ -189,14 +189,14 @@ export default function Services() {
                       <button
                         onClick={() => setActive(i => Math.max(0, i - 1))}
                         disabled={active === 0}
-                        className="w-8 h-8 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
+                        className="w-7 h-7 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
                       >
                         ←
                       </button>
                       <button
                         onClick={() => setActive(i => Math.min(SERVICES.length - 1, i + 1))}
                         disabled={active === SERVICES.length - 1}
-                        className="w-8 h-8 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
+                        className="w-7 h-7 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
                       >
                         →
                       </button>
