@@ -1,165 +1,68 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Layout, UtensilsCrossed, Sofa, PenTool, ShoppingBag } from 'lucide-react';
-import { SERVICES, COMPANY } from '../data/content';
+import { SERVICES } from '../data/content';
 import { TextReveal } from '../utils/animations';
 import { Link } from 'react-router-dom';
 
-const DoorOpenIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-    strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
-    <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
-    <path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/>
-    <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/>
-  </svg>
-);
-
-const iconMap = { Layout, UtensilsCrossed, Sofa, PenTool, ShoppingBag, DoorOpen: DoorOpenIcon };
-
-function ServiceRow({ service, index }) {
+function BentoCard({ service, index }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const Icon = iconMap[service.icon] || Layout;
-  const isEven = index % 2 === 0;
+  const inView = useInView(ref, { once: true, margin: '-50px' });
+  
+  const getGridClasses = (i) => {
+    switch(i) {
+      case 0: return 'lg:col-span-2 lg:row-span-2 aspect-[4/5] lg:aspect-auto min-h-[400px] lg:min-h-[600px]'; // Big hero
+      case 1: return 'lg:col-span-1 lg:row-span-1 aspect-[4/5] lg:aspect-square min-h-[300px]'; 
+      case 2: return 'lg:col-span-1 lg:row-span-1 aspect-[4/5] lg:aspect-square min-h-[300px]';
+      case 3: return 'lg:col-span-1 lg:row-span-1 aspect-[4/5] lg:aspect-[4/3] min-h-[300px]';
+      case 4: return 'lg:col-span-2 lg:row-span-1 aspect-[4/5] lg:aspect-[21/9] min-h-[300px]';
+      default: return 'lg:col-span-1 aspect-[4/5]';
+    }
+  };
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      id={service.id}
-      className={`group relative overflow-hidden border-b border-gray-luxury/[0.1] last:border-b-0
-        grid grid-cols-1 lg:grid-cols-[3fr_2fr] lg:h-[480px] scroll-mt-[80px]`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className={`group relative overflow-hidden rounded-3xl bg-[#0a0f16] ${getGridClasses(index)} shadow-2xl`}
     >
-      {/* ── IMAGE — takes 60% on desktop ─────────────────── */}
-      <div
-        className={`relative overflow-hidden h-[300px] lg:h-auto
-          ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
-      >
-        {/* Image */}
-        <motion.img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover"
-          style={{ objectPosition: service.objectPosition || 'center center' }}
-          loading="lazy"
-          decoding="async"
-          initial={{ scale: 1.1 }}
-          animate={inView ? { scale: 1 } : { scale: 1.1 }}
-          transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
-        {/* Subdued bottom gradient for caption legibility only */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black-deep/30 via-transparent to-transparent opacity-80" />
+      <img
+        src={service.image}
+        alt={service.title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[0.16,1,0.3,1] group-hover:scale-105"
+        loading="lazy"
+      />
+      
+      {/* Dark gradient base that's always there for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
+      
+      {/* Additional dark gradient that fades in on hover for the description */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[0.16,1,0.3,1]" />
 
-        {/* Photo caption — editorial style, bottom of image */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          className={`absolute bottom-5 flex items-center gap-3 z-10
-            ${isEven ? 'left-5' : 'right-5 flex-row-reverse'}`}
-        >
-          <div className="w-8 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
-          <span className="text-white/30 text-[8px] tracking-[0.32em] uppercase">
-            Bangalore · Custom Made
+      <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-10 pointer-events-none">
+        <div className="relative z-10 transition-transform duration-700 ease-[0.16,1,0.3,1] transform group-hover:-translate-y-[100px] md:group-hover:-translate-y-[110px]">
+          <span className="text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold block mb-3 drop-shadow-md">
+            {service.tagline}
           </span>
-        </motion.div>
-      </div>
-
-      {/* ── TEXT — takes 40% on desktop ──────────────────── */}
-      <div
-        className={`relative flex flex-col justify-center px-8 py-12 lg:px-14 lg:py-16
-          bg-black-deep overflow-hidden
-          ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
-      >
-        {/* ── OVERSIZED DECORATIVE NUMERAL ─────────────────
-            Bleeds off the right (or left) edge of the text panel.
-            Creates spatial depth and breaks the "content box" feel. */}
-        <div
-          className={`absolute top-1/2 -translate-y-1/2 font-display font-bold
-            text-white/[0.035] leading-none select-none pointer-events-none
-            transition-all duration-700 group-hover:text-white/[0.055]
-            ${isEven ? '-right-6' : '-left-6'}`}
-          style={{ fontSize: 'clamp(7rem, 13vw, 12rem)' }}
-          aria-hidden="true"
-        >
-          {String(index + 1).padStart(2, '0')}
-        </div>
-
-        {/* Hover top-line — but only on the text panel, not the image */}
-        <div className={`absolute top-0 w-0 h-0.5 bg-pink transition-all duration-700 group-hover:w-full
-          ${isEven ? 'left-0' : 'right-0'}`}
-        />
-
-        {/* Hover bg shift */}
-        <div className="absolute inset-0 bg-black-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        <div className="relative z-10">
-          {/* Icon row */}
-          <motion.div
-            initial={{ opacity: 0, x: isEven ? -16 : 16 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.18 }}
-            className="flex items-center gap-3 mb-6"
-          >
-            <div className="w-9 h-9 border border-pink/25 group-hover:border-pink/60 group-hover:bg-pink/[0.08] flex items-center justify-center transition-all duration-400 flex-shrink-0">
-              <Icon className="text-pink" />
-            </div>
-            <span className="text-pink/70 text-[8px] tracking-[0.38em] uppercase font-medium">
-              {service.tagline}
-            </span>
-          </motion.div>
-
-          {/* Title */}
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.85, delay: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-display font-light text-white group-hover:text-pink/90
-              transition-colors duration-400 leading-[1.05] mb-5"
-            style={{ fontSize: 'clamp(1.9rem, 3.2vw, 2.8rem)' }}
-          >
+          <h3 className="font-display text-3xl lg:text-4xl text-white font-light drop-shadow-lg leading-tight">
             {service.title}
-          </motion.h3>
-
-          {/* Animated pink rule — grows in on scroll */}
-          <motion.div
-            initial={{ width: 0 }}
-            animate={inView ? { width: '2.5rem' } : {}}
-            transition={{ duration: 0.55, delay: 0.4 }}
-            className="h-[2px] bg-gradient-to-r from-pink to-blue opacity-80 mb-6"
-          />
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.44 }}
-            className="text-gray-subtle text-sm leading-[1.85] max-w-[300px] mb-9 font-light"
-          >
+          </h3>
+        </div>
+        
+        <div className="absolute bottom-6 lg:bottom-10 left-6 lg:left-10 right-6 lg:right-10 opacity-0 translate-y-8 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-[0.16,1,0.3,1] z-20 pointer-events-auto">
+          <p className="text-white/80 text-sm leading-relaxed mb-5 max-w-[90%] font-light line-clamp-3 md:line-clamp-none">
             {service.description}
-          </motion.p>
-
-          {/* CTA — styled like the reference image, now routing to /contact */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.58 }}
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 text-white border-b border-white/30 hover:border-[#DF4C73] hover:text-[#DF4C73] pb-1 text-[10px] tracking-[0.25em] uppercase font-semibold transition-colors duration-300 w-max"
           >
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-4 border-b border-pink/40 pb-1.5 group/link
-                hover:border-pink/90 transition-colors duration-300 w-max cursor-pointer"
-            >
-              <span className="text-pink text-[10px] tracking-[0.32em] uppercase font-medium">
-                Inquire Now
-              </span>
-              <span className="text-pink text-sm group-hover/link:translate-x-1 transition-transform duration-300">
-                →
-              </span>
-            </Link>
-          </motion.div>
+            Inquire Now <span className="text-lg leading-none">→</span>
+          </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -168,58 +71,49 @@ export default function Services() {
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="services" className="bg-black-deep">
-
-      {/* ── Section header ──────────────────────────────── */}
-      <div ref={headerRef} className="max-w-7xl mx-auto px-6 lg:px-16 pt-28 pb-14">
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="flex items-center gap-4 mb-5"
-        >
-          <div className="w-12 h-[2px] bg-pink" style={{ boxShadow: '0 0 20px rgba(90, 185, 234, 0.4)' }} />
-          <span className="text-pink text-xs tracking-[0.4em] uppercase font-semibold">
-            Our Expertise
-          </span>
-        </motion.div>
-
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <TextReveal
-            text="Comprehensive _Interior Solutions_"
-            className="font-display font-light text-white leading-[1.05]"
-            style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)' }}
-          />
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={headerInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.28 }}
-            className="text-white/80 text-sm md:text-base max-w-[300px] leading-relaxed lg:text-right font-light"
+    <section id="services" className="bg-[#03070E] pt-28 pb-32">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-10">
+        
+        {/* Header */}
+        <div ref={headerRef} className="mb-16 lg:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+            className="flex items-center gap-4 mb-6"
           >
-            Designed for your space. Crafted for your lifestyle.
-          </motion.p>
+            <div className="w-12 h-[2px] bg-[#DF4C73]" style={{ boxShadow: '0 0 20px rgba(223, 76, 115, 0.4)' }} />
+            <span className="text-[#DF4C73] text-xs tracking-[0.4em] uppercase font-semibold">
+              Our Expertise
+            </span>
+          </motion.div>
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <TextReveal
+              text="Comprehensive _Interior Solutions_"
+              className="font-display font-light text-white leading-[1.1]"
+              style={{ fontSize: 'clamp(2.4rem, 4vw, 3.8rem)' }}
+            />
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={headerInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.7, delay: 0.28 }}
+              className="text-white/70 text-sm md:text-base max-w-[340px] leading-relaxed lg:text-right font-light"
+            >
+              Designed for your space. Crafted for your lifestyle. Discover our end-to-end luxury services.
+            </motion.p>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ width: 0 }}
-          animate={headerInView ? { width: '100%' } : {}}
-          transition={{ duration: 1.1, delay: 0.35 }}
-          className="mt-10 h-px bg-gradient-to-r from-pink/35 via-pink/8 to-transparent"
-        />
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+          {SERVICES.map((service, i) => (
+            <BentoCard key={service.id} service={service} index={i} />
+          ))}
+        </div>
+
       </div>
-
-      {/* ── Service rows ─────────────────────────────────── */}
-      {/* Full-bleed — no max-w container so rows touch viewport edges */}
-      <div className="border-t border-b border-gray-luxury/[0.08]">
-        {SERVICES.map((service, i) => (
-          <div key={service.id}>
-            <ServiceRow service={service} index={i} />
-          </div>
-        ))}
-      </div>
-
-
     </section>
   );
 }
