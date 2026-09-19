@@ -16,7 +16,7 @@ export default function Services() {
     <section id="services" className="bg-[#03070E] pt-24 pb-32">
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-12">
 
-        {/* ── Header ─────────────────────────────── */}
+        {/* ── Header ── */}
         <div ref={headerRef} className="mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -42,131 +42,167 @@ export default function Services() {
           </motion.h2>
         </div>
 
-        {/* ── Main Layout ─────────────────────────────── */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
+        {/* ── Main Layout: sidebar + content, same height ── */}
+        {/* On desktop: fixed 600px height box so photo == info panel == sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:h-[600px]">
 
-          {/* Left — Tab list */}
-          <div className="flex flex-row lg:flex-col gap-2 lg:gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:w-[260px] shrink-0 scroll-hidden">
-            {SERVICES.map((s, i) => (
-              <button
-                key={s.id}
-                onClick={() => setActive(i)}
-                className={`relative group text-left px-4 py-3 lg:py-4 rounded-2xl transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink border
-                  ${active === i
-                    ? 'bg-white/[0.07] border-[#DF4C73]/40 text-white'
-                    : 'bg-transparent border-transparent text-white/45 hover:text-white/75 hover:bg-white/[0.04]'
-                  }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`text-[10px] font-semibold tracking-widest transition-colors duration-300
-                      ${active === i ? 'text-[#DF4C73]' : 'text-white/25 group-hover:text-[#DF4C73]/60'}`}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-sans font-medium text-sm leading-snug">
-                    {s.title}
-                  </span>
-                </div>
+          {/* Left — Tab sidebar: full height, justify tabs spread evenly */}
+          <div className="flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:w-[230px] xl:w-[260px] shrink-0 scroll-hidden lg:h-full lg:justify-between">
 
-                {/* Active indicator bar */}
-                {active === i && (
-                  <motion.div
-                    layoutId="service-tab-indicator"
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-1/2 rounded-full bg-[#DF4C73]"
-                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                  />
-                )}
-              </button>
-            ))}
+            {/* Tab buttons */}
+            <div className="flex flex-row lg:flex-col gap-2 lg:gap-1 flex-shrink-0">
+              {SERVICES.map((s, i) => (
+                <button
+                  key={s.id}
+                  onClick={() => setActive(i)}
+                  className={`relative group text-left px-4 py-3 lg:py-[14px] rounded-2xl transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink border overflow-hidden
+                    ${active === i
+                      ? 'bg-white/[0.07] border-[#DF4C73]/30 text-white'
+                      : 'bg-transparent border-transparent text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
+                    }`}
+                >
+                  {/* Active pill highlight */}
+                  {active === i && (
+                    <motion.div
+                      layoutId="tab-bg"
+                      className="absolute inset-0 rounded-2xl bg-white/[0.05]"
+                      transition={{ type: 'spring', stiffness: 400, damping: 38 }}
+                    />
+                  )}
 
-            {/* CTA below tabs on desktop */}
-            <div className="hidden lg:block mt-6 pl-4">
+                  <div className="relative flex items-center gap-3 z-10">
+                    <span
+                      className={`text-[10px] font-bold tracking-widest transition-colors duration-300 w-5 shrink-0
+                        ${active === i ? 'text-[#DF4C73]' : 'text-white/20 group-hover:text-[#DF4C73]/50'}`}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="font-sans font-medium text-[13px] leading-snug">
+                      {s.title}
+                    </span>
+                  </div>
+
+                  {/* Left active bar */}
+                  {active === i && (
+                    <motion.div
+                      layoutId="tab-bar"
+                      className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full bg-[#DF4C73]"
+                      transition={{ type: 'spring', stiffness: 400, damping: 38 }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Inquire Now — pinned to the bottom of the sidebar on desktop */}
+            <div className="hidden lg:flex items-end pl-4 pb-1">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/40 hover:border-[#DF4C73] pb-1 transition-colors duration-300"
+                className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
               >
                 Inquire Now →
               </Link>
             </div>
           </div>
 
-          {/* Right — Content panel */}
-          <div className="flex-1 min-w-0">
+          {/* Right — Content: photo + info, equal height */}
+          <div className="flex-1 min-w-0 lg:h-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full"
               >
-                {/* Photo */}
-                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:min-h-[480px]">
+
+                {/* Photo — stretches to full height of grid row */}
+                <div className="relative rounded-3xl overflow-hidden aspect-[3/4] md:aspect-auto h-full">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
                   />
-                  {/* Subtle bottom overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-                  {/* Tagline badge on photo */}
+                  {/* Tagline watermark */}
                   <div className="absolute bottom-5 left-5 right-5">
-                    <span className="text-white/60 text-[9px] tracking-[0.35em] uppercase">
-                      {service.tagline}
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-[1px] bg-white/40" />
+                      <span className="text-white/50 text-[8px] tracking-[0.35em] uppercase">
+                        {service.tagline}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Info panel */}
-                <div className="flex flex-col justify-center rounded-3xl bg-white/[0.04] border border-white/[0.07] p-8 lg:p-10">
-                  
-                  {/* Service number */}
-                  <span className="text-[#DF4C73]/50 text-[11px] tracking-[0.4em] uppercase font-semibold mb-4 block">
-                    {String(active + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
-                  </span>
+                {/* Info panel — same height as photo */}
+                <div className="flex flex-col rounded-3xl bg-white/[0.04] border border-white/[0.07] p-8 lg:p-10 h-full">
 
-                  {/* Title */}
-                  <h3
-                    className="font-display font-light text-white leading-tight mb-2"
-                    style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.6rem)' }}
-                  >
-                    {service.title}
-                  </h3>
+                  {/* Top: counter + title + rule */}
+                  <div>
+                    <span className="text-[#DF4C73]/50 text-[10px] tracking-[0.45em] uppercase font-semibold mb-5 block">
+                      {String(active + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
+                    </span>
 
-                  {/* Pink rule */}
-                  <div className="w-10 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-8 rounded-full" />
+                    <h3
+                      className="font-display font-light text-white leading-tight mb-4"
+                      style={{ fontSize: 'clamp(1.7rem, 2.5vw, 2.4rem)' }}
+                    >
+                      {service.title}
+                    </h3>
 
-                  {/* Bullet points */}
-                  <ul className="flex flex-col gap-4">
+                    <div className="w-10 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-8 rounded-full" />
+                  </div>
+
+                  {/* Middle: bullet points — flex-1 so they expand to fill space */}
+                  <ul className="flex flex-col gap-[18px] flex-1">
                     {service.bullets.map((bullet, i) => (
                       <motion.li
                         key={i}
-                        initial={{ opacity: 0, x: -12 }}
+                        initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.45, delay: i * 0.08, ease: EASE }}
+                        transition={{ duration: 0.4, delay: i * 0.07, ease: EASE }}
                         className="flex items-start gap-3 group/bullet"
                       >
-                        <span className="mt-[5px] w-[6px] h-[6px] rounded-full bg-[#DF4C73] flex-shrink-0 group-hover/bullet:scale-110 transition-transform duration-200" />
-                        <span className="text-white/70 text-[13px] md:text-sm leading-snug font-light group-hover/bullet:text-white/90 transition-colors duration-200">
+                        <span className="mt-[6px] w-[5px] h-[5px] rounded-full bg-[#DF4C73] flex-shrink-0 opacity-80 group-hover/bullet:opacity-100 group-hover/bullet:scale-125 transition-all duration-200" />
+                        <span className="text-white/65 text-sm leading-snug font-light group-hover/bullet:text-white/90 transition-colors duration-200">
                           {bullet}
                         </span>
                       </motion.li>
                     ))}
                   </ul>
 
-                  {/* Mobile CTA */}
-                  <div className="mt-10 lg:hidden">
+                  {/* Bottom: CTA pinned to bottom */}
+                  <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between">
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-2 text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/40 hover:border-[#DF4C73] pb-1 transition-colors duration-300"
+                      className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
                     >
                       Inquire Now →
                     </Link>
+
+                    {/* Navigation arrows */}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setActive(i => Math.max(0, i - 1))}
+                        disabled={active === 0}
+                        className="w-8 h-8 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
+                      >
+                        ←
+                      </button>
+                      <button
+                        onClick={() => setActive(i => Math.min(SERVICES.length - 1, i + 1))}
+                        disabled={active === SERVICES.length - 1}
+                        className="w-8 h-8 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
+                      >
+                        →
+                      </button>
+                    </div>
                   </div>
+
                 </div>
 
               </motion.div>
