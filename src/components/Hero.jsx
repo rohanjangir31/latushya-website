@@ -96,7 +96,8 @@ export default function Hero() {
                 --mobile-mask: linear-gradient(to bottom, black 0%, black 50%, transparent 90%);
               }
               .mobile-video-bg {
-                object-position: center 20% !important;
+                object-position: center center !important;
+                transform: scale(1.25) translateY(-8vh) !important;
               }
             }
           `}</style>
