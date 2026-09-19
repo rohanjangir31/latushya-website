@@ -47,7 +47,6 @@ export default function Hero() {
   const imageY  = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
   // Content fades and lifts gently as user scrolls away
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '3%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const handleConsult = () => {
     if (COMPANY.whatsapp) {
@@ -118,7 +117,7 @@ export default function Hero() {
 
         {/* Base darkening — very restrained */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 hidden lg:block pointer-events-none"
           style={{ background: 'rgba(0,0,0,0.18)' }}
         />
 
@@ -133,13 +132,13 @@ export default function Hero() {
           }}
         />
 
-        {/* ── MOBILE SEAMLESS BACKGROUND BLEND ────────────────────
+        {/* ── MOBILE SEAMLESS BACKGROUND BLEND ────────────────────────────────────────────────────────────
             Gently transitions the upper video area into the lower dark canvas where text sits ── */}
         <div
           className="absolute inset-0 lg:hidden pointer-events-none"
           style={{
             background:
-              'linear-gradient(to bottom, #03070E 0%, transparent 15%, transparent 55%, rgba(10,10,10,0.85) 72%, #03070E 88%, #03070E 100%)',
+              'linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(10,10,10,0.85) 72%, #03070E 88%, #03070E 100%)',
           }}
         />
 
@@ -155,7 +154,7 @@ export default function Hero() {
 
       {/* ── CONTENT BLOCK ─ lower-left third ───────────────────────── */}
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={{ y: contentY }}
         className="relative z-10 min-h-[100svh] lg:h-full flex flex-col justify-end lg:flex-row lg:items-end"
       >
         <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-[45vh] lg:pt-0">
