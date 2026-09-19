@@ -82,7 +82,7 @@ export default function Hero() {
         className="absolute inset-0 z-0 will-change-transform bg-[#03070E] flex flex-col justify-start lg:block pt-0 lg:pt-0"
       >
         <div
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className="w-[140%] -left-[20%] -mt-[12vh] relative lg:w-full lg:left-0 lg:mt-0 lg:absolute lg:inset-0 lg:h-full aspect-video lg:aspect-auto pointer-events-none"
           style={{
             WebkitMaskImage: 'var(--mobile-mask, none)',
             WebkitMaskComposite: 'source-in',
@@ -92,17 +92,13 @@ export default function Hero() {
         >
           <style>{`
             @media (max-width: 1023px) {
-              .mobile-video-wrapper {
-                --mobile-mask: linear-gradient(to bottom, black 0%, black 50%, transparent 90%);
-              }
-              .mobile-video-bg {
-                object-position: center center !important;
-                transform: scale(1.25) translateY(-8vh) !important;
+              .aspect-video {
+                --mobile-mask: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
               }
             }
           `}</style>
           <div
-            className="w-full h-full mobile-video-wrapper"
+            className="w-full h-full"
             dangerouslySetInnerHTML={{
               __html: `
                 <video
@@ -112,7 +108,7 @@ export default function Hero() {
                   loop="loop"
                   muted="muted"
                   playsinline="playsinline"
-                  class="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700 mobile-video-bg"
+                  class="w-full h-full object-cover scale-100 lg:scale-[1.35] transition-all duration-700"
                   style="object-position: center center; pointer-events: none;"
                 ></video>
               `
