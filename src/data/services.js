@@ -1,54 +1,63 @@
-// ============================================================
-// LATUSHYA Services Data
-// Each service has a UNIQUE image no repeated photography.
-// Replace these URLs with real project photos when available.
-// ============================================================
-
 const services = [
   {
     id: 'turnkey-interiors',
-    icon: 'Layout',
     title: 'Turnkey Interiors',
     tagline: 'From concept to handover',
-    description:
-      'Complete home design and execution. We manage everything from bare-shell civil work to the final styling, ensuring a seamless, stress-free transformation of your space.',
     image: '/projects/interior-open-kitchen-living.jpg',
+    bullets: [
+      'End-to-end design & execution',
+      'Bare-shell to fully furnished',
+      'Single point of accountability',
+      'Dedicated project manager',
+    ],
   },
   {
     id: 'modular-kitchens',
-    icon: 'UtensilsCrossed',
     title: 'Modular Kitchens',
     tagline: 'The heart of the home',
-    description:
-      'Ergonomically designed, premium modular kitchens featuring state-of-the-art German hardware, moisture-resistant cores, and flawless, easy-to-maintain finishes.',
     image: '/projects/media__1784490387507.jpg',
+    bullets: [
+      'German-grade hardware & fittings',
+      'Moisture & heat resistant cores',
+      'Custom layout ergonomics',
+      'Lifetime maintenance support',
+    ],
   },
   {
     id: 'living-room-design',
-    icon: 'Sofa',
     title: 'Living Room Design',
     tagline: 'Curated entertainment spaces',
-    description:
-      'Custom TV units, sophisticated wall panelling, and exclusive furniture layouts meticulously designed to make your living area the ultimate setting for hosting and relaxing.',
     image: '/projects/indian-living-room-landscape.jpg',
+    bullets: [
+      'Bespoke TV units & wall panels',
+      'Exclusive furniture curation',
+      'Ambient lighting design',
+      'Space-optimised layouts',
+    ],
   },
   {
     id: 'ftc-wardrobes',
-    icon: 'DoorOpen',
     title: 'FTC Wardrobes',
     tagline: 'Precision meets flexibility',
-    description:
-      'From floor-to-ceiling sliding systems to opulent walk-in closets. We engineer custom storage that perfectly balances aesthetic luxury with everyday functionality.',
     image: '/projects/real-ftc-wardrobe.jpg',
+    bullets: [
+      'Floor-to-ceiling systems',
+      'Walk-in & sliding configurations',
+      'Internal organiser solutions',
+      'Soft-close premium fittings',
+    ],
   },
   {
     id: 'decor-sourcing',
-    icon: 'ShoppingBag',
     title: 'Curated Decor Sourcing',
     tagline: 'Exclusive styling accompaniment',
-    description:
-      'A dedicated add-on service where our lead designers personally accompany you to source premium furniture, art, and decor ensuring flawless coordination with your new space.',
     image: '/projects/decor-sourcing-landscape.jpg',
+    bullets: [
+      'Personal designer accompaniment',
+      'Premium furniture & art sourcing',
+      'Flawless style coordination',
+      'Exclusive vendor relationships',
+    ],
   },
 ];
 
