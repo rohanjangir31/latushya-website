@@ -73,19 +73,21 @@
     color: #DF4C73;
   }
 
-  /* Pink scrollbar */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #03070E;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #DF4C73;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #E8CB6A;
+  /* Pink scrollbar (Desktop only) */
+  @media (min-width: 1024px) {
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #03070E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DF4C73;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E8CB6A;
+    }
   }
   
   /* Browser Autofill override for dark theme */
