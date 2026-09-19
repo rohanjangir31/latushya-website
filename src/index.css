@@ -362,14 +362,12 @@
   }
 }
 
- 
- / *   H i d e   i O S   S a f a r i   V i d e o   P l a y   B u t t o n   * / 
- v i d e o : : - w e b k i t - m e d i a - c o n t r o l s - s t a r t - p l a y b a c k - b u t t o n   { 
-     d i s p l a y :   n o n e   ! i m p o r t a n t ; 
-     - w e b k i t - a p p e a r a n c e :   n o n e ; 
- } 
- v i d e o : : - w e b k i t - m e d i a - c o n t r o l s - p l a y - b u t t o n   { 
-     d i s p l a y :   n o n e   ! i m p o r t a n t ; 
-     - w e b k i t - a p p e a r a n c e :   n o n e ; 
- }  
- 
+/* Hide iOS Safari Video Play Button */
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+video::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
