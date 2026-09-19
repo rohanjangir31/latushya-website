@@ -115,20 +115,20 @@ export default function Hero() {
           />
         </div>
 
-        {/* Base darkening — very restrained */}
+        {/* Base darkening ── very restrained */}
         <div
           className="absolute inset-0 hidden lg:block pointer-events-none"
-          style={{ background: 'rgba(0,0,0,0.18)' }}
+          style={{ background: 'rgba(0,0,0,0.08)' }}
         />
 
-        {/* ── DESKTOP PRIMARY TEXT GRADIENT ────────────────────
+        {/* ── DESKTOP PRIMARY TEXT GRADIENT ─────────────────────────
             Radial/linear gradient anchored at the LEFT that fades to
             transparent quickly. Light enough to see the video clearly. ── */}
         <div
           className="absolute inset-0 hidden lg:block pointer-events-none"
           style={{
             background:
-              'linear-gradient(to right, rgba(4,2,1,0.7) 0%, rgba(4,2,1,0.4) 25%, transparent 60%)',
+              'linear-gradient(to right, rgba(4,2,1,0.65) 0%, rgba(4,2,1,0.3) 25%, transparent 60%)',
           }}
         />
 
@@ -142,12 +142,12 @@ export default function Hero() {
           }}
         />
 
-        {/* Bottom gradient — grounds the composition */}
+        {/* Bottom gradient ── grounds the composition */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, rgba(6,4,2,0.85) 0%, rgba(6,4,2,0.30) 25%, transparent 50%)',
+              'linear-gradient(to top, rgba(6,4,2,0.7) 0%, rgba(6,4,2,0.15) 25%, transparent 50%)',
           }}
         />
       </motion.div>
