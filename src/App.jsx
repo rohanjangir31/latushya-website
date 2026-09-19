@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Lenis from 'lenis';
+
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -196,33 +196,7 @@ function AppContent() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  // Initialize Lenis smooth scroll with luxurious but snappy settings
-  useEffect(() => {
-    // Completely disable Lenis on mobile devices to prevent native touch-scroll interference
-    if (window.innerWidth < 1024) return;
 
-    const lenis = new Lenis({
-      duration: 0.55,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
-    });
-
-    let rafId;
-    function raf(time) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
 
   useEffect(() => {
     // 1600ms count-up + 400ms hold at 100% for a satisfying reveal
