@@ -114,11 +114,11 @@ export default function Services() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full"
+                className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full items-stretch"
               >
 
                 {/* Photo — stretches to full height of grid row */}
-                <div className="relative rounded-3xl overflow-hidden aspect-[3/4] md:aspect-auto h-full">
+                <div className="relative rounded-3xl overflow-hidden h-[340px] md:h-full">
                   <img
                     src={service.image}
                     alt={service.title}
