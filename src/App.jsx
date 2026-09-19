@@ -198,6 +198,9 @@ function AppContent() {
 
   // Initialize Lenis smooth scroll with luxurious but snappy settings
   useEffect(() => {
+    // Completely disable Lenis on mobile devices to prevent native touch-scroll interference
+    if (window.innerWidth < 1024) return;
+
     const lenis = new Lenis({
       duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
