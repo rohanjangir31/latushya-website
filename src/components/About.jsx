@@ -74,43 +74,62 @@ export default function About() {
   return (
     <>
       {/* ── PART 1: WHO WE ARE ──────────────────────────────────────────── */}
-      <section id="about" className="relative py-20 lg:py-48 bg-black-deep overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-pink/5 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-16">
-          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      <section id="about" className="relative py-24 lg:py-32 bg-[#03070E] overflow-hidden">
+        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-[#DF4C73]/[0.04] to-transparent pointer-events-none" />
+        
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          
+          {/* --- TOP FULL-WIDTH HEADER --- */}
+          <div className="w-full mb-16 lg:mb-24 flex flex-col items-start">
+            <AnimatedSection>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-[2px] bg-[#DF4C73]" />
+                <span className="text-[#DF4C73] text-[10px] tracking-[0.4em] uppercase font-semibold">
+                  Studio Philosophy
+                </span>
+              </div>
+            </AnimatedSection>
+            
+            {/* The heading needs to breathe! Full width prevents awkward wrapping. */}
+            <h1 
+              className="font-display font-light text-white leading-[1.05] tracking-tight drop-shadow-md w-full max-w-[1200px]"
+              style={{ fontSize: 'clamp(2.5rem, 5.5vw, 6rem)' }}
+            >
+              <TextReveal text="We do not decorate." delay={0.1} />
+              <br />
+              <span className="italic text-white/50"><TextReveal text="We construct " delay={0.3} /></span>
+              <span className="italic text-[#DF4C73] font-normal drop-shadow-lg"><TextReveal text="living spaces." delay={0.4} /></span>
+            </h1>
+          </div>
+
+          {/* --- BOTTOM GRID: PHOTO & TEXT --- */}
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
 
             {/* Left — Photo */}
             <div ref={photoRef} className="lg:col-span-5 relative">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={isPhotoInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 1.4, ease: EASE }} className="relative z-10 overflow-hidden rounded-2xl shadow-2xl" style={{ aspectRatio: '4/5' }}>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={isPhotoInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 1.4, ease: EASE }} className="relative z-10 overflow-hidden rounded-[2rem] shadow-2xl h-[400px] md:h-[500px] lg:h-[700px]">
                 <img src="/projects/media__1784490387524.jpg" alt="Latushya Studio Aesthetic" className="w-full h-full object-cover transition-all duration-1000" loading="lazy" decoding="async" />
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={isPhotoInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.6 }} className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-pink to-transparent hidden lg:block" />
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={isPhotoInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.6 }} className="absolute -left-8 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-[#DF4C73] to-transparent hidden lg:block" />
             </div>
 
-            {/* Right — Manifesto */}
-            <div className="lg:col-span-7 lg:pl-12">
-              <AnimatedSection>
-                <span className="block text-pink text-[10px] tracking-[0.4em] uppercase font-medium mb-8">Studio Philosophy</span>
-              </AnimatedSection>
-              <h1 className="font-display text-[2.75rem] md:text-[4rem] lg:text-[5rem] font-normal text-white leading-[1.05] tracking-tight mb-12 drop-shadow-md">
-                <TextReveal text="We do not decorate." delay={0.1} />
-                <br />
-                <span className="italic text-[#DF4C73] drop-shadow-lg font-medium"><TextReveal text="We construct living spaces." delay={0.3} /></span>
-              </h1>
-              <AnimatedSection delay={0.3}>
-                <div className="space-y-8 text-gray-subtle text-lg font-light leading-relaxed max-w-2xl">
+            {/* Right — Manifesto text */}
+            <div className="lg:col-span-7 lg:pl-12 lg:pt-8">
+              <AnimatedSection delay={0.2}>
+                <div className="space-y-8 text-white/70 text-base lg:text-lg font-light leading-relaxed max-w-2xl">
                   <p>Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is an exclusive commission.</p>
                   <p>Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware.</p>
                   <p>We are not just designers, we are masterful builders. We uncover brilliant ideas and craft solutions you didn't even know you needed. From the first sketch to the final soft close of a cabinet door, our commitment is to absolute, uncompromising quality.</p>
                 </div>
               </AnimatedSection>
-              <AnimatedSection delay={0.5}>
-                <div className="mt-12 pt-10 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              
+              <AnimatedSection delay={0.4}>
+                <div className="mt-16 pt-10 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <p className="font-display text-2xl text-white tracking-wide">The Founders</p>
-                    <p className="text-pink text-[10px] tracking-widest uppercase mt-2">Chandan Kumar • Indraj Sharma • Sarita Kumari</p>
+                    <p className="font-display text-2xl lg:text-3xl text-white tracking-wide font-light">The Founders</p>
+                    <p className="text-[#DF4C73] text-[9px] lg:text-[10px] tracking-widest uppercase mt-3">Chandan Kumar <span className="mx-2 opacity-30">|</span> Indraj Sharma <span className="mx-2 opacity-30">|</span> Sarita Kumari</p>
                   </div>
-                  <div className="w-16 h-[2px] bg-gradient-to-r from-pink to-blue opacity-80" />
+                  <div className="w-16 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] opacity-80" />
                 </div>
               </AnimatedSection>
             </div>
