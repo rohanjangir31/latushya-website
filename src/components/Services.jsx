@@ -188,15 +188,20 @@ export default function Services() {
 
                 <div className="relative z-10 flex flex-col gap-2 w-full">
                   <span
-                    className={`font-display italic text-2xl transition-colors duration-300 ${
-                      active === i ? 'text-[#DF4C73]' : 'text-white/20 group-hover:text-white/40'
+                    className={`font-display italic text-3xl xl:text-4xl leading-none transition-all duration-300 ${
+                      active === i
+                        ? 'text-[#DF4C73]'
+                        : 'text-white/15 group-hover:text-white/35'
                     }`}
+                    style={active === i ? {
+                      textShadow: '0 0 24px rgba(223,76,115,0.55), 0 0 60px rgba(223,76,115,0.18)',
+                    } : {}}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span
-                    className={`font-sans font-medium text-[13px] leading-snug transition-colors duration-300 ${
-                      active === i ? 'text-white' : 'text-white/40 group-hover:text-white/70'
+                    className={`font-sans font-medium text-[12px] xl:text-[13px] leading-snug transition-colors duration-300 ${
+                      active === i ? 'text-white' : 'text-white/35 group-hover:text-white/65'
                     }`}
                   >
                     {s.title}
@@ -243,12 +248,41 @@ export default function Services() {
 
                 {/* Middle — main info block, max half-width so photo shows on right */}
                 <div className="max-w-[480px]">
-                  {/* Counter */}
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <span className="font-display italic text-5xl xl:text-6xl text-[#DF4C73]/80 leading-none">
+                  {/* Counter — editorial, glowing */}
+                  <div className="relative mb-5">
+                    {/* Ghost outline number behind — purely decorative depth */}
+                    <span
+                      className="absolute -top-2 -left-1 font-display italic leading-none select-none pointer-events-none"
+                      style={{
+                        fontSize: 'clamp(5rem, 10vw, 10rem)',
+                        color: 'transparent',
+                        WebkitTextStroke: '1px rgba(223,76,115,0.10)',
+                        lineHeight: 1,
+                      }}
+                      aria-hidden="true"
+                    >
                       {String(active + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-white/25 text-sm font-light tracking-widest">/ {String(SERVICES.length).padStart(2, '0')}</span>
+
+                    {/* Foreground number */}
+                    <div className="relative flex items-baseline gap-3">
+                      <span
+                        className="font-display italic leading-none text-[#DF4C73]"
+                        style={{
+                          fontSize: 'clamp(3.5rem, 6vw, 7rem)',
+                          lineHeight: 1,
+                          textShadow: '0 0 30px rgba(223,76,115,0.60), 0 0 80px rgba(223,76,115,0.20)',
+                        }}
+                      >
+                        {String(active + 1).padStart(2, '0')}
+                      </span>
+                      <div className="flex flex-col gap-[3px] pb-1">
+                        <div className="w-5 h-[1px] bg-[#DF4C73]/40" />
+                        <span className="text-white/30 text-[10px] font-sans tracking-widest">
+                          {String(SERVICES.length).padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Title */}
