@@ -121,9 +121,9 @@ function Preloader() {
         className="flex flex-col items-center"
       >
         <img
-          src="/logo-2d.png"
+          src="/logo-gold.png"
           alt="Latushya Premium Interior Studio"
-          className="w-40 md:w-48 h-auto object-contain opacity-90 drop-shadow-[0_4px_20px_rgba(223,76,115,0.15)]"
+          className="w-20 md:w-28 h-auto object-contain opacity-90 drop-shadow-[0_4px_20px_rgba(223,76,115,0.15)]"
         />
         <motion.div 
           initial={{ opacity: 0, y: 10 }}

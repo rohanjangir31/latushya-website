@@ -73,9 +73,9 @@ export default function Navbar() {
             >
               <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
                 <img 
-                  src="/logo-2d.png" 
+                  src="/logo-gold.png" 
                   alt="Latushya Logo" 
-                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-11 lg:h-12' : 'h-14 lg:h-[4rem]'}`}
+                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-9 lg:h-10' : 'h-11 lg:h-[3.25rem]'}`}
                 />
               </motion.div>
             </Link>
