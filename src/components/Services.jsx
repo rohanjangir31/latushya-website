@@ -13,16 +13,16 @@ export default function Services() {
   const service = SERVICES[active];
 
   return (
-    <section id="services" className="bg-[#03070E] pt-16 pb-20">
+    <section id="services" className="bg-[#03070E] pt-16 pb-20 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-12">
 
         {/* ── Header ── */}
-        <div ref={headerRef} className="mb-16">
+        <div ref={headerRef} className="mb-12 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="flex items-center gap-4 mb-6"
+            className="flex items-center gap-4 mb-5"
           >
             <div className="w-10 h-[2px] bg-[#DF4C73]" />
             <span className="text-[#DF4C73] text-[10px] tracking-[0.4em] uppercase font-semibold">
@@ -42,179 +42,282 @@ export default function Services() {
           </motion.h2>
         </div>
 
-        {/* ── Main Layout: sidebar + content, same height ── */}
-        {/* On desktop: ultra-compact 340px height to perfectly match the 5 topics */}
-        <div className="flex flex-col lg:flex-row gap-6 lg:h-[340px]">
+        {/* ── Mobile: Accordion-style stacked cards ── */}
+        <div className="lg:hidden flex flex-col gap-4">
+          {SERVICES.map((s, i) => {
+            const isOpen = active === i;
+            return (
+              <motion.div
+                key={s.id}
+                layout
+                onClick={() => setActive(i)}
+                className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/[0.07]"
+                style={{ minHeight: isOpen ? 0 : 'auto' }}
+              >
+                {/* Background image always present, fades more when closed */}
+                <div className="absolute inset-0">
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div
+                    className="absolute inset-0 transition-all duration-700"
+                    style={{
+                      background: isOpen
+                        ? 'linear-gradient(to top, rgba(3,7,14,0.97) 0%, rgba(3,7,14,0.7) 50%, rgba(3,7,14,0.3) 100%)'
+                        : 'linear-gradient(to top, rgba(3,7,14,0.92) 0%, rgba(3,7,14,0.82) 100%)',
+                    }}
+                  />
+                </div>
 
-          {/* Left — Tab sidebar: full height */}
-          <div className="flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:w-[230px] xl:w-[260px] shrink-0 scroll-hidden lg:h-full">
-
-            {/* Tab buttons */}
-            <div className="flex flex-row lg:flex-col gap-2 lg:gap-1 flex-shrink-0">
-              {SERVICES.map((s, i) => (
-                <button
-                  key={s.id}
-                  onClick={() => setActive(i)}
-                  className={`relative group text-left px-4 py-3 lg:py-3 rounded-2xl transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink border overflow-hidden
-                    ${active === i
-                      ? 'bg-white/[0.07] border-[#DF4C73]/30 text-white'
-                      : 'bg-transparent border-transparent text-white/40 hover:text-white/70 hover:bg-white/[0.04]'
-                    }`}
-                >
-                  {/* Active pill highlight */}
-                  {active === i && (
-                    <motion.div
-                      layoutId="tab-bg"
-                      className="absolute inset-0 rounded-2xl bg-white/[0.05]"
-                      transition={{ type: 'spring', stiffness: 400, damping: 38 }}
-                    />
-                  )}
-
-                  <div className="relative flex items-center gap-4 z-10">
-                    <span
-                      className={`font-display text-xl lg:text-2xl italic transition-colors duration-300 w-7 shrink-0
-                        ${active === i ? 'text-[#DF4C73]' : 'text-white/30 group-hover:text-[#DF4C73]/70'}`}
-                    >
+                {/* Tab header row */}
+                <div className="relative z-10 flex items-center justify-between p-5">
+                  <div className="flex items-center gap-3">
+                    <span className={`font-display italic text-lg transition-colors duration-300 ${isOpen ? 'text-[#DF4C73]' : 'text-white/30'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="font-sans font-medium text-[14px] leading-snug">
+                    <span className={`font-sans font-medium text-sm transition-colors duration-300 ${isOpen ? 'text-white' : 'text-white/50'}`}>
                       {s.title}
                     </span>
                   </div>
-
-                  {/* Left active bar */}
-                  {active === i && (
-                    <motion.div
-                      layoutId="tab-bar"
-                      className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full bg-[#DF4C73]"
-                      transition={{ type: 'spring', stiffness: 400, damping: 38 }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Inquire Now — placed naturally below tabs */}
-            <div className="hidden lg:flex mt-5 pl-4 pb-1">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
-              >
-                Inquire Now →
-              </Link>
-            </div>
-          </div>
-
-          {/* Right — Content: photo + info, equal height */}
-          <div className="flex-1 min-w-0 lg:h-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.45, ease: EASE }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full items-stretch"
-              >
-
-                {/* Photo — stretches to full height of grid row */}
-                <div className="relative rounded-3xl overflow-hidden h-[340px] md:h-full">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                  {/* Tagline watermark */}
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-6 h-[1px] bg-white/40" />
-                      <span className="text-white/50 text-[8px] tracking-[0.35em] uppercase">
-                        {service.tagline}
-                      </span>
-                    </div>
-                  </div>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                    className={`w-5 h-5 flex items-center justify-center rounded-full border transition-colors duration-300 ${isOpen ? 'border-[#DF4C73]/50 text-[#DF4C73]' : 'border-white/20 text-white/30'}`}
+                  >
+                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                      <path d="M4.5 0v9M0 4.5h9" stroke="currentColor" strokeWidth="1.5"/>
+                    </svg>
+                  </motion.div>
                 </div>
 
-                {/* Info panel — same height as photo */}
-                <div className="flex flex-col rounded-3xl bg-white/[0.04] border border-white/[0.07] p-6 lg:p-7 h-full">
-
-                  {/* Top: counter + title + rule */}
-                  <div>
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className="font-display italic text-2xl text-[#DF4C73]/70">
-                        {String(active + 1).padStart(2, '0')}
-                      </span>
-                      <span className="font-sans text-[10px] text-white/30 uppercase tracking-widest font-bold">
-                        / {String(SERVICES.length).padStart(2, '0')}
-                      </span>
-                    </div>
-
-                    <h3
-                      className="font-display font-light text-white leading-tight mb-2"
-                      style={{ fontSize: 'clamp(1.5rem, 2.2vw, 2.2rem)' }}
+                {/* Expandable content */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.45, ease: EASE }}
+                      className="relative z-10 overflow-hidden"
                     >
-                      {service.title}
-                    </h3>
+                      {/* Image strip */}
+                      <div className="mx-5 rounded-xl overflow-hidden h-48 mb-5">
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
 
-                    <div className="w-10 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-4 rounded-full" />
+                      {/* Tagline */}
+                      <div className="px-5 mb-4 flex items-center gap-2">
+                        <div className="w-5 h-[1px] bg-[#DF4C73]/50" />
+                        <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase">{s.tagline}</span>
+                      </div>
+
+                      {/* Bullets */}
+                      <ul className="px-5 flex flex-col gap-3 mb-6">
+                        {s.bullets.map((b, bi) => (
+                          <motion.li
+                            key={bi}
+                            initial={{ opacity: 0, x: -8 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: bi * 0.07, duration: 0.35, ease: EASE }}
+                            className="flex items-start gap-3"
+                          >
+                            <span className="mt-[7px] w-[4px] h-[4px] rounded-full bg-[#DF4C73] flex-shrink-0" />
+                            <span className="text-white/70 text-[13px] font-light leading-snug">{b}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+
+                      {/* CTA */}
+                      <div className="px-5 pb-5">
+                        <Link
+                          to="/contact"
+                          className="inline-flex items-center gap-2 text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/40 pb-1 hover:border-[#DF4C73] transition-all duration-300"
+                        >
+                          Inquire Now →
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ── Desktop: Full-bleed cinematic panel ── */}
+        <div className="hidden lg:block">
+          {/* Service selector strip — numbered list along top */}
+          <div className="flex items-stretch gap-0 mb-8 border border-white/[0.06] rounded-2xl overflow-hidden">
+            {SERVICES.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => setActive(i)}
+                className="relative flex-1 flex flex-col items-start px-6 py-5 text-left overflow-hidden group transition-all duration-500"
+              >
+                {/* Active fill */}
+                {active === i && (
+                  <motion.div
+                    layoutId="tab-fill"
+                    className="absolute inset-0 bg-white/[0.05]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+
+                {/* Bottom active bar */}
+                {active === i && (
+                  <motion.div
+                    layoutId="tab-underline"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+
+                {/* Vertical separator */}
+                {i < SERVICES.length - 1 && (
+                  <div className="absolute right-0 top-4 bottom-4 w-[1px] bg-white/[0.07]" />
+                )}
+
+                <div className="relative z-10 flex flex-col gap-2 w-full">
+                  <span
+                    className={`font-display italic text-2xl transition-colors duration-300 ${
+                      active === i ? 'text-[#DF4C73]' : 'text-white/20 group-hover:text-white/40'
+                    }`}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span
+                    className={`font-sans font-medium text-[13px] leading-snug transition-colors duration-300 ${
+                      active === i ? 'text-white' : 'text-white/40 group-hover:text-white/70'
+                    }`}
+                  >
+                    {s.title}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Main cinematic panel */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: EASE }}
+              className="relative rounded-3xl overflow-hidden"
+              style={{ height: '520px' }}
+            >
+              {/* Full-bleed background image */}
+              <motion.img
+                key={`img-${active}`}
+                initial={{ scale: 1.06, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, ease: EASE }}
+                src={service.image}
+                alt={service.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+
+              {/* Gradient overlays — left for text legibility, right lighter */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#03070E]/95 via-[#03070E]/60 to-[#03070E]/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03070E]/70 via-transparent to-transparent" />
+
+              {/* Content — sits on the left side */}
+              <div className="absolute inset-0 flex flex-col justify-between p-10 xl:p-14">
+                {/* Top — tagline */}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-[1px] bg-[#DF4C73]/60" />
+                  <span className="text-white/40 text-[9px] tracking-[0.4em] uppercase">{service.tagline}</span>
+                </div>
+
+                {/* Middle — main info block, max half-width so photo shows on right */}
+                <div className="max-w-[480px]">
+                  {/* Counter */}
+                  <div className="flex items-baseline gap-2 mb-4">
+                    <span className="font-display italic text-5xl xl:text-6xl text-[#DF4C73]/80 leading-none">
+                      {String(active + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-white/25 text-sm font-light tracking-widest">/ {String(SERVICES.length).padStart(2, '0')}</span>
                   </div>
 
-                  {/* Middle: bullet points — flex-1 so they expand to fill space */}
-                  <ul className="flex flex-col gap-2.5 flex-1">
+                  {/* Title */}
+                  <h3
+                    className="font-display font-light text-white leading-tight mb-4"
+                    style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)' }}
+                  >
+                    {service.title}
+                  </h3>
+
+                  {/* Pink rule */}
+                  <div className="w-12 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-6 rounded-full" />
+
+                  {/* Bullets — 2-column grid */}
+                  <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
                     {service.bullets.map((bullet, i) => (
                       <motion.li
                         key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: i * 0.07, ease: EASE }}
-                        className="flex items-start gap-3 group/bullet"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
+                        className="flex items-start gap-2 group/b"
                       >
-                        <span className="mt-[6px] w-[5px] h-[5px] rounded-full bg-[#DF4C73] flex-shrink-0 opacity-80 group-hover/bullet:opacity-100 group-hover/bullet:scale-125 transition-all duration-200" />
-                        <span className="text-white/65 text-[13px] leading-snug font-light group-hover/bullet:text-white/90 transition-colors duration-200">
+                        <span className="mt-[7px] w-[4px] h-[4px] rounded-full bg-[#DF4C73] flex-shrink-0" />
+                        <span className="text-white/65 text-[13px] font-light leading-snug group-hover/b:text-white/90 transition-colors duration-200">
                           {bullet}
                         </span>
                       </motion.li>
                     ))}
                   </ul>
-
-                  {/* Bottom: CTA pinned to bottom */}
-                  <div className="mt-4 pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 text-[#DF4C73]/70 hover:text-[#DF4C73] text-[10px] tracking-[0.3em] uppercase font-semibold border-b border-[#DF4C73]/30 hover:border-[#DF4C73] pb-1 transition-all duration-300"
-                    >
-                      Inquire Now →
-                    </Link>
-
-                    {/* Navigation arrows */}
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setActive(i => Math.max(0, i - 1))}
-                        disabled={active === 0}
-                        className="w-7 h-7 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
-                      >
-                        ←
-                      </button>
-                      <button
-                        onClick={() => setActive(i => Math.min(SERVICES.length - 1, i + 1))}
-                        disabled={active === SERVICES.length - 1}
-                        className="w-7 h-7 rounded-full border border-white/10 hover:border-[#DF4C73]/50 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-xs"
-                      >
-                        →
-                      </button>
-                    </div>
-                  </div>
-
                 </div>
 
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                {/* Bottom — CTA + nav arrows */}
+                <div className="flex items-center justify-between">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-3 group/cta"
+                  >
+                    <span className="relative flex items-center justify-center w-10 h-10 rounded-full border border-[#DF4C73]/40 group-hover/cta:border-[#DF4C73] group-hover/cta:bg-[#DF4C73]/10 transition-all duration-300">
+                      <span className="text-[#DF4C73] text-xs">→</span>
+                    </span>
+                    <span className="text-[10px] tracking-[0.3em] uppercase font-semibold text-[#DF4C73]/70 group-hover/cta:text-[#DF4C73] transition-colors duration-300 border-b border-[#DF4C73]/30 group-hover/cta:border-[#DF4C73] pb-px">
+                      Inquire Now
+                    </span>
+                  </Link>
 
+                  {/* Prev / Next */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setActive(i => Math.max(0, i - 1))}
+                      disabled={active === 0}
+                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-sm backdrop-blur-sm bg-black/20"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={() => setActive(i => Math.min(SERVICES.length - 1, i + 1))}
+                      disabled={active === SERVICES.length - 1}
+                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 flex items-center justify-center text-white/30 hover:text-white/80 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200 text-sm backdrop-blur-sm bg-black/20"
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
       </div>
     </section>
   );
