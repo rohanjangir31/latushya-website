@@ -74,9 +74,12 @@ export default function Navbar() {
               <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
                 <img 
                   src="/logo-gold.png" 
-                  alt="Latushya Logo" 
-                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-9 lg:h-10' : 'h-11 lg:h-[3.25rem]'}`}
+                  alt="Latushya Logo Icon" 
+                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-8 lg:h-9' : 'h-10 lg:h-11'}`}
                 />
+                <span className="font-display tracking-[0.25em] text-white/90 text-sm md:text-base font-medium uppercase mt-1">
+                  Latushya
+                </span>
               </motion.div>
             </Link>
           </Magnetic>

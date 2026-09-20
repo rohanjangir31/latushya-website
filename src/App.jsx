@@ -120,11 +120,16 @@ function Preloader() {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col items-center"
       >
-        <img
-          src="/logo-gold.png"
-          alt="Latushya Premium Interior Studio"
-          className="w-20 md:w-28 h-auto object-contain opacity-90 drop-shadow-[0_4px_20px_rgba(223,76,115,0.15)]"
-        />
+        <div className="flex flex-col items-center gap-4">
+          <img
+            src="/logo-gold.png"
+            alt="Latushya Premium Interior Studio Icon"
+            className="w-16 md:w-20 h-auto object-contain opacity-90 drop-shadow-[0_4px_20px_rgba(223,76,115,0.15)]"
+          />
+          <span className="font-display tracking-[0.3em] text-white/90 text-xl md:text-2xl font-light uppercase">
+            Latushya
+          </span>
+        </div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
