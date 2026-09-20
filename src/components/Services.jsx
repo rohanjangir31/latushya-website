@@ -191,7 +191,7 @@ export default function Services() {
                     className={`font-display italic text-3xl xl:text-4xl leading-none transition-all duration-300 ${
                       active === i
                         ? 'text-[#DF4C73]'
-                        : 'text-white/15 group-hover:text-white/35'
+                        : 'text-white/50 group-hover:text-white/70'
                     }`}
                     style={active === i ? {
                       textShadow: '0 0 24px rgba(223,76,115,0.55), 0 0 60px rgba(223,76,115,0.18)',
@@ -201,7 +201,7 @@ export default function Services() {
                   </span>
                   <span
                     className={`font-sans font-medium text-[12px] xl:text-[13px] leading-snug transition-colors duration-300 ${
-                      active === i ? 'text-white' : 'text-white/35 group-hover:text-white/65'
+                      active === i ? 'text-white' : 'text-white/55 group-hover:text-white/80'
                     }`}
                   >
                     {s.title}
