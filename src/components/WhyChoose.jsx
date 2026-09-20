@@ -163,7 +163,7 @@ export default function WhyChoose() {
       style={{
         background: '#050B14',
       }}
-      className="py-20 lg:py-[160px]"
+      className="py-20 lg:pt-16 lg:pb-32"
     >
       <div
         style={{
