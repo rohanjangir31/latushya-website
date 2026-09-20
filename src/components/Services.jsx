@@ -130,8 +130,8 @@ export default function Services() {
                             transition={{ delay: bi * 0.07, duration: 0.35, ease: EASE }}
                             className="flex items-start gap-3"
                           >
-                            <span className="mt-[7px] w-[4px] h-[4px] rounded-full bg-[#DF4C73] flex-shrink-0" />
-                            <span className="text-white/70 text-[13px] font-light leading-snug">{b}</span>
+                            <span className="mt-[8px] w-[5px] h-[5px] rounded-full bg-[#DF4C73] flex-shrink-0 shadow-[0_0_8px_rgba(223,76,115,0.6)]" />
+                            <span className="text-white/85 text-[15px] font-normal leading-snug">{b}</span>
                           </motion.li>
                         ))}
                       </ul>
@@ -297,7 +297,7 @@ export default function Services() {
                   <div className="w-12 h-[2px] bg-gradient-to-r from-[#DF4C73] to-[#5AB9EA] mb-6 rounded-full" />
 
                   {/* Bullets — 2-column grid */}
-                  <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
+                  <ul className="grid grid-cols-2 gap-x-6 gap-y-4">
                     {service.bullets.map((bullet, i) => (
                       <motion.li
                         key={i}
@@ -306,8 +306,8 @@ export default function Services() {
                         transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
                         className="flex items-start gap-2 group/b"
                       >
-                        <span className="mt-[7px] w-[4px] h-[4px] rounded-full bg-[#DF4C73] flex-shrink-0" />
-                        <span className="text-white/65 text-[13px] font-light leading-snug group-hover/b:text-white/90 transition-colors duration-200">
+                        <span className="mt-[8px] w-[5px] h-[5px] rounded-full bg-[#DF4C73] flex-shrink-0 shadow-[0_0_8px_rgba(223,76,115,0.6)] group-hover/b:scale-125 transition-transform duration-300" />
+                        <span className="text-white/80 text-[15px] font-normal leading-snug group-hover/b:text-white transition-colors duration-200">
                           {bullet}
                         </span>
                       </motion.li>
