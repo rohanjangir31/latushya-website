@@ -306,7 +306,7 @@ export default function SlidingSubTypes({ subTypes }) {
   if (!subTypes || subTypes.length === 0) return null;
 
   return (
-    <div className="w-full bg-black pt-16 lg:pt-32 pb-32 relative">
+    <div className="w-full bg-black pt-12 lg:pt-20 pb-20 relative">
 
       {/* Section header */}
       <div ref={headerRef} className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-24">

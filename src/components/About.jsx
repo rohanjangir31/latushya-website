@@ -74,7 +74,7 @@ export default function About() {
   return (
     <>
       {/* ── PART 1: WHO WE ARE ──────────────────────────────────────────── */}
-      <section id="about" className="relative py-24 lg:py-32 bg-[#03070E] overflow-hidden">
+      <section id="about" className="relative py-16 lg:py-20 bg-[#03070E] overflow-hidden">
         <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-[#DF4C73]/[0.04] to-transparent pointer-events-none" />
         
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -139,7 +139,7 @@ export default function About() {
       </section>
 
       {/* ── BRIDGE: Cinematic Quote ──────────────────────────────────────── */}
-      <section ref={bridgeRef} className="relative py-28 lg:py-40 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #040b14, #03070E)' }}>
+      <section ref={bridgeRef} className="relative py-20 lg:py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #040b14, #03070E)' }}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue/20 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" style={{ fontFamily: DISPLAY, fontSize: 'clamp(8rem, 20vw, 22rem)', fontWeight: 700, color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.025)', letterSpacing: '-0.04em', lineHeight: 1 }}>

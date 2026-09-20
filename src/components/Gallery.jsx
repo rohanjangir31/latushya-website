@@ -39,7 +39,7 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="py-32 bg-black-deep"
+      className="py-20 bg-black-deep"
       onKeyDown={handleKeyDown}
       tabIndex={-1}
     >

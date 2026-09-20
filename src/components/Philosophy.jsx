@@ -16,7 +16,7 @@ export default function Philosophy() {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full bg-black overflow-hidden pt-20 pb-24 lg:pt-48 lg:pb-24"
+      className="relative w-full bg-black overflow-hidden pt-16 pb-16 lg:pt-24 lg:pb-16"
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
         

@@ -13,7 +13,7 @@ export default function Services() {
   const service = SERVICES[active];
 
   return (
-    <section id="services" className="bg-[#03070E] pt-24 pb-32">
+    <section id="services" className="bg-[#03070E] pt-16 pb-20">
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-12">
 
         {/* ── Header ── */}

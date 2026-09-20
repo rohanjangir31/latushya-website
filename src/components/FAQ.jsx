@@ -8,7 +8,7 @@ export default function FAQ() {
   const [openId, setOpenId] = useState(null);
 
   return (
-    <section id="faq" className="py-32 bg-black-charcoal relative overflow-hidden">
+    <section id="faq" className="py-20 bg-black-charcoal relative overflow-hidden">
       <div className="absolute right-0 top-0 w-96 h-full opacity-30">
         <div className="absolute inset-0 bg-gradient-to-l from-pink/5 to-transparent" />
       </div>

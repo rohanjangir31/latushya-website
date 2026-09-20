@@ -158,7 +158,7 @@ export default function BeforeAfter() {
   const allPlaceholders = BEFORE_AFTER_PROJECTS.every(p => p.isPlaceholder);
 
   return (
-    <section id="before-after" className="py-32 bg-black-charcoal relative overflow-hidden">
+    <section id="before-after" className="py-20 bg-black-charcoal relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">

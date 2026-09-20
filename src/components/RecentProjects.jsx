@@ -92,7 +92,7 @@ export default function RecentProjects() {
   const allPlaceholder = RECENT_PROJECTS.every(p => p.isPlaceholder);
 
   return (
-    <section id="recent-projects" className="py-32 bg-black-deep relative overflow-hidden">
+    <section id="recent-projects" className="py-20 bg-black-deep relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink/15 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16">

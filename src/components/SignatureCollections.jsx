@@ -15,7 +15,7 @@ function MinimalCard({ item, index }) {
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={`relative group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 lg:gap-32 pb-24 lg:pb-40 border-b border-white/5 last:border-0 last:pb-0`}
+      className={`relative group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 lg:gap-32 pb-16 lg:pb-24 border-b border-white/5 last:border-0 last:pb-0`}
     >
       {/* Background Watermark Number */}
       <div className={`absolute top-0 ${isEven ? 'right-0' : 'left-0'} text-[12rem] lg:text-[18rem] leading-none font-display font-light text-white/[0.02] select-none pointer-events-none -z-10 tracking-tighter`}>
@@ -108,7 +108,7 @@ export default function SignatureCollections() {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
 
   return (
-    <section id="collections" className="py-24 lg:py-32 bg-black relative overflow-hidden">
+    <section id="collections" className="py-16 lg:py-20 bg-black relative overflow-hidden">
       
       <div className="absolute top-1/3 left-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-pink/5 to-transparent opacity-30 pointer-events-none" />
 

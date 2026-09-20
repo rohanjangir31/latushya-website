@@ -28,7 +28,7 @@ export default function WardrobeShowcase() {
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
-    <section ref={sectionRef} className="py-32 lg:py-48 bg-[#03070E] relative overflow-hidden">
+    <section ref={sectionRef} className="py-20 lg:py-48 bg-[#03070E] relative overflow-hidden">
       
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 lg:px-16 mb-16 lg:mb-24">

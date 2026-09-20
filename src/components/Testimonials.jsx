@@ -133,7 +133,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-32 bg-black-charcoal relative overflow-hidden">
+    <section id="testimonials" className="py-20 bg-black-charcoal relative overflow-hidden">
       {/* Decorative quote mark — capped on mobile */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 font-display text-[120px] md:text-[200px] text-pink/[0.04] font-bold leading-none select-none pointer-events-none overflow-hidden" aria-hidden="true">
         &ldquo;

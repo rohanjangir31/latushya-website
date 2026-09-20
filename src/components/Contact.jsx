@@ -30,7 +30,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-16 lg:py-48 overflow-hidden bg-black-deep"
+      className="relative py-16 lg:py-24 overflow-hidden bg-black-deep"
     >
       {/* ── Background Aesthetics ─────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none noise-texture" />
@@ -145,7 +145,7 @@ export default function Contact() {
         {/* ── Footer Info ──────────────────────────────────── */}
         <motion.div
           {...fadeUp(0.5)}
-          className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 text-white/80 font-medium text-xs tracking-widest uppercase"
+          className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 text-white/80 font-medium text-xs tracking-widest uppercase"
         >
           <p>Strictly By Appointment</p>
           <p>{COMPANY.city}</p>

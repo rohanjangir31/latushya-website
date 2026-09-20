@@ -22,7 +22,7 @@ export default function CTASection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 lg:py-28 overflow-hidden flex items-center"
+      className="relative py-16 lg:py-20 overflow-hidden flex items-center"
     >
       {/* Background image */}
       <div className="absolute inset-0 z-0">

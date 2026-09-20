@@ -75,7 +75,7 @@ function CategorySection({ category, materials, image, reverse }) {
   const meta = CATEGORY_LABELS[category];
   
   return (
-    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24 mb-32 lg:mb-40`}>
+    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24 mb-20 lg:mb-24`}>
       
       {/* ── Photo (Brings Life) ── */}
       <div className="w-full lg:w-1/2">
@@ -145,7 +145,7 @@ export default function MaterialsSection() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
 
         {/* ── SECTION HEADER ── */}
-        <div className="mb-24 lg:mb-40 text-center flex flex-col items-center">
+        <div className="mb-16 lg:mb-24 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
