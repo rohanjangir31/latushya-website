@@ -70,14 +70,14 @@ export default function Services() {
                     />
                   )}
 
-                  <div className="relative flex items-center gap-3 z-10">
+                  <div className="relative flex items-center gap-4 z-10">
                     <span
-                      className={`text-[10px] font-bold tracking-widest transition-colors duration-300 w-5 shrink-0
-                        ${active === i ? 'text-[#DF4C73]' : 'text-white/20 group-hover:text-[#DF4C73]/50'}`}
+                      className={`font-display text-xl lg:text-2xl italic transition-colors duration-300 w-7 shrink-0
+                        ${active === i ? 'text-[#DF4C73]' : 'text-white/30 group-hover:text-[#DF4C73]/70'}`}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="font-sans font-medium text-[13px] leading-snug">
+                    <span className="font-sans font-medium text-[14px] leading-snug">
                       {s.title}
                     </span>
                   </div>
@@ -143,9 +143,14 @@ export default function Services() {
 
                   {/* Top: counter + title + rule */}
                   <div>
-                    <span className="text-[#DF4C73]/50 text-[10px] tracking-[0.45em] uppercase font-semibold mb-2 block">
-                      {String(active + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
-                    </span>
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="font-display italic text-2xl text-[#DF4C73]/70">
+                        {String(active + 1).padStart(2, '0')}
+                      </span>
+                      <span className="font-sans text-[10px] text-white/30 uppercase tracking-widest font-bold">
+                        / {String(SERVICES.length).padStart(2, '0')}
+                      </span>
+                    </div>
 
                     <h3
                       className="font-display font-light text-white leading-tight mb-2"
