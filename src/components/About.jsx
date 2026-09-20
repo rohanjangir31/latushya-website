@@ -92,11 +92,11 @@ export default function About() {
               <AnimatedSection>
                 <span className="block text-pink text-[10px] tracking-[0.4em] uppercase font-medium mb-8">Studio Philosophy</span>
               </AnimatedSection>
-              <div className="font-display text-4xl md:text-5xl lg:text-[64px] font-light text-white leading-[1.1] mb-12">
+              <h1 className="font-display text-[2.75rem] md:text-[4rem] lg:text-[5rem] font-normal text-white leading-[1.05] tracking-tight mb-12 drop-shadow-md">
                 <TextReveal text="We do not decorate." delay={0.1} />
                 <br />
-                <span className="italic text-pink"><TextReveal text="We construct living spaces." delay={0.3} /></span>
-              </div>
+                <span className="italic text-[#DF4C73] drop-shadow-lg font-medium"><TextReveal text="We construct living spaces." delay={0.3} /></span>
+              </h1>
               <AnimatedSection delay={0.3}>
                 <div className="space-y-8 text-gray-subtle text-lg font-light leading-relaxed max-w-2xl">
                   <p>Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is an exclusive commission.</p>
