@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { MapPin, Phone, Mail, Heart, Home, LayoutGrid, Columns, Image as ImageIcon, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Heart, Home, LayoutGrid, Columns, Image as ImageIcon, MessageCircle, FileText } from 'lucide-react';
 import { COMPANY } from '../data/content';
 
 // Inline SVG social icons
@@ -164,6 +164,10 @@ export default function Footer() {
                   ) : (
                     <span className="text-gray-light/40 text-sm italic">{COMPANY.city}<br/>Full address coming soon</span>
                   )}
+                </li>
+                <li className="flex items-start gap-3">
+                  <FileText size={14} className="text-pink flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-light text-sm">GST: 29COPPP3833M1Z2</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone size={14} className="text-pink flex-shrink-0" />

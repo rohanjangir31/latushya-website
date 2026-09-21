@@ -18,6 +18,7 @@ import Materials from './pages/Materials';
 import Contact from './pages/Contact';
 import CollectionDetail from './pages/CollectionDetail';
 import WardrobesHub from './pages/WardrobesHub';
+import NotFound from './pages/NotFound';
 import React from 'react';
 
 class ErrorBoundary extends React.Component {
@@ -227,6 +228,7 @@ function AppContent() {
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/collections/:id" element={<CollectionDetail />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>
           </main>
