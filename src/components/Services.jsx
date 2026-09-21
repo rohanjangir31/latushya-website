@@ -1,14 +1,29 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { SERVICES } from '../data/content';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const EASE = [0.16, 1, 0.3, 1];
 
 export default function Services() {
+  const location = useLocation();
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (location.hash) {
+      const hashId = location.hash.replace('#', '');
+      const idx = SERVICES.findIndex((s) => s.id === hashId);
+      if (idx !== -1) {
+        setActive(idx);
+        const el = document.getElementById('services');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }, [location.hash]);
 
   const service = SERVICES[active];
 
