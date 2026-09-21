@@ -148,6 +148,11 @@ function WhatsAppFloat() {
       href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
       target="_blank"
       rel="noreferrer"
+      onClick={() => {
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'conversion', { 'send_to': 'AW-663510360/2lJmCM7Co-EbENi6sbwC' });
+        }
+      }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 3, duration: 0.5, type: 'spring' }}
