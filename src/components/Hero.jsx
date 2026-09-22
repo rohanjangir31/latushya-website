@@ -199,7 +199,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.42, ease: EASE_OUT_EXPO }}
                   className="font-display italic pr-2"
                   style={{
-                    fontSize: 'clamp(2.8rem, 8.5vw, 7rem)',
+                    fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.02em',
                     lineHeight: 0.92,
@@ -218,7 +218,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.52, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(2.8rem, 8.5vw, 7rem)',
+                    fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.02em',
                     lineHeight: 0.92,
@@ -239,7 +239,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.62, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(1.5rem, 4vw, 3.4rem)',
+                    fontSize: 'clamp(1.2rem, 3vw, 2.8rem)',
                     fontWeight: 300,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
@@ -278,7 +278,7 @@ export default function Hero() {
                   transition={{ duration: 1.1, delay: 0.74, ease: EASE_OUT_EXPO }}
                   className="font-display"
                   style={{
-                    fontSize: 'clamp(1.5rem, 4vw, 3.4rem)',
+                    fontSize: 'clamp(1.4rem, 3.5vw, 3rem)',
                     fontWeight: 400,
                     letterSpacing: '-0.005em',
                     lineHeight: 1.15,
