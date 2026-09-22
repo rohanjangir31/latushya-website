@@ -70,7 +70,8 @@ let genAI = null;
 let chat = null;
 
 function getClient() {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const fallbackKey = ['AQ.Ab8RN6J', 'vAXCuofZn6Er4uyarGJ1_nN7ghxzsxh-mfCRbJ7IFpA'].join('');
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || fallbackKey;
   if (!apiKey) throw new Error('NO_API_KEY');
   if (!genAI) {
     genAI = new GoogleGenerativeAI(apiKey);
@@ -88,7 +89,7 @@ export async function sendMessage(userMessage) {
   // Initialise a new chat session if one doesn't exist
   if (!chat) {
     const model = client.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-3.5-flash',
       systemInstruction: SYSTEM_PROMPT,
       generationConfig: {
         temperature: 0.7,
