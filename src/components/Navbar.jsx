@@ -59,8 +59,8 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex items-center ${
           scrolled || menuOpen
-            ? 'h-[80px] bg-black-deep/95 backdrop-blur-md border-b border-pink/10'
-            : 'h-[80px] bg-black-deep/95 lg:bg-transparent lg:h-[100px]'
+            ? 'h-[80px] bg-[#03070E]/95 backdrop-blur-md border-b border-pink/10'
+            : 'h-[80px] lg:h-[100px] bg-[#03070E]'
         }`}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex w-full items-center justify-between">
