@@ -69,13 +69,14 @@ export default function Navbar() {
             <Link
               to="/"
               onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="flex flex-col items-start group relative z-10"
+              className="flex items-center group relative z-10"
             >
-              <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
+              <motion.div whileHover={{ scale: 1.02 }} className="flex items-center justify-center">
                 <img 
                   src="/logo-2d.png" 
                   alt="Latushya Logo" 
-                  className={`w-auto object-contain transition-all duration-500 ${(scrolled || menuOpen) ? 'h-10 lg:h-12' : 'h-14 lg:h-16'}`}
+                  className={`object-contain transition-all duration-500 ${(scrolled || menuOpen) ? 'w-10 h-10 lg:w-12 lg:h-12' : 'w-14 h-14 lg:w-[4.5rem] lg:h-[4.5rem]'}`}
+                  style={{ maxHeight: '100%', maxWidth: '100%' }}
                 />
               </motion.div>
             </Link>
