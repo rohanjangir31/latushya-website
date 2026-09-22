@@ -59,8 +59,8 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex items-center ${
           scrolled || menuOpen
-            ? 'h-[50px] bg-black-deep/90 backdrop-blur-md border-b border-pink/10'
-            : 'h-[80px] bg-transparent'
+            ? 'h-[70px] lg:h-[80px] bg-black-deep/90 backdrop-blur-md border-b border-pink/10'
+            : 'h-[90px] lg:h-[100px] bg-transparent'
         }`}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex w-full items-center justify-between">
@@ -75,7 +75,7 @@ export default function Navbar() {
                 <img 
                   src="/logo-2d.png" 
                   alt="Latushya Logo" 
-                  className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-11 lg:h-12' : 'h-14 lg:h-[4rem]'}`}
+                  className={`w-auto object-contain transition-all duration-500 ${(scrolled || menuOpen) ? 'h-10 lg:h-12' : 'h-14 lg:h-16'}`}
                 />
               </motion.div>
             </Link>
