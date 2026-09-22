@@ -157,7 +157,7 @@ export default function Hero() {
         style={{ y: contentY }}
         className="relative z-10 min-h-[100svh] lg:h-full flex flex-col justify-end lg:flex-row lg:items-end"
       >
-        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-[45vh] lg:pt-0">
+        <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 lg:px-8 xl:px-12 pb-16 lg:pb-32 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-8 pt-[45vh] lg:pt-[140px]">
           
           {/* Left Text Block */}
           <div className="max-w-[560px] w-full">
