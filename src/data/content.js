@@ -28,33 +28,33 @@ export const TESTIMONIALS    = reviews;
 export const WHY_CHOOSE = [
   {
     id: 1,
-    title: 'Custom Interior Designs',
-    description: 'Every space is designed from scratch around your specific dimensions, lifestyle requirements, and aesthetic preferences. We never use off-the-shelf templates.',
+    title: 'Built for Your Home',
+    description: 'We measure your actual space and design around it. Nothing is copied from a catalogue. Your kitchen or wardrobe is designed once, for you.',
   },
   {
     id: 2,
-    title: 'Premium Hardware',
-    description: 'We install only trusted luxury brands Häfele, Hettich, and Blum known for their flawless engineering, silent operation, and lifetime performance.',
+    title: 'German Hardware',
+    description: 'We use Häfele, Hettich, and Blum. These brands are trusted by serious furniture makers worldwide because they hold up for years without needing any adjustment.',
   },
   {
     id: 3,
-    title: 'Quality Materials',
-    description: 'Century Ply and Greenply grade plywood, premium laminates, and solid wood options materials selected for their structural integrity and beautiful finish.',
+    title: 'Solid Core Materials',
+    description: 'Century Ply and Greenply grade boards form the base of all our work. They do not warp, they hold screws well, and they last.',
   },
   {
     id: 4,
-    title: 'Precision Installation',
-    description: 'Our experienced carpentry team ensures millimetre-accurate installation. Every panel, rail, and fitting is checked before handover.',
+    title: 'Careful Installation',
+    description: 'Our carpenters have done this hundreds of times. Panels are fitted to the millimetre and checked before we leave the site.',
   },
   {
     id: 5,
-    title: 'Space Optimisation',
-    description: 'We map your spatial usage patterns daily routines, entertainment needs, storage and engineer a layout that makes every square foot count.',
+    title: 'Storage That Makes Sense',
+    description: 'We ask how you use your space before designing it. The layout is built around your actual habits, not what looks good in a render.',
   },
   {
     id: 6,
-    title: 'Personalised Consultation',
-    description: 'Your project starts with a one-on-one consultation. We listen first, measure carefully, and only then present a design concept.',
+    title: 'One-on-One from Day One',
+    description: 'You speak to the same person throughout your project. We take the first consultation seriously because that is where the real work begins.',
   },
 ];
 
@@ -168,33 +168,33 @@ export const MATERIALS = [
 export const PROCESS_STEPS = [
   {
     step: '01',
-    title: 'Project Commissioning',
-    description: 'Once you choose to work with Latushya, our dedicated team visits your home to assess the space and listen carefully to your requirements including room dimensions, lifestyle habits, and style preferences.',
+    title: 'First Visit',
+    description: 'We come to your home. We look at the space, take measurements, and talk through what you want. No forms, no presentations — just a straightforward conversation about your home.',
   },
   {
     step: '02',
-    title: 'Design Concept',
-    description: 'Your house is designed through deep collaboration. Over a dedicated series of five to six in depth design sessions, we iteratively refine a 3D spatial layout tailored exclusively for your space, perfecting every interior zone, material finish, and lighting plan together.',
+    title: 'Design',
+    description: 'Based on what we heard, we put together a 3D layout of your space. We go back and forth with you until it feels right — usually over a few sessions — before anything gets finalised.',
   },
   {
     step: '03',
     title: 'Material Selection',
-    description: 'You will handpick your primary finishes including premium laminates, luxurious acrylics, and architectural glass alongside your preferred hardware and internal fittings from our exclusively curated material library.',
+    description: 'You pick your finishes — laminates, acrylics, colours, handles — from our material samples. We guide you through what works well together and what holds up over time.',
   },
   {
     step: '04',
     title: 'Production',
-    description: 'Your woodwork panels are precision cut and pre assembled in our advanced workshop ensuring absolute accuracy before they ever reach your home.',
+    description: 'Your panels are cut and assembled at our workshop before they come to your home. This way everything fits correctly the first time and there is no wasted time on-site.',
   },
   {
     step: '05',
     title: 'Installation',
-    description: 'Our trained carpentry team installs your interiors on site with minimal mess and disruption while working strictly to our approved timelines.',
+    description: 'Our team comes in, installs everything, and keeps the site clean while they work. We stick to the agreed schedule and keep you updated if anything changes.',
   },
   {
     step: '06',
-    title: 'Quality Handover',
-    description: 'True luxury lies in flawless execution. We invite you to conduct a meticulous walkthrough and compile a final snag list. Our team thoroughly resolves every detail to your absolute standard before we ever ask for your final sign off.',
+    title: 'Handover',
+    description: 'We walk through the finished space with you. If anything is not right, we fix it before we ask for final payment. Simple as that.',
   },
 ];
 

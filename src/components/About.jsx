@@ -117,9 +117,9 @@ export default function About() {
             <div className="lg:col-span-7 lg:pl-12 lg:pt-8">
               <AnimatedSection delay={0.2}>
                 <div className="space-y-8 text-white/70 text-base lg:text-lg font-light leading-relaxed max-w-2xl">
-                  <p>Latushya was founded on a singular belief that a home should be an architectural extension of the people who live within. We reject the mass produced and the templated. Every wardrobe, every kitchen, and every interior space we execute is an exclusive commission.</p>
-                  <p>Our process begins with silence, listening to how you move through your home, understanding your storage habits, and studying the natural light of your space. Only then do we engineer solutions using world class German hardware.</p>
-                  <p>We are not just designers, we are masterful builders. We uncover brilliant ideas and craft solutions you didn't even know you needed. From the first sketch to the final soft close of a cabinet door, our commitment is to absolute, uncompromising quality.</p>
+                   <p>Latushya started with one simple idea — most interior work in Bangalore is either too expensive for what you get, or too cheap to last. We wanted to change that. So we built a studio that does high-quality, fully custom work at a price that's actually fair.</p>
+                   <p>We spend a lot of time at the start just listening. What bothers you about your current space? How do you actually use your wardrobe in the morning? Where does the clutter always end up? The answers to those questions drive the whole design.</p>
+                   <p>We use German hardware — Blum, Häfele, Hettich — because it genuinely lasts. Not because it sounds impressive. When you open a drawer five years from now and it still glides silently, that's the whole point.</p>
                 </div>
               </AnimatedSection>
               
@@ -158,7 +158,7 @@ export default function About() {
               <br />Your home, built right.
             </h2>
             <p className="text-white/40 text-base max-w-lg mx-auto leading-relaxed" style={{ fontFamily: SANS }}>
-              Once you commission us, a precise and time tested sequence begins. No shortcuts. No surprises.
+              Once you give us the go-ahead, we follow the same six steps every time. It keeps things predictable for you, and it's how we've managed to stay consistent across every project.
             </p>
           </motion.div>
         </div>
