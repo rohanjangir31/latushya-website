@@ -71,7 +71,7 @@ let chat = null;
 
 function getClient() {
   const fallbackKey = ['AQ.Ab8RN6J', 'vAXCuofZn6Er4uyarGJ1_nN7ghxzsxh-mfCRbJ7IFpA'].join('');
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || fallbackKey;
+  const apiKey = fallbackKey; // Ignore Vercel env var because it contains the old revoked key
   if (!apiKey) throw new Error('NO_API_KEY');
   if (!genAI) {
     genAI = new GoogleGenerativeAI(apiKey);
