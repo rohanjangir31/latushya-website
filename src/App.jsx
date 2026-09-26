@@ -160,7 +160,7 @@ function WhatsAppFloat() {
       transition={{ delay: 3, duration: 0.5, type: 'spring' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="flex fixed bottom-24 right-6 lg:bottom-8 lg:right-28 z-50 w-14 h-14 bg-[#25D366] rounded-full items-center justify-center shadow-[0_4px_15px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_25px_rgba(37,211,102,0.6)] transition-all duration-300"
+      className="flex fixed bottom-24 right-6 lg:bottom-[5.5rem] lg:right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full items-center justify-center shadow-[0_4px_15px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_25px_rgba(37,211,102,0.6)] transition-all duration-300"
       aria-label="Chat on WhatsApp"
       id="floating-whatsapp"
     >
@@ -183,11 +183,11 @@ function CallFloat() {
       transition={{ delay: 3.2, duration: 0.5, type: 'spring' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="flex fixed bottom-40 right-6 lg:bottom-[5.5rem] lg:right-8 z-50 w-14 h-14 bg-white rounded-full items-center justify-center shadow-[0_8px_25px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_30px_rgba(255,255,255,0.2)] hover:scale-110 transition-all duration-300 group"
+      className="flex fixed bottom-40 right-6 lg:bottom-[9.5rem] lg:right-8 z-50 w-14 h-14 bg-[#111620] border border-white/10 rounded-full items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:border-white/30 hover:bg-[#1a202c] transition-all duration-300 group"
       aria-label="Call Us"
       id="floating-call"
     >
-      <Phone size={22} className="text-[#03070E] group-hover:text-[#DF4C73] transition-colors duration-300" />
+      <Phone size={22} className="text-white group-hover:text-white transition-colors duration-300" />
     </motion.a>
   );
 }
