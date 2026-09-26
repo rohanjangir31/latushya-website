@@ -183,7 +183,7 @@ function CallFloat() {
       transition={{ delay: 3.2, duration: 0.5, type: 'spring' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="flex fixed bottom-40 right-6 lg:bottom-8 lg:right-48 z-50 w-14 h-14 bg-[#5AB9EA] rounded-full items-center justify-center shadow-[0_4px_15px_rgba(90,185,234,0.4)] hover:shadow-[0_6px_25px_rgba(90,185,234,0.6)] transition-all duration-300 group"
+      className="flex fixed bottom-40 right-6 lg:bottom-[5.5rem] lg:right-8 z-50 w-14 h-14 bg-[#5AB9EA] rounded-full items-center justify-center shadow-[0_4px_15px_rgba(90,185,234,0.4)] hover:shadow-[0_6px_25px_rgba(90,185,234,0.6)] transition-all duration-300 group"
       aria-label="Call Us"
       id="floating-call"
     >
