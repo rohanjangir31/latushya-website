@@ -84,8 +84,8 @@ export default function About() {
             <AnimatedSection>
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-[2px] bg-[#DF4C73]" />
-                <span className="text-[#DF4C73] text-[10px] tracking-[0.4em] uppercase font-semibold">
-                  Studio Philosophy
+                <span className="text-[#DF4C73] text-[10px] tracking-[0.15em] uppercase font-semibold">
+                  About Us
                 </span>
               </div>
             </AnimatedSection>
@@ -142,14 +142,14 @@ export default function About() {
       <section ref={bridgeRef} className="relative py-20 lg:py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #040b14, #03070E)' }}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue/20 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" style={{ fontFamily: DISPLAY, fontSize: 'clamp(8rem, 20vw, 22rem)', fontWeight: 700, color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.025)', letterSpacing: '-0.04em', lineHeight: 1 }}>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" style={{ fontFamily: DISPLAY, fontSize: 'clamp(8rem, 20vw, 22rem)', fontWeight: 700, color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.012)', letterSpacing: '-0.04em', lineHeight: 1 }}>
           HOW
         </div>
         <div className="max-w-5xl mx-auto px-6 lg:px-16 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={isBridgeInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: EASE }}>
             <div className="flex items-center justify-center gap-4 mb-10">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-pink/60" />
-              <span className="text-pink/70 text-[10px] tracking-[0.4em] uppercase font-medium">Methodology</span>
+            <span className="text-pink/70 text-[10px] tracking-[0.15em] uppercase font-medium">How we work</span>
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-pink/60" />
             </div>
             <h2 className="text-white font-light mb-6 leading-tight" style={{ fontFamily: DISPLAY, fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.02em' }}>

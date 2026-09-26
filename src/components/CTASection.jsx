@@ -51,7 +51,7 @@ export default function CTASection() {
           transition={{ duration: 0.6 }}
           className="text-pink text-[9px] tracking-[0.32em] uppercase font-medium block mb-6"
         >
-          The Design Concierge
+          Free home visit. No pressure.
         </motion.span>
 
         <motion.h2
@@ -61,8 +61,7 @@ export default function CTASection() {
           className="font-display font-light text-white leading-tight mb-6"
           style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
         >
-          A lifestyle curated{' '}
-          <span className="italic text-pink">for you.</span>
+          Ready when <span className="italic text-pink">you are.</span>
         </motion.h2>
 
         <motion.p
@@ -71,7 +70,7 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="text-gray-subtle text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-10"
         >
-          Experience our tailored approach to interior architecture. From initial concept to flawless execution, our design experts provide a highly personalized, hand-held service.
+          Come in, sit down, look at some samples, and tell us about your space. The consultation is free and there is no obligation. We just like to start with a proper conversation.
         </motion.p>
 
         <motion.button
@@ -84,7 +83,7 @@ export default function CTASection() {
           className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-8 py-3.5 tracking-widest text-[0.65rem] uppercase transition-all duration-300"
           id="cta-section-btn"
         >
-          <span className="relative z-10">Request a Free Private Consultation</span>
+          <span className="relative z-10">Get in Touch</span>
         </motion.button>
       </div>
     </section>

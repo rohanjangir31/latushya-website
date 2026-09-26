@@ -19,6 +19,7 @@ import Contact from './pages/Contact';
 import CollectionDetail from './pages/CollectionDetail';
 import WardrobesHub from './pages/WardrobesHub';
 import NotFound from './pages/NotFound';
+import LandingPage from './pages/LandingPage';
 import React from 'react';
 
 class ErrorBoundary extends React.Component {
@@ -250,7 +251,11 @@ function AppContent() {
 export default function App() {
   return (
     <Router>
-      <AppContent />
+      {/* Landing page route — completely outside main layout */}
+      <Routes>
+        <Route path="/lp" element={<LandingPage />} />
+        <Route path="*" element={<AppContent />} />
+      </Routes>
     </Router>
   );
 }

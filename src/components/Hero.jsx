@@ -180,7 +180,7 @@ export default function Hero() {
                 className="uppercase font-medium leading-none"
                 style={{
                   fontSize: '0.625rem',
-                  letterSpacing: '0.32em',
+                  letterSpacing: '0.12em',
                   color: 'rgba(223, 76, 115,0.75)',
                 }}
               >

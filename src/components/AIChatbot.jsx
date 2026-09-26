@@ -93,10 +93,10 @@ function HomeScreen({ onCategorySelect, onQuestionSelect }) {
       {/* Hero greeting */}
       <div className="pt-1 pb-2">
         <p style={{ fontFamily: DISPLAY, fontSize: '22px', color: 'rgba(255,255,255,0.95)', lineHeight: 1.25 }}>
-          How can we help<br />you today?
+          What can we help<br />you with?
         </p>
         <p style={{ fontFamily: SANS, fontSize: '12.5px', color: 'rgba(255,255,255,0.4)', marginTop: '6px' }}>
-          Ask me anything — I'm powered by Gemini AI.
+          Ask anything about wardrobes, kitchens, or interiors.
         </p>
       </div>
 
@@ -227,7 +227,7 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
         </button>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 block animate-pulse" />
-          <span style={{ fontFamily: SANS, fontSize: '12px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>AI Concierge · Online</span>
+          <span style={{ fontFamily: SANS, fontSize: '12px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Online</span>
         </div>
       </div>
 
@@ -269,7 +269,7 @@ function ChatScreen({ messages, isTyping, onBack, onSend, inputValue, setInputVa
           </button>
         </div>
         <p style={{ fontFamily: SANS, fontSize: '10.5px', color: 'rgba(255,255,255,0.2)', marginTop: '6px', textAlign: 'center' }}>
-          Powered by Gemini AI · Press Enter to send
+          Press Enter to send
         </p>
       </form>
     </motion.div>
@@ -403,8 +403,8 @@ export default function AIChatbot() {
                   <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] block" />
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: DISPLAY, fontSize: '18px', color: 'rgba(255,255,255,0.95)', lineHeight: 1 }}>Latushya Concierge</h3>
-                  <p style={{ fontFamily: SANS, fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '2px' }}>AI · Design Assistant</p>
+                  <h3 style={{ fontFamily: DISPLAY, fontSize: '18px', color: 'rgba(255,255,255,0.95)', lineHeight: 1 }}>Ask Latushya</h3>
+                  <p style={{ fontFamily: SANS, fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em', textTransform: 'uppercase', marginTop: '2px' }}>Design Help</p>
                 </div>
               </div>
               <button
@@ -487,7 +487,7 @@ export default function AIChatbot() {
             </motion.span>
           ) : (
             <motion.span key="chat" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.2 }} className="relative z-10 flex items-center justify-center">
-              <span style={{ fontSize: '20px', lineHeight: 1 }}>✦</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </motion.span>
           )}
         </AnimatePresence>

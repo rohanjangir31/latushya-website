@@ -7,7 +7,7 @@ const companyInfo = {
   name: 'LATUSHYA',
   tagline: 'Premium Interior Design Studio',
   subTagline: "We build wardrobes, kitchens, and complete interiors in Bangalore. Everything is made to measure, on-site, for your home.",
-  specialty: "Premium Interior Design",
+  specialty: "Wardrobes & Interiors · Bangalore",
 
   // ─── CONTACT ──────────────────────────────────────────────
   // Replace with final values when owners provide them

@@ -21,39 +21,39 @@ const SANS    = "'Inter', system-ui, sans-serif";
 const CAPABILITIES = [
   {
     num: '01',
-    title: 'Custom Design',
+    title: 'Built for your space',
     description:
-      'Every space is crafted from scratch around your dimensions, lifestyle, and interior palette — no templates, no compromise.',
+      'We measure your actual room and design around those exact numbers. Nothing is pulled from a catalogue or resized to fit.',
   },
   {
     num: '02',
-    title: 'Premium Materials',
+    title: 'CenturyPly & Greenply boards',
     description:
-      'Century Ply and Greenply substrates paired with premium laminates and finishes, selected for structural integrity and lasting beauty.',
+      'The core of all our work is made from ISI-certified boards that hold screws well, resist moisture, and stay flat for years.',
   },
   {
     num: '03',
-    title: 'Precision Craftsmanship',
+    title: 'Fitted to the millimetre',
     description:
-      'Millimetre-accurate joinery and installation by our experienced in-house carpentry team, verified at every stage.',
+      'Our carpenters have done this hundreds of times. Everything is checked on-site before we leave, and we do not move on until it is right.',
   },
   {
     num: '04',
-    title: 'Installation Excellence',
+    title: 'Häfele, Hettich & Blum hardware',
     description:
-      'Häfele and Hettich German hardware — soft-close mechanisms, silent runners, and fittings built to outlast decades of daily use.',
+      'These are the brands serious furniture makers use globally. Soft-close, silent runners, and fittings that genuinely last — not just for the first year.',
   },
   {
     num: '05',
-    title: 'Lifetime Support',
+    title: 'We come back if something is off',
     description:
-      'Post-installation support included as standard. We return to adjust, refine, or repair — because your home should perform indefinitely.',
+      'After installation we do a walkthrough with you. If something is not sitting right, we fix it. That is not a policy — it is just how we work.',
   },
   {
     num: '06',
-    title: 'Personal Consultation',
+    title: 'One person, start to finish',
     description:
-      'Your project begins with an in-home visit. We listen, measure precisely, and design only after we understand your home and your habits.',
+      'You will not be passed between departments. The same person you meet at the first visit is the one managing your project through to handover.',
   },
 ];
 
@@ -228,8 +228,8 @@ export default function WhyChoose() {
                 color: '#ffffff',
               }}
             >
-              Six Reasons to{' '}
-              <em style={{ fontStyle: 'italic', color: '#DF4C73' }}>Choose Us</em>
+              What makes us{' '}
+              <em style={{ fontStyle: 'italic', color: '#DF4C73' }}>different</em>
             </motion.h2>
 
             <motion.p
@@ -245,7 +245,7 @@ export default function WhyChoose() {
                 flexShrink: 0,
               }}
             >
-              The principles behind every wardrobe we design and build for your home.
+              The way we work, explained plainly.
             </motion.p>
           </div>
 

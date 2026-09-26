@@ -105,7 +105,7 @@ export default function Footer() {
               </div>
 
               <p className="text-gray-light text-sm leading-relaxed mb-6">
-                Bangalore's premium interior design and execution studio. We create custom living spaces including turnkey interiors, modular kitchens, and custom furniture tailored precisely to your lifestyle.
+                We build wardrobes, kitchens, and complete interiors in Bangalore. Custom work, on-site, made to fit your actual home.
               </p>
 
               {/* SEO keywords as natural text */}
@@ -209,7 +209,7 @@ export default function Footer() {
               © {new Date().getFullYear()} {COMPANY.name}. Premium Wardrobes, {COMPANY.city}
             </p>
             <p className="text-gray-light/20 text-xs flex items-center gap-1.5">
-              Crafted with <Heart size={9} className="text-pink fill-pink" /> for beautiful living spaces
+              Built with care in Bangalore
             </p>
           </div>
         </div>
@@ -229,16 +229,16 @@ export default function Footer() {
             <span className={`text-[9px] uppercase tracking-wider ${location.pathname === '/services' ? 'font-semibold' : 'font-medium'}`}>Services</span>
           </Link>
           
-          {/* Tab 3: Center Elevated Button (AI Chat) */}
+          {/* Tab 3: Center Elevated Button */}
           <div className="relative w-full h-full flex justify-center items-start">
             <button
               onClick={() => document.dispatchEvent(new CustomEvent('open-ai-chatbot'))}
               className="absolute -top-5 w-12 h-12 rounded-full bg-gradient-to-br from-[#DF4C73] to-[#b33554] shadow-[0_4px_20px_rgba(223,76,115,0.4)] flex items-center justify-center text-white transition-transform active:scale-95 border-[3px] border-[#03070E]"
             >
-              <span style={{ fontSize: '20px', lineHeight: 1 }}>✦</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </button>
             <span className="absolute bottom-2 text-[9px] uppercase tracking-wider font-semibold text-pink drop-shadow-[0_0_8px_rgba(223,76,115,0.4)]">
-              AI Chat
+              Chat
             </span>
           </div>
 
