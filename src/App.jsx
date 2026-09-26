@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 
@@ -170,6 +171,27 @@ function WhatsAppFloat() {
   );
 }
 
+// Floating Call button
+function CallFloat() {
+  if (!COMPANY.phone) return null;
+
+  return (
+    <motion.a
+      href={`tel:${COMPANY.phone}`}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 3.2, duration: 0.5, type: 'spring' }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="flex fixed bottom-40 right-6 lg:bottom-8 lg:right-48 z-50 w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.2)] hover:bg-white/20 transition-all duration-300"
+      aria-label="Call Us"
+      id="floating-call"
+    >
+      <Phone size={24} color="white" />
+    </motion.a>
+  );
+}
+
 // Scroll to top button
 function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -239,6 +261,7 @@ function AppContent() {
             </AnimatePresence>
           </main>
           <Footer />
+          <CallFloat />
           <WhatsAppFloat />
           <AIChatbot />
           <ScrollToTop />
