@@ -1,4 +1,4 @@
-﻿import { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, ChevronDown, X } from "lucide-react";
 import { COMPANY } from "../data/content";
@@ -77,10 +77,10 @@ function LeadForm({ compact = false }) {
         {!done ? (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <p style={{ fontFamily: DISPLAY, fontSize: compact ? "22px" : "26px", color: "#fff", lineHeight: 1.2, marginBottom: "6px" }}>
-              Book a free <em style={{ color: PINK, fontStyle: "italic" }}>home visit</em>
+              Book a <em style={{ color: PINK, fontStyle: "italic" }}>consultation</em>
             </p>
             <p style={{ fontFamily: SANS, fontSize: "12px", color: "rgba(255,255,255,0.45)", marginBottom: "22px" }}>
-              No payment. No obligation. We come to you.
+              Expert advice. No obligation. We come to you.
             </p>
             {error && <p style={{ fontFamily: SANS, fontSize: "12px", color: "#ff6b6b", marginBottom: "14px" }}>{error}</p>}
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -209,7 +209,7 @@ const SERVICES_LIST = [
 ];
 
 const PROCESS = [
-  { num: "01", title: "We visit your home", body: "Free, no-obligation. We take measurements and listen to what you need." },
+  { num: "01", title: "We visit your home", body: "We take accurate measurements and listen carefully to understand your requirements." },
   { num: "02", title: "You approve design & quote", body: "We share a 3D plan and final price. Nothing moves until you say yes." },
   { num: "03", title: "We install & hand over", body: "Our team installs everything on-site. You do a walkthrough before we leave." },
 ];
@@ -228,7 +228,7 @@ export default function LandingPage() {
       window.gtag("event", "conversion", { send_to: "AW-663510360/2lJmCM7Co-EbENi6sbwC" });
     }
     window.open(
-      `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20saw%20your%20ad%20and%20want%20to%20book%20a%20free%20consultation.`,
+      `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20saw%20your%20ad%20and%20want%20to%20book%20a%20consultation.`,
       "_blank"
     );
   };
@@ -264,7 +264,7 @@ export default function LandingPage() {
             </motion.p>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }} style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "40px" }}>
-              <TrustPill>Free home visit</TrustPill>
+              <TrustPill>Expert consultation</TrustPill>
               <TrustPill>Häfele & Hettich hardware</TrustPill>
               <TrustPill>500+ projects in Bangalore</TrustPill>
               <TrustPill>No middlemen</TrustPill>
@@ -391,12 +391,12 @@ export default function LandingPage() {
         </div>
         <div style={{ position: "relative", zIndex: 10, maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
           <FadeUp>
-            <p style={{ fontFamily: SANS, fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(223,76,115,0.8)", marginBottom: "16px" }}>Book your free visit</p>
+            <p style={{ fontFamily: SANS, fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(223,76,115,0.8)", marginBottom: "16px" }}>Book your consultation</p>
             <h2 style={{ fontFamily: DISPLAY, fontSize: "clamp(2.2rem, 5vw, 3.8rem)", color: "#fff", fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: "18px" }}>
               Ready when <em style={{ color: PINK, fontStyle: "italic" }}>you are.</em>
             </h2>
             <p style={{ fontFamily: SANS, fontSize: "15px", color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: "40px" }}>
-              Most consultations are booked within 24 hours. We will come to your home, take measurements, and give you a proper design and quote — free.
+              Most consultations are booked within 24 hours. We will come to your home, take measurements, and provide a proper design and quote.
             </p>
             <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
               <button onClick={() => handleWA("final")} id="lp-final-wa" style={{ display: "flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", border: "none", borderRadius: "999px", padding: "16px 36px", fontFamily: SANS, fontWeight: 700, fontSize: "14px", cursor: "pointer", boxShadow: "0 4px 20px rgba(37,211,102,0.4)" }}>
