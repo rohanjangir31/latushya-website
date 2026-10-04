@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COMPANY } from '../data/content';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,9 +17,8 @@ export default function QuoteForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Consultation Request from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email || 'Not provided'}\nMobile: ${formData.mobile}\n\nI would like to request a consultation.`);
-    window.location.href = `mailto:info@latushya.com?subject=${subject}&body=${body}`;
+    const text = `Hello Latushya! I would like to request a consultation.\nName: ${formData.name}\nMobile: ${formData.mobile}\nEmail: ${formData.email || 'Not provided'}`;
+    window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
