@@ -15,10 +15,27 @@ export default function QuoteForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const text = `Hello Latushya! I would like to request a consultation.\nName: ${formData.name}\nMobile: ${formData.mobile}\nEmail: ${formData.email || 'Not provided'}`;
-    window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+    
+    try {
+      await fetch("https://formsubmit.co/ajax/info@latushya.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email || 'Not provided',
+          mobile: formData.mobile,
+          _subject: "New Consultation Request!"
+        })
+      });
+    } catch (err) {
+      console.error("Form submission failed", err);
+    }
+
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
