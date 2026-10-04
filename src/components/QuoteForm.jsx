@@ -4,6 +4,7 @@ import { COMPANY } from '../data/content';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +19,9 @@ export default function QuoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     
+    setIsSubmitting(true);
     try {
       await fetch("https://formsubmit.co/ajax/info@latushya.com", {
         method: "POST",
@@ -38,6 +41,7 @@ export default function QuoteForm() {
       console.error("Form submission failed", err);
     }
 
+    setIsSubmitting(false);
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
@@ -91,9 +95,10 @@ export default function QuoteForm() {
                 </p>
                 <button 
                   type="submit"
-                  className="w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400"
+                  disabled={isSubmitting}
+                  className="w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400 disabled:opacity-70 disabled:cursor-wait"
                 >
-                  Submit Request
+                  {isSubmitting ? "Sending..." : "Submit Request"}
                 </button>
               </div>
             </form>
