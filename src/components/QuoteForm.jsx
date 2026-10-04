@@ -46,7 +46,7 @@ export default function QuoteForm() {
   };
 
   // High-contrast translucent capsule inputs
-  const inputClasses = "w-full bg-black/40 border border-white/20 px-4 py-3 text-xs text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-black/60 transition-all duration-300 rounded-xl shadow-inner";
+  const inputClasses = "w-full bg-black/40 border border-white/20 px-4 py-3 text-[16px] md:text-xs text-white placeholder-white/70 focus:outline-none focus:border-[#DF4C73] focus:bg-black/60 transition-all duration-300 rounded-xl shadow-inner";
 
   return (
     <motion.div

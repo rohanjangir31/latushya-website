@@ -57,7 +57,7 @@ function LeadForm({ compact = false }) {
   };
 
   const inputBase = {
-    fontFamily: SANS, fontSize: "13px",
+    fontFamily: SANS, fontSize: "16px",
     background: "rgba(255,255,255,0.05)",
     border: "1px solid rgba(255,255,255,0.12)",
     borderRadius: "10px", color: "#fff",
