@@ -7,7 +7,8 @@ export default function QuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    mobile: ''
+    mobile: '',
+    message: ''
   });
 
   const handleChange = (e) => {
@@ -29,6 +30,7 @@ export default function QuoteForm() {
           name: formData.name,
           email: formData.email || 'Not provided',
           mobile: formData.mobile,
+          message: formData.message,
           _subject: "New Consultation Request!"
         })
       });
@@ -39,7 +41,7 @@ export default function QuoteForm() {
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', email: '', mobile: '' });
+      setFormData({ name: '', email: '', mobile: '', message: '' });
     }, 5000);
   };
 
@@ -81,8 +83,12 @@ export default function QuoteForm() {
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address (Optional)" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
+              <textarea name="message" value={formData.message} onChange={handleChange} required placeholder="Briefly describe your requirements..." rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <div className="mt-2">
+                <p className="text-[10px] text-white/90 text-center italic mb-3">
+                  *Please include approximate measurements for a more accurate estimate.
+                </p>
                 <button 
                   type="submit"
                   className="w-full h-[44px] bg-gradient-to-r from-[#DF4C73] to-[#F07595] text-white font-semibold text-[10px] tracking-[0.25em] uppercase rounded-xl hover:shadow-[0_8px_25px_rgba(223,76,115,0.5)] transition-all duration-400"
