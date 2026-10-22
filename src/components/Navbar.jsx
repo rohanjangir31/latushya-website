@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { COMPANY } from '../data/content';
 import Magnetic from './Magnetic';
+import { trackWhatsAppConversion } from '../utils/analytics';
 
 const navLinks = [
   { label: 'Home',      href: '/' },
@@ -149,6 +150,7 @@ export default function Navbar() {
                   href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackWhatsAppConversion()}
                   className="relative overflow-hidden rounded-full inline-flex items-center justify-center text-white font-semibold bg-gradient-to-r from-pink to-pink-light shadow-[0_4px_15px_rgba(223,76,115,0.25)] px-6 py-2.5 tracking-widest text-[0.6rem] uppercase transition-[transform,filter] duration-300 hover:-translate-y-0.5 hover:brightness-110"
                   id="nav-cta"
                 >
@@ -235,6 +237,7 @@ export default function Navbar() {
                       href={`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20a%20consultation.`}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() => trackWhatsAppConversion()}
                       className="btn-pink"
                     >
                       <span>Book Consultation</span>

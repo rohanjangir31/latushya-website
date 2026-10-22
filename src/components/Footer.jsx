@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { MapPin, Phone, Mail, Heart, Home, LayoutGrid, Columns, Image as ImageIcon, MessageCircle, FileText } from 'lucide-react';
 import { COMPANY } from '../data/content';
+import { trackWhatsAppConversion } from '../utils/analytics';
 
 // Inline SVG social icons
 const InstagramIcon = () => (
@@ -60,6 +61,7 @@ export default function Footer() {
 
   const handleConsult = () => {
     if (COMPANY.whatsapp) {
+      trackWhatsAppConversion();
       window.open(`https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20need%20an%20interior%20consultation.`, '_blank');
     } else {
       document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });

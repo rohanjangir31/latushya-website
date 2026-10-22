@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { COMPANY } from '../data/content';
+import { trackWhatsAppConversion } from '../utils/analytics';
 
 // Full-viewport immersive CTA section
 // Sits between Portfolio and Materials
@@ -10,6 +11,7 @@ export default function CTASection() {
 
   const handleCTA = () => {
     if (COMPANY.whatsapp) {
+      trackWhatsAppConversion();
       window.open(
         `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%27m%20interested%20in%20an%20interior%20consultation.`,
         '_blank'

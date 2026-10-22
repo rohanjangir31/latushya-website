@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, ChevronLeft, ArrowUpRight, Phone, AlertCircle } from 'lucide-react';
 import { CATEGORIES, KNOWLEDGE } from '../data/chatbotKnowledge';
 import { sendMessage as geminiSend, startNewChat } from '../services/gemini';
+import { trackWhatsAppConversion } from '../utils/analytics';
 
 const SANS    = "'Inter', system-ui, sans-serif";
 const DISPLAY = "'Cormorant Garamond', Georgia, serif";
@@ -67,6 +68,7 @@ function Bubble({ msg }) {
           href="https://wa.me/919741415887?text=Hello%20Latushya!%20I%20have%20a%20design%20query."
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackWhatsAppConversion()}
           style={{ fontFamily: SANS, fontSize: '13px' }}
           className="flex items-center gap-2.5 px-4 py-2.5 bg-[#25D366] hover:bg-[#1fba59] text-white rounded-xl font-medium transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(37,211,102,0.35)]"
         >

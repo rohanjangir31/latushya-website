@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { COMPANY } from './data/content';
 import GrainOverlay from './components/GrainOverlay';
+import { trackWhatsAppConversion } from './utils/analytics';
 
 // Pages
 import Home from './pages/Home';
@@ -151,9 +152,7 @@ function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       onClick={() => {
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'conversion', { 'send_to': 'AW-663510360/2lJmCM7Co-EbENi6sbwC' });
-        }
+        trackWhatsAppConversion();
       }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

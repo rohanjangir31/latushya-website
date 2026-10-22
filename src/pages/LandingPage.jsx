@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, ChevronDown, X } from "lucide-react";
 import { COMPANY } from "../data/content";
+import { trackWhatsAppConversion } from "../utils/analytics";
 
 const PINK    = "#DF4C73";
 const DARK    = "#03070E";
@@ -223,10 +224,8 @@ const WA_SVG = (
 export default function LandingPage() {
   const [galleryOpen, setGalleryOpen] = useState(null);
 
-  const handleWA = (id) => {
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "conversion", { send_to: "AW-663510360/2lJmCM7Co-EbENi6sbwC" });
-    }
+  const handleWA = () => {
+    trackWhatsAppConversion();
     window.open(
       `https://wa.me/${COMPANY.whatsapp}?text=Hello%20Latushya!%20I%20saw%20your%20ad%20and%20want%20to%20book%20a%20consultation.`,
       "_blank"
