@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
@@ -276,8 +276,16 @@ function AppContent() {
 // Dynamic GA4 SPA Route & UTM tracker
 function PageTracker() {
   const location = useLocation();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    // Initial page load pageview is handled by the global gtag('config', 'G-3RDNN89DG5').
+    // Subsequent client-side SPA navigations or query param changes dispatch trackPageView.
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const timer = setTimeout(() => {
       trackPageView(location.pathname + location.search, document.title);
     }, 120);
