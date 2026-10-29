@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { COMPANY } from './data/content';
 import GrainOverlay from './components/GrainOverlay';
-import { trackWhatsAppConversion } from './utils/analytics';
+import { trackWhatsAppConversion, trackPageView } from './utils/analytics';
 
 // Pages
 import Home from './pages/Home';
@@ -272,9 +272,25 @@ function AppContent() {
   );
 }
 
+
+// Dynamic GA4 SPA Route & UTM tracker
+function PageTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      trackPageView(location.pathname + location.search, document.title);
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [location.pathname, location.search]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <PageTracker />
       {/* Landing page route — completely outside main layout */}
       <Routes>
         <Route path="/lp" element={<LandingPage />} />

@@ -1,3 +1,4 @@
+import { trackFormLead } from '../utils/analytics';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY } from '../data/content';
@@ -43,6 +44,7 @@ export default function QuoteForm() {
 
     setIsSubmitting(false);
     setIsSubmitted(true);
+    trackFormLead("hero_quote_form");
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({ name: '', email: '', mobile: '', message: '' });

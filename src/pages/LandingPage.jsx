@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight } from "lucide-react";
 import { COMPANY } from "../data/content";
-import { trackWhatsAppConversion } from "../utils/analytics";
+import { trackWhatsAppConversion, trackFormLead } from "../utils/analytics";
 import SEO from "../components/SEO";
 
 const PINK    = "#DF4C73";
@@ -53,10 +53,8 @@ function LeadForm({ compact = false }) {
       setError("Please enter your name and phone number.");
       return;
     }
-    // Fire Google Ads primary conversion for Form Leads
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "conversion", { send_to: "AW-663510360/2lJmCM7Co-EbENi6sbwC" });
-    }
+    // Fire Google Ads primary conversion for Form Leads and GA4 Lead
+    trackFormLead("lp_quote_form");
     window.open(waLink(form.name, form.phone, form.service, form.location), "_blank");
     setDone(true);
   };

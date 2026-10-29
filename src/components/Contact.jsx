@@ -1,3 +1,4 @@
+import { trackFormLead } from '../utils/analytics';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { COMPANY } from '../data/content';
@@ -21,10 +22,8 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Trigger Google Ads Conversion Tracking
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', { 'send_to': 'AW-663510360/2lJmCM7Co-EbENi6sbwC' });
-    }
+    // Trigger Google Ads Conversion Tracking & GA4 Lead Event
+    trackFormLead('contact_page_form');
 
     if (COMPANY.whatsapp) {
       const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;

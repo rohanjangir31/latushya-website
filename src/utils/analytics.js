@@ -1,60 +1,86 @@
 /**
- * Google Ads Conversion Tracking utility
+ * Universal Analytics & Conversion Tracking utility
  *
- * Configured with Google Ads Conversion Action:
- *   Name: WhatsApp button click
- *   Send to: AW-663510360/gI1YCKyZs6UdENi6sbwC
+ * Integrated with:
+ * - Google Ads: AW-663510360
+ *     Primary Conversion: Form Leads (AW-663510360/2lJmCM7Co-EbENi6sbwC)
+ *     Secondary Conversion: WhatsApp button click (AW-663510360/gI1YCKyZs6UdENi6sbwC)
+ * - Google Analytics 4 (GA4): G-3RDNN89DG5
+ *     Dynamic Page Views with UTM campaign parameters
+ *     Lead Events: generate_lead (form submissions)
+ *     Engagement Events: click_whatsapp (does NOT mark as completed lead)
  */
 
+export const GOOGLE_ADS_ID = 'AW-663510360';
+export const GOOGLE_ADS_FORM_LEAD_CONVERSION_ID = 'AW-663510360/2lJmCM7Co-EbENi6sbwC';
 export const GOOGLE_ADS_WHATSAPP_CONVERSION_ID = 'AW-663510360/gI1YCKyZs6UdENi6sbwC';
+export const GA4_MEASUREMENT_ID = 'G-3RDNN89DG5';
 
 /**
- * Tracks a WhatsApp contact CTA click conversion in Google Ads.
- *
- * Features:
- * - Safely checks for window.gtag without throwing if missing or ad-blocked
- * - Never transmits PII (no phone numbers, emails, or message contents)
- * - Fires only on user click
- * - Supports an optional callback with timeout fallback for same-tab navigations
- *   while executing immediately without popup-blocking delays for new-tab navigations
- *
- * @param {Function} [callback] Optional navigation or continuation callback
+ * Tracks SPA pageviews dynamically across GA4 with full URL, path, and UTM parameters
+ */
+export function trackPageView(path, title) {
+  try {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', {
+        page_title: title || document.title,
+        page_location: window.location.href,
+        page_path: path || window.location.pathname + window.location.search,
+        send_to: GA4_MEASUREMENT_ID
+      });
+    }
+  } catch (err) {
+    console.warn('[Analytics] Pageview tracking error:', err);
+  }
+}
+
+/**
+ * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead)
+ */
+export function trackFormLead(source = 'general') {
+  try {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      // 1. Google Ads Primary Conversion Action
+      window.gtag('event', 'conversion', {
+        send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID
+      });
+
+      // 2. GA4 Standard Lead Event
+      window.gtag('event', 'generate_lead', {
+        event_category: 'lead',
+        event_label: source,
+        send_to: GA4_MEASUREMENT_ID
+      });
+    }
+  } catch (err) {
+    console.warn('[Analytics] Form lead tracking error:', err);
+  }
+}
+
+/**
+ * Tracks WhatsApp button interactions across Google Ads (Secondary) and GA4 (Engagement)
+ * Note: Raw WhatsApp clicks are tracked as engagement events and are NOT marked as completed leads.
  */
 export function trackWhatsAppConversion(callback) {
   try {
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      if (typeof callback === 'function') {
-        let called = false;
-        const executeCallback = () => {
-          if (!called) {
-            called = true;
-            callback();
-          }
-        };
-
-        // Safety fallback: ensure navigation occurs even if gtag fails or stalls
-        const fallbackTimer = setTimeout(executeCallback, 500);
-
-        window.gtag('event', 'conversion', {
-          send_to: GOOGLE_ADS_WHATSAPP_CONVERSION_ID,
-          event_callback: () => {
-            clearTimeout(fallbackTimer);
-            executeCallback();
-          },
-        });
-        return;
-      }
-
+      // 1. Google Ads Secondary Conversion Action
       window.gtag('event', 'conversion', {
-        send_to: GOOGLE_ADS_WHATSAPP_CONVERSION_ID,
+        send_to: GOOGLE_ADS_WHATSAPP_CONVERSION_ID
+      });
+
+      // 2. GA4 Engagement Event (Not marked as lead)
+      window.gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: typeof window !== 'undefined' ? window.location.pathname : 'unknown',
+        send_to: GA4_MEASUREMENT_ID
       });
     }
   } catch (error) {
-    // Non-blocking: tracking errors must never prevent user navigation
     console.warn('[Analytics] Conversion tracking error:', error);
   }
 
-  // If callback was provided and gtag was not available or errored, execute callback immediately
+  // If callback was provided, execute callback immediately
   if (typeof callback === 'function') {
     callback();
   }

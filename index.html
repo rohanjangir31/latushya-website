@@ -133,13 +133,16 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     />
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — Google Ads & Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-663510360"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-663510360');
+      gtag('config', 'G-3RDNN89DG5', {
+        send_page_view: false // Managed dynamically in React Router for SPA navigation & UTM attribution
+      });
     </script>
   </head>
   <body>
