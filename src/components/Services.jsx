@@ -45,7 +45,7 @@ export default function Services() {
             </span>
           </motion.div>
 
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
@@ -54,7 +54,7 @@ export default function Services() {
           >
             Comprehensive{' '}
             <em className="not-italic text-[#DF4C73]">Interior Solutions</em>
-          </motion.h2>
+          </motion.h1>
         </div>
 
         {/* ── Mobile: Accordion-style stacked cards ── */}

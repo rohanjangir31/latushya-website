@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function NotFound() {
   return (
     <section className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden pt-24 pb-20 px-6">
+      <SEO
+        title="Page Not Found | Latushya"
+        description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+      />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-pink/30 rounded-full blur-[120px] mix-blend-screen" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue/20 rounded-full blur-[100px] mix-blend-screen" />

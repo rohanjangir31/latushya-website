@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { WARDROBE_COLLECTIONS } from '../data/collections';
 import PageTransition from '../components/PageTransition';
+import SEO from '../components/SEO';
 
 function EditorialHubCard({ item, index }) {
   const cardRef = useRef(null);
@@ -68,6 +69,11 @@ export default function WardrobesHub() {
 
   return (
     <PageTransition>
+      <SEO
+        title="Custom Wardrobes Bangalore | Sliding & Walk-in Systems | Latushya"
+        description="Explore Latushya's bespoke wardrobe collections in Bangalore: floor-to-ceiling sliding wardrobes, glass profiles, walk-in closets, and hinged designs with Häfele hardware."
+        canonicalUrl="https://latushya.com/wardrobes"
+      />
       <main className="bg-black min-h-screen pt-[120px]">
         {/* Hub Header - Perfectly matching Portfolio.jsx */}
         <section className="relative px-8 lg:px-16 max-w-7xl mx-auto mb-[88px]">

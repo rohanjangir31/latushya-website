@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { WARDROBE_COLLECTIONS } from '../data/collections';
 import PageTransition from '../components/PageTransition';
 import SlidingSubTypes from '../components/SlidingSubTypes';
+import SEO from '../components/SEO';
 
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset, velocity) => {
@@ -32,7 +33,6 @@ export default function CollectionDetail() {
   const designs = collection.designs || [];
   const currentDesign = designs[currentIndex];
 
-
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % designs.length);
   };
@@ -48,8 +48,23 @@ export default function CollectionDetail() {
 
   const nextNameParts = nextCollection.name.split(' ');
 
+  const isSliding = id === 'sliding-wardrobes';
+  const seoTitle = isSliding
+    ? 'Sliding Wardrobes Bangalore | Lacquered Glass & Mirror Systems | Latushya'
+    : `${collection.name} Bangalore | Custom Architectural Storage | Latushya`;
+  const seoDesc = isSliding
+    ? 'Custom floor-to-ceiling sliding wardrobes in Bangalore. Premium lacquered glass, tinted mirror, and laminate finishes with German Häfele & Hettich hardware.'
+    : `Bespoke ${collection.name.toLowerCase()} in Bangalore. Custom architectural detailing, premium core materials, and soft-close German fittings crafted for your home.`;
+  const canonicalUrl = `https://latushya.com/collections/${id}`;
+
   return (
     <PageTransition>
+      <SEO
+        title={seoTitle}
+        description={seoDesc}
+        canonicalUrl={canonicalUrl}
+        ogImage={`https://latushya.com${collection.image}`}
+      />
       <main className="bg-black text-white min-h-screen pt-[140px] pb-32">
         
         {/* Header */}

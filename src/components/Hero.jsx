@@ -188,16 +188,16 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* ── HEADLINE ───────────────────────────────────────── */}
-            <div className="mb-7 lg:mb-9">
+            {/* ── HEADLINE (Unified Semantic H1 for SEO) ────────── */}
+            <h1 className="mb-7 lg:mb-9 block">
 
               {/* Line 1: Custom */}
-              <div className="overflow-hidden">
-                <motion.h1
+              <span className="block overflow-hidden">
+                <motion.span
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.42, ease: EASE_OUT_EXPO }}
-                  className="font-display italic pr-2"
+                  className="block font-display italic pr-2"
                   style={{
                     fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
                     fontWeight: 300,
@@ -207,16 +207,16 @@ export default function Hero() {
                   }}
                 >
                   Custom
-                </motion.h1>
-              </div>
+                </motion.span>
+              </span>
 
               {/* Line 2: Wardrobes */}
-              <div className="overflow-hidden">
-                <motion.h1
+              <span className="block overflow-hidden">
+                <motion.span
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.52, ease: EASE_OUT_EXPO }}
-                  className="font-display"
+                  className="block font-display"
                   style={{
                     fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
                     fontWeight: 300,
@@ -228,16 +228,16 @@ export default function Hero() {
                   }}
                 >
                   Wardrobes
-                </motion.h1>
-              </div>
+                </motion.span>
+              </span>
 
               {/* Line 3: & Premium Interiors */}
-              <div className="overflow-hidden">
-                <motion.h1
+              <span className="block overflow-hidden">
+                <motion.span
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.62, ease: EASE_OUT_EXPO }}
-                  className="font-display"
+                  className="block font-display"
                   style={{
                     fontSize: 'clamp(1.2rem, 3vw, 2.8rem)',
                     fontWeight: 300,
@@ -248,16 +248,16 @@ export default function Hero() {
                   }}
                 >
                   & Premium Interiors
-                </motion.h1>
-              </div>
+                </motion.span>
+              </span>
 
               {/* Line 4: crafted for */}
-              <div className="overflow-hidden mt-2 lg:mt-3 mb-1">
-                <motion.p
+              <span className="block overflow-hidden mt-2 lg:mt-3 mb-1">
+                <motion.span
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.68, ease: EASE_OUT_EXPO }}
-                  className="font-sans"
+                  className="block font-sans"
                   style={{
                     fontSize: 'clamp(0.65rem, 1.2vw, 0.85rem)',
                     fontWeight: 500,
@@ -267,16 +267,16 @@ export default function Hero() {
                   }}
                 >
                   crafted for
-                </motion.p>
-              </div>
+                </motion.span>
+              </span>
 
               {/* Line 5: Your Lifestyle */}
-              <div className="overflow-hidden">
-                <motion.h1
+              <span className="block overflow-hidden">
+                <motion.span
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{ duration: 1.1, delay: 0.74, ease: EASE_OUT_EXPO }}
-                  className="font-display"
+                  className="block font-display"
                   style={{
                     fontSize: 'clamp(1.4rem, 3.5vw, 3rem)',
                     fontWeight: 400,
@@ -287,9 +287,9 @@ export default function Hero() {
                   }}
                 >
                   Your Lifestyle.
-                </motion.h1>
-              </div>
-            </div>
+                </motion.span>
+              </span>
+            </h1>
 
             {/* ── THIN RULE ──────────────────────────────────── */}
             <motion.div
