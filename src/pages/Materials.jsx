@@ -8,7 +8,7 @@ export default function Materials() {
       <SEO
         title="Premium Interior Materials & German Hardware | Century Ply & Häfele | Latushya"
         description="Discover the materials behind Latushya interiors: Century BWP plywood, Greenply, Saint-Gobain glass, and Häfele & Hettich German fittings."
-        canonicalUrl="https://latushya.com/materials"
+        canonicalUrl="https://www.latushya.com/materials"
       />
       <MaterialsComponent />
     </PageTransition>

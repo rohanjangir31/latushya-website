@@ -8,7 +8,7 @@ export default function About() {
       <SEO
         title="About Latushya | Premium Bespoke Interior Design Studio Bangalore"
         description="Learn about Latushya: Bangalore's dedicated interior studio delivering on-site bespoke craftsmanship, transparent execution, and 500+ completed projects."
-        canonicalUrl="https://latushya.com/about"
+        canonicalUrl="https://www.latushya.com/about"
       />
       <AboutComponent />
     </PageTransition>

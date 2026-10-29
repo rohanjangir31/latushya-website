@@ -14,7 +14,7 @@ export default function Home() {
       <SEO
         title="Latushya — Custom Wardrobes & Luxury Turnkey Interiors | Bangalore"
         description="Latushya crafts bespoke floor-to-ceiling sliding wardrobes, walk-in closets, modular kitchens, and luxury turnkey interiors on-site across Bangalore. Book a free consultation."
-        canonicalUrl="https://latushya.com/"
+        canonicalUrl="https://www.latushya.com/"
       />
       <Hero />
       <Philosophy />

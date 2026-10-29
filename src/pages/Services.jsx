@@ -8,7 +8,7 @@ export default function Services() {
       <SEO
         title="Interior Design & Modular Kitchen Services Bangalore | Latushya"
         description="Comprehensive interior services in Bangalore: luxury turnkey home interiors, modular kitchens, custom wardrobes, and curated living room architecture."
-        canonicalUrl="https://latushya.com/services"
+        canonicalUrl="https://www.latushya.com/services"
       />
       <ServicesOverview />
     </PageTransition>

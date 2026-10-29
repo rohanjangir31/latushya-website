@@ -7,11 +7,45 @@
   "installCommand": "npm install",
   "routes": [
     {
+      "src": "^/(category|product|admiralbet-polska-com|pacific-spins-casinonz-com|rocketcasinoaustralia-org|wp-content|wp-admin|wp-includes|wp-json)(/.*)?$",
+      "status": 410,
+      "dest": "/410.html",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow",
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
+    {
+      "src": "^/(.*)(winbeatz|thunder-coins|paripesabangladesh|playregalcasino|spinyoocasino|metalcasino|spinaniacasino|stanleybet|coinpoker)(.*)$",
+      "status": 410,
+      "dest": "/410.html",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow",
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
+    {
       "handle": "filesystem"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(about|services|portfolio|wardrobes|materials|contact|lp)(/.*)?$",
       "dest": "/index.html"
+    },
+    {
+      "src": "^/collections(/[a-zA-Z0-9_-]+)?(/.*)?$",
+      "dest": "/index.html"
+    },
+    {
+      "src": "^/?$",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow"
+      }
     }
   ],
   "headers": [

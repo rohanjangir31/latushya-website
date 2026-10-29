@@ -9,6 +9,7 @@ export default function NotFound() {
       <SEO
         title="Page Not Found | Latushya"
         description="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+        noindex={true}
       />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-pink/30 rounded-full blur-[120px] mix-blend-screen" />

@@ -4,18 +4,19 @@ import { useLocation } from 'react-router-dom';
 /**
  * Lightweight, zero-dependency SEO head manager for Latushya SPA.
  * Dynamically updates document title, meta descriptions, canonical URLs,
- * Open Graph, Twitter Cards, and route-level JSON-LD schema on navigation.
+ * Open Graph, Twitter Cards, robots indexing directives, and route-level JSON-LD schema on navigation.
  */
 export default function SEO({
   title,
   description,
   canonicalUrl,
-  ogImage = 'https://latushya.com/projects/media__1784490387524.jpg',
+  ogImage = 'https://www.latushya.com/projects/media__1784490387524.jpg',
   ogType = 'website',
-  schemaData = null
+  schemaData = null,
+  noindex = false
 }) {
   const location = useLocation();
-  const currentUrl = canonicalUrl || `https://latushya.com${location.pathname === '/' ? '' : location.pathname}`;
+  const currentUrl = canonicalUrl || `https://www.latushya.com${location.pathname === '/' ? '' : location.pathname}`;
 
   useEffect(() => {
     // 1. Document Title
@@ -56,7 +57,14 @@ export default function SEO({
       setMeta('name', 'twitter:image', ogImage);
     }
 
-    // 5. Canonical Link Tag
+    // 5. Robots indexing
+    if (noindex) {
+      setMeta('name', 'robots', 'noindex, follow');
+    } else {
+      setMeta('name', 'robots', 'index, follow');
+    }
+
+    // 6. Canonical Link Tag
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
@@ -65,7 +73,7 @@ export default function SEO({
     }
     canonical.setAttribute('href', currentUrl);
 
-    // 6. Route-level Structured Data (JSON-LD)
+    // 7. Route-level Structured Data (JSON-LD)
     let scriptTag = document.getElementById('route-schema');
     if (schemaData) {
       if (!scriptTag) {
@@ -78,7 +86,7 @@ export default function SEO({
     } else if (scriptTag) {
       scriptTag.remove();
     }
-  }, [title, description, currentUrl, ogImage, ogType, schemaData]);
+  }, [title, description, currentUrl, ogImage, ogType, schemaData, noindex]);
 
   return null;
 }

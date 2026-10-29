@@ -72,7 +72,7 @@ export default function WardrobesHub() {
       <SEO
         title="Custom Wardrobes Bangalore | Sliding & Walk-in Systems | Latushya"
         description="Explore Latushya's bespoke wardrobe collections in Bangalore: floor-to-ceiling sliding wardrobes, glass profiles, walk-in closets, and hinged designs with Häfele hardware."
-        canonicalUrl="https://latushya.com/wardrobes"
+        canonicalUrl="https://www.latushya.com/wardrobes"
       />
       <main className="bg-black min-h-screen pt-[120px]">
         {/* Hub Header - Perfectly matching Portfolio.jsx */}

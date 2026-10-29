@@ -55,7 +55,7 @@ export default function CollectionDetail() {
   const seoDesc = isSliding
     ? 'Custom floor-to-ceiling sliding wardrobes in Bangalore. Premium lacquered glass, tinted mirror, and laminate finishes with German Häfele & Hettich hardware.'
     : `Bespoke ${collection.name.toLowerCase()} in Bangalore. Custom architectural detailing, premium core materials, and soft-close German fittings crafted for your home.`;
-  const canonicalUrl = `https://latushya.com/collections/${id}`;
+  const canonicalUrl = `https://www.latushya.com/collections/${id}`;
 
   return (
     <PageTransition>
@@ -63,7 +63,7 @@ export default function CollectionDetail() {
         title={seoTitle}
         description={seoDesc}
         canonicalUrl={canonicalUrl}
-        ogImage={`https://latushya.com${collection.image}`}
+        ogImage={`https://www.latushya.com${collection.image}`}
       />
       <main className="bg-black text-white min-h-screen pt-[140px] pb-32">
         

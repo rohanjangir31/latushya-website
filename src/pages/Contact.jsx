@@ -9,7 +9,7 @@ export default function Contact() {
       <SEO
         title="Contact Latushya | Book Free 3D Design Consultation Bangalore"
         description="Schedule a consultation with Latushya for custom wardrobes, modular kitchens, or turnkey home interiors in Bangalore. Site visits and 3D quotes available."
-        canonicalUrl="https://latushya.com/contact"
+        canonicalUrl="https://www.latushya.com/contact"
       />
       <FAQ />
       <ContactComponent />

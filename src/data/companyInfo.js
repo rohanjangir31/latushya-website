@@ -24,7 +24,7 @@ const companyInfo = {
   youtube:   'https://www.youtube.com/@Latushya',
 
   // ─── SEO ──────────────────────────────────────────────────
-  siteUrl: 'https://latushya.com',
+  siteUrl: 'https://www.latushya.com',
   metaDescription:
     'Latushya is Bangalore\'s premium interior design studio. We specialize in turnkey interiors, modular kitchens, luxury living rooms, and complete home transformations. Free home consultation.',
 };

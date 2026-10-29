@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight } from "lucide-react";
 import { COMPANY } from "../data/content";
 import { trackWhatsAppConversion } from "../utils/analytics";
+import SEO from "../components/SEO";
 
 const PINK    = "#DF4C73";
 const DARK    = "#03070E";
@@ -357,6 +358,11 @@ export default function LandingPage() {
 
   return (
     <div style={{ background: DARK, minHeight: "100vh", fontFamily: SANS, overflowX: "hidden", paddingBottom: "92px" }}>
+      <SEO
+        title="Custom Wardrobes & Luxury Turnkey Interiors Bangalore | Latushya"
+        description="Floor-to-ceiling custom sliding wardrobes and luxury turnkey home interiors in Bangalore. Free 3D design and quotation."
+        noindex={true}
+      />
       {/* Grain texture */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, opacity: 0.025 }} />
 

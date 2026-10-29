@@ -11,7 +11,7 @@ export default function Portfolio() {
       <SEO
         title="Interior Design & Wardrobe Portfolio Bangalore | Real Projects | Latushya"
         description="Browse real completed interior design and custom wardrobe installations across Bangalore, including Prestige Golfshire, Sobha City, and Assetz Marq."
-        canonicalUrl="https://latushya.com/portfolio"
+        canonicalUrl="https://www.latushya.com/portfolio"
       />
       <Projects 
         projectsData={INTERIOR_PROJECTS_DATA}
