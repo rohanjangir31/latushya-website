@@ -22,6 +22,7 @@ import CollectionDetail from './pages/CollectionDetail';
 import WardrobesHub from './pages/WardrobesHub';
 import NotFound from './pages/NotFound';
 import LandingPage from './pages/LandingPage';
+import SobhaCityCaseStudy from './pages/SobhaCityCaseStudy';
 import React from 'react';
 
 class ErrorBoundary extends React.Component {
@@ -251,6 +252,7 @@ function AppContent() {
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/portfolio/sobha-city-sliding-wardrobe" element={<SobhaCityCaseStudy />} />
                 <Route path="/wardrobes" element={<WardrobesHub />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/contact" element={<Contact />} />

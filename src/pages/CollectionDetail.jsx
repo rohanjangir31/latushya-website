@@ -197,6 +197,18 @@ export default function CollectionDetail() {
                       <p className="font-sans text-[0.9rem] lg:text-[1rem] font-light text-white/60 leading-relaxed line-clamp-2 md:line-clamp-none">
                         {currentDesign.description}
                       </p>
+
+                      {currentDesign.caseStudyUrl && (
+                        <div className="mt-4">
+                          <Link 
+                            to={currentDesign.caseStudyUrl}
+                            className="inline-flex items-center gap-2 text-xs tracking-wider uppercase text-pink hover:text-white transition-colors border-b border-pink/40 pb-0.5 font-medium"
+                          >
+                            <span>Read Sobha City Project Case Study</span>
+                            <ArrowRight size={13} />
+                          </Link>
+                        </div>
+                      )}
                     </motion.div>
                   </AnimatePresence>
                 </div>

@@ -32,6 +32,7 @@ export const WARDROBE_PROJECTS = [
     title: 'Dual-Tone Masterpiece',
     location: 'Sobha City, Thanisandra',
     projectType: 'Geometric Wardrobe',
+    caseStudyUrl: '/portfolio/sobha-city-sliding-wardrobe',
     materials: 'Beige & Black Lacquered Glass',
     duration: '18 Days',
     description: 'A striking architectural statement piece. This sliding wardrobe utilizes bold geometric divisions of beige and black glass, set within ultra-slim matte black aluminium profiles.',

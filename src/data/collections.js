@@ -59,7 +59,8 @@ export const WARDROBE_COLLECTIONS = [
         name: 'Two-Tone Geometric Sliding',
         description: 'A striking modern design featuring asymmetric beige and black glass panels separated by sleek dark profiles.',
         image: '/assets/wardrobes/sliding-beige-black.jpg',
-        projectId: 2
+        projectId: 2,
+        caseStudyUrl: '/portfolio/sobha-city-sliding-wardrobe'
       },
       {
         id: 'sl-2',

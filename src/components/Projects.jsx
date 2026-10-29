@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ImageReveal from './ImageReveal';
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -172,7 +173,27 @@ function TextBlock({ project, delay, inView, align = 'left', onOpenGallery }) {
 
       {/* View Project → */}
       {!isPlaceholder && (
-        <ViewLink onClick={onOpenGallery} />
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '16px' }}>
+          <ViewLink onClick={onOpenGallery} />
+          {project.caseStudyUrl && (
+            <Link
+              to={project.caseStudyUrl}
+              style={{
+                fontFamily: SANS,
+                fontSize: '0.6875rem',
+                fontWeight: 500,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#DF4C73',
+                textDecoration: 'none',
+                paddingBottom: '3px',
+                borderBottom: '1px solid rgba(223, 76, 115, 0.4)',
+              }}
+            >
+              Case Study →
+            </Link>
+          )}
+        </div>
       )}
     </motion.div>
   );
@@ -271,7 +292,29 @@ function FeaturedProject({ project, inView, onOpenGallery }) {
             : (project.description || 'A custom interior installation, designed around the client\'s lifestyle and aesthetic vision.')}
         </motion.p>
 
-        {!project.isPlaceholder && <ViewLink onClick={onOpenGallery} />}
+        {!project.isPlaceholder && (
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '16px' }}>
+            <ViewLink onClick={onOpenGallery} />
+            {project.caseStudyUrl && (
+              <Link
+                to={project.caseStudyUrl}
+                style={{
+                  fontFamily: SANS,
+                  fontSize: '0.6875rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: '#DF4C73',
+                  textDecoration: 'none',
+                  paddingBottom: '3px',
+                  borderBottom: '1px solid rgba(223, 76, 115, 0.4)',
+                }}
+              >
+                Case Study →
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );
