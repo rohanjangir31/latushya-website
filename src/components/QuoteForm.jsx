@@ -6,6 +6,7 @@ import { COMPANY } from '../data/content';
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,39 +17,64 @@ export default function QuoteForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
-    
+
+    const trimmedName = formData.name.trim();
+    const trimmedMobile = formData.mobile.trim();
+
+    // Guard against empty or whitespace-only submissions
+    if (!trimmedName || !trimmedMobile) {
+      setError('Please provide your name and contact number.');
+      return;
+    }
+
     setIsSubmitting(true);
+    setError('');
+
     try {
-      await fetch("https://formsubmit.co/ajax/info@latushya.com", {
+      const response = await fetch("https://formsubmit.co/ajax/info@latushya.com", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email || 'Not provided',
-          mobile: formData.mobile,
-          message: formData.message || 'Not provided',
+          name: trimmedName,
+          email: formData.email.trim() || 'Not provided',
+          mobile: trimmedMobile,
+          message: formData.message.trim() || 'Not provided',
           _subject: "New Consultation Request!"
         })
       });
-    } catch (err) {
-      console.error("Form submission failed", err);
-    }
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    trackFormLead("hero_quote_form");
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', mobile: '', message: '' });
-    }, 5000);
+      if (!response.ok) {
+        throw new Error(`Server returned HTTP ${response.status}`);
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (result.success === 'false' || result.success === false) {
+        throw new Error(result.message || 'Submission rejected by provider');
+      }
+
+      // Verified successful form submission
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      trackFormLead("hero_quote_form");
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', email: '', mobile: '', message: '' });
+      }, 5000);
+    } catch (err) {
+      console.error("Form submission failed:", err);
+      setIsSubmitting(false);
+      setError("Unable to send request right now. Please try again or reach out on WhatsApp.");
+    }
   };
 
   // High-contrast translucent capsule inputs
@@ -95,6 +121,13 @@ export default function QuoteForm() {
                 <p className="text-[10px] text-white/90 text-center italic mb-3">
                   *Please include approximate measurements for a more accurate estimate.
                 </p>
+                {error && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-red-950/60 border border-red-500/40 text-center backdrop-blur-sm">
+                    <p className="text-[11px] text-[#ff6b8b] font-medium leading-tight">
+                      {error}
+                    </p>
+                  </div>
+                )}
                 <button 
                   type="submit"
                   disabled={isSubmitting}
