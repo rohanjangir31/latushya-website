@@ -1,12 +1,13 @@
 import { trackFormLead } from '../utils/analytics';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COMPANY } from '../data/content';
+import { validateFormSubmitResponse } from '../utils/formSubmit';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const isSubmittingRef = useRef(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +23,7 @@ export default function QuoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmittingRef.current || isSubmitting) return;
 
     const trimmedName = formData.name.trim();
     const trimmedMobile = formData.mobile.trim();
@@ -34,6 +35,7 @@ export default function QuoteForm() {
     }
 
     setIsSubmitting(true);
+    isSubmittingRef.current = true;
     setError('');
 
     try {
@@ -48,21 +50,15 @@ export default function QuoteForm() {
           email: formData.email.trim() || 'Not provided',
           mobile: trimmedMobile,
           message: formData.message.trim() || 'Not provided',
-          _subject: "New Consultation Request!"
+          _subject: "New Consultation Request"
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
-      }
-
-      const result = await response.json().catch(() => ({}));
-      if (result.success === 'false' || result.success === false) {
-        throw new Error(result.message || 'Submission rejected by provider');
-      }
+      await validateFormSubmitResponse(response);
 
       // Verified successful form submission
       setIsSubmitting(false);
+      isSubmittingRef.current = false;
       setIsSubmitted(true);
       trackFormLead("hero_quote_form");
 
@@ -73,6 +69,7 @@ export default function QuoteForm() {
     } catch (err) {
       console.error("Form submission failed:", err);
       setIsSubmitting(false);
+      isSubmittingRef.current = false;
       setError("Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
   };
