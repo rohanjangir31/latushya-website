@@ -1,11 +1,12 @@
 import { trackFormLead } from '../utils/analytics';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { validateFormSubmitResponse } from '../utils/formSubmit';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COMPANY } from '../data/content';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -33,6 +34,7 @@ export default function QuoteForm() {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError('');
 
@@ -52,16 +54,11 @@ export default function QuoteForm() {
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
-      }
+      // Strict fail-closed validation of provider response
+      await validateFormSubmitResponse(response);
 
-      const result = await response.json().catch(() => ({}));
-      if (result.success === 'false' || result.success === false) {
-        throw new Error(result.message || 'Submission rejected by provider');
-      }
-
-      // Verified successful form submission
+      // Verified successful form submission and persistence
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
       setIsSubmitted(true);
       trackFormLead("hero_quote_form");
@@ -72,6 +69,7 @@ export default function QuoteForm() {
       }, 5000);
     } catch (err) {
       console.error("Form submission failed:", err);
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
       setError("Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
