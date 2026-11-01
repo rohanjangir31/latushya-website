@@ -1,16 +1,18 @@
 import { trackFormLead } from '../utils/analytics';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COMPANY } from '../data/content';
+import { submitLeadConsultation } from '../utils/formSubmit';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const isSubmittingRef = useRef(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     mobile: '',
+    service: 'Custom Wardrobes',
     message: ''
   });
 
@@ -22,58 +24,27 @@ export default function QuoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
-
-    const trimmedName = formData.name.trim();
-    const trimmedMobile = formData.mobile.trim();
-
-    // Guard against empty or whitespace-only submissions
-    if (!trimmedName || !trimmedMobile) {
-      setError('Please provide your name and contact number.');
-      return;
-    }
+    if (isSubmittingRef.current || isSubmitting) return;
 
     setIsSubmitting(true);
     setError('');
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@latushya.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: trimmedName,
-          email: formData.email.trim() || 'Not provided',
-          mobile: trimmedMobile,
-          message: formData.message.trim() || 'Not provided',
-          _subject: "New Consultation Request!"
-        })
-      });
+    const res = await submitLeadConsultation({
+      form: formData,
+      isSubmittingRef,
+      trackLeadFn: () => trackFormLead("hero_quote_form")
+    });
 
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
-      }
+    setIsSubmitting(false);
 
-      const result = await response.json().catch(() => ({}));
-      if (result.success === 'false' || result.success === false) {
-        throw new Error(result.message || 'Submission rejected by provider');
-      }
-
-      // Verified successful form submission
-      setIsSubmitting(false);
+    if (res.success) {
       setIsSubmitted(true);
-      trackFormLead("hero_quote_form");
-
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', email: '', mobile: '', message: '' });
+        setFormData({ name: '', email: '', mobile: '', service: 'Custom Wardrobes', message: '' });
       }, 5000);
-    } catch (err) {
-      console.error("Form submission failed:", err);
-      setIsSubmitting(false);
-      setError("Unable to send request right now. Please try again or reach out on WhatsApp.");
+    } else {
+      setError(res.error || "Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
   };
 
@@ -115,6 +86,18 @@ export default function QuoteForm() {
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address (Optional)" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                aria-label="Service or Goal Required"
+                className={`${inputClasses} cursor-pointer [&>option]:bg-[#080f1a] [&>option]:text-white`}
+              >
+                <option value="Custom Wardrobes">Custom Wardrobes</option>
+                <option value="Modular Kitchen">Modular Kitchen</option>
+                <option value="Turnkey Interiors">Turnkey Interiors</option>
+                <option value="General Inquiries">General / Other Inquiries</option>
+              </select>
               <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Briefly describe your requirements (Optional)" rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <div className="mt-2">
