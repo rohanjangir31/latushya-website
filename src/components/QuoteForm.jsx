@@ -23,7 +23,7 @@ export default function QuoteForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmittingRef.current || isSubmitting) return;
 
     const trimmedName = formData.name.trim();
     const trimmedMobile = formData.mobile.trim();

@@ -1,6 +1,7 @@
 /**
  * Direct unit tests for the production helper src/utils/formSubmit.js
- * Exercises validateFormSubmitResponse against all edge cases.
+ * Exercises validateFormSubmitResponse against all edge cases,
+ * and tests the in-flight submission guard pattern.
  */
 import assert from 'node:assert';
 import { validateFormSubmitResponse } from '../src/utils/formSubmit.js';
@@ -119,7 +120,47 @@ async function runTests() {
     passed++;
   }
 
-  console.log(`\nAll ${passed}/7 helper unit tests passed successfully!`);
+  // 8. In-flight synchronous ref guard blocks concurrent duplicate submit
+  {
+    const isSubmittingRef = { current: false };
+    let isSubmitting = false;
+
+    async function executeSubmit(mockFetch) {
+      if (isSubmittingRef.current || isSubmitting) return 'BLOCKED';
+      isSubmittingRef.current = true;
+      isSubmitting = true;
+      try {
+        const resp = await mockFetch();
+        await validateFormSubmitResponse(resp);
+        isSubmittingRef.current = false;
+        isSubmitting = false;
+        return 'SUCCESS';
+      } catch (e) {
+        isSubmittingRef.current = false;
+        isSubmitting = false;
+        return 'ERROR';
+      }
+    }
+
+    let resolveSlow;
+    const slowFetch = () => new Promise(r => { resolveSlow = r; });
+    const p1 = executeSubmit(slowFetch);
+    const p2Result = await executeSubmit(slowFetch); // Concurrent submit arrives immediately
+    assert.strictEqual(p2Result, 'BLOCKED');
+
+    resolveSlow({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true })
+    });
+    const p1Result = await p1;
+    assert.strictEqual(p1Result, 'SUCCESS');
+    assert.strictEqual(isSubmittingRef.current, false);
+    console.log("✓ Test 8: In-flight guard synchronously blocks racing duplicate submit");
+    passed++;
+  }
+
+  console.log(`\nAll ${passed}/8 helper unit tests passed successfully!`);
 }
 
 runTests();
