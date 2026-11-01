@@ -43,7 +43,7 @@ export async function validateFormSubmitResponse(response, preParsedJson) {
 }
 
 /**
- * Production helper for LandingPage lead consultation form.
+ * Production helper for lead consultation forms (LandingPage LeadForm & Homepage QuoteForm).
  * Handles validation, in-flight ref guard, dispatch, response contract verification, and attribution.
  */
 export async function submitLeadConsultation({
@@ -51,38 +51,62 @@ export async function submitLeadConsultation({
   isSubmittingRef,
   fetchFn = fetch,
   trackLeadFn,
+  webhookUrl = (typeof import.meta !== 'undefined' && import.meta?.env?.VITE_LEADS_WEBHOOK_URL) || undefined,
 }) {
   if (isSubmittingRef && isSubmittingRef.current) {
     return { success: false, reason: 'BLOCKED' };
   }
 
   const trimmedName = form?.name ? String(form.name).trim() : '';
-  const trimmedPhone = form?.phone ? String(form.phone).trim() : '';
+  const rawContact = form?.phone !== undefined && form?.phone !== null && String(form.phone).trim() !== ''
+    ? form.phone
+    : form?.mobile;
+  const trimmedPhone = rawContact ? String(rawContact).trim() : '';
 
   if (!trimmedName || !trimmedPhone) {
     return {
       success: false,
       reason: 'VALIDATION_FAILED',
-      error: 'Please enter your name and phone number.',
+      error: 'Please enter your name and contact number.',
     };
   }
 
   if (isSubmittingRef) isSubmittingRef.current = true;
 
+  const payload = {
+    name: trimmedName,
+    phone: trimmedPhone,
+    email: form?.email ? String(form.email).trim() : 'Not provided',
+    service: form?.service || 'Custom Wardrobes',
+    location: form?.location ? String(form.location).trim() : 'Not provided',
+    message: form?.message ? String(form.message).trim() : 'Not provided',
+    _subject: 'New Consultation Request - ' + (form?.service || 'General Inquiries'),
+  };
+
   try {
+    // If a Google Sheets Web App or external lead webhook is configured, dispatch asynchronously
+    if (webhookUrl) {
+      try {
+        await fetchFn(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+          mode: 'no-cors',
+        });
+      } catch (webhookErr) {
+        console.warn('Webhook dispatch warning:', webhookErr);
+      }
+    }
+
     const response = await fetchFn('https://formsubmit.co/ajax/info@latushya.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        name: trimmedName,
-        phone: trimmedPhone,
-        service: form.service || 'Custom Wardrobes',
-        location: form.location ? String(form.location).trim() : 'Not provided',
-        _subject: 'New Consultation Request',
-      }),
+      body: JSON.stringify(payload),
     });
 
     await validateFormSubmitResponse(response);
@@ -95,14 +119,22 @@ export async function submitLeadConsultation({
       }
     }
 
+    const returnData = {
+      name: trimmedName,
+      phone: trimmedPhone,
+      service: form?.service || 'Custom Wardrobes',
+      location: form?.location ? String(form.location).trim() : 'Not provided',
+    };
+    if (form?.email && String(form.email).trim()) {
+      returnData.email = String(form.email).trim();
+    }
+    if (form?.message && String(form.message).trim()) {
+      returnData.message = String(form.message).trim();
+    }
+
     return {
       success: true,
-      data: {
-        name: trimmedName,
-        phone: trimmedPhone,
-        service: form.service || 'Custom Wardrobes',
-        location: form.location ? String(form.location).trim() : 'Not provided',
-      },
+      data: returnData,
     };
   } catch (err) {
     return {

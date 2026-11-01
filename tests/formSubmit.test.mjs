@@ -4,7 +4,7 @@
  * and tests the in-flight submission guard pattern.
  */
 import assert from 'node:assert';
-import { validateFormSubmitResponse } from '../src/utils/formSubmit.js';
+import { validateFormSubmitResponse, submitLeadConsultation } from '../src/utils/formSubmit.js';
 
 async function runTests() {
   console.log("Running validateFormSubmitResponse unit tests...\n");
@@ -160,7 +160,59 @@ async function runTests() {
     passed++;
   }
 
-  console.log(`\nAll ${passed}/8 helper unit tests passed successfully!`);
+  // 9. submitLeadConsultation accepts mobile as phone fallback
+  {
+    const res = await submitLeadConsultation({
+      form: { name: "Ananya", mobile: "9876543210", service: "Modular Kitchen" },
+      fetchFn: async () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ success: true })
+      })
+    });
+    assert.strictEqual(res.success, true);
+    assert.strictEqual(res.data.phone, "9876543210");
+    assert.strictEqual(res.data.service, "Modular Kitchen");
+    console.log("✓ Test 9: Contact normalization accepts mobile field");
+    passed++;
+  }
+
+  // 10. submitLeadConsultation dispatches to webhookUrl when provided
+  {
+    const calls = [];
+    const res = await submitLeadConsultation({
+      form: { name: "Vikram", phone: "9876543211", service: "Turnkey Interiors" },
+      webhookUrl: "https://script.google.com/macros/s/TEST/exec",
+      fetchFn: async (url, opts) => {
+        calls.push({ url, body: JSON.parse(opts.body) });
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({ success: true })
+        };
+      }
+    });
+    assert.strictEqual(res.success, true);
+    assert.strictEqual(calls.length, 2);
+    assert.strictEqual(calls[0].url, "https://script.google.com/macros/s/TEST/exec");
+    assert.strictEqual(calls[1].url, "https://formsubmit.co/ajax/info@latushya.com");
+    console.log("✓ Test 10: Dispatches to webhookUrl and FormSubmit simultaneously");
+    passed++;
+  }
+
+  // 11. submitLeadConsultation fails closed on missing contact
+  {
+    const res = await submitLeadConsultation({
+      form: { name: "Vikram" },
+      fetchFn: async () => {}
+    });
+    assert.strictEqual(res.success, false);
+    assert.strictEqual(res.reason, "VALIDATION_FAILED");
+    console.log("✓ Test 11: Rejects missing contact info");
+    passed++;
+  }
+
+  console.log(`\nAll ${passed} helper unit tests passed successfully!`);
 }
 
 runTests();

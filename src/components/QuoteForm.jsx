@@ -1,7 +1,7 @@
 import { trackFormLead } from '../utils/analytics';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { validateFormSubmitResponse } from '../utils/formSubmit';
+import { submitLeadConsultation } from '../utils/formSubmit';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -12,6 +12,7 @@ export default function QuoteForm() {
     name: '',
     email: '',
     mobile: '',
+    service: 'Custom Wardrobes',
     message: ''
   });
 
@@ -25,52 +26,25 @@ export default function QuoteForm() {
     e.preventDefault();
     if (isSubmittingRef.current || isSubmitting) return;
 
-    const trimmedName = formData.name.trim();
-    const trimmedMobile = formData.mobile.trim();
-
-    // Guard against empty or whitespace-only submissions
-    if (!trimmedName || !trimmedMobile) {
-      setError('Please provide your name and contact number.');
-      return;
-    }
-
     setIsSubmitting(true);
-    isSubmittingRef.current = true;
     setError('');
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@latushya.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: trimmedName,
-          email: formData.email.trim() || 'Not provided',
-          mobile: trimmedMobile,
-          message: formData.message.trim() || 'Not provided',
-          _subject: "New Consultation Request"
-        })
-      });
+    const res = await submitLeadConsultation({
+      form: formData,
+      isSubmittingRef,
+      trackLeadFn: () => trackFormLead("hero_quote_form")
+    });
 
-      await validateFormSubmitResponse(response);
+    setIsSubmitting(false);
 
-      // Verified successful form submission
-      setIsSubmitting(false);
-      isSubmittingRef.current = false;
+    if (res.success) {
       setIsSubmitted(true);
-      trackFormLead("hero_quote_form");
-
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', email: '', mobile: '', message: '' });
+        setFormData({ name: '', email: '', mobile: '', service: 'Custom Wardrobes', message: '' });
       }, 5000);
-    } catch (err) {
-      console.error("Form submission failed:", err);
-      setIsSubmitting(false);
-      isSubmittingRef.current = false;
-      setError("Unable to send request right now. Please try again or reach out on WhatsApp.");
+    } else {
+      setError(res.error || "Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
   };
 
@@ -112,6 +86,18 @@ export default function QuoteForm() {
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address (Optional)" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                aria-label="Service or Goal Required"
+                className={`${inputClasses} cursor-pointer [&>option]:bg-[#080f1a] [&>option]:text-white`}
+              >
+                <option value="Custom Wardrobes">Custom Wardrobes</option>
+                <option value="Modular Kitchen">Modular Kitchen</option>
+                <option value="Turnkey Interiors">Turnkey Interiors</option>
+                <option value="General Inquiries">General / Other Inquiries</option>
+              </select>
               <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Briefly describe your requirements (Optional)" rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <div className="mt-2">
