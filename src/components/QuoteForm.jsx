@@ -12,7 +12,6 @@ export default function QuoteForm() {
     name: '',
     email: '',
     mobile: '',
-    service: 'Custom Wardrobes',
     message: ''
   });
 
@@ -29,8 +28,25 @@ export default function QuoteForm() {
     setIsSubmitting(true);
     setError('');
 
+    // Seamlessly infer goal/service from user requirements if specified,
+    // otherwise default to Custom Wardrobes (matching homepage hero service).
+    let inferredService = 'Custom Wardrobes';
+    const msg = (formData.message || '').toLowerCase();
+    if (msg.includes('kitchen')) {
+      inferredService = 'Modular Kitchen';
+    } else if (msg.includes('interiors') || msg.includes('turnkey') || msg.includes('full home') || msg.includes('3bhk') || msg.includes('2bhk') || msg.includes('villa')) {
+      inferredService = 'Turnkey Interiors';
+    }
+
     const res = await submitLeadConsultation({
-      form: formData,
+      form: {
+        name: formData.name,
+        email: formData.email,
+        mobile: formData.mobile,
+        service: inferredService,
+        message: formData.message,
+        source: 'Homepage QuoteForm'
+      },
       isSubmittingRef,
       trackLeadFn: () => trackFormLead("hero_quote_form")
     });
@@ -41,7 +57,7 @@ export default function QuoteForm() {
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', email: '', mobile: '', service: 'Custom Wardrobes', message: '' });
+        setFormData({ name: '', email: '', mobile: '', message: '' });
       }, 5000);
     } else {
       setError(res.error || "Unable to send request right now. Please try again or reach out on WhatsApp.");
@@ -86,18 +102,6 @@ export default function QuoteForm() {
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Full Name" className={inputClasses} />
               <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address (Optional)" className={inputClasses} />
               <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required placeholder="Mobile Number" className={inputClasses} />
-              <select
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                aria-label="Service or Goal Required"
-                className={`${inputClasses} cursor-pointer [&>option]:bg-[#080f1a] [&>option]:text-white`}
-              >
-                <option value="Custom Wardrobes">Custom Wardrobes</option>
-                <option value="Modular Kitchen">Modular Kitchen</option>
-                <option value="Turnkey Interiors">Turnkey Interiors</option>
-                <option value="General Inquiries">General / Other Inquiries</option>
-              </select>
               <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Briefly describe your requirements (Optional)" rows="2" className={`${inputClasses} resize-none`}></textarea>
 
               <div className="mt-2">
