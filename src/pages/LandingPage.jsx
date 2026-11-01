@@ -39,6 +39,7 @@ function LeadForm({ compact = false }) {
   const [form, setForm]               = useState({ name: "", phone: "", location: "", service: "Custom Wardrobes" });
   const [done, setDone]               = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef               = useRef(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [error, setError]             = useState("");
   const nameInputRef                  = useRef(null);
@@ -51,7 +52,7 @@ function LeadForm({ compact = false }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmittingRef.current || isSubmitting) return;
 
     const trimmedName = form.name.trim();
     const trimmedPhone = form.phone.trim();
@@ -63,6 +64,7 @@ function LeadForm({ compact = false }) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError("");
 
@@ -76,11 +78,10 @@ function LeadForm({ compact = false }) {
         body: JSON.stringify({
           name: trimmedName,
           phone: trimmedPhone,
-          mobile: trimmedPhone,
           service: selectedService,
           locality: trimmedLocation || "Not specified",
           message: `Service: ${selectedService} | Bangalore Locality: ${trimmedLocation || "Not specified"}`,
-          _subject: `New /lp Consultation Request: ${selectedService} (${trimmedName})`
+          _subject: `New Consultation Request: ${selectedService}`
         })
       });
 
@@ -88,12 +89,14 @@ function LeadForm({ compact = false }) {
         throw new Error(`Server returned HTTP ${response.status}`);
       }
 
-      const result = await response.json().catch(() => ({}));
-      if (result.success === "false" || result.success === false) {
-        throw new Error(result.message || "Submission rejected by provider");
+      // Strict fail-closed parsing: do not swallow JSON parse errors or treat missing/invalid success as true
+      const result = await response.json();
+      if (!result || typeof result !== "object" || (result.success !== true && result.success !== "true")) {
+        throw new Error(result?.message || "FormSubmit did not return a verified success acknowledgement");
       }
 
-      // Verified successful form submission and backend persistence
+      // Verified positive provider acknowledgement and persistence
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
       setSubmittedData({ name: trimmedName, phone: trimmedPhone, service: selectedService, location: trimmedLocation });
       setDone(true);
@@ -101,6 +104,7 @@ function LeadForm({ compact = false }) {
       trackFormLead("lp_quote_form");
     } catch (err) {
       console.error("LP form submission failed:", err);
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
       setError("Unable to submit consultation request right now. Please try again or reach out on WhatsApp.");
     }
