@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight, MessageCircle, Loader2 } from "lucide-react";
 import { COMPANY } from "../data/content";
 import { trackWhatsAppConversion, trackFormLead } from "../utils/analytics";
+import { submitLeadConsultation } from "../utils/formSubmit";
 import SEO from "../components/SEO";
 
 const PINK    = "#DF4C73";
@@ -54,60 +55,28 @@ function LeadForm({ compact = false }) {
     e.preventDefault();
     if (isSubmittingRef.current || isSubmitting) return;
 
-    const trimmedName = form.name.trim();
-    const trimmedPhone = form.phone.trim();
-    const trimmedLocation = form.location.trim();
-    const selectedService = form.service || "Custom Wardrobes";
-
-    if (!trimmedName || !trimmedPhone) {
-      setError("Please enter your name and phone number.");
-      return;
-    }
-
-    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError("");
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@latushya.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          name: trimmedName,
-          phone: trimmedPhone,
-          service: selectedService,
-          locality: trimmedLocation || "Not specified",
-          message: `Service: ${selectedService} | Bangalore Locality: ${trimmedLocation || "Not specified"}`,
-          _subject: `New Consultation Request: ${selectedService}`
-        })
-      });
+    const res = await submitLeadConsultation({
+      form,
+      isSubmittingRef,
+      trackLeadFn: trackFormLead
+    });
 
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
+    setIsSubmitting(false);
+
+    if (!res.success) {
+      if (res.reason === "VALIDATION_FAILED") {
+        setError(res.error || "Please enter your name and phone number.");
+      } else if (res.reason !== "BLOCKED") {
+        setError("Unable to submit consultation request right now. Please try again or reach out on WhatsApp.");
       }
-
-      // Strict fail-closed parsing: do not swallow JSON parse errors or treat missing/invalid success as true
-      const result = await response.json();
-      if (!result || typeof result !== "object" || (result.success !== true && result.success !== "true")) {
-        throw new Error(result?.message || "FormSubmit did not return a verified success acknowledgement");
-      }
-
-      // Verified positive provider acknowledgement and persistence
-      isSubmittingRef.current = false;
-      setIsSubmitting(false);
-      setSubmittedData({ name: trimmedName, phone: trimmedPhone, service: selectedService, location: trimmedLocation });
-      setDone(true);
-      // Fire Google Ads primary conversion for Form Leads and GA4 Lead only upon verified persistence
-      trackFormLead("lp_quote_form");
-    } catch (err) {
-      console.error("LP form submission failed:", err);
-      isSubmittingRef.current = false;
-      setIsSubmitting(false);
-      setError("Unable to submit consultation request right now. Please try again or reach out on WhatsApp.");
+      return;
     }
+
+    setSubmittedData(res.data);
+    setDone(true);
   };
 
   const inputBase = {
