@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight } from "lucide-react";
+import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight, MessageCircle, Loader2 } from "lucide-react";
 import { COMPANY } from "../data/content";
 import { trackWhatsAppConversion, trackFormLead } from "../utils/analytics";
 import SEO from "../components/SEO";
@@ -36,10 +36,12 @@ function FadeUp({ children, delay = 0, className = "" }) {
 }
 
 function LeadForm({ compact = false }) {
-  const [form, setForm]   = useState({ name: "", phone: "", location: "", service: "Custom Wardrobes" });
-  const [done, setDone]   = useState(false);
-  const [error, setError] = useState("");
-  const nameInputRef      = useRef(null);
+  const [form, setForm]               = useState({ name: "", phone: "", location: "", service: "Custom Wardrobes" });
+  const [done, setDone]               = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedData, setSubmittedData] = useState(null);
+  const [error, setError]             = useState("");
+  const nameInputRef                  = useRef(null);
 
   const services = [
     "Custom Wardrobes",
@@ -47,16 +49,61 @@ function LeadForm({ compact = false }) {
     "Full Home Interiors",
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
+    if (isSubmitting) return;
+
+    const trimmedName = form.name.trim();
+    const trimmedPhone = form.phone.trim();
+    const trimmedLocation = form.location.trim();
+    const selectedService = form.service || "Custom Wardrobes";
+
+    if (!trimmedName || !trimmedPhone) {
       setError("Please enter your name and phone number.");
       return;
     }
-    // Fire Google Ads primary conversion for Form Leads and GA4 Lead
-    trackFormLead("lp_quote_form");
-    window.open(waLink(form.name, form.phone, form.service, form.location), "_blank");
-    setDone(true);
+
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@latushya.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          phone: trimmedPhone,
+          mobile: trimmedPhone,
+          service: selectedService,
+          locality: trimmedLocation || "Not specified",
+          message: `Service: ${selectedService} | Bangalore Locality: ${trimmedLocation || "Not specified"}`,
+          _subject: `New /lp Consultation Request: ${selectedService} (${trimmedName})`
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned HTTP ${response.status}`);
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (result.success === "false" || result.success === false) {
+        throw new Error(result.message || "Submission rejected by provider");
+      }
+
+      // Verified successful form submission and backend persistence
+      setIsSubmitting(false);
+      setSubmittedData({ name: trimmedName, phone: trimmedPhone, service: selectedService, location: trimmedLocation });
+      setDone(true);
+      // Fire Google Ads primary conversion for Form Leads and GA4 Lead only upon verified persistence
+      trackFormLead("lp_quote_form");
+    } catch (err) {
+      console.error("LP form submission failed:", err);
+      setIsSubmitting(false);
+      setError("Unable to submit consultation request right now. Please try again or reach out on WhatsApp.");
+    }
   };
 
   const inputBase = {
@@ -184,20 +231,32 @@ function LeadForm({ compact = false }) {
               <motion.button
                 type="submit"
                 id="lp-form-submit"
-                whileHover={{ scale: 1.01, boxShadow: "0 8px 30px rgba(223,76,115,0.45)" }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                whileHover={!isSubmitting ? { scale: 1.01, boxShadow: "0 8px 30px rgba(223,76,115,0.45)" } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 style={{
                   marginTop: "8px", minHeight: "52px",
                   background: `linear-gradient(135deg, ${PINK} 0%, #F07595 100%)`,
                   color: "#fff", border: "none", borderRadius: "14px",
                   fontFamily: SANS, fontWeight: 700, fontSize: "14px",
-                  letterSpacing: "0.02em", cursor: "pointer",
+                  letterSpacing: "0.02em",
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                  opacity: isSubmitting ? 0.75 : 1,
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "10px",
                   boxShadow: "0 4px 18px rgba(223,76,115,0.35)",
                 }}
               >
-                <span>Get Free 3D Design & Quote</span>
-                <ArrowRight size={17} />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    <span>Submitting Request...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Get Free 3D Design & Quote</span>
+                    <ArrowRight size={17} />
+                  </>
+                )}
               </motion.button>
 
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", marginTop: "4px" }}>
@@ -215,18 +274,61 @@ function LeadForm({ compact = false }) {
             </div>
             <p style={{ fontFamily: DISPLAY, fontSize: "26px", color: "#fff", marginBottom: "8px" }}>Consultation Requested!</p>
             <p style={{ fontFamily: SANS, fontSize: "13px", color: "rgba(255,255,255,0.65)", lineHeight: 1.6, marginBottom: "20px" }}>
-              We've pre-filled your details on WhatsApp. Our senior designer will review your room dimensions and share a 3D layout within 30 minutes.
+              Thank you{submittedData?.name ? `, ${submittedData.name}` : ""}. Your consultation details have been sent. Our senior designer will review your requirements and reach out within 30 minutes.
             </p>
-            <button
-              onClick={() => setDone(false)}
-              style={{
-                background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
-                borderRadius: "10px", padding: "10px 20px", color: "#fff",
-                fontFamily: SANS, fontSize: "12px", cursor: "pointer",
-              }}
-            >
-              Submit Another Inquiry
-            </button>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
+              <button
+                type="button"
+                onClick={() => {
+                  trackWhatsAppConversion();
+                  const target = submittedData || form;
+                  window.open(waLink(target.name, target.phone, target.service, target.location), "_blank");
+                }}
+                style={{
+                  width: "100%",
+                  minHeight: "48px",
+                  background: "#25D366",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "12px",
+                  fontFamily: SANS,
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  boxShadow: "0 4px 18px rgba(37,211,102,0.35)",
+                }}
+              >
+                <MessageCircle size={18} />
+                <span>Chat with Designer on WhatsApp</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setDone(false);
+                  setForm({ name: "", phone: "", location: "", service: "Custom Wardrobes" });
+                  setSubmittedData(null);
+                }}
+                style={{
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: "10px",
+                  padding: "10px 20px",
+                  color: "rgba(255,255,255,0.7)",
+                  fontFamily: SANS,
+                  fontSize: "12px",
+                  cursor: "pointer",
+                  marginTop: "6px",
+                }}
+              >
+                Submit Another Inquiry
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -348,7 +450,7 @@ export default function LandingPage() {
     }
   };
 
-  const handleWA = (source = "general") => {
+  const handleWA = () => {
     trackWhatsAppConversion();
     const text = encodeURIComponent(`Hello Latushya! I saw your bespoke wardrobe ad and would like to book a free 3D design consultation.`);
     window.open(`https://wa.me/${COMPANY.whatsapp}?text=${text}`, "_blank");
