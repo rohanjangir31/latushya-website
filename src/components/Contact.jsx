@@ -1,4 +1,5 @@
 import { trackFormLead } from '../utils/analytics';
+import { submitLeadConsultation } from '../utils/formSubmit';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { COMPANY } from '../data/content';
@@ -13,21 +14,65 @@ const fadeUp = (delay = 0) => ({
 
 export default function Contact() {
   const sectionRef = useRef(null);
+  const isSubmittingRef = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
   
-  // Basic form state (no backend connected yet, just UI)
   const [formData, setFormData] = useState({ name: '', phone: '', project: '' });
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError('');
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Trigger Google Ads Conversion Tracking & GA4 Lead Event
-    trackFormLead('contact_page_form');
+    if (isSubmittingRef.current || isSubmitting) return;
 
-    if (COMPANY.whatsapp) {
-      const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
-      window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+    setIsSubmitting(true);
+    setError('');
+
+    let inferredService = 'General Inquiries';
+    const projLower = (formData.project || '').toLowerCase();
+    if (projLower.includes('wardrobe')) {
+      inferredService = 'Custom Wardrobes';
+    } else if (projLower.includes('kitchen')) {
+      inferredService = 'Modular Kitchen';
+    } else if (projLower.includes('interiors') || projLower.includes('turnkey') || projLower.includes('home') || projLower.includes('bhk') || projLower.includes('villa')) {
+      inferredService = 'Turnkey Interiors';
+    }
+
+    const res = await submitLeadConsultation({
+      form: {
+        name: formData.name,
+        phone: formData.phone,
+        service: inferredService,
+        message: formData.project,
+        source: 'Website Contact Section'
+      },
+      isSubmittingRef,
+      trackLeadFn: () => trackFormLead('contact_page_form')
+    });
+
+    setIsSubmitting(false);
+
+    if (res.success) {
+      setIsSubmitted(true);
+      if (COMPANY.whatsapp) {
+        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
+        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+      }
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', phone: '', project: '' });
+      }, 5000);
+    } else {
+      setError(res.error || "Unable to send request right now. Opening WhatsApp directly...");
+      if (COMPANY.whatsapp) {
+        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
+        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+      }
     }
   };
 
@@ -138,12 +183,21 @@ export default function Contact() {
           </div>
 
           <div className="flex justify-center">
-            <button 
-              type="submit"
-              className="btn-pink px-12 py-5 text-sm tracking-[0.2em]"
-            >
-              <span>Submit Inquiry</span>
-            </button>
+            <div className="flex flex-col items-center gap-3">
+              {error && (
+                <p className="text-sm text-red-400 font-light">{error}</p>
+              )}
+              {isSubmitted && (
+                <p className="text-sm text-[#DF4C73] font-medium tracking-wide">Thank you! Your inquiry has been recorded.</p>
+              )}
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-pink px-12 py-5 text-sm tracking-[0.2em] disabled:opacity-60 disabled:cursor-wait"
+              >
+                <span>{isSubmitting ? 'Recording Inquiry...' : 'Submit Inquiry'}</span>
+              </button>
+            </div>
           </div>
         </motion.form>
 
