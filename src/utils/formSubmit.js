@@ -42,6 +42,9 @@ export async function validateFormSubmitResponse(response, preParsedJson) {
   return result;
 }
 
+// Live Google Sheets Webhook Endpoint for Latushya Lead Automation Engine
+const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxMvmDzqdzbES3P-yVbAncAkM0rcahGc-aAJAc7qK6TM6BfcLit_zPbwe69YWYLIGW4/exec';
+
 /**
  * Production helper for lead consultation forms (LandingPage LeadForm & Homepage QuoteForm).
  * Handles validation, in-flight ref guard, dispatch, response contract verification, and attribution.
@@ -51,7 +54,7 @@ export async function submitLeadConsultation({
   isSubmittingRef,
   fetchFn = fetch,
   trackLeadFn,
-  webhookUrl = (typeof import.meta !== 'undefined' && import.meta?.env?.VITE_LEADS_WEBHOOK_URL) || undefined,
+  webhookUrl = (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_LEADS_WEBHOOK_URL) || DEFAULT_WEBHOOK_URL,
 }) {
   if (isSubmittingRef && isSubmittingRef.current) {
     return { success: false, reason: 'BLOCKED' };
