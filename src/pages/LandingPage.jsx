@@ -12,11 +12,9 @@ const CARD    = "#080f1a";
 const DISPLAY = "'DM Serif Display', 'Cormorant Garamond', Georgia, serif";
 const SANS    = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
 
-function waLink(name, phone, service, location) {
-  let msg = `Hello Latushya! I would like a Free 3D Design & Quote for ${service || "Custom Wardrobes"}.\nName: ${name}\nPhone: ${phone}`;
-  if (location && location.trim()) {
-    msg += `\nBangalore Locality: ${location.trim()}`;
-  }
+function waLink(service) {
+  const serviceLabel = service || "Custom Wardrobes";
+  const msg = `Hello Latushya! I would like to schedule a Free 3D Design & Quote consultation for ${serviceLabel}.`;
   return `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -256,7 +254,7 @@ function LeadForm({ compact = false }) {
                 onClick={() => {
                   trackWhatsAppConversion();
                   const target = submittedData || form;
-                  window.open(waLink(target.name, target.phone, target.service, target.location), "_blank");
+                  window.open(waLink(target?.service), "_blank");
                 }}
                 style={{
                   width: "100%",

@@ -60,7 +60,7 @@ export default function Contact() {
     if (res.success) {
       setIsSubmitted(true);
       if (COMPANY.whatsapp) {
-        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
+        const text = "Hello Latushya! I would like to schedule a private interior design consultation.";
         window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
       }
       setTimeout(() => {
@@ -70,7 +70,7 @@ export default function Contact() {
     } else {
       setError(res.error || "Unable to send request right now. Opening WhatsApp directly...");
       if (COMPANY.whatsapp) {
-        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
+        const text = "Hello Latushya! I would like to schedule a private interior design consultation.";
         window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
       }
     }

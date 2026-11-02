@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { body } = require('express-validator');
 
-const { createEnquiry, getEnquiries } = require('../controllers/enquiry.controller');
+const { createEnquiry } = require('../controllers/enquiry.controller');
 const { WARDROBE_TYPES }              = require('../models/enquiry.model');
 
 // ─────────────────────────────────────────────────────────────
@@ -46,7 +46,5 @@ const createEnquiryRules = [
 // Public: submit a new enquiry
 router.post('/', createEnquiryRules, createEnquiry);
 
-// Temporarily public for Phase 2 testing — will require admin auth in Phase 3
-router.get('/', getEnquiries);
 
 module.exports = router;

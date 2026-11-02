@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 
 const Enquiry            = require('../models/enquiry.model');
-const { ENQUIRY_STATUSES } = require('../models/enquiry.model');
 const ApiError           = require('../utils/ApiError');
 const ApiResponse        = require('../utils/ApiResponse');
 const asyncHandler       = require('../utils/asyncHandler');
@@ -47,59 +46,4 @@ const createEnquiry = asyncHandler(async (req, res) => {
   );
 });
 
-// ─────────────────────────────────────────────────────────────
-// GET /api/v1/enquiries
-// Returns all enquiries, newest first.
-//
-// Query parameters:
-//   ?status=new              — filter by status
-//   ?page=1&limit=20         — pagination (default: page 1, 20 per page)
-//
-// NOTE: This endpoint is temporarily open during Phase 2 to allow
-// API testing. It will be protected by admin auth in Phase 3.
-// ─────────────────────────────────────────────────────────────
-const getEnquiries = asyncHandler(async (req, res) => {
-  const page  = Math.max(1, parseInt(req.query.page, 10)  || 1);
-  const limit = Math.min(100, parseInt(req.query.limit, 10) || 20);
-  const skip  = (page - 1) * limit;
-
-  // Validate optional status filter
-  const filter = {};
-  if (req.query.status) {
-    if (!ENQUIRY_STATUSES.includes(req.query.status)) {
-      throw new ApiError(
-        400,
-        `Invalid status "${req.query.status}". Must be one of: ${ENQUIRY_STATUSES.join(', ')}`
-      );
-    }
-    filter.status = req.query.status;
-  }
-
-  // Run count and fetch in parallel for efficiency.
-  // select('-__v') removes the internal Mongoose version key from every document.
-  const [enquiries, total] = await Promise.all([
-    Enquiry
-      .find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .select('-__v')
-      .lean(),
-    Enquiry.countDocuments(filter),
-  ]);
-
-  res.status(200).json(
-    new ApiResponse(200, 'Enquiries fetched successfully', {
-      enquiries,
-      pagination: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-        hasNextPage: page < Math.ceil(total / limit),
-      },
-    })
-  );
-});
-
-module.exports = { createEnquiry, getEnquiries };
+module.exports = { createEnquiry };
