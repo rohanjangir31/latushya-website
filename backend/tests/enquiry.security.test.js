@@ -2,17 +2,24 @@ const test = require('node:test');
 const assert = require('node:assert');
 const express = require('express');
 
-// Import production enquiry router directly without connecting to Mongo or loading server.js
+// Import production enquiry router, model, and error handler
 const enquiryRoutes = require('../src/routes/enquiry.routes');
+const Enquiry = require('../src/models/enquiry.model');
+const errorHandler = require('../src/middleware/error.middleware');
 
 function createTestApp() {
   const app = express();
   app.use(express.json());
   app.use('/api/v1/enquiries', enquiryRoutes);
+  
   // Default 404 handler for routes not found
   app.use((req, res) => {
     res.status(404).json({ success: false, error: 'Not Found' });
   });
+
+  // Centralized error handler to catch validation and operational errors
+  app.use(errorHandler);
+  
   return app;
 }
 
@@ -52,13 +59,41 @@ test('Security Integration: GET /api/v1/enquiries is disabled and inaccessible',
     assert.strictEqual(body.enquiries, undefined);
   });
 
-  await t.test('POST / route remains mounted and rejects invalid payload', async () => {
-    const res = await fetch(baseUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: '' })
-    });
-    // POST / route is active (not 404)
-    assert.notStrictEqual(res.status, 404, 'POST / route must exist for public lead creation');
+  await t.test('POST / route rejects invalid payload with HTTP 400 and does NOT trigger DB write', async () => {
+    let dbCreateCalled = false;
+    const originalCreate = Enquiry.create;
+    Enquiry.create = async (...args) => {
+      dbCreateCalled = true;
+      return originalCreate.apply(Enquiry, args);
+    };
+
+    try {
+      // Test 1: Empty name and invalid phone
+      const res1 = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: '', phone: 'not-a-phone' })
+      });
+      assert.strictEqual(res1.status, 400, 'POST with invalid fields must return HTTP 400');
+      const body1 = await res1.json();
+      assert.strictEqual(body1.success, false, 'Response success must be false');
+      assert.strictEqual(body1.message, 'Validation failed', 'Message must indicate validation failure');
+      assert.ok(Array.isArray(body1.errors), 'Errors must be an array');
+      assert.ok(body1.errors.length > 0, 'Errors array must contain field validation errors');
+      assert.strictEqual(dbCreateCalled, false, 'Enquiry.create must not be invoked on validation failure');
+
+      // Test 2: Completely empty body
+      const res2 = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+      assert.strictEqual(res2.status, 400, 'POST with empty body must return HTTP 400');
+      const body2 = await res2.json();
+      assert.strictEqual(body2.success, false);
+      assert.strictEqual(dbCreateCalled, false, 'Enquiry.create must not be invoked on empty payload');
+    } finally {
+      Enquiry.create = originalCreate;
+    }
   });
 });

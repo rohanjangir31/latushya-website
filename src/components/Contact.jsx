@@ -59,20 +59,12 @@ export default function Contact() {
 
     if (res.success) {
       setIsSubmitted(true);
-      if (COMPANY.whatsapp) {
-        const text = "Hello Latushya! I would like to schedule a private interior design consultation.";
-        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
-      }
+      setFormData({ name: '', phone: '', project: '' });
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', phone: '', project: '' });
-      }, 5000);
+      }, 8000);
     } else {
-      setError(res.error || "Unable to send request right now. Opening WhatsApp directly...");
-      if (COMPANY.whatsapp) {
-        const text = "Hello Latushya! I would like to schedule a private interior design consultation.";
-        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
-      }
+      setError(res.error || "Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
   };
 
@@ -185,10 +177,34 @@ export default function Contact() {
           <div className="flex justify-center">
             <div className="flex flex-col items-center gap-3">
               {error && (
-                <p className="text-sm text-red-400 font-light">{error}</p>
+                <div className="flex flex-col items-center gap-2 mb-2">
+                  <p className="text-sm text-red-400 font-light">{error}</p>
+                  {COMPANY.whatsapp && (
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent("Hello Latushya! I would like to schedule a private interior design consultation.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-white/70 hover:text-white underline tracking-wider transition-colors inline-flex items-center gap-1.5"
+                    >
+                      Connect on WhatsApp instead →
+                    </a>
+                  )}
+                </div>
               )}
               {isSubmitted && (
-                <p className="text-sm text-[#DF4C73] font-medium tracking-wide">Thank you! Your inquiry has been recorded.</p>
+                <div className="flex flex-col items-center gap-2 mb-2">
+                  <p className="text-sm text-[#DF4C73] font-medium tracking-wide">Thank you! Your inquiry has been recorded.</p>
+                  {COMPANY.whatsapp && (
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent("Hello Latushya! I would like to schedule a private interior design consultation.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-white/70 hover:text-white underline tracking-wider transition-colors inline-flex items-center gap-1.5"
+                    >
+                      Chat directly on WhatsApp (optional) →
+                    </a>
+                  )}
+                </div>
               )}
               <button 
                 type="submit"
