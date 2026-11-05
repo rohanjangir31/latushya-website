@@ -4,7 +4,7 @@
  * and tests the in-flight submission guard pattern.
  */
 import assert from 'node:assert';
-import { validateFormSubmitResponse, submitLeadConsultation } from '../src/utils/formSubmit.js';
+import { validateFormSubmitResponse, submitLeadConsultation, normalizeService, getAttributionData, generateIdempotencyKey } from '../src/utils/formSubmit.js';
 
 async function runTests() {
   console.log("Running validateFormSubmitResponse unit tests...\n");
@@ -209,6 +209,40 @@ async function runTests() {
     assert.strictEqual(res.success, false);
     assert.strictEqual(res.reason, "VALIDATION_FAILED");
     console.log("✓ Test 11: Rejects missing contact info");
+    passed++;
+  }
+
+  // 12. normalizeService maps canonical taxonomy and never defaults ambiguous to wardrobes
+  {
+    assert.strictEqual(normalizeService("Custom Wardrobes"), "Custom Wardrobes");
+    assert.strictEqual(normalizeService("Modular Kitchen"), "Modular Kitchen");
+    assert.strictEqual(normalizeService("Full Home Interiors"), "Turnkey Interiors");
+    assert.strictEqual(normalizeService("Turnkey Interiors"), "Turnkey Interiors");
+    assert.strictEqual(normalizeService("Other / Not sure"), "Other / Not sure");
+    assert.strictEqual(normalizeService(""), "Other / Not sure");
+    assert.strictEqual(normalizeService(null), "Other / Not sure");
+    assert.strictEqual(normalizeService("random inquiry about pricing"), "Other / Not sure");
+    console.log("✓ Test 12: Canonical service taxonomy mapping and ambiguous safeguard");
+    passed++;
+  }
+
+  // 13. generateIdempotencyKey generates unique keys
+  {
+    const k1 = generateIdempotencyKey();
+    const k2 = generateIdempotencyKey();
+    assert.ok(k1.startsWith("idemp_"));
+    assert.ok(k2.startsWith("idemp_"));
+    assert.notStrictEqual(k1, k2);
+    console.log("✓ Test 13: Unique idempotency key generation");
+    passed++;
+  }
+
+  // 14. getAttributionData preserves form placement and non-PII fields
+  {
+    const attr = getAttributionData("homepage_hero");
+    assert.strictEqual(attr.formPlacement, "homepage_hero");
+    assert.strictEqual(typeof attr, "object");
+    console.log("✓ Test 14: Attribution structure extraction");
     passed++;
   }
 

@@ -13,8 +13,9 @@ const DISPLAY = "'DM Serif Display', 'Cormorant Garamond', Georgia, serif";
 const SANS    = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
 
 function waLink(service) {
-  const serviceLabel = service || "Custom Wardrobes";
-  const msg = `Hello Latushya! I would like to schedule a Free 3D Design & Quote consultation for ${serviceLabel}.`;
+  const msg = service && service !== "Other / Not sure"
+    ? `Hello Latushya! I would like to schedule a private consultation for ${service}.`
+    : "Hello Latushya! I would like to schedule a private interior design consultation.";
   return `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -46,7 +47,8 @@ function LeadForm({ compact = false }) {
   const services = [
     "Custom Wardrobes",
     "Modular Kitchen",
-    "Full Home Interiors",
+    "Turnkey Interiors",
+    "Other / Not sure",
   ];
 
   const handleSubmit = async (e) => {
@@ -104,11 +106,11 @@ function LeadForm({ compact = false }) {
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: "rgba(223,76,115,0.15)", border: "1px solid rgba(223,76,115,0.3)", borderRadius: "999px", padding: "4px 10px", fontSize: "11px", fontWeight: 600, color: PINK, textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                <Sparkles size={12} /> Free Site Consultation
+                <Sparkles size={12} /> Design Consultation
               </span>
             </div>
             <p style={{ fontFamily: DISPLAY, fontSize: compact ? "22px" : "28px", color: "#fff", lineHeight: 1.2, marginBottom: "6px" }}>
-              Get Free 3D Design & <em style={{ color: PINK, fontStyle: "italic" }}>Quote</em>
+              Schedule Private <em style={{ color: PINK, fontStyle: "italic" }}>Consultation</em>
             </p>
             <p style={{ fontFamily: SANS, fontSize: "13px", color: "rgba(255,255,255,0.55)", marginBottom: "20px", lineHeight: 1.5 }}>
               On-site measurements across Bangalore. Precision layout. No obligation.
@@ -126,7 +128,7 @@ function LeadForm({ compact = false }) {
                 <label style={{ display: "block", fontFamily: SANS, fontSize: "11px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "6px" }}>
                   Select Service
                 </label>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "6px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "6px" }}>
                   {services.map(svc => {
                     const isSelected = form.service === svc;
                     return (
@@ -149,7 +151,7 @@ function LeadForm({ compact = false }) {
                           lineHeight: 1.2,
                         }}
                       >
-                        {svc === "Custom Wardrobes" ? "Wardrobes" : svc === "Modular Kitchen" ? "Kitchen" : "Full Home"}
+                        {svc === "Custom Wardrobes" ? "Wardrobes" : svc === "Modular Kitchen" ? "Kitchen" : svc === "Turnkey Interiors" ? "Turnkey Interiors" : "Other / Not sure"}
                       </button>
                     );
                   })}
@@ -224,7 +226,7 @@ function LeadForm({ compact = false }) {
                   </>
                 ) : (
                   <>
-                    <span>Get Free 3D Design & Quote</span>
+                    <span>Request Design Consultation</span>
                     <ArrowRight size={17} />
                   </>
                 )}
@@ -423,7 +425,7 @@ export default function LandingPage() {
 
   const handleWA = () => {
     trackWhatsAppConversion();
-    const text = encodeURIComponent(`Hello Latushya! I saw your bespoke wardrobe ad and would like to book a free 3D design consultation.`);
+    const text = encodeURIComponent(`Hello Latushya! I saw your bespoke wardrobe ad and would like to schedule a private design consultation.`);
     window.open(`https://wa.me/${COMPANY.whatsapp}?text=${text}`, "_blank");
   };
 
@@ -431,7 +433,7 @@ export default function LandingPage() {
     <div style={{ background: DARK, minHeight: "100vh", fontFamily: SANS, overflowX: "hidden", paddingBottom: "92px" }}>
       <SEO
         title="Custom Wardrobes & Luxury Turnkey Interiors Bangalore | Latushya"
-        description="Floor-to-ceiling custom sliding wardrobes and luxury turnkey home interiors in Bangalore. Free 3D design and quotation."
+        description="Floor-to-ceiling custom sliding wardrobes and luxury turnkey home interiors in Bangalore. Schedule a private consultation and estimate."
         noindex={true}
       />
       {/* Grain texture */}
@@ -467,7 +469,7 @@ export default function LandingPage() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.45 }} style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "32px" }}>
               <TrustPill>500+ Bangalore Projects Done</TrustPill>
               <TrustPill>German Häfele & Hettich</TrustPill>
-              <TrustPill>Free On-Site 3D Design</TrustPill>
+              <TrustPill>On-Site Design Consultation</TrustPill>
               <TrustPill>Direct Team · No Middlemen</TrustPill>
             </motion.div>
 
@@ -484,7 +486,7 @@ export default function LandingPage() {
                   cursor: "pointer", boxShadow: "0 6px 24px rgba(223,76,115,0.45)",
                 }}
               >
-                <span>Get Free 3D Design & Quote</span>
+                <span>Request Design Consultation</span>
                 <ArrowRight size={16} />
               </button>
 
@@ -646,7 +648,7 @@ export default function LandingPage() {
           <FadeUp>
             <p style={{ fontFamily: SANS, fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", color: PINK, marginBottom: "16px", fontWeight: 600 }}>Start your project</p>
             <h2 style={{ fontFamily: DISPLAY, fontSize: "clamp(2.2rem, 5vw, 3.8rem)", color: "#fff", fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: "18px" }}>
-              Ready for a proper <em style={{ color: PINK, fontStyle: "italic" }}>3D design?</em>
+              Ready for a tailored <em style={{ color: PINK, fontStyle: "italic" }}>consultation?</em>
             </h2>
             <p style={{ fontFamily: SANS, fontSize: "15px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, marginBottom: "36px" }}>
               Consultations scheduled within 24 hours. We measure on-site in Bangalore and build a layout around your storage requirements.
@@ -663,7 +665,7 @@ export default function LandingPage() {
                   cursor: "pointer", boxShadow: "0 6px 24px rgba(223,76,115,0.45)",
                 }}
               >
-                <span>Book Free 3D Consultation</span>
+                <span>Book Consultation</span>
                 <ArrowRight size={16} />
               </button>
               <button
@@ -728,7 +730,7 @@ export default function LandingPage() {
           }}
         >
           <Sparkles size={15} />
-          <span>Get Free 3D Quote</span>
+          <span>Request Consultation</span>
           <ArrowRight size={14} />
         </button>
 

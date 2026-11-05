@@ -28,11 +28,12 @@ export default function QuoteForm() {
     setIsSubmitting(true);
     setError('');
 
-    // Seamlessly infer goal/service from user requirements if specified,
-    // otherwise default to Custom Wardrobes (matching homepage hero service).
-    let inferredService = 'Custom Wardrobes';
+    // Canonical service inference: never default ambiguous leads to wardrobes.
+    let inferredService = 'Other / Not sure';
     const msg = (formData.message || '').toLowerCase();
-    if (msg.includes('kitchen')) {
+    if (msg.includes('wardrobe') || msg.includes('closet') || msg.includes('cupboard') || msg.includes('sliding')) {
+      inferredService = 'Custom Wardrobes';
+    } else if (msg.includes('kitchen')) {
       inferredService = 'Modular Kitchen';
     } else if (msg.includes('interiors') || msg.includes('turnkey') || msg.includes('full home') || msg.includes('3bhk') || msg.includes('2bhk') || msg.includes('villa')) {
       inferredService = 'Turnkey Interiors';
