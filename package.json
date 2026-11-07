@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node tests/lp-form-contract.test.mjs && node tests/formSubmit.test.mjs",
+    "test:all": "npm run test && cd backend && npm test"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
