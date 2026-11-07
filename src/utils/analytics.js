@@ -34,26 +34,115 @@ export function trackPageView(path, title) {
   }
 }
 
-/**
- * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead)
- */
-export function trackFormLead(source = 'general') {
-  try {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      // 1. Google Ads Primary Conversion Action
-      window.gtag('event', 'conversion', {
-        send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID
-      });
+// In-memory set of tracked conversion event IDs to enforce application-level at-most-once delivery
+export const trackedLeadEventIds = new Set();
 
-      // 2. GA4 Standard Lead Event
-      window.gtag('event', 'generate_lead', {
+/**
+ * Checks if an eventId has already been tracked in memory or sessionStorage (safe across reloads, zero PII).
+ * @param {string} eventId
+ * @returns {boolean}
+ */
+export function isLeadEventTracked(eventId) {
+  if (!eventId || typeof eventId !== 'string') return false;
+  if (trackedLeadEventIds.has(eventId)) return true;
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const stored = window.sessionStorage.getItem(`latushya_tracked_lead_${eventId}`);
+      if (stored === '1') {
+        trackedLeadEventIds.add(eventId);
+        return true;
+      }
+    }
+  } catch {
+    // Ignore sessionStorage quota or access errors
+  }
+  return false;
+}
+
+/**
+ * Marks an eventId as successfully dispatched in memory and sessionStorage.
+ * @param {string} eventId
+ */
+export function markLeadEventTracked(eventId) {
+  if (!eventId || typeof eventId !== 'string') return;
+  trackedLeadEventIds.add(eventId);
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.setItem(`latushya_tracked_lead_${eventId}`, '1');
+    }
+  } catch {
+    // Ignore sessionStorage quota or access errors
+  }
+}
+
+/**
+ * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead).
+ *
+ * DEDUPLICATION CONTRACT:
+ * - Google Ads natively deduplicates conversions sharing the same `transaction_id` (AW-663510360/2lJmCM7Co-EbENi6sbwC).
+ * - GA4 standard `generate_lead` events do NOT natively deduplicate via `transaction_id` (Google GA4 documentation
+ *   specifies that transaction_id deduplication is built-in only for ecommerce `purchase` and `refund` events).
+ * - Therefore, to prevent duplicate `generate_lead` events in GA4, this helper enforces an explicit application-level
+ *   at-most-once guard using `isLeadEventTracked` / `markLeadEventTracked`. If an eventId has already been dispatched,
+ *   subsequent retries or replays are suppressed for GA4.
+ * - Crucial: If `window.gtag` is unavailable or not yet initialized, the eventId is NOT marked as dispatched,
+ *   allowing a later retry attempt to successfully dispatch once analytics runtime is ready.
+ * - Customer PII is strictly avoided in all analytics payloads.
+ *
+ * @param {string} [source='general'] - Form identifier / placement
+ * @param {object} [metadata={}] - Safe metadata
+ * @param {string} [metadata.eventId] - Unique server-generated event ID used as transaction_id
+ * @param {string} [metadata.service] - Canonical service taxonomy name
+ * @returns {boolean} Whether dispatch was attempted via active window.gtag
+ */
+export function trackFormLead(source = 'general', metadata = {}) {
+  try {
+    const eventId = metadata && typeof metadata === 'object' ? metadata.eventId : null;
+    const service = metadata && typeof metadata === 'object' ? metadata.service : null;
+
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
+      // Do NOT poison or mark eventId as dispatched when gtag runtime is unavailable.
+      // This allows a subsequent retry to dispatch once gtag finishes initializing.
+      return false;
+    }
+
+    // 1. Google Ads Primary Conversion Action (Form Leads: AW-663510360/2lJmCM7Co-EbENi6sbwC)
+    // Google Ads supports native `transaction_id` conversion deduplication:
+    // https://support.google.com/google-ads/answer/6386712
+    const adsPayload = {
+      send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID,
+    };
+    if (eventId) {
+      adsPayload.transaction_id = eventId;
+    }
+    window.gtag('event', 'conversion', adsPayload);
+
+    // 2. GA4 Standard Lead Event (generate_lead)
+    // GA4 does not natively dedup generate_lead via transaction_id; the application-level at-most-once
+    // guard below suppresses client duplicate firing, while transaction_id is carried for reporting consistency.
+    if (!isLeadEventTracked(eventId)) {
+      const ga4Payload = {
         event_category: 'lead',
         event_label: source,
-        send_to: GA4_MEASUREMENT_ID
-      });
+        send_to: GA4_MEASUREMENT_ID,
+      };
+      if (eventId) {
+        ga4Payload.transaction_id = eventId;
+      }
+      if (service) {
+        ga4Payload.service_category = service;
+      }
+      window.gtag('event', 'generate_lead', ga4Payload);
+
+      if (eventId) {
+        markLeadEventTracked(eventId);
+      }
     }
+
+    return true;
   } catch (err) {
     console.warn('[Analytics] Form lead tracking error:', err);
+    return false;
   }
 }
 

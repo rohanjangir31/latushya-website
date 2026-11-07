@@ -1,13 +1,14 @@
 /**
  * Direct unit tests for the production helper src/utils/formSubmit.js
  * Exercises validateFormSubmitResponse against all edge cases,
- * and tests the in-flight submission guard pattern.
+ * and tests the in-flight submission guard pattern, canonical taxonomy,
+ * attribution extraction, and exclusive backend API dispatch.
  */
 import assert from 'node:assert';
-import { validateFormSubmitResponse, submitLeadConsultation } from '../src/utils/formSubmit.js';
+import { validateFormSubmitResponse, submitLeadConsultation, normalizeService, getAttributionData, generateIdempotencyKey } from '../src/utils/formSubmit.js';
 
 async function runTests() {
-  console.log("Running validateFormSubmitResponse unit tests...\n");
+  console.log("Running validateFormSubmitResponse & helper unit tests...\n");
   let passed = 0;
 
   // 1. Rejects missing or non-ok response
@@ -160,43 +161,47 @@ async function runTests() {
     passed++;
   }
 
-  // 9. submitLeadConsultation accepts mobile as phone fallback
+  // 9. submitLeadConsultation accepts mobile as phone fallback and calls backend
   {
     const res = await submitLeadConsultation({
       form: { name: "Ananya", mobile: "9876543210", service: "Modular Kitchen" },
+      apiUrl: "http://localhost:5000",
       fetchFn: async () => ({
         ok: true,
-        status: 200,
-        json: async () => ({ success: true })
+        status: 201,
+        json: async () => ({ success: true, data: { eventId: "evt_mobile_test" } })
       })
     });
     assert.strictEqual(res.success, true);
     assert.strictEqual(res.data.phone, "9876543210");
     assert.strictEqual(res.data.service, "Modular Kitchen");
-    console.log("✓ Test 9: Contact normalization accepts mobile field");
+    assert.strictEqual(res.eventId, "evt_mobile_test");
+    console.log("✓ Test 9: Contact normalization accepts mobile field with backend verification");
     passed++;
   }
 
-  // 10. submitLeadConsultation dispatches to webhookUrl when provided
+  // 10. submitLeadConsultation dispatches exclusively to backend and removes client-side webhook/formsubmit
   {
     const calls = [];
     const res = await submitLeadConsultation({
       form: { name: "Vikram", phone: "9876543211", service: "Turnkey Interiors" },
-      webhookUrl: "https://script.google.com/macros/s/TEST/exec",
+      apiUrl: "http://localhost:5000",
       fetchFn: async (url, opts) => {
         calls.push({ url, body: JSON.parse(opts.body) });
         return {
           ok: true,
-          status: 200,
-          json: async () => ({ success: true })
+          status: 201,
+          json: async () => ({ success: true, data: { eventId: "evt_exclusive_backend" } })
         };
       }
     });
     assert.strictEqual(res.success, true);
-    assert.strictEqual(calls.length, 2);
-    assert.strictEqual(calls[0].url, "https://script.google.com/macros/s/TEST/exec");
-    assert.strictEqual(calls[1].url, "https://formsubmit.co/ajax/info@latushya.com");
-    console.log("✓ Test 10: Dispatches to webhookUrl and FormSubmit simultaneously");
+    // Crucial: Exactly one dispatch to authoritative backend, zero calls to FormSubmit or public Sheets webhook
+    assert.strictEqual(calls.length, 1);
+    assert.strictEqual(calls[0].url, "http://localhost:5000/api/v1/enquiries");
+    assert.strictEqual(calls[0].body.serviceRequested, "Turnkey Interiors");
+    assert.strictEqual(calls[0].body.phone, "9876543211");
+    console.log("✓ Test 10: Dispatches exclusively to Express/Mongo backend without parallel third-party sinks");
     passed++;
   }
 
@@ -204,11 +209,46 @@ async function runTests() {
   {
     const res = await submitLeadConsultation({
       form: { name: "Vikram" },
+      apiUrl: "http://localhost:5000",
       fetchFn: async () => {}
     });
     assert.strictEqual(res.success, false);
     assert.strictEqual(res.reason, "VALIDATION_FAILED");
     console.log("✓ Test 11: Rejects missing contact info");
+    passed++;
+  }
+
+  // 12. normalizeService maps canonical taxonomy and never defaults ambiguous to wardrobes
+  {
+    assert.strictEqual(normalizeService("Custom Wardrobes"), "Custom Wardrobes");
+    assert.strictEqual(normalizeService("Modular Kitchen"), "Modular Kitchen");
+    assert.strictEqual(normalizeService("Full Home Interiors"), "Turnkey Interiors");
+    assert.strictEqual(normalizeService("Turnkey Interiors"), "Turnkey Interiors");
+    assert.strictEqual(normalizeService("Other / Not sure"), "Other / Not sure");
+    assert.strictEqual(normalizeService(""), "Other / Not sure");
+    assert.strictEqual(normalizeService(null), "Other / Not sure");
+    assert.strictEqual(normalizeService("random inquiry about pricing"), "Other / Not sure");
+    console.log("✓ Test 12: Canonical service taxonomy mapping and ambiguous safeguard");
+    passed++;
+  }
+
+  // 13. generateIdempotencyKey generates unique keys
+  {
+    const k1 = generateIdempotencyKey();
+    const k2 = generateIdempotencyKey();
+    assert.ok(k1.startsWith("idemp_"));
+    assert.ok(k2.startsWith("idemp_"));
+    assert.notStrictEqual(k1, k2);
+    console.log("✓ Test 13: Unique idempotency key generation");
+    passed++;
+  }
+
+  // 14. getAttributionData preserves form placement and non-PII fields
+  {
+    const attr = getAttributionData("homepage_hero");
+    assert.strictEqual(attr.formPlacement, "homepage_hero");
+    assert.strictEqual(typeof attr, "object");
+    console.log("✓ Test 14: Attribution structure extraction");
     passed++;
   }
 

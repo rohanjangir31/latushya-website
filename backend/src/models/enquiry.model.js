@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 
-// ── Constants (exported for use in routes validation) ────────
+// ── Canonical Service Taxonomy ──────────────────────────────
+const SERVICES_REQUESTED = [
+  'Custom Wardrobes',
+  'Modular Kitchen',
+  'Turnkey Interiors',
+  'Other / Not sure',
+];
+
+const WARDROBE_SUBTYPES = [
+  'Sliding',
+  'Hinged',
+  'Walk-In',
+  'Other / Not sure',
+];
+
+// Preserved for backward compatibility with legacy records
 const WARDROBE_TYPES = [
   'Modular Wardrobe',
   'Sliding Wardrobe',
@@ -13,7 +28,16 @@ const WARDROBE_TYPES = [
 
 const ENQUIRY_STATUSES = ['new', 'contacted', 'in_progress', 'closed'];
 
-const ENQUIRY_SOURCES = ['contact_form', 'whatsapp', 'phone', 'other'];
+const ENQUIRY_SOURCES = [
+  'contact_form',
+  'website_quote_form',
+  'landing_page_form',
+  'website_contact_section',
+  'google_ads_lead_form',
+  'whatsapp',
+  'phone',
+  'other',
+];
 
 // ── Schema ───────────────────────────────────────────────────
 const enquirySchema = new mongoose.Schema(
@@ -28,9 +52,9 @@ const enquirySchema = new mongoose.Schema(
     },
 
     phone: {
-      type:     String,
-      required: [true, 'Phone number is required'],
-      trim:     true,
+      type:      String,
+      required:  [true, 'Phone number is required'],
+      trim:      true,
       maxlength: [20, 'Phone number must not exceed 20 characters'],
     },
 
@@ -42,6 +66,25 @@ const enquirySchema = new mongoose.Schema(
       maxlength: [254, 'Email address is too long'],
     },
 
+    serviceRequested: {
+      type: String,
+      enum: {
+        values:  SERVICES_REQUESTED,
+        message: '"{VALUE}" is not a recognized service',
+      },
+      default: 'Other / Not sure',
+    },
+
+    wardrobeSubtype: {
+      type: String,
+      enum: {
+        values:  WARDROBE_SUBTYPES,
+        message: '"{VALUE}" is not a recognized wardrobe subtype',
+      },
+      default: null,
+    },
+
+    // Legacy field preserved for existing records
     wardrobeType: {
       type:    String,
       enum:    {
@@ -51,11 +94,52 @@ const enquirySchema = new mongoose.Schema(
       default: null,
     },
 
+    locality: {
+      type:      String,
+      trim:      true,
+      maxlength: [100, 'Locality must not exceed 100 characters'],
+      default:   null,
+    },
+
     message: {
       type:      String,
       trim:      true,
       maxlength: [1000, 'Message must not exceed 1000 characters'],
       default:   null,
+    },
+
+    // ── Idempotency & Attribution ───────────────────────────
+    idempotencyKey: {
+      type:      String,
+      trim:      true,
+      required:  [true, 'idempotencyKey is required'],
+      minlength: [8,   'idempotencyKey must be at least 8 characters'],
+      maxlength: [128, 'idempotencyKey must not exceed 128 characters'],
+    },
+
+    eventId: {
+      type:      String,
+      trim:      true,
+      maxlength: [128, 'eventId must not exceed 128 characters'],
+      default:   null,
+    },
+
+    consent: {
+      type:    Boolean,
+      default: true,
+    },
+
+    attribution: {
+      utmSource:     { type: String, trim: true, maxlength: 100, default: null },
+      utmMedium:     { type: String, trim: true, maxlength: 100, default: null },
+      utmCampaign:   { type: String, trim: true, maxlength: 100, default: null },
+      utmTerm:       { type: String, trim: true, maxlength: 100, default: null },
+      utmContent:    { type: String, trim: true, maxlength: 100, default: null },
+      gclid:         { type: String, trim: true, maxlength: 120, default: null },
+      fbclid:        { type: String, trim: true, maxlength: 120, default: null },
+      landingPage:   { type: String, trim: true, maxlength: 500, default: null },
+      referrer:      { type: String, trim: true, maxlength: 500, default: null },
+      formPlacement: { type: String, trim: true, maxlength: 100, default: null },
     },
 
     // ── Admin-managed fields ────────────────────────────────
@@ -77,7 +161,7 @@ const enquirySchema = new mongoose.Schema(
 
     source: {
       type:    String,
-      enum:    ENQUIRY_SOURCES,
+      trim:    true,
       default: 'contact_form',
     },
   },
@@ -104,12 +188,26 @@ enquirySchema.index({ createdAt: -1 });
 // Filter by status in admin panel
 enquirySchema.index({ status: 1, createdAt: -1 });
 
+// Unique index on idempotencyKey with partialFilterExpression guaranteeing only non-null strings are indexed
+enquirySchema.index(
+  { idempotencyKey: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { idempotencyKey: { $type: 'string' } },
+  }
+);
+
+// Index phone and created date for quick duplicate check
+enquirySchema.index({ phone: 1, createdAt: -1 });
+
 // ── Model ────────────────────────────────────────────────────
 const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 module.exports = Enquiry;
 
 // Named exports so routes can import validation constants
-// without importing the full model (avoids circular deps)
-module.exports.WARDROBE_TYPES    = WARDROBE_TYPES;
-module.exports.ENQUIRY_STATUSES  = ENQUIRY_STATUSES;
+module.exports.SERVICES_REQUESTED = SERVICES_REQUESTED;
+module.exports.WARDROBE_SUBTYPES  = WARDROBE_SUBTYPES;
+module.exports.WARDROBE_TYPES     = WARDROBE_TYPES;
+module.exports.ENQUIRY_STATUSES   = ENQUIRY_STATUSES;
+module.exports.ENQUIRY_SOURCES    = ENQUIRY_SOURCES;

@@ -1,20 +1,18 @@
+const crypto = require('crypto');
 const { validationResult } = require('express-validator');
 
-const Enquiry            = require('../models/enquiry.model');
-const { ENQUIRY_STATUSES } = require('../models/enquiry.model');
-const ApiError           = require('../utils/ApiError');
-const ApiResponse        = require('../utils/ApiResponse');
-const asyncHandler       = require('../utils/asyncHandler');
+const Enquiry      = require('../models/enquiry.model');
+const ApiError     = require('../utils/ApiError');
+const ApiResponse  = require('../utils/ApiResponse');
+const asyncHandler = require('../utils/asyncHandler');
 
 // ─────────────────────────────────────────────────────────────
 // POST /api/v1/enquiries
 // Public — no authentication required.
 //
-// Accepts a contact/consultation enquiry from the website form,
-// validates it, and persists it to the database.
-//
-// Returns a 201 with a minimal confirmation payload (not the full
-// document — avoids exposing internal fields to the public).
+// Accepts an omnichannel lead consultation enquiry from the website forms,
+// validates canonical service taxonomy and non-PII attribution, ensures
+// durable idempotency against duplicates, and persists to MongoDB.
 // ─────────────────────────────────────────────────────────────
 const createEnquiry = asyncHandler(async (req, res) => {
   // express-validator results
@@ -23,83 +21,114 @@ const createEnquiry = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'Validation failed', errors.array({ onlyFirstError: true }));
   }
 
-  const { name, phone, email, wardrobeType, message } = req.body;
-
-  const enquiry = await Enquiry.create({
+  const {
     name,
     phone,
-    email:        email        || null,
-    wardrobeType: wardrobeType || null,
-    message:      message      || null,
-    source:       'contact_form',
-  });
+    email,
+    serviceRequested,
+    wardrobeSubtype,
+    wardrobeType,
+    locality,
+    message,
+    source,
+    idempotencyKey,
+    attribution,
+    consent,
+  } = req.body;
 
-  // Return only the fields relevant to the visitor.
-  // Internal fields (status, adminNotes, source) are never sent back.
-  // enquiry.id is the Mongoose string getter — consistent with the toJSON transform.
-  res.status(201).json(
-    new ApiResponse(201, 'Thank you — we will be in touch shortly.', {
-      id:           enquiry.id,
-      name:         enquiry.name,
-      wardrobeType: enquiry.wardrobeType,
-      createdAt:    enquiry.createdAt,
-    })
-  );
-});
-
-// ─────────────────────────────────────────────────────────────
-// GET /api/v1/enquiries
-// Returns all enquiries, newest first.
-//
-// Query parameters:
-//   ?status=new              — filter by status
-//   ?page=1&limit=20         — pagination (default: page 1, 20 per page)
-//
-// NOTE: This endpoint is temporarily open during Phase 2 to allow
-// API testing. It will be protected by admin auth in Phase 3.
-// ─────────────────────────────────────────────────────────────
-const getEnquiries = asyncHandler(async (req, res) => {
-  const page  = Math.max(1, parseInt(req.query.page, 10)  || 1);
-  const limit = Math.min(100, parseInt(req.query.limit, 10) || 20);
-  const skip  = (page - 1) * limit;
-
-  // Validate optional status filter
-  const filter = {};
-  if (req.query.status) {
-    if (!ENQUIRY_STATUSES.includes(req.query.status)) {
-      throw new ApiError(
-        400,
-        `Invalid status "${req.query.status}". Must be one of: ${ENQUIRY_STATUSES.join(', ')}`
+  // ── Durable Idempotency Check ──────────────────────────────
+  if (idempotencyKey) {
+    const existing = await Enquiry.findOne({ idempotencyKey });
+    if (existing) {
+      return res.status(200).json(
+        new ApiResponse(200, 'Thank you — your inquiry has already been received.', {
+          id:               existing.id,
+          name:             existing.name,
+          serviceRequested: existing.serviceRequested,
+          wardrobeSubtype:  existing.wardrobeSubtype,
+          eventId:          existing.eventId,
+          createdAt:        existing.createdAt,
+          idempotentReplay: true,
+        })
       );
     }
-    filter.status = req.query.status;
   }
 
-  // Run count and fetch in parallel for efficiency.
-  // select('-__v') removes the internal Mongoose version key from every document.
-  const [enquiries, total] = await Promise.all([
-    Enquiry
-      .find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .select('-__v')
-      .lean(),
-    Enquiry.countDocuments(filter),
-  ]);
+  // ── Canonical Service Taxonomy Resolution ───────────────────
+  // Canonical values: 'Custom Wardrobes', 'Modular Kitchen', 'Turnkey Interiors', 'Other / Not sure'
+  // Never default an ambiguous lead to wardrobes.
+  const canonicalService = serviceRequested || 'Other / Not sure';
 
-  res.status(200).json(
-    new ApiResponse(200, 'Enquiries fetched successfully', {
-      enquiries,
-      pagination: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-        hasNextPage: page < Math.ceil(total / limit),
+  // Subtype is collected exclusively for Custom Wardrobes
+  let canonicalSubtype = null;
+  if (canonicalService === 'Custom Wardrobes') {
+    canonicalSubtype = wardrobeSubtype || null;
+  }
+
+  // ── Server-Generated Event ID ───────────────────────────────
+  // Used for deduplicated downstream conversion tracking (GA4 / Google Form Lead / future Meta CAPI)
+  const eventId = `evt_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
+
+  // ── Persistence ─────────────────────────────────────────────
+  try {
+    const enquiry = await Enquiry.create({
+      name,
+      phone,
+      email:            email            || null,
+      serviceRequested: canonicalService,
+      wardrobeSubtype:  canonicalSubtype,
+      wardrobeType:     wardrobeType     || null,
+      locality:         locality         || null,
+      message:          message          || null,
+      source:           source           || 'contact_form',
+      idempotencyKey:   idempotencyKey   || null,
+      eventId,
+      consent:          consent !== false,
+      attribution: {
+        utmSource:     attribution?.utmSource     || null,
+        utmMedium:     attribution?.utmMedium     || null,
+        utmCampaign:   attribution?.utmCampaign   || null,
+        utmTerm:       attribution?.utmTerm       || null,
+        utmContent:    attribution?.utmContent    || null,
+        gclid:         attribution?.gclid         || null,
+        fbclid:        attribution?.fbclid        || null,
+        landingPage:   attribution?.landingPage   || null,
+        referrer:      attribution?.referrer      || null,
+        formPlacement: attribution?.formPlacement || null,
       },
-    })
-  );
+    });
+
+    // Return only safe confirmation fields — never expose internal/admin fields
+    res.status(201).json(
+      new ApiResponse(201, 'Thank you — we will be in touch shortly.', {
+        id:               enquiry.id,
+        name:             enquiry.name,
+        serviceRequested: enquiry.serviceRequested,
+        wardrobeSubtype:  enquiry.wardrobeSubtype,
+        eventId:          enquiry.eventId,
+        createdAt:        enquiry.createdAt,
+      })
+    );
+  } catch (err) {
+    // Handle concurrent submission with duplicate idempotencyKey (E11000)
+    if (err.code === 11000 && idempotencyKey) {
+      const existing = await Enquiry.findOne({ idempotencyKey });
+      if (existing) {
+        return res.status(200).json(
+          new ApiResponse(200, 'Thank you — your inquiry has already been received.', {
+            id:               existing.id,
+            name:             existing.name,
+            serviceRequested: existing.serviceRequested,
+            wardrobeSubtype:  existing.wardrobeSubtype,
+            eventId:          existing.eventId,
+            createdAt:        existing.createdAt,
+            idempotentReplay: true,
+          })
+        );
+      }
+    }
+    throw err;
+  }
 });
 
-module.exports = { createEnquiry, getEnquiries };
+module.exports = { createEnquiry };

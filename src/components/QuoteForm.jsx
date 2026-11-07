@@ -1,13 +1,14 @@
 import { trackFormLead } from '../utils/analytics';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { submitLeadConsultation } from '../utils/formSubmit';
+import { submitLeadConsultation, generateIdempotencyKey } from '../utils/formSubmit';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const isSubmittingRef = useRef(false);
+  const idempotencyKeyRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +18,12 @@ export default function QuoteForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => {
+      if (prev[name] !== value) {
+        idempotencyKeyRef.current = null;
+      }
+      return { ...prev, [name]: value };
+    });
     if (error) setError('');
   };
 
@@ -28,14 +34,19 @@ export default function QuoteForm() {
     setIsSubmitting(true);
     setError('');
 
-    // Seamlessly infer goal/service from user requirements if specified,
-    // otherwise default to Custom Wardrobes (matching homepage hero service).
-    let inferredService = 'Custom Wardrobes';
+    // Canonical service inference: never default ambiguous leads to wardrobes.
+    let inferredService = 'Other / Not sure';
     const msg = (formData.message || '').toLowerCase();
-    if (msg.includes('kitchen')) {
+    if (msg.includes('wardrobe') || msg.includes('closet') || msg.includes('cupboard') || msg.includes('sliding')) {
+      inferredService = 'Custom Wardrobes';
+    } else if (msg.includes('kitchen')) {
       inferredService = 'Modular Kitchen';
     } else if (msg.includes('interiors') || msg.includes('turnkey') || msg.includes('full home') || msg.includes('3bhk') || msg.includes('2bhk') || msg.includes('villa')) {
       inferredService = 'Turnkey Interiors';
+    }
+
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = generateIdempotencyKey();
     }
 
     const res = await submitLeadConsultation({
@@ -45,15 +56,17 @@ export default function QuoteForm() {
         mobile: formData.mobile,
         service: inferredService,
         message: formData.message,
+        idempotencyKey: idempotencyKeyRef.current,
         source: 'Homepage QuoteForm'
       },
       isSubmittingRef,
-      trackLeadFn: () => trackFormLead("hero_quote_form")
+      trackLeadFn: (source, meta) => trackFormLead("hero_quote_form", meta)
     });
 
     setIsSubmitting(false);
 
     if (res.success) {
+      idempotencyKeyRef.current = null;
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);

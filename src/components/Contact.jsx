@@ -1,5 +1,5 @@
 import { trackFormLead } from '../utils/analytics';
-import { submitLeadConsultation } from '../utils/formSubmit';
+import { submitLeadConsultation, generateIdempotencyKey } from '../utils/formSubmit';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { COMPANY } from '../data/content';
@@ -15,6 +15,7 @@ const fadeUp = (delay = 0) => ({
 export default function Contact() {
   const sectionRef = useRef(null);
   const isSubmittingRef = useRef(false);
+  const idempotencyKeyRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -22,7 +23,13 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', phone: '', project: '' });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => {
+      if (prev[name] !== value) {
+        idempotencyKeyRef.current = null;
+      }
+      return { ...prev, [name]: value };
+    });
     if (error) setError('');
   };
 
@@ -33,7 +40,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setError('');
 
-    let inferredService = 'General Inquiries';
+    let inferredService = 'Other / Not sure';
     const projLower = (formData.project || '').toLowerCase();
     if (projLower.includes('wardrobe')) {
       inferredService = 'Custom Wardrobes';
@@ -43,36 +50,34 @@ export default function Contact() {
       inferredService = 'Turnkey Interiors';
     }
 
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = generateIdempotencyKey();
+    }
+
     const res = await submitLeadConsultation({
       form: {
         name: formData.name,
         phone: formData.phone,
         service: inferredService,
         message: formData.project,
+        idempotencyKey: idempotencyKeyRef.current,
         source: 'Website Contact Section'
       },
       isSubmittingRef,
-      trackLeadFn: () => trackFormLead('contact_page_form')
+      trackLeadFn: (source, meta) => trackFormLead('contact_page_form', meta)
     });
 
     setIsSubmitting(false);
 
     if (res.success) {
+      idempotencyKeyRef.current = null;
       setIsSubmitted(true);
-      if (COMPANY.whatsapp) {
-        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
-        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
-      }
+      setFormData({ name: '', phone: '', project: '' });
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: '', phone: '', project: '' });
-      }, 5000);
+      }, 8000);
     } else {
-      setError(res.error || "Unable to send request right now. Opening WhatsApp directly...");
-      if (COMPANY.whatsapp) {
-        const text = `Hello Latushya! My name is ${formData.name}. I'm interested in a consultation for: ${formData.project}`;
-        window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
-      }
+      setError(res.error || "Unable to send request right now. Please try again or reach out on WhatsApp.");
     }
   };
 
@@ -185,10 +190,34 @@ export default function Contact() {
           <div className="flex justify-center">
             <div className="flex flex-col items-center gap-3">
               {error && (
-                <p className="text-sm text-red-400 font-light">{error}</p>
+                <div className="flex flex-col items-center gap-2 mb-2">
+                  <p className="text-sm text-red-400 font-light">{error}</p>
+                  {COMPANY.whatsapp && (
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent("Hello Latushya! I would like to schedule a private interior design consultation.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-white/70 hover:text-white underline tracking-wider transition-colors inline-flex items-center gap-1.5"
+                    >
+                      Connect on WhatsApp instead →
+                    </a>
+                  )}
+                </div>
               )}
               {isSubmitted && (
-                <p className="text-sm text-[#DF4C73] font-medium tracking-wide">Thank you! Your inquiry has been recorded.</p>
+                <div className="flex flex-col items-center gap-2 mb-2">
+                  <p className="text-sm text-[#DF4C73] font-medium tracking-wide">Thank you! Your inquiry has been recorded.</p>
+                  {COMPANY.whatsapp && (
+                    <a
+                      href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent("Hello Latushya! I would like to schedule a private interior design consultation.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-white/70 hover:text-white underline tracking-wider transition-colors inline-flex items-center gap-1.5"
+                    >
+                      Chat directly on WhatsApp (optional) →
+                    </a>
+                  )}
+                </div>
               )}
               <button 
                 type="submit"

@@ -1,17 +1,92 @@
 /**
- * Shared form submission and contract validation for Latushya website.
+ * Shared form submission, canonical taxonomy normalization, attribution capture,
+ * and contract validation for Latushya omnichannel lead pipeline.
  *
- * PROVIDER CONTRACT ASSUMPTION:
- * The FormSubmit AJAX endpoint (https://formsubmit.co/ajax/info@latushya.com) is
- * assumed to return a JSON payload with { success: true } or { success: "true" } on successful
- * message dispatch, and { success: false, message: "..." } on failure.
- *
- * NOTE: FormSubmit's public AJAX documentation demonstrates sending "Accept: application/json"
- * and parsing response JSON, but does not formally document the response schema (unlike its separate
- * submissions API). Until vendor written confirmation or controlled non-production testing with
- * an owner-approved test endpoint is completed, this remains an explicit fail-closed contract assumption.
- * We enforce fail-closed handling to prevent silent dropped leads.
+ * CANONICAL SERVICE TAXONOMY:
+ * 1. 'Custom Wardrobes'
+ * 2. 'Modular Kitchen'
+ * 3. 'Turnkey Interiors'
+ * 4. 'Other / Not sure'
+ * (Never defaults ambiguous leads to Custom Wardrobes).
  */
+
+export const CANONICAL_SERVICES = [
+  'Custom Wardrobes',
+  'Modular Kitchen',
+  'Turnkey Interiors',
+  'Other / Not sure',
+];
+
+/**
+ * Maps arbitrary UI or free-text inputs into the canonical 4-value service taxonomy.
+ * Guarantees that unclassified or ambiguous leads resolve strictly to 'Other / Not sure'.
+ * @param {string} [rawService]
+ * @returns {string} One of CANONICAL_SERVICES
+ */
+export function normalizeService(rawService) {
+  if (!rawService) return 'Other / Not sure';
+  const s = String(rawService).trim();
+  if (s === 'Custom Wardrobes') return 'Custom Wardrobes';
+  if (s === 'Modular Kitchen') return 'Modular Kitchen';
+  if (s === 'Turnkey Interiors' || s === 'Full Home Interiors' || s === 'Turnkey') return 'Turnkey Interiors';
+  if (s === 'Other / Not sure') return 'Other / Not sure';
+
+  const lower = s.toLowerCase();
+  if (lower.includes('wardrobe') || lower.includes('closet') || lower.includes('cupboard') || lower.includes('sliding')) {
+    return 'Custom Wardrobes';
+  }
+  if (lower.includes('kitchen')) {
+    return 'Modular Kitchen';
+  }
+  if (lower.includes('interiors') || lower.includes('turnkey') || lower.includes('home') || lower.includes('3bhk') || lower.includes('2bhk') || lower.includes('villa')) {
+    return 'Turnkey Interiors';
+  }
+  return 'Other / Not sure';
+}
+
+/**
+ * Extracts non-PII attribution data from URL parameters and document context.
+ * Strictly preserves marketing attribution without capturing customer PII.
+ * @param {string} [formPlacement]
+ * @returns {object} Attribution payload
+ */
+export function getAttributionData(formPlacement = 'website_form') {
+  const attribution = {
+    formPlacement,
+    landingPage: typeof window !== 'undefined' && window.location ? window.location.pathname : null,
+    referrer: typeof document !== 'undefined' && document.referrer ? document.referrer.substring(0, 500) : null,
+    utmSource: null,
+    utmMedium: null,
+    utmCampaign: null,
+    utmTerm: null,
+    utmContent: null,
+    gclid: null,
+    fbclid: null,
+  };
+
+  if (typeof window !== 'undefined' && window.location && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    attribution.utmSource   = params.get('utm_source');
+    attribution.utmMedium   = params.get('utm_medium');
+    attribution.utmCampaign = params.get('utm_campaign');
+    attribution.utmTerm     = params.get('utm_term');
+    attribution.utmContent  = params.get('utm_content');
+    attribution.gclid       = params.get('gclid');
+    attribution.fbclid      = params.get('fbclid');
+  }
+
+  return attribution;
+}
+
+/**
+ * Generates a unique client-side idempotency key to prevent duplicate lead insertion.
+ * @returns {string}
+ */
+export function generateIdempotencyKey() {
+  const ts = Date.now();
+  const rand = Math.random().toString(36).substring(2, 10);
+  return `idemp_${ts}_${rand}`;
+}
 
 /**
  * Validates a FormSubmit HTTP response and parses its JSON body against the expected contract.
@@ -42,19 +117,26 @@ export async function validateFormSubmitResponse(response, preParsedJson) {
   return result;
 }
 
-// Live Google Sheets Webhook Endpoint for Latushya Lead Automation Engine
-const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxMvmDzqdzbES3P-yVbAncAkM0rcahGc-aAJAc7qK6TM6BfcLit_zPbwe69YWYLIGW4/exec';
-
 /**
- * Production helper for lead consultation forms (LandingPage LeadForm & Homepage QuoteForm).
- * Handles validation, in-flight ref guard, dispatch, response contract verification, and attribution.
+ * Production helper for lead consultation forms (LandingPage LeadForm, Homepage QuoteForm, Contact).
+ * 
+ * Strict Lead-Persistence Contract:
+ * - The Express/MongoDB backend API (POST /api/v1/enquiries) is the SOLE authoritative lead write and success condition.
+ * - If apiUrl is unset/unconfigured, unreachable (network error), returns non-2xx HTTP status, malformed JSON,
+ *   rejected status (success !== true), or missing eventId, this helper immediately fails closed without showing
+ *   success or firing primary conversion events (Google Ads Form Leads / GA4 generate_lead).
+ * - Browser-side parallel PII dispatch to unauthenticated public webhooks and third-party email aggregators
+ *   has been completely removed from the authoritative path.
+ * - Idempotent retries/replays return the existing record and pass the exact same server-generated eventId
+ *   to analytics for platform-supported deterministic conversion deduplication.
  */
 export async function submitLeadConsultation({
   form,
   isSubmittingRef,
   fetchFn = fetch,
   trackLeadFn,
-  webhookUrl = (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_LEADS_WEBHOOK_URL) || DEFAULT_WEBHOOK_URL,
+  apiUrl,
+  isDev = typeof import.meta.env !== 'undefined' && Boolean(import.meta.env.DEV),
 }) {
   if (isSubmittingRef && isSubmittingRef.current) {
     return { success: false, reason: 'BLOCKED' };
@@ -74,76 +156,142 @@ export async function submitLeadConsultation({
     };
   }
 
+  let effectiveApiUrl = apiUrl !== undefined && apiUrl !== null ? String(apiUrl).trim() : '';
+  if (!effectiveApiUrl && typeof import.meta.env !== 'undefined' && import.meta.env.VITE_API_URL) {
+    effectiveApiUrl = String(import.meta.env.VITE_API_URL).trim();
+  }
+
+  if (!effectiveApiUrl) {
+    if (isDev) {
+      // In development mode, Vite proxy forwards relative /api/* to http://localhost:5000 (see vite.config.js)
+      effectiveApiUrl = '';
+    } else {
+      return {
+        success: false,
+        reason: 'BACKEND_NOT_CONFIGURED',
+        error: 'Backend API URL is not configured. Submission cannot be verified.',
+      };
+    }
+  }
+
   if (isSubmittingRef) isSubmittingRef.current = true;
 
-  const payload = {
+  const canonicalService = normalizeService(form?.service);
+  const idempotencyKey = form?.idempotencyKey || generateIdempotencyKey();
+  const attribution = form?.attribution || getAttributionData(form?.source || 'website_form');
+  const wardrobeSubtype = canonicalService === 'Custom Wardrobes' ? (form?.wardrobeSubtype || null) : null;
+  const locality = form?.location ? String(form.location).trim() : (form?.locality ? String(form.locality).trim() : null);
+  const message = form?.message ? String(form.message).trim() : null;
+
+  const backendPayload = {
     name: trimmedName,
     phone: trimmedPhone,
-    email: form?.email ? String(form.email).trim() : 'Not provided',
-    service: form?.service || 'Custom Wardrobes',
-    location: form?.location ? String(form.location).trim() : 'Not provided',
-    message: form?.message ? String(form.message).trim() : 'Not provided',
-    _subject: 'New Consultation Request - ' + (form?.service || 'General Inquiries'),
+    email: form?.email && String(form.email).trim() ? String(form.email).trim() : null,
+    serviceRequested: canonicalService,
+    wardrobeSubtype,
+    locality: locality || null,
+    message: message || null,
+    source: form?.source || 'website_form',
+    idempotencyKey,
+    attribution,
+    consent: true,
   };
 
   try {
-    // If a Google Sheets Web App or external lead webhook is configured, dispatch asynchronously
-    if (webhookUrl) {
-      try {
-        await fetchFn(webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-          mode: 'no-cors',
-        });
-      } catch (webhookErr) {
-        console.warn('Webhook dispatch warning:', webhookErr);
-      }
+    const endpoint = effectiveApiUrl
+      ? `${effectiveApiUrl.replace(/\/+$/, '')}/api/v1/enquiries`
+      : '/api/v1/enquiries';
+    let apiRes;
+    try {
+      apiRes = await fetchFn(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(backendPayload),
+      });
+    } catch (networkErr) {
+      return {
+        success: false,
+        reason: 'BACKEND_NETWORK_ERROR',
+        error: networkErr?.message || 'Network error reaching backend server',
+      };
     }
 
-    const response = await fetchFn('https://formsubmit.co/ajax/info@latushya.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    if (!apiRes || !apiRes.ok) {
+      const status = apiRes && apiRes.status ? apiRes.status : 'UNKNOWN';
+      return {
+        success: false,
+        reason: 'BACKEND_HTTP_ERROR',
+        error: `Backend returned HTTP ${status}`,
+      };
+    }
 
-    await validateFormSubmitResponse(response);
+    let apiJson;
+    try {
+      apiJson = await apiRes.json();
+    } catch {
+      return {
+        success: false,
+        reason: 'BACKEND_MALFORMED_JSON',
+        error: 'Backend returned invalid JSON',
+      };
+    }
 
+    if (!apiJson || typeof apiJson !== 'object' || Array.isArray(apiJson) || apiJson.success !== true) {
+      return {
+        success: false,
+        reason: 'BACKEND_REJECTED',
+        error: apiJson?.message || 'Backend rejected lead enquiry',
+      };
+    }
+
+    const eventId = apiJson.data?.eventId;
+    if (!eventId || typeof eventId !== 'string') {
+      return {
+        success: false,
+        reason: 'BACKEND_MISSING_EVENT_ID',
+        error: 'Backend persistence succeeded but eventId is missing',
+      };
+    }
+
+    // Post-Commit Primary Conversion Tracking (Deduplicated via server-generated eventId)
+    // Dispatches on every confirmed backend persistence response (initial 201 or idempotent retry 200).
+    // Application-level deduplication in trackFormLead ensures at-most-once delivery for GA4,
+    // while Google Ads natively deduplicates matching transaction_id if a prior send occurred.
     if (typeof trackLeadFn === 'function') {
       try {
-        trackLeadFn('lp_quote_form');
-      } catch (err) {
-        console.warn('Tracking dispatch error:', err);
+        trackLeadFn(form?.source || 'website_form', {
+          eventId,
+          service: canonicalService,
+        });
+      } catch (trackErr) {
+        console.warn('[Analytics] Conversion tracking dispatch error:', trackErr);
       }
     }
 
     const returnData = {
       name: trimmedName,
       phone: trimmedPhone,
-      service: form?.service || 'Custom Wardrobes',
-      location: form?.location ? String(form.location).trim() : 'Not provided',
+      service: canonicalService,
+      location: locality || 'Not provided',
     };
-    if (form?.email && String(form.email).trim()) {
-      returnData.email = String(form.email).trim();
-    }
-    if (form?.message && String(form.message).trim()) {
-      returnData.message = String(form.message).trim();
-    }
+    if (backendPayload.email) returnData.email = backendPayload.email;
+    if (backendPayload.message) returnData.message = backendPayload.message;
 
     return {
       success: true,
       data: returnData,
+      idempotencyKey,
+      eventId,
+      serviceRequested: canonicalService,
+      wardrobeSubtype,
+      backendPersisted: true,
+      idempotentReplay: Boolean(apiJson.data?.idempotentReplay),
     };
   } catch (err) {
     return {
       success: false,
       reason: 'SUBMISSION_ERROR',
-      error: err?.message || 'Submission error',
+      error: err?.message || 'Unexpected submission error',
     };
   } finally {
     if (isSubmittingRef) isSubmittingRef.current = false;
