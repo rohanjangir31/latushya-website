@@ -59,10 +59,10 @@ const createEnquiryRules = [
     .withMessage('Message must not exceed 1000 characters'),
 
   body('idempotencyKey')
-    .optional({ nullable: true, checkFalsy: true })
     .trim()
-    .isLength({ max: 128 })
-    .withMessage('idempotencyKey must not exceed 128 characters'),
+    .notEmpty().withMessage('idempotencyKey is required')
+    .isLength({ min: 8, max: 128 })
+    .withMessage('idempotencyKey must be between 8 and 128 characters'),
 
   body('consent')
     .optional()

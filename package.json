@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "lint:backend": "eslint backend/src backend/tests",
+    "lint:pr": "eslint src/utils/formSubmit.js src/utils/analytics.js src/components/QuoteForm.jsx src/components/Contact.jsx src/pages/LandingPage.jsx backend/src backend/tests",
     "preview": "vite preview",
     "test": "node tests/lp-form-contract.test.mjs && node tests/formSubmit.test.mjs",
     "test:all": "npm run test && cd backend && npm test"

@@ -109,7 +109,8 @@ test('Security & Lead Pipeline Integration Suite', async (t) => {
         body: JSON.stringify({
           name: 'Rohan Test',
           phone: '+91 98765 43210',
-          serviceRequested: 'Arbitrary Unvalidated Service'
+          serviceRequested: 'Arbitrary Unvalidated Service',
+          idempotencyKey: 'test-idemp-enum-check'
         })
       });
       assert.strictEqual(res.status, 400, 'Must reject arbitrary service values');
@@ -233,6 +234,140 @@ test('Security & Lead Pipeline Integration Suite', async (t) => {
       assert.strictEqual(body2.data.idempotentReplay, true, 'Response must identify idempotent replay');
       assert.strictEqual(body2.data.eventId, 'evt_existing_123');
       assert.strictEqual(createCallCount, 1, 'Enquiry.create must NOT be called on replay');
+    } finally {
+      Enquiry.create = originalCreate;
+      Enquiry.findOne = originalFindOne;
+    }
+  });
+
+  await t.test('POST / rejects missing idempotencyKey with HTTP 400 and does NOT trigger DB write', async () => {
+    let dbCreateCalled = false;
+    const originalCreate = Enquiry.create;
+    Enquiry.create = async () => { dbCreateCalled = true; };
+
+    try {
+      const res = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Ananya Rao',
+          phone: '+91 98765 43210',
+          serviceRequested: 'Modular Kitchen',
+        })
+      });
+      assert.strictEqual(res.status, 400, 'Must return HTTP 400 when idempotencyKey is omitted');
+      const body = await res.json();
+      assert.strictEqual(body.success, false);
+      assert.ok(body.errors.some(e => e.path === 'idempotencyKey' || e.msg.includes('idempotencyKey')));
+      assert.strictEqual(dbCreateCalled, false, 'Must not call Enquiry.create when idempotencyKey is missing');
+    } finally {
+      Enquiry.create = originalCreate;
+    }
+  });
+
+  await t.test('POST / rejects empty or whitespace-only idempotencyKey with HTTP 400 and does NOT trigger DB write', async () => {
+    let dbCreateCalled = false;
+    const originalCreate = Enquiry.create;
+    Enquiry.create = async () => { dbCreateCalled = true; };
+
+    try {
+      // Empty string
+      const res1 = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Ananya Rao',
+          phone: '+91 98765 43210',
+          serviceRequested: 'Modular Kitchen',
+          idempotencyKey: '',
+        })
+      });
+      assert.strictEqual(res1.status, 400);
+      assert.strictEqual(dbCreateCalled, false);
+
+      // Whitespace string
+      const res2 = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Ananya Rao',
+          phone: '+91 98765 43210',
+          serviceRequested: 'Modular Kitchen',
+          idempotencyKey: '   ',
+        })
+      });
+      assert.strictEqual(res2.status, 400);
+      assert.strictEqual(dbCreateCalled, false);
+    } finally {
+      Enquiry.create = originalCreate;
+    }
+  });
+
+  await t.test('POST / multiple submissions without idempotencyKey fail closed without DB collisions', async () => {
+    let dbCreateCount = 0;
+    const originalCreate = Enquiry.create;
+    Enquiry.create = async () => { dbCreateCount++; };
+
+    try {
+      const p1 = fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'User 1', phone: '+91 98765 00001' })
+      });
+      const p2 = fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'User 2', phone: '+91 98765 00002' })
+      });
+      const [r1, r2] = await Promise.all([p1, p2]);
+      assert.strictEqual(r1.status, 400);
+      assert.strictEqual(r2.status, 400);
+      assert.strictEqual(dbCreateCount, 0, 'Zero DB creates triggered; no null-key collisions possible');
+    } finally {
+      Enquiry.create = originalCreate;
+    }
+  });
+
+  await t.test('POST / concurrent duplicate submission caught by DB unique index (E11000) recovers gracefully with HTTP 200 idempotentReplay', async () => {
+    const originalCreate = Enquiry.create;
+    const originalFindOne = Enquiry.findOne;
+
+    const existingRecord = {
+      id: '67264a7e9ef4d4380fd86cf9',
+      name: 'Rohan Concurrent',
+      serviceRequested: 'Turnkey Interiors',
+      wardrobeSubtype: null,
+      eventId: 'evt_concurrent_winner_456',
+      createdAt: '2026-11-02T10:00:00.000Z',
+      idempotencyKey: 'idemp-racing-key-789'
+    };
+
+    // Simulate race: findOne initially returns null, but create throws E11000 duplicate key error
+    Enquiry.findOne = async () => existingRecord;
+    Enquiry.create = async () => {
+      const mongoError = new Error('E11000 duplicate key error collection: latushya.enquiries index: idempotencyKey_1 dup key: { idempotencyKey: "idemp-racing-key-789" }');
+      mongoError.code = 11000;
+      mongoError.keyPattern = { idempotencyKey: 1 };
+      throw mongoError;
+    };
+
+    try {
+      const res = await fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Rohan Concurrent',
+          phone: '+91 98765 11111',
+          serviceRequested: 'Turnkey Interiors',
+          idempotencyKey: 'idemp-racing-key-789'
+        })
+      });
+
+      assert.strictEqual(res.status, 200, 'Must catch E11000 and return HTTP 200 idempotentReplay');
+      const body = await res.json();
+      assert.strictEqual(body.success, true);
+      assert.strictEqual(body.data.idempotentReplay, true);
+      assert.strictEqual(body.data.eventId, 'evt_concurrent_winner_456');
     } finally {
       Enquiry.create = originalCreate;
       Enquiry.findOne = originalFindOne;

@@ -112,8 +112,9 @@ const enquirySchema = new mongoose.Schema(
     idempotencyKey: {
       type:      String,
       trim:      true,
+      required:  [true, 'idempotencyKey is required'],
+      minlength: [8,   'idempotencyKey must be at least 8 characters'],
       maxlength: [128, 'idempotencyKey must not exceed 128 characters'],
-      default:   null,
     },
 
     eventId: {
@@ -187,8 +188,14 @@ enquirySchema.index({ createdAt: -1 });
 // Filter by status in admin panel
 enquirySchema.index({ status: 1, createdAt: -1 });
 
-// Sparse unique index on idempotencyKey to guarantee zero duplicate writes
-enquirySchema.index({ idempotencyKey: 1 }, { unique: true, sparse: true });
+// Unique index on idempotencyKey with partialFilterExpression guaranteeing only non-null strings are indexed
+enquirySchema.index(
+  { idempotencyKey: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { idempotencyKey: { $type: 'string' } },
+  }
+);
 
 // Index phone and created date for quick duplicate check
 enquirySchema.index({ phone: 1, createdAt: -1 });
