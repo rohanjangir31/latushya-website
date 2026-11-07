@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert';
 import { submitLeadConsultation, generateIdempotencyKey } from '../src/utils/formSubmit.js';
-import { trackFormLead, trackedLeadEventIds } from '../src/utils/analytics.js';
+import { trackFormLead, trackedLeadEventIds, isLeadEventTracked } from '../src/utils/analytics.js';
 
 async function runTests() {
   console.log("Running /lp LeadForm Production Backend Persistence & Idempotency Contract Tests...\n");
@@ -197,10 +197,27 @@ async function runTests() {
   // Test 9: Realistic Production Form Retry Simulation:
   // Backend commits 1st request but network drops before response reaches browser.
   // User retries -> form reuses stable idempotencyKey -> Mongo returns existing record with same eventId.
-  // Conversion tracking fires strictly ONCE across the entire retry lifecycle.
+  // At-most-once conversion tracking contract:
+  // - Attempt 1 dropped before browser confirmation: 0 conversions fired.
+  // - Attempt 2 retry succeeds with idempotentReplay: true: dispatches exactly 1 Google Ads conversion and 1 GA4 generate_lead.
   {
     const isSubmittingRef = { current: false };
-    const trackedEvents = [];
+    const mockGtagCalls = [];
+    const storageMap = new Map();
+
+    globalThis.window = {
+      location: { pathname: '/lp', search: '' },
+      gtag: (cmd, name, params) => {
+        mockGtagCalls.push({ cmd, name, params });
+      },
+      sessionStorage: {
+        getItem: (k) => storageMap.get(k) || null,
+        setItem: (k, v) => storageMap.set(k, String(v)),
+        removeItem: (k) => storageMap.delete(k),
+        clear: () => storageMap.clear(),
+      }
+    };
+    trackedLeadEventIds.clear();
 
     // Simulate form component state across retries
     let formState = {
@@ -259,7 +276,6 @@ async function runTests() {
     }
     const initialKey = formIdempotencyKey;
 
-    let attempt1DroppedNetwork = false;
     const res1 = await submitLeadConsultation({
       form: { ...formState, idempotencyKey: formIdempotencyKey },
       isSubmittingRef,
@@ -268,21 +284,20 @@ async function runTests() {
         // Backend successfully commits to Mongo
         await mockBackendHandler(JSON.parse(opts.body));
         // But response is lost due to client-side network drop
-        attempt1DroppedNetwork = true;
         throw new Error("Network timeout: client disconnected");
       },
-      trackLeadFn: (s, m) => trackedEvents.push({ s, m })
+      trackLeadFn: trackFormLead
     });
 
     // Attempt 1 failed from browser perspective
     assert.strictEqual(res1.success, false);
     assert.strictEqual(res1.reason, 'BACKEND_NETWORK_ERROR');
-    assert.strictEqual(trackedEvents.length, 0, 'Zero conversion calls on failed network response');
+    assert.strictEqual(mockGtagCalls.length, 0, 'Zero conversion calls on failed network response');
     // But record WAS committed in DB:
     assert.strictEqual(mockDb.size, 1);
     const persistedRecord = mockDb.get(initialKey);
 
-    // Form retains formIdempotencyKey after retryable failure
+    // Form retains formIdempotencyKey across retryable failure
     assert.strictEqual(formIdempotencyKey, initialKey);
 
     // --- Submission Attempt 2 (User clicks Submit again to retry) ---
@@ -294,7 +309,7 @@ async function runTests() {
       fetchFn: async (url, opts) => {
         return await mockBackendHandler(JSON.parse(opts.body));
       },
-      trackLeadFn: (s, m) => trackedEvents.push({ s, m })
+      trackLeadFn: trackFormLead
     });
 
     // Attempt 2 succeeds as idempotent replay
@@ -303,15 +318,129 @@ async function runTests() {
     assert.strictEqual(res2.eventId, persistedRecord.eventId);
     // Crucial: Only 1 durable record in Mongo!
     assert.strictEqual(mockDb.size, 1);
-    // Crucial: Conversion tracking is suppressed on replay (0 events fired because attempt 1 dropped before commit ack)
-    // If the form clears its key on confirmed success:
+
+    // Crucial: First browser-confirmed persistence dispatches exactly 1 Google Ads conversion & 1 GA4 generate_lead
+    const adsConversions = mockGtagCalls.filter(e => e.cmd === 'event' && e.name === 'conversion');
+    const ga4Leads = mockGtagCalls.filter(e => e.cmd === 'event' && e.name === 'generate_lead');
+
+    assert.strictEqual(adsConversions.length, 1, 'First successful replay must dispatch Google Ads conversion');
+    assert.strictEqual(adsConversions[0].params.transaction_id, persistedRecord.eventId);
+    assert.strictEqual(adsConversions[0].params.send_to, 'AW-663510360/2lJmCM7Co-EbENi6sbwC');
+
+    assert.strictEqual(ga4Leads.length, 1, 'First successful replay must dispatch GA4 generate_lead');
+    assert.strictEqual(ga4Leads[0].params.transaction_id, persistedRecord.eventId);
+    assert.strictEqual(ga4Leads[0].params.event_category, 'lead');
+    assert.strictEqual(ga4Leads[0].params.event_label, 'lp_consultation');
+
+    // On confirmed success, form resets its idempotencyKeyRef
     formIdempotencyKey = null;
 
-    console.log("✓ Test 9: Realistic production retry reuses stable key, deduplicates in Mongo, and suppresses duplicate events");
+    delete globalThis.window;
+    console.log("✓ Test 9: Lost first response then successful idempotent replay fires exactly one logical Google Ads conversion and one GA4 generate_lead");
     passed++;
   }
 
-  // Test 10: Payload mutation resets idempotency key for new submission
+  // Test 10: Duplicate replay after a successful first dispatch is suppressed for GA4 across reloads
+  {
+    trackedLeadEventIds.clear();
+    const mockGtagCalls = [];
+    const storageMap = new Map();
+
+    globalThis.window = {
+      location: { pathname: '/lp', search: '' },
+      gtag: (cmd, name, params) => {
+        mockGtagCalls.push({ cmd, name, params });
+      },
+      sessionStorage: {
+        getItem: (k) => storageMap.get(k) || null,
+        setItem: (k, v) => storageMap.set(k, String(v)),
+        removeItem: (k) => storageMap.delete(k),
+        clear: () => storageMap.clear(),
+      }
+    };
+
+    const testEventId = "evt_dedup_test_888";
+
+    // 1st dispatch
+    const d1 = trackFormLead("test_source", { eventId: testEventId, service: "Turnkey Interiors" });
+    assert.strictEqual(d1, true);
+
+    const ga4_1 = mockGtagCalls.filter(e => e.name === 'generate_lead');
+    const ads_1 = mockGtagCalls.filter(e => e.name === 'conversion');
+    assert.strictEqual(ga4_1.length, 1);
+    assert.strictEqual(ads_1.length, 1);
+
+    // 2nd dispatch with same eventId (client replay simulation)
+    const d2 = trackFormLead("test_source", { eventId: testEventId, service: "Turnkey Interiors" });
+    assert.strictEqual(d2, true);
+
+    // GA4 generate_lead must remain strictly 1 (suppressed by application-level at-most-once guard)
+    const ga4_2 = mockGtagCalls.filter(e => e.name === 'generate_lead');
+    assert.strictEqual(ga4_2.length, 1, 'GA4 generate_lead must be suppressed on duplicate replay');
+
+    // Google Ads conversion carries the same transaction_id for server-side deduplication
+    const ads_2 = mockGtagCalls.filter(e => e.name === 'conversion');
+    assert.strictEqual(ads_2.length, 2);
+    assert.strictEqual(ads_2[0].params.transaction_id, testEventId);
+    assert.strictEqual(ads_2[1].params.transaction_id, testEventId);
+
+    // Simulate page reload within session: in-memory Set is wiped, but sessionStorage persists
+    trackedLeadEventIds.clear();
+    assert.strictEqual(isLeadEventTracked(testEventId), true, 'sessionStorage must restore tracked state across reloads');
+
+    // 3rd dispatch after simulated reload
+    trackFormLead("test_source", { eventId: testEventId, service: "Turnkey Interiors" });
+    const ga4_3 = mockGtagCalls.filter(e => e.name === 'generate_lead');
+    assert.strictEqual(ga4_3.length, 1, 'GA4 generate_lead remains suppressed across session reloads');
+
+    delete globalThis.window;
+    console.log("✓ Test 10: Duplicate replay after successful dispatch suppresses duplicate GA4 generate_lead across session");
+    passed++;
+  }
+
+  // Test 11: gtag unavailable does not poison eventId and later retry dispatches successfully
+  {
+    trackedLeadEventIds.clear();
+    const storageMap = new Map();
+
+    // gtag runtime is NOT yet loaded/available
+    globalThis.window = {
+      location: { pathname: '/lp', search: '' },
+      sessionStorage: {
+        getItem: (k) => storageMap.get(k) || null,
+        setItem: (k, v) => storageMap.set(k, String(v)),
+        removeItem: (k) => storageMap.delete(k),
+        clear: () => storageMap.clear(),
+      }
+    };
+
+    const testEventId = "evt_gtag_loading_delay_456";
+
+    // Attempt 1: gtag is missing
+    const earlyDispatch = trackFormLead("test_source", { eventId: testEventId, service: "Custom Wardrobes" });
+    assert.strictEqual(earlyDispatch, false, 'trackFormLead must return false when gtag is unavailable');
+    assert.strictEqual(isLeadEventTracked(testEventId), false, 'Missing gtag must NOT mark eventId as tracked (no poisoning)');
+
+    // Now gtag script finishes loading
+    const mockGtagCalls = [];
+    globalThis.window.gtag = (cmd, name, params) => {
+      mockGtagCalls.push({ cmd, name, params });
+    };
+
+    // Attempt 2: retry dispatch now succeeds
+    const lateDispatch = trackFormLead("test_source", { eventId: testEventId, service: "Custom Wardrobes" });
+    assert.strictEqual(lateDispatch, true, 'trackFormLead must succeed once gtag is available');
+    assert.strictEqual(isLeadEventTracked(testEventId), true, 'eventId is now marked as tracked');
+    assert.strictEqual(mockGtagCalls.length, 2);
+    assert.strictEqual(mockGtagCalls[0].params.transaction_id, testEventId);
+    assert.strictEqual(mockGtagCalls[1].params.transaction_id, testEventId);
+
+    delete globalThis.window;
+    console.log("✓ Test 11: Unavailable gtag does not poison eventId; subsequent retry dispatches once gtag is available");
+    passed++;
+  }
+
+  // Test 12: Payload mutation resets idempotency key for distinct submission
   {
     const isSubmittingRef = { current: false };
     let keyRef = { current: null };
@@ -332,39 +461,11 @@ async function runTests() {
     keyRef.current = generateIdempotencyKey();
     const key2 = keyRef.current;
     assert.notStrictEqual(key1, key2, 'Mutated payload must receive a distinct idempotency key');
-    console.log("✓ Test 10: Form input modification resets idempotency key for distinct submission");
+    console.log("✓ Test 12: Form input modification resets idempotency key for distinct submission");
     passed++;
   }
 
-  // Test 11: Application-level at-most-once analytics guard prevents duplicate GA4 generate_lead
-  {
-    trackedLeadEventIds.clear();
-    const mockGtagEvents = [];
-    globalThis.window = {
-      gtag: (cmd, name, params) => {
-        mockGtagEvents.push({ cmd, name, params });
-      }
-    };
-
-    const testEventId = "evt_dedup_test_999";
-
-    // 1st dispatch
-    trackFormLead("test_source", { eventId: testEventId, service: "Turnkey Interiors" });
-    assert.strictEqual(mockGtagEvents.length, 2); // 1 Google Ads conversion + 1 GA4 generate_lead
-    assert.strictEqual(mockGtagEvents[0].params.transaction_id, testEventId);
-    assert.strictEqual(mockGtagEvents[1].params.transaction_id, testEventId);
-
-    // 2nd dispatch with same eventId (client replay)
-    trackFormLead("test_source", { eventId: testEventId, service: "Turnkey Interiors" });
-    // Guard must suppress 2nd dispatch entirely:
-    assert.strictEqual(mockGtagEvents.length, 2, 'At-most-once guard must suppress duplicate analytics call');
-
-    delete globalThis.window;
-    console.log("✓ Test 11: Analytics at-most-once guard suppresses duplicate GA4 generate_lead dispatch");
-    passed++;
-  }
-
-  // Test 12: In-flight synchronous guard blocks racing concurrent submit
+  // Test 13: In-flight synchronous guard blocks racing concurrent submit
   {
     const isSubmittingRef = { current: false };
     const trackedEvents = [];
@@ -402,11 +503,11 @@ async function runTests() {
     assert.strictEqual(firstRes.success, true);
     assert.strictEqual(trackedEvents.length, 1);
     assert.strictEqual(isSubmittingRef.current, false);
-    console.log("✓ Test 12: In-flight synchronous guard blocks racing concurrent submit");
+    console.log("✓ Test 13: In-flight synchronous guard blocks racing concurrent submit");
     passed++;
   }
 
-  console.log(`\nAll ${passed}/12 backend persistence and idempotency contract tests passed successfully!`);
+  console.log(`\nAll ${passed}/13 backend persistence and idempotency contract tests passed successfully!`);
 }
 
 runTests();

@@ -53,7 +53,7 @@ export function normalizeService(rawService) {
 export function getAttributionData(formPlacement = 'website_form') {
   const attribution = {
     formPlacement,
-    landingPage: typeof window !== 'undefined' ? window.location.pathname : null,
+    landingPage: typeof window !== 'undefined' && window.location ? window.location.pathname : null,
     referrer: typeof document !== 'undefined' && document.referrer ? document.referrer.substring(0, 500) : null,
     utmSource: null,
     utmMedium: null,
@@ -64,7 +64,7 @@ export function getAttributionData(formPlacement = 'website_form') {
     fbclid: null,
   };
 
-  if (typeof window !== 'undefined' && window.location.search) {
+  if (typeof window !== 'undefined' && window.location && window.location.search) {
     const params = new URLSearchParams(window.location.search);
     attribution.utmSource   = params.get('utm_source');
     attribution.utmMedium   = params.get('utm_medium');
@@ -253,11 +253,11 @@ export async function submitLeadConsultation({
       };
     }
 
-    const isReplay = Boolean(apiJson.data?.idempotentReplay);
-
     // Post-Commit Primary Conversion Tracking (Deduplicated via server-generated eventId)
-    // Only fires after confirmed initial backend persistence; suppressed on idempotent replays
-    if (!isReplay && typeof trackLeadFn === 'function') {
+    // Dispatches on every confirmed backend persistence response (initial 201 or idempotent retry 200).
+    // Application-level deduplication in trackFormLead ensures at-most-once delivery for GA4,
+    // while Google Ads natively deduplicates matching transaction_id if a prior send occurred.
+    if (typeof trackLeadFn === 'function') {
       try {
         trackLeadFn(form?.source || 'website_form', {
           eventId,
