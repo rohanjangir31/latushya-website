@@ -117,20 +117,24 @@ export async function validateFormSubmitResponse(response, preParsedJson) {
   return result;
 }
 
-// Live Google Sheets Webhook Endpoint for Latushya Lead Automation Engine
-const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxMvmDzqdzbES3P-yVbAncAkM0rcahGc-aAJAc7qK6TM6BfcLit_zPbwe69YWYLIGW4/exec';
-
 /**
  * Production helper for lead consultation forms (LandingPage LeadForm, Homepage QuoteForm, Contact).
- * Handles canonical validation, in-flight ref guard, dispatch to authoritative backend / backup sinks,
- * response contract verification, and post-commit conversion tracking.
+ * 
+ * Strict Lead-Persistence Contract:
+ * - The Express/MongoDB backend API (POST /api/v1/enquiries) is the SOLE authoritative lead write and success condition.
+ * - If apiUrl is unset/unconfigured, unreachable (network error), returns non-2xx HTTP status, malformed JSON,
+ *   rejected status (success !== true), or missing eventId, this helper immediately fails closed without showing
+ *   success or firing primary conversion events (Google Ads Form Leads / GA4 generate_lead).
+ * - Browser-side parallel PII dispatch to unauthenticated public webhooks and third-party email aggregators
+ *   has been completely removed from the authoritative path.
+ * - Idempotent retries/replays return the existing record and pass the exact same server-generated eventId
+ *   to analytics for platform-supported deterministic conversion deduplication.
  */
 export async function submitLeadConsultation({
   form,
   isSubmittingRef,
   fetchFn = fetch,
   trackLeadFn,
-  webhookUrl = (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_LEADS_WEBHOOK_URL) || DEFAULT_WEBHOOK_URL,
   apiUrl = (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_API_URL) || '',
 }) {
   if (isSubmittingRef && isSubmittingRef.current) {
@@ -151,96 +155,102 @@ export async function submitLeadConsultation({
     };
   }
 
+  const effectiveApiUrl = apiUrl !== undefined && apiUrl !== null ? String(apiUrl).trim() : '';
+  if (!effectiveApiUrl) {
+    return {
+      success: false,
+      reason: 'BACKEND_NOT_CONFIGURED',
+      error: 'Backend API URL is not configured. Submission cannot be verified.',
+    };
+  }
+
   if (isSubmittingRef) isSubmittingRef.current = true;
 
   const canonicalService = normalizeService(form?.service);
   const idempotencyKey = form?.idempotencyKey || generateIdempotencyKey();
   const attribution = form?.attribution || getAttributionData(form?.source || 'website_form');
+  const wardrobeSubtype = canonicalService === 'Custom Wardrobes' ? (form?.wardrobeSubtype || null) : null;
+  const locality = form?.location ? String(form.location).trim() : (form?.locality ? String(form.locality).trim() : null);
+  const message = form?.message ? String(form.message).trim() : null;
 
-  const payload = {
+  const backendPayload = {
     name: trimmedName,
     phone: trimmedPhone,
-    email: form?.email ? String(form.email).trim() : 'Not provided',
-    service: canonicalService,
+    email: form?.email && String(form.email).trim() ? String(form.email).trim() : null,
     serviceRequested: canonicalService,
-    wardrobeSubtype: canonicalService === 'Custom Wardrobes' ? (form?.wardrobeSubtype || null) : null,
-    location: form?.location ? String(form.location).trim() : (form?.locality ? String(form.locality).trim() : 'Not provided'),
-    locality: form?.locality ? String(form.locality).trim() : (form?.location ? String(form.location).trim() : 'Not provided'),
-    message: form?.message ? String(form.message).trim() : 'Not provided',
-    source: form?.source || 'Website Form',
+    wardrobeSubtype,
+    locality: locality || null,
+    message: message || null,
+    source: form?.source || 'website_form',
     idempotencyKey,
     attribution,
-    _subject: `New Consultation Request - ${canonicalService}`,
+    consent: true,
   };
 
   try {
-    // 1. Authoritative Backend Submission (when VITE_API_URL or local /api proxy is available)
-    let backendPersisted = false;
-    let eventId = null;
-    if (apiUrl) {
-      try {
-        const apiRes = await fetchFn(`${apiUrl}/api/v1/enquiries`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: trimmedName,
-            phone: trimmedPhone,
-            email: form?.email ? String(form.email).trim() : null,
-            serviceRequested: canonicalService,
-            wardrobeSubtype: payload.wardrobeSubtype,
-            locality: payload.locality !== 'Not provided' ? payload.locality : null,
-            message: payload.message !== 'Not provided' ? payload.message : null,
-            source: form?.source || 'website_form',
-            idempotencyKey,
-            attribution,
-            consent: true,
-          }),
-        });
-
-        if (apiRes.ok) {
-          const apiJson = await apiRes.json();
-          if (apiJson && apiJson.success) {
-            backendPersisted = true;
-            eventId = apiJson.data?.eventId;
-          }
-        }
-      } catch (apiErr) {
-        console.warn('Backend API persistence warning:', apiErr);
-      }
+    const endpoint = `${effectiveApiUrl.replace(/\/+$/, '')}/api/v1/enquiries`;
+    let apiRes;
+    try {
+      apiRes = await fetchFn(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(backendPayload),
+      });
+    } catch (networkErr) {
+      return {
+        success: false,
+        reason: 'BACKEND_NETWORK_ERROR',
+        error: networkErr?.message || 'Network error reaching backend server',
+      };
     }
 
-    // 2. Automated Google Sheets Webhook Backup (zero dropped leads guarantee)
-    if (webhookUrl) {
-      try {
-        await fetchFn(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          mode: 'no-cors',
-        });
-      } catch (webhookErr) {
-        console.warn('Webhook dispatch warning:', webhookErr);
-      }
+    if (!apiRes || !apiRes.ok) {
+      const status = apiRes && apiRes.status ? apiRes.status : 'UNKNOWN';
+      return {
+        success: false,
+        reason: 'BACKEND_HTTP_ERROR',
+        error: `Backend returned HTTP ${status}`,
+      };
     }
 
-    // 3. FormSubmit Backup Sink
-    const response = await fetchFn('https://formsubmit.co/ajax/info@latushya.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    let apiJson;
+    try {
+      apiJson = await apiRes.json();
+    } catch {
+      return {
+        success: false,
+        reason: 'BACKEND_MALFORMED_JSON',
+        error: 'Backend returned invalid JSON',
+      };
+    }
 
-    await validateFormSubmitResponse(response);
+    if (!apiJson || typeof apiJson !== 'object' || Array.isArray(apiJson) || apiJson.success !== true) {
+      return {
+        success: false,
+        reason: 'BACKEND_REJECTED',
+        error: apiJson?.message || 'Backend rejected lead enquiry',
+      };
+    }
 
-    // 4. Post-Commit Primary Conversion Tracking (Deduplicated)
+    const eventId = apiJson.data?.eventId;
+    if (!eventId || typeof eventId !== 'string') {
+      return {
+        success: false,
+        reason: 'BACKEND_MISSING_EVENT_ID',
+        error: 'Backend persistence succeeded but eventId is missing',
+      };
+    }
+
+    // Post-Commit Primary Conversion Tracking (Deduplicated via server-generated eventId)
+    // Only fires after confirmed backend Express/Mongo persistence
     if (typeof trackLeadFn === 'function') {
       try {
-        trackLeadFn('lp_quote_form', { eventId, service: canonicalService });
-      } catch (err) {
-        console.warn('Tracking dispatch error:', err);
+        trackLeadFn(form?.source || 'website_form', {
+          eventId,
+          service: canonicalService,
+        });
+      } catch (trackErr) {
+        console.warn('[Analytics] Conversion tracking dispatch error:', trackErr);
       }
     }
 
@@ -248,14 +258,10 @@ export async function submitLeadConsultation({
       name: trimmedName,
       phone: trimmedPhone,
       service: canonicalService,
-      location: payload.location,
+      location: locality || 'Not provided',
     };
-    if (form?.email && String(form.email).trim()) {
-      returnData.email = String(form.email).trim();
-    }
-    if (form?.message && String(form.message).trim()) {
-      returnData.message = String(form.message).trim();
-    }
+    if (backendPayload.email) returnData.email = backendPayload.email;
+    if (backendPayload.message) returnData.message = backendPayload.message;
 
     return {
       success: true,
@@ -263,14 +269,15 @@ export async function submitLeadConsultation({
       idempotencyKey,
       eventId,
       serviceRequested: canonicalService,
-      wardrobeSubtype: payload.wardrobeSubtype,
-      backendPersisted,
+      wardrobeSubtype,
+      backendPersisted: true,
+      idempotentReplay: Boolean(apiJson.data?.idempotentReplay),
     };
   } catch (err) {
     return {
       success: false,
       reason: 'SUBMISSION_ERROR',
-      error: err?.message || 'Submission error',
+      error: err?.message || 'Unexpected submission error',
     };
   } finally {
     if (isSubmittingRef) isSubmittingRef.current = false;

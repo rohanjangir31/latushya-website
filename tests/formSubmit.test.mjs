@@ -1,13 +1,14 @@
 /**
  * Direct unit tests for the production helper src/utils/formSubmit.js
  * Exercises validateFormSubmitResponse against all edge cases,
- * and tests the in-flight submission guard pattern.
+ * and tests the in-flight submission guard pattern, canonical taxonomy,
+ * attribution extraction, and exclusive backend API dispatch.
  */
 import assert from 'node:assert';
 import { validateFormSubmitResponse, submitLeadConsultation, normalizeService, getAttributionData, generateIdempotencyKey } from '../src/utils/formSubmit.js';
 
 async function runTests() {
-  console.log("Running validateFormSubmitResponse unit tests...\n");
+  console.log("Running validateFormSubmitResponse & helper unit tests...\n");
   let passed = 0;
 
   // 1. Rejects missing or non-ok response
@@ -160,43 +161,47 @@ async function runTests() {
     passed++;
   }
 
-  // 9. submitLeadConsultation accepts mobile as phone fallback
+  // 9. submitLeadConsultation accepts mobile as phone fallback and calls backend
   {
     const res = await submitLeadConsultation({
       form: { name: "Ananya", mobile: "9876543210", service: "Modular Kitchen" },
+      apiUrl: "http://localhost:5000",
       fetchFn: async () => ({
         ok: true,
-        status: 200,
-        json: async () => ({ success: true })
+        status: 201,
+        json: async () => ({ success: true, data: { eventId: "evt_mobile_test" } })
       })
     });
     assert.strictEqual(res.success, true);
     assert.strictEqual(res.data.phone, "9876543210");
     assert.strictEqual(res.data.service, "Modular Kitchen");
-    console.log("✓ Test 9: Contact normalization accepts mobile field");
+    assert.strictEqual(res.eventId, "evt_mobile_test");
+    console.log("✓ Test 9: Contact normalization accepts mobile field with backend verification");
     passed++;
   }
 
-  // 10. submitLeadConsultation dispatches to webhookUrl when provided
+  // 10. submitLeadConsultation dispatches exclusively to backend and removes client-side webhook/formsubmit
   {
     const calls = [];
     const res = await submitLeadConsultation({
       form: { name: "Vikram", phone: "9876543211", service: "Turnkey Interiors" },
-      webhookUrl: "https://script.google.com/macros/s/TEST/exec",
+      apiUrl: "http://localhost:5000",
       fetchFn: async (url, opts) => {
         calls.push({ url, body: JSON.parse(opts.body) });
         return {
           ok: true,
-          status: 200,
-          json: async () => ({ success: true })
+          status: 201,
+          json: async () => ({ success: true, data: { eventId: "evt_exclusive_backend" } })
         };
       }
     });
     assert.strictEqual(res.success, true);
-    assert.strictEqual(calls.length, 2);
-    assert.strictEqual(calls[0].url, "https://script.google.com/macros/s/TEST/exec");
-    assert.strictEqual(calls[1].url, "https://formsubmit.co/ajax/info@latushya.com");
-    console.log("✓ Test 10: Dispatches to webhookUrl and FormSubmit simultaneously");
+    // Crucial: Exactly one dispatch to authoritative backend, zero calls to FormSubmit or public Sheets webhook
+    assert.strictEqual(calls.length, 1);
+    assert.strictEqual(calls[0].url, "http://localhost:5000/api/v1/enquiries");
+    assert.strictEqual(calls[0].body.serviceRequested, "Turnkey Interiors");
+    assert.strictEqual(calls[0].body.phone, "9876543211");
+    console.log("✓ Test 10: Dispatches exclusively to Express/Mongo backend without parallel third-party sinks");
     passed++;
   }
 
@@ -204,6 +209,7 @@ async function runTests() {
   {
     const res = await submitLeadConsultation({
       form: { name: "Vikram" },
+      apiUrl: "http://localhost:5000",
       fetchFn: async () => {}
     });
     assert.strictEqual(res.success, false);

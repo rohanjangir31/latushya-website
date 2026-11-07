@@ -52,7 +52,7 @@ export default function Contact() {
         source: 'Website Contact Section'
       },
       isSubmittingRef,
-      trackLeadFn: () => trackFormLead('contact_page_form')
+      trackLeadFn: (source, meta) => trackFormLead('contact_page_form', meta)
     });
 
     setIsSubmitting(false);

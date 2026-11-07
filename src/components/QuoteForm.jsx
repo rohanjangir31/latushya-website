@@ -49,7 +49,7 @@ export default function QuoteForm() {
         source: 'Homepage QuoteForm'
       },
       isSubmittingRef,
-      trackLeadFn: () => trackFormLead("hero_quote_form")
+      trackLeadFn: (source, meta) => trackFormLead("hero_quote_form", meta)
     });
 
     setIsSubmitting(false);

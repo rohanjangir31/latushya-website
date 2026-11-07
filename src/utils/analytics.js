@@ -36,21 +36,43 @@ export function trackPageView(path, title) {
 
 /**
  * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead)
+ * with deterministic deduplication via server-generated eventId / transaction_id.
+ * Strictly avoids customer PII in analytics payloads.
+ *
+ * @param {string} [source='general'] - Form identifier / placement
+ * @param {object} [metadata={}] - Safe metadata
+ * @param {string} [metadata.eventId] - Unique server-generated event ID used as transaction_id
+ * @param {string} [metadata.service] - Canonical service taxonomy name
  */
-export function trackFormLead(source = 'general') {
+export function trackFormLead(source = 'general', metadata = {}) {
   try {
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      // 1. Google Ads Primary Conversion Action
-      window.gtag('event', 'conversion', {
-        send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID
-      });
+      const eventId = metadata && typeof metadata === 'object' ? metadata.eventId : null;
+      const service = metadata && typeof metadata === 'object' ? metadata.service : null;
 
-      // 2. GA4 Standard Lead Event
-      window.gtag('event', 'generate_lead', {
+      // 1. Google Ads Primary Conversion Action (Form Leads: AW-663510360/2lJmCM7Co-EbENi6sbwC)
+      // Google Ads supports `transaction_id` for conversion deduplication.
+      const adsPayload = {
+        send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID,
+      };
+      if (eventId) {
+        adsPayload.transaction_id = eventId;
+      }
+      window.gtag('event', 'conversion', adsPayload);
+
+      // 2. GA4 Standard Lead Event (generate_lead)
+      const ga4Payload = {
         event_category: 'lead',
         event_label: source,
-        send_to: GA4_MEASUREMENT_ID
-      });
+        send_to: GA4_MEASUREMENT_ID,
+      };
+      if (eventId) {
+        ga4Payload.transaction_id = eventId;
+      }
+      if (service) {
+        ga4Payload.service_category = service;
+      }
+      window.gtag('event', 'generate_lead', ga4Payload);
     }
   } catch (err) {
     console.warn('[Analytics] Form lead tracking error:', err);
