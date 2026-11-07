@@ -1,13 +1,14 @@
 import { trackFormLead } from '../utils/analytics';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { submitLeadConsultation } from '../utils/formSubmit';
+import { submitLeadConsultation, generateIdempotencyKey } from '../utils/formSubmit';
 
 export default function QuoteForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const isSubmittingRef = useRef(false);
+  const idempotencyKeyRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +18,12 @@ export default function QuoteForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => {
+      if (prev[name] !== value) {
+        idempotencyKeyRef.current = null;
+      }
+      return { ...prev, [name]: value };
+    });
     if (error) setError('');
   };
 
@@ -39,6 +45,10 @@ export default function QuoteForm() {
       inferredService = 'Turnkey Interiors';
     }
 
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = generateIdempotencyKey();
+    }
+
     const res = await submitLeadConsultation({
       form: {
         name: formData.name,
@@ -46,6 +56,7 @@ export default function QuoteForm() {
         mobile: formData.mobile,
         service: inferredService,
         message: formData.message,
+        idempotencyKey: idempotencyKeyRef.current,
         source: 'Homepage QuoteForm'
       },
       isSubmittingRef,
@@ -55,6 +66,7 @@ export default function QuoteForm() {
     setIsSubmitting(false);
 
     if (res.success) {
+      idempotencyKeyRef.current = null;
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);

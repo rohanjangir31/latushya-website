@@ -34,10 +34,20 @@ export function trackPageView(path, title) {
   }
 }
 
+// In-memory set of tracked conversion event IDs to enforce application-level at-most-once delivery
+export const trackedLeadEventIds = new Set();
+
 /**
- * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead)
- * with deterministic deduplication via server-generated eventId / transaction_id.
- * Strictly avoids customer PII in analytics payloads.
+ * Tracks genuine form submissions across Google Ads (Primary Lead) and GA4 (generate_lead).
+ *
+ * DEDUPLICATION CONTRACT:
+ * - Google Ads natively deduplicates conversions sharing the same `transaction_id` (AW-663510360/2lJmCM7Co-EbENi6sbwC).
+ * - GA4 standard `generate_lead` events do NOT natively deduplicate via `transaction_id` (Google GA4 documentation
+ *   specifies that transaction_id deduplication is built-in only for ecommerce `purchase` and `refund` events).
+ * - Therefore, to prevent duplicate `generate_lead` events in GA4, this helper enforces an explicit application-level
+ *   at-most-once guard using `trackedLeadEventIds`. If an eventId has already been dispatched, subsequent retries
+ *   or replays are suppressed.
+ * - Customer PII is strictly avoided in all analytics payloads.
  *
  * @param {string} [source='general'] - Form identifier / placement
  * @param {object} [metadata={}] - Safe metadata
@@ -46,12 +56,21 @@ export function trackPageView(path, title) {
  */
 export function trackFormLead(source = 'general', metadata = {}) {
   try {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      const eventId = metadata && typeof metadata === 'object' ? metadata.eventId : null;
-      const service = metadata && typeof metadata === 'object' ? metadata.service : null;
+    const eventId = metadata && typeof metadata === 'object' ? metadata.eventId : null;
+    const service = metadata && typeof metadata === 'object' ? metadata.service : null;
 
+    // Application-level at-most-once guard (suppresses duplicate GA4 generate_lead on client replay)
+    if (eventId && trackedLeadEventIds.has(eventId)) {
+      return;
+    }
+    if (eventId) {
+      trackedLeadEventIds.add(eventId);
+    }
+
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       // 1. Google Ads Primary Conversion Action (Form Leads: AW-663510360/2lJmCM7Co-EbENi6sbwC)
-      // Google Ads supports `transaction_id` for conversion deduplication.
+      // Google Ads supports native `transaction_id` conversion deduplication:
+      // https://support.google.com/google-ads/answer/6386712
       const adsPayload = {
         send_to: GOOGLE_ADS_FORM_LEAD_CONVERSION_ID,
       };
@@ -61,6 +80,8 @@ export function trackFormLead(source = 'general', metadata = {}) {
       window.gtag('event', 'conversion', adsPayload);
 
       // 2. GA4 Standard Lead Event (generate_lead)
+      // Note: GA4 does not natively dedup generate_lead via transaction_id; the at-most-once guard above
+      // prevents client duplicate firing, while transaction_id is carried for reporting consistency.
       const ga4Payload = {
         event_category: 'lead',
         event_label: source,

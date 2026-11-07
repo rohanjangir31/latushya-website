@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Phone, CheckCircle, X, Sparkles, ShieldCheck, MapPin, ArrowRight, MessageCircle, Loader2 } from "lucide-react";
 import { COMPANY } from "../data/content";
 import { trackWhatsAppConversion, trackFormLead } from "../utils/analytics";
-import { submitLeadConsultation } from "../utils/formSubmit";
+import { submitLeadConsultation, generateIdempotencyKey } from "../utils/formSubmit";
 import SEO from "../components/SEO";
 
 const PINK    = "#DF4C73";
@@ -40,9 +40,20 @@ function LeadForm({ compact = false }) {
   const [done, setDone]               = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isSubmittingRef               = useRef(false);
+  const idempotencyKeyRef             = useRef(null);
   const [submittedData, setSubmittedData] = useState(null);
   const [error, setError]             = useState("");
   const nameInputRef                  = useRef(null);
+
+  const setFormField = (field, val) => {
+    setForm(f => {
+      if (f[field] !== val) {
+        idempotencyKeyRef.current = null;
+      }
+      return { ...f, [field]: val };
+    });
+    if (error) setError("");
+  };
 
   const services = [
     "Custom Wardrobes",
@@ -58,8 +69,12 @@ function LeadForm({ compact = false }) {
     setIsSubmitting(true);
     setError("");
 
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = generateIdempotencyKey();
+    }
+
     const res = await submitLeadConsultation({
-      form,
+      form: { ...form, idempotencyKey: idempotencyKeyRef.current },
       isSubmittingRef,
       trackLeadFn: trackFormLead
     });
@@ -75,6 +90,7 @@ function LeadForm({ compact = false }) {
       return;
     }
 
+    idempotencyKeyRef.current = null;
     setSubmittedData(res.data);
     setDone(true);
   };
@@ -135,7 +151,7 @@ function LeadForm({ compact = false }) {
                       <button
                         key={svc}
                         type="button"
-                        onClick={() => { setForm(f => ({ ...f, service: svc })); setError(""); }}
+                        onClick={() => setFormField("service", svc)}
                         style={{
                           padding: "10px 4px",
                           borderRadius: "10px",
@@ -166,7 +182,7 @@ function LeadForm({ compact = false }) {
                   placeholder="Your Name *"
                   autoComplete="name"
                   value={form.name}
-                  onChange={e => { setForm(f => ({ ...f, name: e.target.value })); setError(""); }}
+                  onChange={e => setFormField("name", e.target.value)}
                   onFocus={e => (e.target.style.borderColor = PINK)}
                   onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.14)")}
                 />
@@ -180,7 +196,7 @@ function LeadForm({ compact = false }) {
                   type="tel"
                   autoComplete="tel"
                   value={form.phone}
-                  onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setError(""); }}
+                  onChange={e => setFormField("phone", e.target.value)}
                   onFocus={e => (e.target.style.borderColor = PINK)}
                   onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.14)")}
                 />
@@ -193,7 +209,7 @@ function LeadForm({ compact = false }) {
                     style={{ ...inputBase, paddingLeft: "38px" }}
                     placeholder="Bangalore Locality (e.g. Indiranagar, Whitefield)"
                     value={form.location}
-                    onChange={e => { setForm(f => ({ ...f, location: e.target.value })); setError(""); }}
+                    onChange={e => setFormField("location", e.target.value)}
                     onFocus={e => (e.target.style.borderColor = PINK)}
                     onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.14)")}
                   />

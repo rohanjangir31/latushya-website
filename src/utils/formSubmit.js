@@ -135,7 +135,8 @@ export async function submitLeadConsultation({
   isSubmittingRef,
   fetchFn = fetch,
   trackLeadFn,
-  apiUrl = (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_API_URL) || '',
+  apiUrl,
+  isDev = typeof import.meta.env !== 'undefined' && Boolean(import.meta.env.DEV),
 }) {
   if (isSubmittingRef && isSubmittingRef.current) {
     return { success: false, reason: 'BLOCKED' };
@@ -155,13 +156,22 @@ export async function submitLeadConsultation({
     };
   }
 
-  const effectiveApiUrl = apiUrl !== undefined && apiUrl !== null ? String(apiUrl).trim() : '';
+  let effectiveApiUrl = apiUrl !== undefined && apiUrl !== null ? String(apiUrl).trim() : '';
+  if (!effectiveApiUrl && typeof import.meta.env !== 'undefined' && import.meta.env.VITE_API_URL) {
+    effectiveApiUrl = String(import.meta.env.VITE_API_URL).trim();
+  }
+
   if (!effectiveApiUrl) {
-    return {
-      success: false,
-      reason: 'BACKEND_NOT_CONFIGURED',
-      error: 'Backend API URL is not configured. Submission cannot be verified.',
-    };
+    if (isDev) {
+      // In development mode, Vite proxy forwards relative /api/* to http://localhost:5000 (see vite.config.js)
+      effectiveApiUrl = '';
+    } else {
+      return {
+        success: false,
+        reason: 'BACKEND_NOT_CONFIGURED',
+        error: 'Backend API URL is not configured. Submission cannot be verified.',
+      };
+    }
   }
 
   if (isSubmittingRef) isSubmittingRef.current = true;
@@ -188,7 +198,9 @@ export async function submitLeadConsultation({
   };
 
   try {
-    const endpoint = `${effectiveApiUrl.replace(/\/+$/, '')}/api/v1/enquiries`;
+    const endpoint = effectiveApiUrl
+      ? `${effectiveApiUrl.replace(/\/+$/, '')}/api/v1/enquiries`
+      : '/api/v1/enquiries';
     let apiRes;
     try {
       apiRes = await fetchFn(endpoint, {
@@ -241,9 +253,11 @@ export async function submitLeadConsultation({
       };
     }
 
+    const isReplay = Boolean(apiJson.data?.idempotentReplay);
+
     // Post-Commit Primary Conversion Tracking (Deduplicated via server-generated eventId)
-    // Only fires after confirmed backend Express/Mongo persistence
-    if (typeof trackLeadFn === 'function') {
+    // Only fires after confirmed initial backend persistence; suppressed on idempotent replays
+    if (!isReplay && typeof trackLeadFn === 'function') {
       try {
         trackLeadFn(form?.source || 'website_form', {
           eventId,

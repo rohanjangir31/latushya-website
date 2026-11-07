@@ -1,5 +1,5 @@
 import { trackFormLead } from '../utils/analytics';
-import { submitLeadConsultation } from '../utils/formSubmit';
+import { submitLeadConsultation, generateIdempotencyKey } from '../utils/formSubmit';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { COMPANY } from '../data/content';
@@ -15,6 +15,7 @@ const fadeUp = (delay = 0) => ({
 export default function Contact() {
   const sectionRef = useRef(null);
   const isSubmittingRef = useRef(false);
+  const idempotencyKeyRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -22,7 +23,13 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', phone: '', project: '' });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => {
+      if (prev[name] !== value) {
+        idempotencyKeyRef.current = null;
+      }
+      return { ...prev, [name]: value };
+    });
     if (error) setError('');
   };
 
@@ -33,7 +40,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setError('');
 
-    let inferredService = 'General Inquiries';
+    let inferredService = 'Other / Not sure';
     const projLower = (formData.project || '').toLowerCase();
     if (projLower.includes('wardrobe')) {
       inferredService = 'Custom Wardrobes';
@@ -43,12 +50,17 @@ export default function Contact() {
       inferredService = 'Turnkey Interiors';
     }
 
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = generateIdempotencyKey();
+    }
+
     const res = await submitLeadConsultation({
       form: {
         name: formData.name,
         phone: formData.phone,
         service: inferredService,
         message: formData.project,
+        idempotencyKey: idempotencyKeyRef.current,
         source: 'Website Contact Section'
       },
       isSubmittingRef,
@@ -58,6 +70,7 @@ export default function Contact() {
     setIsSubmitting(false);
 
     if (res.success) {
+      idempotencyKeyRef.current = null;
       setIsSubmitted(true);
       setFormData({ name: '', phone: '', project: '' });
       setTimeout(() => {
